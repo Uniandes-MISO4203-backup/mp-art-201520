@@ -12,7 +12,7 @@
             }, {
                 name: 'picture',
                 displayName: 'Picture',
-                type: 'String',
+                type: 'Image',
                 required: true
             }, {
                 name: 'price',
