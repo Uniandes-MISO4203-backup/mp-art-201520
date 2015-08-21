@@ -68,4 +68,8 @@ public class ClientLogic implements IClientLogic {
     public List<ClientDTO> findByName(String name) {
         return ClientConverter.listEntity2DTO(persistence.findByName(name));
     }
+
+    public ClientDTO getClientByUserId(String userId) {
+        return ClientConverter.refEntity2DTO(persistence.getClientByUserId(userId));
+    }
 }

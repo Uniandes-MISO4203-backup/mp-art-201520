@@ -11,4 +11,5 @@ public interface IArtistLogic {
     public ArtistDTO updateArtist(ArtistDTO dto);
     public void deleteArtist(Long id);
     public List<ArtistDTO> findByName(String name);
+    public ArtistDTO getArtistByUserId(String userId);
 }

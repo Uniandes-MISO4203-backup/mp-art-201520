@@ -6,7 +6,7 @@
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
-      <property name="eclipselink.cache.type.default" value="Weak" />
+      <property name="eclipselink.cache.type.default" value="NONE" />
     </properties>
   </persistence-unit>
 </persistence>

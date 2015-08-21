@@ -68,4 +68,8 @@ public class ArtistLogic implements IArtistLogic {
     public List<ArtistDTO> findByName(String name) {
         return ArtistConverter.listEntity2DTO(persistence.findByName(name));
     }
+
+    public ArtistDTO getArtistByUserId(String userId) {
+        return ArtistConverter.refEntity2DTO(persistence.getArtistByUserId(userId));
+    }
 }

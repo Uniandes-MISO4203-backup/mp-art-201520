@@ -30,6 +30,7 @@ public class ArtworkService {
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
+    @QueryParam("q") private String artworkName;
 
     /**
      * @generated
@@ -45,6 +46,9 @@ public class ArtworkService {
      */
     @GET
     public List<ArtworkDTO> getArtworks() {
+        if (artworkName != null) {
+            return artworkLogic.findByName(artworkName);
+        }
         if (page != null && maxRecords != null) {
             this.response.setIntHeader("X-Total-Count", artworkLogic.countArtworks());
         }
