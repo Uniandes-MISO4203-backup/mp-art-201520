@@ -1,6 +1,8 @@
 package co.edu.uniandes.csw.artmarketplace.services;
 
+import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
+import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import java.util.List;
@@ -17,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
 
 /**
  * @generated
@@ -26,11 +29,19 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class ArtworkService {
 
-    @Inject private IArtworkLogic artworkLogic;
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
-    @QueryParam("q") private String artworkName;
+    @Inject
+    private IArtworkLogic artworkLogic;
+    @Inject
+    private IArtistLogic artistLogic;
+    @Context
+    private HttpServletResponse response;
+    @QueryParam("page")
+    private Integer page;
+    @QueryParam("maxRecords")
+    private Integer maxRecords;
+    @QueryParam("q")
+    private String artworkName;
+    private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
 
     /**
      * @generated
@@ -46,13 +57,17 @@ public class ArtworkService {
      */
     @GET
     public List<ArtworkDTO> getArtworks() {
-        if (artworkName != null) {
-            return artworkLogic.findByName(artworkName);
+        if (artist != null) {
+            return artistLogic.getArtist(artist.getId()).getArtwork();
+        } else {
+            if (artworkName != null) {
+                return artworkLogic.findByName(artworkName);
+            }
+            if (page != null && maxRecords != null) {
+                this.response.setIntHeader("X-Total-Count", artworkLogic.countArtworks());
+            }
+            return artworkLogic.getArtworks(page, maxRecords);
         }
-        if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", artworkLogic.countArtworks());
-        }
-        return artworkLogic.getArtworks(page, maxRecords);
     }
 
     /**

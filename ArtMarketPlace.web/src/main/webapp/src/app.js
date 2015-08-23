@@ -24,7 +24,22 @@
                         controller: 'clientCtrl',
                         controllerAs: alias
                     })
-                    .otherwise('/');
+                    .when('/catalog', {
+                        templateUrl: tplUrl,
+                        controller: 'catalogCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/shoppingCart', {
+                        templateUrl: 'src/modules/cartItem/shoppingCart.tpl.html',
+                        controller: 'cartItemCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/artwork', {
+                        templateUrl: tplUrl,
+                        controller: 'artworkCtrl',
+                        controllerAs: alias
+                    })
+                    .otherwise('/catalog');
         }]);
 
     mainApp.config(['authServiceProvider', function (auth) {

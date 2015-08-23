@@ -32,9 +32,11 @@
         <script src="src/modules/artwork/artwork.mod.js"></script>
         <script src="src/modules/artwork/artwork.svc.js"></script>
         <script src="src/modules/artwork/artwork.ctrl.js"></script>
+        <script src="src/modules/artwork/catalog.ctrl.js"></script>
 
         <script src="src/modules/cartItem/cartItem.mod.js"></script>
         <script src="src/modules/cartItem/cartItem.svc.js"></script>
+        <script src="src/modules/cartItem/cartItem.ctrl.js"></script>
 
         <script src="src/modules/client/client.mod.js"></script>
         <script src="src/modules/client/client.svc.js"></script>
@@ -54,22 +56,21 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">ArtMarketPlace</a>
+                            <a class="navbar-brand" href="#/catalog">ArtMarketPlace</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="main-bar">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#/artist">Artist Master</a></li>
-                                <li><a href="#/client">Client Master</a></li>
-                            </ul>
-                            <form novalidate class="navbar-form navbar-left" role="search" ng-submit="ctrl.searchByName(artworkName)" ng-controller="artworkCtrl as ctrl">
+                            <form novalidate class="navbar-form navbar-left" role="search" ng-submit="ctrl.searchByName(artworkName)" ng-controller="catalogCtrl as ctrl">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search books" ng-model="artworkName" required>
+                                    <input type="text" class="form-control" placeholder="Search artwork" ng-model="artworkName" required>
                                 </div>
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
                             <ul class="nav navbar-nav navbar-right">
+                                <li class="active">
+                                    <a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
+                                <li>
                                 <login-button></login-button>
                             </ul>
                         </div> <!-- /.navbar-collapse -->
