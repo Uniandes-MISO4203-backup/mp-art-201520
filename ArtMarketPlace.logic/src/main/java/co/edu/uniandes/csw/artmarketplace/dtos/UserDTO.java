@@ -12,6 +12,7 @@ package co.edu.uniandes.csw.artmarketplace.dtos;
 public class UserDTO {
 
     private String name;
+    private String lastName;
     private String userName;
     private String password;
     private String email;
@@ -64,6 +65,14 @@ public class UserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 }

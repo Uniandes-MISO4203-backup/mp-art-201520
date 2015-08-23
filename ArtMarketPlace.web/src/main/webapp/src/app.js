@@ -54,6 +54,7 @@
                 logoutURL: 'logout',
                 nameCookie: 'userCookie'
             });
+            auth.setRoles({'user': 'Client', 'artists': 'Artist'});
         }]);
 
     mainApp.run(function (editableOptions) {

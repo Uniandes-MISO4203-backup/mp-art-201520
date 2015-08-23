@@ -47,7 +47,11 @@ public class CartItemService {
     @POST
     @StatusCreated
     public CartItemDTO createCartItem(CartItemDTO dto) {
-        return cartItemLogic.createCartItem(dto);
+        if (client != null) {
+            dto.setClient(client);
+            return cartItemLogic.createCartItem(dto);
+        }
+        return null;
     }
 
     /**

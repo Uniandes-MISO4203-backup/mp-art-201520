@@ -6,7 +6,7 @@
             this.fetchRecords();
         }]);
 
-    mod.controller('cartItemCtrl', ['CrudCreator', '$scope', 'cartItemModel', function (CrudCreator, $scope, model) {
+    mod.controller('cartItemsCtrl', ['CrudCreator', '$scope', 'cartItemModel', function (CrudCreator, $scope, model) {
             CrudCreator.extendCompChildCtrl(this, $scope, model, 'cartItem', 'client');
             this.loadRefOptions();
         }]);

@@ -113,17 +113,17 @@ public class UserService {
     @Path("/register")
     @POST
     public Response setUser(UserDTO user) {
-        Account account = createUser(user);
         try {
+            Account account = createUser(user);
             switch (user.getRole()) {
-                case "client":
+                case "user":
                     ClientDTO client = new ClientDTO();
                     client.setName(user.getUserName());
                     client.setUserId(account.getHref());
                     clientLogic.createClient(client);
                     break;
 
-                case "artist":
+                case "artists":
                     ArtistDTO artist = new ArtistDTO();
                     artist.setName(user.getUserName());
                     artist.setUserId(account.getHref());
@@ -148,7 +148,7 @@ public class UserService {
         acct.setPassword(user.getPassword());
         acct.setEmail(user.getEmail());
         acct.setGivenName(user.getName());
-        acct.setSurname(user.getName());
+        acct.setSurname(user.getLastName());
         acct.setStatus(AccountStatus.ENABLED);
         GroupList groups = application.getGroups();
         for (Group grp : groups) {

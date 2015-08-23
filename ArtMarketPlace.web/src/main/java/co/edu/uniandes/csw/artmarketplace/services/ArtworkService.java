@@ -49,7 +49,10 @@ public class ArtworkService {
     @POST
     @StatusCreated
     public ArtworkDTO createArtwork(ArtworkDTO dto) {
-        return artworkLogic.createArtwork(dto);
+        if (artist != null) {
+            return artworkLogic.createArtwork(dto);
+        }
+        return null;
     }
 
     /**

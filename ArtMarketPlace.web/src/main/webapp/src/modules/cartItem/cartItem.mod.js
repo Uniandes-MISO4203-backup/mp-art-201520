@@ -21,5 +21,23 @@
                 service: 'artworkService',
                 options: [],
                 required: true
+            }, {
+                name: 'price',
+                displayName: 'Price',
+                type: 'Computed',
+                fn: function (record) {
+                    return record.artwork.price;
+                },
+                required: true,
+                editable: false,
+                currency: true
+            }, {
+                name: 'SubTotal',
+                displayName: 'SubTotal',
+                type: 'Computed',
+                editable: false,
+                fn: function (record) {
+                    return record.artwork.price * record.quantity;
+                }
             }]});
 })(window.angular);
