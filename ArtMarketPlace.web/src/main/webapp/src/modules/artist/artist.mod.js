@@ -19,5 +19,5 @@
                 name: 'artwork',
                 displayName: 'Artwork',
                 //template: '', //override generic template
-                ctrl: 'artworkCtrl'            }        ]});
+                ctrl: 'artworksCtrl'            }        ]});
 })(window.angular);

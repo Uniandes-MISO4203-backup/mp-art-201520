@@ -6,7 +6,7 @@
             this.fetchRecords();
         }]);
 
-    mod.controller('artworkCtrl', ['CrudCreator', '$scope', 'artworkModel', function (CrudCreator, $scope, model) {
+    mod.controller('artworksCtrl', ['CrudCreator', '$scope', 'artworkModel', function (CrudCreator, $scope, model) {
             CrudCreator.extendCompChildCtrl(this, $scope, model, 'artwork', 'artist');
             this.asGallery = true;
         }]);
