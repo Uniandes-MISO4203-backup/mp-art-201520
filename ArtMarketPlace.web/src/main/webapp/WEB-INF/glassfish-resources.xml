@@ -8,8 +8,8 @@
         <property name="serverName" value="157.253.238.75"/>
         <property name="portNumber" value="5432"/>
         <property name="databaseName" value="mp-art"/>
-        <property name="User" value="marketplace"/>
-        <property name="Password" value="Gestion2015"/>
+        <property name="User" value="grupo1"/>
+        <property name="Password" value="Grupo1"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/ArtMarketPlace" object-type="user" pool-name="ArtMarketPlace_pool"/>
 </resources>
