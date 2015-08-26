@@ -6,8 +6,8 @@
             var self = this;
 
             var oldFetch = this.fetchRecords;
-            this.fetchRecords = function(){
-                return oldFetch.call(this).then(function(data){
+            this.fetchRecords = function () {
+                return oldFetch.call(this).then(function (data) {
                     self.calcTotal();
                     return data;
                 });
@@ -17,20 +17,20 @@
             $scope.lastQuantity = 0;
             $scope.total = 0;
 
-            this.recordActions = [{
-                    name: 'Delete',
+            this.recordActions = {
+                delete: {
                     displayName: ' ',
                     icon: 'trash',
                     class: 'primary',
                     fn: function (record) {
-                        svc.deleteRecord(record).then(function(){
+                        svc.deleteRecord(record).then(function () {
                             self.fetchRecords();
                         });
                     },
                     show: function () {
                         return true;
                     }
-                }];
+                }};
 
             this.calcTotal = function () {
                 $scope.total = 0;
