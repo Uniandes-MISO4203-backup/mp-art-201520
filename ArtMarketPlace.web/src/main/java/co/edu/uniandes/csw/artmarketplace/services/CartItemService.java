@@ -49,7 +49,7 @@ public class CartItemService {
     public CartItemDTO createCartItem(CartItemDTO dto) {
         if (client != null) {
             dto.setClient(client);
-            return cartItemLogic.createCartItem(dto);
+            return cartItemLogic.createCartItemByClient(dto, client.getId());
         }
         return null;
     }
@@ -68,7 +68,7 @@ public class CartItemService {
     @GET
     @Path("{id: \\d+}")
     public CartItemDTO getCartItem(@PathParam("id") Long id) {
-        return cartItemLogic.getCartItem(id);
+        return cartItemLogic.getCartItemsByClientById(id, client.getId());
     }
 
     /**
@@ -78,7 +78,7 @@ public class CartItemService {
     @Path("{id: \\d+}")
     public CartItemDTO updateCartItem(@PathParam("id") Long id, CartItemDTO dto) {
         dto.setId(id);
-        return cartItemLogic.updateCartItem(dto);
+        return cartItemLogic.updateCartItemByClient(client.getId(), dto);
     }
 
     /**
@@ -87,6 +87,6 @@ public class CartItemService {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCartItem(@PathParam("id") Long id) {
-        cartItemLogic.deleteCartItem(id);
+        cartItemLogic.deleteCartItemByClient(client.getId(), id);
     }
 }
