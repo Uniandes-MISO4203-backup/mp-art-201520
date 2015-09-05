@@ -25,7 +25,7 @@
                         controllerAs: alias
                     })
                     .when('/catalog', {
-                        templateUrl: tplUrl,
+                        templateUrl: 'src/modules/artwork/catalog.tpl.html',
                         controller: 'catalogCtrl',
                         controllerAs: alias
                     })
@@ -37,6 +37,11 @@
                     .when('/artwork', {
                         templateUrl: tplUrl,
                         controller: 'artworkCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/search', {
+                        templateUrl: 'src/modules/search/search.tpl.html',
+                        controller: 'catalogCtrl',
                         controllerAs: alias
                     })
                     .otherwise('/catalog');
