@@ -19,5 +19,12 @@
                 displayName: 'Price',
                 type: 'Integer',
                 required: true
-            }]});
+            }, {
+                name: 'artist',
+                displayName: 'Artist',
+                type: 'Reference',
+                required: true
+            }]
+        
+    });
 })(window.angular);

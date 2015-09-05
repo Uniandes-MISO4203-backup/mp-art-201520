@@ -13,6 +13,19 @@
                 }
                 $location.url('/catalog' + search);
             };
+            $scope.searchArtistWithCheapestArtwork = function (artworkName) {
+                svc.searchArtistWithCheapestArtwork(artworkName).then(function (results) {
+                    $scope.artworks = [];
+                    $scope.artworks = results;
+                });
+            };
+
+            $scope.searchCheapestArtworkOfAnArtist = function (artistName) {
+                svc.searchCheapestArtworkOfAnArtist(artistName).then(function (results) {
+                    $scope.artworks = [];
+                    $scope.artworks = results;
+                });
+            };
 
             this.recordActions = [{
                     name: 'addToCart',

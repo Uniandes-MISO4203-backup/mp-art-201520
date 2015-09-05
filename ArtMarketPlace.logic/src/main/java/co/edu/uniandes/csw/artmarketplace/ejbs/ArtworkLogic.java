@@ -68,4 +68,12 @@ public class ArtworkLogic implements IArtworkLogic {
     public List<ArtworkDTO> findByName(String name) {
         return ArtworkConverter.listEntity2DTO(persistence.findByName(name));
     }
+
+    public List<ArtworkDTO> searchArtistWithCheapestArtwork(String artworkName) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchArtistWithCheapestArtwork(artworkName));
+    }
+
+    public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(String artistName) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchCheapestArtworkOfAnArtist(artistName));
+    }
 }

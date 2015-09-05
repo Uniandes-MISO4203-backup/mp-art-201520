@@ -1,0 +1,36 @@
+<div style="padding-top: 20px;">
+
+    <div class="navbar-form navbar-left">
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="artistName" required>
+        <button ng-click="searchCheapestArtworkOfAnArtist(artistName)" class="btn btn-default">Search The Cheapest Artwork of an Artist</button>
+    </div>
+
+    <div class="navbar-form navbar-left">
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Name Here..." ng-model="artworkName" required>
+        <button ng-click="searchArtistWithCheapestArtwork(artworkName)" class="btn btn-default">Search an Artist with the Cheapest Artwork</button>
+    </div>
+
+
+
+
+    <div class="col-sm-12">
+        <div ng-repeat="element in artworks">
+            <div class="col-sm-4 well text-center">
+                <div class="col-md-12">
+                    <div class="img-thumbnail" id="cover" ng-if="element.picture">
+                        <a ng-href="{{element.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{element.picture}}" alt="{{element.picture}}"></a>
+                    </div>
+                </div>
+                <div class="caption" >
+                    <p><strong>Name:</strong> {{element.name}}</p>
+                    <p><strong>Price:</strong> {{element.price}}</p>
+                    <p><strong>Artist:</strong> {{element.artist.name}}</p>
+                </div>
+                <p class="text-center">
+                    <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(element)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

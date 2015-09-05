@@ -39,6 +39,11 @@
                         controller: 'artworkCtrl',
                         controllerAs: alias
                     })
+                    .when('/search', {
+                        templateUrl: 'src/modules/search/search.tpl.html',
+                        controller: 'catalogCtrl',
+                        controllerAs: alias
+                    })
                     .otherwise('/catalog');
         }]);
 

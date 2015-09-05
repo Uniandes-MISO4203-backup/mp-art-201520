@@ -5,11 +5,21 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @generated
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "ArtworkEntity.searchArtistWithCheapestArtwork", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.name) like UPPER(:artworkName) ORDER BY a.price"),
+    
+        @NamedQuery(name = "ArtworkEntity.searchCheapestArtworkOfAnArtist", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artist.name) like UPPER(:artistName) ORDER BY a.price")}
+        
+)
 public class ArtworkEntity implements Serializable {
 
     @Id
