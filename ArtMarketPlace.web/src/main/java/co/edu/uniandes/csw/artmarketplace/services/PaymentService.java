@@ -38,7 +38,7 @@ public class PaymentService {
     private Integer maxRecords;
     @QueryParam("q")
     private String paymentName;
-    private ClientDTO cliente = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
 
     /**
      * @generated
@@ -46,7 +46,8 @@ public class PaymentService {
     @POST
     @StatusCreated
     public PaymentDTO createPayment(PaymentDTO dto) {
-        if (cliente != null) {
+        if (client != null) {
+            dto.setClient(client);
             return paymentLogic.createPayment(dto);
         }
         return null;

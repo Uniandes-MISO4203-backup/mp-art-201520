@@ -30,11 +30,11 @@
                 $scope.totalandtaxes = $scope.taxes + $scope.total;
             };
             $scope.endPayment = function () {
-                if ($scope.cardNumber === '') {
-                    self.showWarning("Card Number is necessary.");
+                if ($scope.cardNumber <= 0) {
+                    self.showWarning("A valid card number is necessary.");
                 }
                 else {
-                    paymentSvc.createItem({
+                    $scope.newId = paymentSvc.createItem({
                         method: $scope.paymentMethod,
                         subtotal: $scope.total,
                         taxes: $scope.taxes,
