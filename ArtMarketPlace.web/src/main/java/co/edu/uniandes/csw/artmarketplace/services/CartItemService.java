@@ -39,6 +39,7 @@ public class CartItemService {
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
+    
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
 
     /**
@@ -59,7 +60,7 @@ public class CartItemService {
      */
     @GET
     public List<CartItemDTO> getCartItems() {
-        return clientLogic.getClient(client.getId()).getCartItem();
+        return cartItemLogic.getCartItemsByClient(page, maxRecords, client.getId());
     }
 
     /**

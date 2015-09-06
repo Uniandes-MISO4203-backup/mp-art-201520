@@ -16,5 +16,10 @@
                     self.saveRecord(record);
                 });
             };
+            this.payItem = function (record) {
+                var self = this;
+                record.state = 'P';
+                self.saveRecord(record);
+            };
         }]);
 })(window.angular);
