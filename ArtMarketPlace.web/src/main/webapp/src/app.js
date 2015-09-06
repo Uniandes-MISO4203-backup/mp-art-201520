@@ -31,7 +31,7 @@
                         controllerAs: alias
                     })
                     .when('/catalog', {
-                        templateUrl: tplUrl,
+                        templateUrl: 'src/modules/artwork/catalog.tpl.html',
                         controller: 'catalogCtrl',
                         controllerAs: alias
                     })
