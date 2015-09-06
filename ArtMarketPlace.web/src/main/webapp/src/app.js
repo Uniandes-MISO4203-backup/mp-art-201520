@@ -8,6 +8,7 @@
         'artworkModule',
         'cartItemModule',
         'clientModule',
+        'paymentModule',
         'ngRoute',
         'ngCrud'
     ]);
@@ -17,6 +18,11 @@
                     .when('/artist', {
                         templateUrl: tplUrl,
                         controller: 'artistCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/payment', {
+                        templateUrl: tplUrl,
+                        controller: 'paymentCtrl',
                         controllerAs: alias
                     })
                     .when('/client', {
@@ -32,6 +38,16 @@
                     .when('/shoppingCart', {
                         templateUrl: 'src/modules/cartItem/shoppingCart.tpl.html',
                         controller: 'cartItemCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/pay', {
+                        templateUrl: 'src/modules/payment/pay.tpl.html',
+                        controller: 'paymentViewCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/payf', {
+                        templateUrl: 'src/modules/payment/paymentFinished.tpl.html',
+                        controller: 'paymentViewCtrl',
                         controllerAs: alias
                     })
                     .when('/artwork', {
