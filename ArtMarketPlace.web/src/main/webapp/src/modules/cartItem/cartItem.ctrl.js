@@ -36,7 +36,12 @@
             this.calcTotal = function () {
                 $scope.total = 0;
                 for (var i = 0; i < $scope.records.length; i++) {
-                    $scope.total += $scope.records[i].artwork.price * $scope.records[i].quantity;
+                    if($scope.records[i].artwork.discount)
+                    {
+                        $scope.total += (1-$scope.records[i].artwork.discount/100)*$scope.records[i].artwork.price * $scope.records[i].quantity;
+                    }else{
+                        $scope.total += $scope.records[i].artwork.price * $scope.records[i].quantity;
+                    }
                 }
                 $scope.taxes = $scope.total * 0.16;
             };
@@ -59,7 +64,12 @@
                 self.showWarning("Not implemented yet");
             };
             $scope.subtotal = function (record) {
-                return record.artwork.price * record.quantity;
+                if(record.artwork.discount)
+                {
+                    return (1-record.artwork.discount/100)*record.artwork.price * record.quantity;
+                }else{
+                    return record.artwork.price * record.quantity;
+                }
             };
         }]);
 })(window.angular);
