@@ -16,6 +16,7 @@
             this.readOnly = true;
             $scope.lastQuantity = 0;
             $scope.total = 0;
+            $scope.taxes = 0;
 
             this.recordActions = {
                 delete: {
@@ -37,6 +38,7 @@
                 for (var i = 0; i < $scope.records.length; i++) {
                     $scope.total += $scope.records[i].artwork.price * $scope.records[i].quantity;
                 }
+                $scope.taxes = $scope.total * 0.16;
             };
 
             $scope.verify = function (quantity) {

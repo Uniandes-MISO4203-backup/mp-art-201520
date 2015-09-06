@@ -1,0 +1,13 @@
+<div>
+    <!--Display Alerts -->
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+    <div class="col-md-8 col-md-offset-3">
+        <div class="col-md-8" style="margin: auto"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Payment process</h3></div><div class="panel-body">
+                    <div style="margin-top: 20px; text-align: center;">
+                        Payment was succesful.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
