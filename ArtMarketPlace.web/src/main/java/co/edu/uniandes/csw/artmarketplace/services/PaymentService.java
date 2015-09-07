@@ -1,9 +1,8 @@
 package co.edu.uniandes.csw.artmarketplace.services;
 
-import co.edu.uniandes.csw.artmarketplace.api.ICartItemLogic;
-import co.edu.uniandes.csw.artmarketplace.api.IClientLogic;
-import co.edu.uniandes.csw.artmarketplace.dtos.CartItemDTO;
+import co.edu.uniandes.csw.artmarketplace.api.IPaymentLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.PaymentDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -24,22 +23,21 @@ import org.apache.shiro.SecurityUtils;
 /**
  * @generated
  */
-@Path("/cartItems")
+@Path("/payments")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CartItemService {
+public class PaymentService {
 
     @Inject
-    private ICartItemLogic cartItemLogic;
-    @Inject
-    private IClientLogic clientLogic;
+    private IPaymentLogic paymentLogic;
     @Context
     private HttpServletResponse response;
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
-    
+    @QueryParam("q")
+    private String paymentName;
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
 
     /**
@@ -47,10 +45,10 @@ public class CartItemService {
      */
     @POST
     @StatusCreated
-    public CartItemDTO createCartItem(CartItemDTO dto) {
+    public PaymentDTO createPayment(PaymentDTO dto) {
         if (client != null) {
             dto.setClient(client);
-            return cartItemLogic.createCartItemByClient(dto, client.getId());
+            return paymentLogic.createPayment(dto);
         }
         return null;
     }
@@ -59,8 +57,14 @@ public class CartItemService {
      * @generated
      */
     @GET
-    public List<CartItemDTO> getCartItems() {
-        return cartItemLogic.getCartItemsByClient(page, maxRecords, client.getId());
+    public List<PaymentDTO> getPayments() {
+        if (paymentName != null) {
+            return paymentLogic.findByName(paymentName);
+        }
+        if (page != null && maxRecords != null) {
+            this.response.setIntHeader("X-Total-Count", paymentLogic.countPayments());
+        }
+        return paymentLogic.getPayments(page, maxRecords);
     }
 
     /**
@@ -68,18 +72,18 @@ public class CartItemService {
      */
     @GET
     @Path("{id: \\d+}")
-    public CartItemDTO getCartItem(@PathParam("id") Long id) {
-        return cartItemLogic.getCartItemsByClientById(id, client.getId());
+    public PaymentDTO getPayment(@PathParam("id") Long id) {
+        return paymentLogic.getPayment(id);
     }
-
+    
     /**
      * @generated
      */
     @PUT
     @Path("{id: \\d+}")
-    public CartItemDTO updateCartItem(@PathParam("id") Long id, CartItemDTO dto) {
+    public PaymentDTO updatePayment(@PathParam("id") Long id, PaymentDTO dto) {
         dto.setId(id);
-        return cartItemLogic.updateCartItemByClient(client.getId(), dto);
+        return paymentLogic.updatePayment(dto);
     }
 
     /**
@@ -87,7 +91,7 @@ public class CartItemService {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCartItem(@PathParam("id") Long id) {
-        cartItemLogic.deleteCartItemByClient(client.getId(), id);
+    public void deletePayment(@PathParam("id") Long id) {
+        paymentLogic.deletePayment(id);
     }
 }

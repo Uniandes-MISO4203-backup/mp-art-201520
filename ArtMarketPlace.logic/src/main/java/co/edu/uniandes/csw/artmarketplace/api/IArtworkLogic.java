@@ -11,4 +11,6 @@ public interface IArtworkLogic {
     public ArtworkDTO updateArtwork(ArtworkDTO dto);
     public void deleteArtwork(Long id);
     public List<ArtworkDTO> findByName(String name);
+    public List<ArtworkDTO> searchArtistWithCheapestArtwork(String artworkName);
+    public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(String artistName);
 }

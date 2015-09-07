@@ -50,6 +50,7 @@ public class ArtworkService {
     @StatusCreated
     public ArtworkDTO createArtwork(ArtworkDTO dto) {
         if (artist != null) {
+            dto.setArtist(artist);
             return artworkLogic.createArtwork(dto);
         }
         return null;
@@ -82,6 +83,18 @@ public class ArtworkService {
         return artworkLogic.getArtwork(id);
     }
 
+    @GET
+    @Path("/artistWithCheapestArtwork/{artworkName}")
+    public List<ArtworkDTO> searchArtistWithCheapestArtwork(@PathParam("artworkName") String artworkName) {
+        return artworkLogic.searchArtistWithCheapestArtwork(artworkName);
+    }
+    
+    @GET
+    @Path("/cheapestArtworkOfAnArtist/{artistName}")
+    public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(@PathParam("artistName") String artistName) {
+        return artworkLogic.searchCheapestArtworkOfAnArtist(artistName);
+    }
+    
     /**
      * @generated
      */

@@ -42,6 +42,10 @@
         <script src="src/modules/client/client.svc.js"></script>
         <script src="src/modules/client/client.ctrl.js"></script>
 
+        <script src="src/modules/payment/payment.mod.js"></script>
+        <script src="src/modules/payment/payment.svc.js"></script>
+        <script src="src/modules/payment/payment.ctrl.js"></script>
+
     </head>
     <body style="padding-top: 60px;">
         <div class="container-fluid">
@@ -79,8 +83,13 @@
                             
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="active">
-                                    <a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
+                                    <a href="#/search"><span class="glyphicon glyphicon-search" ></span> Advanced Search </a></li>
                                 <li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active">
+                                    <a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a>
+                                </li>
                                 <login-button></login-button>
                             </ul>
                         </div> <!-- /.navbar-collapse -->

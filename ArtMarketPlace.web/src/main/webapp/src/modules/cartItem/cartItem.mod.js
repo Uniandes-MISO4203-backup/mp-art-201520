@@ -9,6 +9,11 @@
                 displayName: 'Name',
                 type: 'String',
                 required: true
+            },{
+                name: 'state',
+                displayName: 'State',
+                type: 'String',
+                required: true
             }, {
                 name: 'quantity',
                 displayName: 'Quantity',

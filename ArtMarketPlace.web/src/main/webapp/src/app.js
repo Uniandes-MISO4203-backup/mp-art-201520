@@ -8,6 +8,7 @@
         'artworkModule',
         'cartItemModule',
         'clientModule',
+        'paymentModule',
         'ngRoute',
         'ngCrud'
     ]);
@@ -19,13 +20,18 @@
                         controller: 'artistCtrl',
                         controllerAs: alias
                     })
+                    .when('/payment', {
+                        templateUrl: tplUrl,
+                        controller: 'paymentCtrl',
+                        controllerAs: alias
+                    })
                     .when('/client', {
                         templateUrl: tplUrl,
                         controller: 'clientCtrl',
                         controllerAs: alias
                     })
                     .when('/catalog', {
-                        templateUrl: tplUrl,
+                        templateUrl: 'src/modules/artwork/catalog.tpl.html',
                         controller: 'catalogCtrl',
                         controllerAs: alias
                     })
@@ -34,9 +40,24 @@
                         controller: 'cartItemCtrl',
                         controllerAs: alias
                     })
+                    .when('/pay', {
+                        templateUrl: 'src/modules/payment/pay.tpl.html',
+                        controller: 'paymentViewCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/payf', {
+                        templateUrl: 'src/modules/payment/paymentFinished.tpl.html',
+                        controller: 'paymentViewCtrl',
+                        controllerAs: alias
+                    })
                     .when('/artwork', {
                         templateUrl: tplUrl,
                         controller: 'artworkCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/search', {
+                        templateUrl: 'src/modules/search/search.tpl.html',
+                        controller: 'catalogCtrl',
                         controllerAs: alias
                     })
                     .otherwise('/catalog');

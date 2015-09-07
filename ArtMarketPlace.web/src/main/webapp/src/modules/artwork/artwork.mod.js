@@ -17,7 +17,19 @@
             }, {
                 name: 'price',
                 displayName: 'Price',
-                type: 'Integer',
+                type: 'Currency',
                 required: true
-            }]});
+            }, {
+                name: 'artist',
+                displayName: 'Artist',
+                type: 'Reference',
+                required: true
+            }, {
+                name: 'discount',
+                displayName: 'Special Discount',
+                type: 'Integer',
+                required: false
+            }]
+        
+    });
 })(window.angular);
