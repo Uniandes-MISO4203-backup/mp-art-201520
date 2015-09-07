@@ -8,7 +8,6 @@
         'artworkModule',
         'cartItemModule',
         'clientModule',
-        'questionModule',
         'ngRoute',
         'ngCrud'
     ]);
@@ -38,11 +37,6 @@
                     .when('/artwork', {
                         templateUrl: tplUrl,
                         controller: 'artworkCtrl',
-                        controllerAs: alias
-                    })
-                    .when('/question', {
-                        templateUrl: tplUrl,
-                        controller: 'questionCtrl',
                         controllerAs: alias
                     })
                     .when('/search', {

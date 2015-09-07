@@ -2,10 +2,8 @@ package co.edu.uniandes.csw.artmarketplace.services;
 
 import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
-import co.edu.uniandes.csw.artmarketplace.api.IQuestionLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
-import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -35,8 +33,6 @@ public class ArtworkService {
     private IArtworkLogic artworkLogic;
     @Inject
     private IArtistLogic artistLogic;
-    @Inject
-    private IQuestionLogic questionLogic;
     @Context
     private HttpServletResponse response;
     @QueryParam("page")
@@ -115,14 +111,5 @@ public class ArtworkService {
     @Path("{id: \\d+}")
     public void deleteArtwork(@PathParam("id") Long id) {
         artworkLogic.deleteArtwork(id);
-    }
-    
-    @POST
-    @Path("/question/{id: \\d+}")
-    public QuestionDTO createQuestion(@PathParam("id") Long id, QuestionDTO dto){
-        if(id != null){
-            return questionLogic.createQuestion(dto);
-        }
-        return null;
     }
 }
