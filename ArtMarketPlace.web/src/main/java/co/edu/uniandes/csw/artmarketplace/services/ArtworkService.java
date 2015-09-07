@@ -50,6 +50,7 @@ public class ArtworkService {
     @StatusCreated
     public ArtworkDTO createArtwork(ArtworkDTO dto) {
         if (artist != null) {
+            dto.setArtist(artist);
             return artworkLogic.createArtwork(dto);
         }
         return null;

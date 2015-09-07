@@ -31,6 +31,10 @@ public class ArtworkEntity implements Serializable {
     private String picture;
 
     private Integer price;
+    /**
+     * Descuento de una obra
+     */
+    private Float discount;
 
     @ManyToOne
     private ArtistEntity artist;
@@ -102,6 +106,21 @@ public class ArtworkEntity implements Serializable {
      */
     public void setArtist(ArtistEntity artist) {
         this.artist = artist;
+    }
+    /**
+     * Metodo para obtener el descuento de una obra de arte
+     */
+    public Float getDiscount()
+    {
+        return discount;
+    }
+    /**
+     * Metodo para actualizar el descuento de una obra de arte
+     * 
+     */
+    public void setDiscount(Float discount)
+    {
+        this.discount = discount;
     }
 
 }

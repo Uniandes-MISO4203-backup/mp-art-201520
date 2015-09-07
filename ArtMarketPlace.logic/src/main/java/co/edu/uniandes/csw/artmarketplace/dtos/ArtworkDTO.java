@@ -13,6 +13,12 @@ public class ArtworkDTO {
     private String picture;
     private Integer price;
     private ArtistDTO artist;
+    
+    /**
+     * Descuento de una obra
+     */
+    private Float discount;
+    
     /**
      * @generated
      */
@@ -82,5 +88,20 @@ public class ArtworkDTO {
     public void setArtist(ArtistDTO artist) {
         this.artist = artist;
     }
-
+    
+    /**
+     * Metodo para obtener el descuento de una obra de arte
+     */
+    public Float getDiscount()
+    {
+        return discount;
+    }
+    /**
+     * Metodo para actualizar el descuento de una obra de arte
+     * 
+     */
+    public void setDiscount(Float discount)
+    {
+        this.discount = discount;
+    }
 }
