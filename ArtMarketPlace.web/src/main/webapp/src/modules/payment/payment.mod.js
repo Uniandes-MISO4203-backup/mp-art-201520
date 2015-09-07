@@ -5,6 +5,11 @@
 
     mod.constant('paymentModel', {
         fields: [{
+                name: 'id',
+                displayName: 'Id',
+                type: 'Integer',
+                required: true
+            },{
                 name: 'method',
                 displayName: 'Method',
                 type: 'String',

@@ -29,12 +29,13 @@
                 $scope.taxes = $scope.total * 0.16;
                 $scope.totalandtaxes = $scope.taxes + $scope.total;
             };
+            
             $scope.endPayment = function () {
                 if ($scope.cardNumber <= 0) {
                     self.showWarning("A valid card number is necessary.");
                 }
                 else {
-                    $scope.newId = paymentSvc.createItem({
+                    $scope.newPayment = paymentSvc.createItem({
                         method: $scope.paymentMethod,
                         subtotal: $scope.total,
                         taxes: $scope.taxes,
@@ -46,9 +47,11 @@
                     }
                     $scope.paymentMethod = '1';
                     $scope.cardNumber = '';
+                    console.log($scope.newPayment);
                     $location.path('payf');
                 }
             };
+            
             $scope.reset = function () {
                 $scope.paymentMethod = '1';
                 $scope.cardNumber = '';
