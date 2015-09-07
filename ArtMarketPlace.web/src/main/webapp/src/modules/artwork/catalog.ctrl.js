@@ -1,10 +1,11 @@
 (function (ng) {
     var mod = ng.module('artworkModule');
 
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
+    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
+            this.detailsMode = false;
 
             this.searchByName = function (artworkName) {
                 var search;
@@ -27,21 +28,37 @@
                 });
             };
 
-            this.recordActions = [{
-                    name: 'addToCart',
-                    displayName: 'Add to Cart',
-                    icon: 'shopping-cart',
-                    class: 'primary',
-                    fn: function (artwork) {
-                        return cartItemSvc.addItem({
-                            artwork: artwork,
-                            name: artwork.name,
-                            quantity: 1});
-                    },
-                    show: function () {
-                        return true;
+            var self = this;
+            this.recordActions = {
+                    addToCart: {
+                        name: 'addToCart',
+                        displayName: 'Add to Cart',
+                        icon: 'shopping-cart',
+                        class: 'primary',
+                        fn: function (artwork) {
+                            return cartItemSvc.addItem({
+                                artwork: artwork,
+                                name: artwork.name,
+                                quantity: 1});
+                        },
+                        show: function () {
+                            return true;
                     }
-                }];
+                    },
+                    remarks: {
+                        displayName: 'Remarks',
+                        icon: 'list',
+                        class: 'info',
+                        fn: function (record) {
+                            artworkSvc.api.get(record.id).then(function (data) {
+                                self.detailsMode = true;
+                                $scope.artworkRecord = data;
+                            });
+                        },
+                        show: function () {
+                            return !self.detailsMode;
+                        }
+                    }};
 
             this.fetchRecords();
         }]);

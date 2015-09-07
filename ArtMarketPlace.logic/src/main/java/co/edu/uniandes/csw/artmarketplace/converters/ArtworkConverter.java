@@ -97,6 +97,7 @@ public abstract class ArtworkConverter {
     public static ArtworkDTO fullEntity2DTO(ArtworkEntity entity) {
         if (entity != null) {
             ArtworkDTO dto = basicEntity2DTO(entity);
+            dto.setRemarks(RemarkConverter.listEntity2DTO(entity.getRemarks()));
             return dto;
         } else {
             return null;
@@ -109,6 +110,7 @@ public abstract class ArtworkConverter {
     public static ArtworkEntity fullDTO2Entity(ArtworkDTO dto) {
         if (dto != null) {
             ArtworkEntity entity = basicDTO2Entity(dto);
+            entity.setRemarks(RemarkConverter.childListDTO2Entity(dto.getRemarks(), entity));
             return entity;
         } else {
             return null;

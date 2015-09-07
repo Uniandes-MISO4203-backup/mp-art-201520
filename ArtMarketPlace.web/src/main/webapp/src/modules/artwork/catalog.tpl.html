@@ -26,12 +26,12 @@
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
-<div ng-show="ctrl.detailsMode" ng-if="bookRecord">
+<div ng-show="ctrl.detailsMode" ng-if="artworkRecord">
     <div class="panel panel-default">
-        <div class="panel-heading">{{bookRecord.name}}</div>
-        <ul class="list-group" ng-repeat="review in bookRecord.reviews">
+        <div class="panel-heading">{{artworkRecord.name}}</div>
+        <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
             <li class="list-group-item">
-                {{review.description}} - <em>{{review.source}}</em>
+                {{remark.remarkDate}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
             </li>
         </ul>    
     </div>
