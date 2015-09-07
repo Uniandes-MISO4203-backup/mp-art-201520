@@ -25,6 +25,7 @@
                     <p><strong>Name:</strong> {{element.name}}</p>
                     <p><strong>Price:</strong> {{element.price}}</p>
                     <p><strong>Artist:</strong> {{element.artist.name}}</p>
+                    <p ng-if=element.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{element.discount}} &#37; </p>
                 </div>
                 <p class="text-center">
                     <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(element)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>

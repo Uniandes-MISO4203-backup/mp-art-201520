@@ -1,0 +1,39 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-hide="ctrl.detailsMode">
+    <div class="col-sm-12">
+        <div ng-repeat="record in records">
+            <div class="col-sm-4 well text-center">
+                <div class="col-md-12">
+                    <div class="img-thumbnail" id="cover" ng-if="record.picture">
+                        <a ng-href="{{record.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.picture}}" alt="{{record.picture}}"></a>
+                    </div>
+                </div>
+                <div class="caption" >
+                    <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
+                    <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
+                    <p><strong>{{model.fields[3].displayName}}: </strong> {{record.artist.name}}</p>
+                    <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
+                </div>
+                <p class="text-center">
+                    <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>
+<div ng-show="ctrl.detailsMode" ng-if="artworkRecord">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{artworkRecord.name}}</div>
+        <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
+            <li class="list-group-item">
+                {{remark.remarkDate}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
+            </li>
+        </ul>    
+    </div>
+    <a class="btn btn-default" ng-click="ctrl.detailsMode = false" >Back</a>
+</div>

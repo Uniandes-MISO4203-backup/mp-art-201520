@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,6 +14,17 @@ public class ArtworkDTO {
     private String picture;
     private Integer price;
     private ArtistDTO artist;
+    
+    /**
+     * Comentarios de la obra de arte.
+     */
+    private List<RemarkDTO> remarks;
+    
+    /**
+     * Descuento de una obra
+     */
+    private Float discount;
+    
     /**
      * @generated
      */
@@ -82,5 +94,38 @@ public class ArtworkDTO {
     public void setArtist(ArtistDTO artist) {
         this.artist = artist;
     }
+    
+    /**
+     * Metodo para obtener el descuento de una obra de arte
+     */
+    public Float getDiscount()
+    {
+        return discount;
+    }
+    /**
+     * Metodo para actualizar el descuento de una obra de arte
+     * 
+     */
+    public void setDiscount(Float discount)
+    {
+        this.discount = discount;
+    }
+    
+    /**
+     * Retorna los comentarios de la obra de arte.
+     * @return 
+     */
+    public List<RemarkDTO> getRemarks()
+    {
+        return remarks;
+    }
 
+    /**
+     * Establece los comentarios de la obra de arte.
+     * @param remarks 
+     */
+    public void setRemarks(List<RemarkDTO> remarks)
+    {
+        this.remarks = remarks;
+    }
 }

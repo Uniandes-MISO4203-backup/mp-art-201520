@@ -1,12 +1,15 @@
 package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -31,6 +34,16 @@ public class ArtworkEntity implements Serializable {
     private String picture;
 
     private Integer price;
+    /**
+     * Descuento de una obra
+     */
+    private Float discount;
+ 
+    /**
+     * Comentarios de la obra de arte.
+     */
+    @OneToMany(mappedBy = "artwork", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RemarkEntity> remarks;
 
     @ManyToOne
     private ArtistEntity artist;
@@ -103,5 +116,37 @@ public class ArtworkEntity implements Serializable {
     public void setArtist(ArtistEntity artist) {
         this.artist = artist;
     }
+    /**
+     * Metodo para obtener el descuento de una obra de arte
+     */
+    public Float getDiscount()
+    {
+        return discount;
+    }
+    /**
+     * Metodo para actualizar el descuento de una obra de arte
+     * 
+     */
+    public void setDiscount(Float discount)
+    {
+        this.discount = discount;
+    }
+    
+    /**
+     * Retorna los comentarios de una obra de arte.
+     * @return remarks
+     */
+    public List<RemarkEntity> getRemarks()
+    {
+       return remarks;
+    }
 
+    /**
+     * Establece los comentarios de una obra de arte.
+     * @param remarks
+     */
+    public void setRemarks(List<RemarkEntity> remarks)
+    {
+       this.remarks = remarks;
+    }
 }

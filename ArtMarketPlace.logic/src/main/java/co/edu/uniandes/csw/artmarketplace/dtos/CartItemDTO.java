@@ -10,6 +10,7 @@ public class CartItemDTO {
 
     private Long id;
     private String name;
+    private String state;
     private Integer quantity;
     private ArtworkDTO artwork;
     private ClientDTO client;
@@ -82,5 +83,21 @@ public class CartItemDTO {
     public void setClient(ClientDTO client) {
         this.client = client;
     }
+
+    /**
+     * @generated
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @generated
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    
 
 }

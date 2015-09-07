@@ -22,7 +22,7 @@ public class CartItemPersistence extends CrudPersistence<CartItemEntity> {
     }
     
     public List<CartItemDTO> getCartItemsByClient(Integer page, Integer maxRecords, Long idClient) {
-        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.client.id = :idC");
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.state is null and u.client.id = :idC");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);
@@ -39,7 +39,7 @@ public class CartItemPersistence extends CrudPersistence<CartItemEntity> {
     }
 
     public CartItemDTO getCartItemsByClientById(Long idCart, Long idClient) {
-        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.client.id = :idC and u.id= :id");
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.state is null and u.client.id = :idC and u.id= :id");
         return CartItemConverter.fullEntity2DTO((CartItemEntity) q.setParameter("idC", idClient).setParameter("id", idCart).getSingleResult());
     }
 
