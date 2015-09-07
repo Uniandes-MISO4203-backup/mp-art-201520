@@ -1,8 +1,8 @@
 (function (ng) {
     var mod = ng.module('artworkModule');
 
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc) {
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', '$http', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, $http) {
+    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', '$http'  , function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc,$http) {
+
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
