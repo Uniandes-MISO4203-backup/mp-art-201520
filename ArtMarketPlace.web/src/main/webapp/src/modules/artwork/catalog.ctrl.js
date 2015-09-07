@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('artworkModule');
 
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
+    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', '$http', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, $http) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
@@ -13,7 +13,7 @@
                 }
                 $location.url('/catalog' + search);
             };
-
+            
             this.recordActions = [{
                     name: 'addToCart',
                     displayName: 'Add to Cart',
@@ -31,5 +31,17 @@
                 }];
 
             this.fetchRecords();
+            
+
+            $http.get($location.absUrl().replace("#"+$location.path(),"")+'webresources/users/currentUser').success(function(data){
+                    var elem = document.getElementById("divAdmin");     
+                    if(data.role === "Admin"){
+                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/client\">Clients</a> </li><li> <a href=\"#/artist\">Artists</a></li></ul>";
+                    }else{
+                        elem.innerHTML = "";
+                }        
+
+             });
+
         }]);
 })(window.angular);

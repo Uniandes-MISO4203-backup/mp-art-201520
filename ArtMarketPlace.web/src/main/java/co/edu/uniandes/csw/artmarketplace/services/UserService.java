@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.artmarketplace.services;
 
+import co.edu.uniandes.csw.artmarketplace.api.IAdminLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IClientLogic;
+import co.edu.uniandes.csw.artmarketplace.dtos.AdminDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.UserDTO;
@@ -47,6 +49,9 @@ public class UserService {
 
     @Inject
     private IArtistLogic artistLogic;
+    
+    @Inject
+    private IAdminLogic adminLogic;
 
     @Path("/login")
     @POST
@@ -65,10 +70,16 @@ public class UserService {
                     currentUser.getSession().setAttribute("Artist", provider);
                     return Response.ok(provider).build();
                 } else {
-                    return Response.status(Response.Status.BAD_REQUEST)
+                    AdminDTO providerAdmin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+                    if (providerAdmin != null) {
+                        currentUser.getSession().setAttribute("Admin", providerAdmin);
+                        return Response.ok(providerAdmin).build();
+                    }else{
+                       return Response.status(Response.Status.BAD_REQUEST)
                             .entity(" User is not registered")
                             .type(MediaType.TEXT_PLAIN)
-                            .build();
+                            .build(); 
+                    }  
                 }
             }
         } catch (AuthenticationException e) {
@@ -101,6 +112,10 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
+            AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+            if(admin!=null){
+                user.setRole("Admin");
+            }
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.BAD_REQUEST)
