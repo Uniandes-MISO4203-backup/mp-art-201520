@@ -28,6 +28,13 @@
                     $scope.artworks = results;
                 });
             };
+            
+            $scope.postRemark = function (id, newRemark) {
+                artworkSvc.postRemark(id, newRemark).then(function (result) {
+                    $scope.artworkRecord = [];
+                    $scope.artworkRecord = result;
+                });
+            };
 
             var self = this;
             this.recordActions = {

@@ -36,4 +36,6 @@
         </ul>    
     </div>
     <a class="btn btn-default" ng-click="ctrl.detailsMode = false" >Back</a>
+    <button ng-click="postRemark(artworkRecord.id, newRemark)" class="btn btn-default">POST</button>
+    <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Enter remark here..." maxlength="255" ng-model="newRemark" required>
 </div>

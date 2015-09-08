@@ -9,5 +9,8 @@
             this.searchCheapestArtworkOfAnArtist = function(artistName){
                 return this.api.one("cheapestArtworkOfAnArtist/"+ artistName).get();
             };
+            this.postRemark = function(id, newRemark){
+                return this.api.one("postRemark/"+ id + "/" + newRemark).get();
+            };
     }]);
 })(window.angular);
