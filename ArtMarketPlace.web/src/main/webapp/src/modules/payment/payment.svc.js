@@ -4,11 +4,7 @@
             CrudCreator.extendService(this, context);
             this.createItem = function (record) {
                 var self = this;
-                var nuevo = self.saveRecord(record);
-                console.log(record);
-                console.log(nuevo.getId());
-                console.log(nuevo);
-                console.log(Object);
+                self.saveRecord(record);
             };
         }]);
 })(window.angular);
