@@ -27,4 +27,9 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    <!-- Configuración de Correo -->
+    <context-param>
+        <param-name>emailConfig</param-name>
+        <param-value>/WEB-INF/email.properties</param-value>
+    </context-param>
 </web-app>

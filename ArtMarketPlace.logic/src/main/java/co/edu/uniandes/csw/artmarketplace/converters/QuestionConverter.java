@@ -39,6 +39,7 @@ public abstract class QuestionConverter {
             dto.setEmail(entity.getEmail());
             dto.setQuestion(entity.getQuestion());
             dto.setDate(entity.getDate());
+            dto.setArtistEmail(entity.getArtistEmail());
             return dto;
         } else {
             return null;
@@ -74,6 +75,7 @@ public abstract class QuestionConverter {
             entity.setArtwork(ArtworkConverter.refDTO2Entity(dto.getArtwork()));
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setDate(dto.getDate());
+            entity.setArtistEmail(dto.getArtistEmail());
             entity.setEmail(dto.getEmail());
             entity.setQuestion(dto.getQuestion());
             return entity;
@@ -98,6 +100,7 @@ public abstract class QuestionConverter {
             dto.setEmail(entity.getEmail());
             dto.setQuestion(entity.getQuestion());
             dto.setDate(entity.getDate());
+            dto.setArtistEmail(entity.getArtistEmail());
             return dto;
         } else {
             return null;

@@ -34,37 +34,42 @@ public class QuestionEntity implements Serializable{
      */
     @Id
     @GeneratedValue(generator = "QuestionEntity")
-    public Long id;
+    private Long id;
     
     /**
      * artwork es la referencia de la obra de arter de la cual se esta preguntando.
      */
     @ManyToOne
-    public ArtworkEntity artwork;
+    private ArtworkEntity artwork;
     
     /**
      * client es la referencia del comprador quien hace la pregunta.
      */
     @ManyToOne
-    public ClientEntity client;
+    private ClientEntity client;
+    
+    /**
+     * artistEmail es el correo de referencia al cual se debe hacer envió la pregunta.
+     */
+    private String artistEmail;
 
     /**
      * date es la fecha de creación de la pregunta sobre la obra de arte.
      */
     @Temporal(TemporalType.DATE)
-    public Date date;
+    private Date date;
     
     /**
      * email es es la cuenta de correo del usuario a la cual se espera que el artista de respuesta
      * a su pregunta.
      */
-    public String email;
+    private String email;
     
     /**
      * question es el campo dispuesto para que el usuario haga la pregunta respecto a la obra de
      * arte.
      */    
-    public String question;
+    private String question;
 
     /**
      * Es un método de acceso que retorna el identificador único de la pregunta.
@@ -153,7 +158,7 @@ public class QuestionEntity implements Serializable{
     /**
      * Es un método de acceso que retorna la pregunta realizada por un comprador sobre una
      * obra de arte en específico.
-     * @return 
+     * @return question es la pregunta formulada por el cliente.
      */
     public String getQuestion() {
         return question;
@@ -167,5 +172,20 @@ public class QuestionEntity implements Serializable{
     public void setQuestion(String question) {
         this.question = question;
     }
-    
+
+    /**
+     * Es un método de acceso que retorna el correo del destinatario de la pregunta.
+     * @return artistEmail es el correo del artista a quien se le pregunta sobre su obra.
+     */
+    public String getArtistEmail() {
+        return artistEmail;
+    }
+
+    /**
+     * Es un método de acceso que modifica el correo del destinatario de la pregunta.
+     * @param artistEmail es el correo del artista a quien se le hace envión del correo.
+     */
+    public void setArtistEmail(String artistEmail) {
+        this.artistEmail = artistEmail;
+    }
 }

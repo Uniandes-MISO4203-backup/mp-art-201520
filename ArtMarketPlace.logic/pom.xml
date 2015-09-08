@@ -48,5 +48,12 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
         </dependency>
+        
+        <!--  JavaMail  -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
     </dependencies>
 </project>

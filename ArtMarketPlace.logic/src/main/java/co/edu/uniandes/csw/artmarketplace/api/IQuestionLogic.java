@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.artmarketplace.api;
 
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -20,5 +21,6 @@ public interface IQuestionLogic {
     public QuestionDTO createQuestion(QuestionDTO dto);
     public QuestionDTO updateQuestion(QuestionDTO dto);
     public void deleteQuestion(Long id);
+    public boolean sendEmail(QuestionDTO dto,Properties properties);
     
 }

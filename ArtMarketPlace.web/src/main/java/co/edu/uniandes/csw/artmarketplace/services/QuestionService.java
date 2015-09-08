@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.artmarketplace.api.IQuestionLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -54,7 +56,9 @@ public class QuestionService {
     @POST
     @StatusCreated
     public QuestionDTO createQuestion(QuestionDTO dto) {
-
+        dto.setDate(new Date());
+        client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+        dto.setClient(client);
         return questionLogic.createQuestion(dto);
 
     }

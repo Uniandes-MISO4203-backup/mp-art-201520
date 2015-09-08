@@ -16,36 +16,40 @@ public class QuestionDTO {
     /**
      * Id es el campo de identificador único de la pregunta realizada por el comprador.
      */
-    public Long id;
+    private Long id;
     
     /**
      * artwork es la referencia de la obra de arter de la cual se esta preguntando.
      */
-    public ArtworkDTO artwork;
+    private ArtworkDTO artwork;
     
     /**
      * client es la referencia del comprador quien hace la pregunta.
      */
-    public ClientDTO client;
+    private ClientDTO client;
     
     
     /**
      * date es la fecha de creación de la pregunta sobre la obra de arte.
      */
-    public Date date;
+    private Date date;
     
     /**
      * email es es la cuenta de correo del usuario a la cual se espera que el artista de respuesta
      * a su pregunta.
      */
-    public String email;
+    private String email;
     
     /**
      * question es el campo dispuesto para que el usuario haga la pregunta respecto a la obra de
      * arte.
      */    
-    public String question;
-
+    private String question;
+    
+    /**
+     * artistEmail es el correo del destinatario.
+     */
+    private String artistEmail;
     
     /**
      * Es un método de acceso que retorna el identificador único de la pregunta.
@@ -148,4 +152,22 @@ public class QuestionDTO {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    /**
+     * Es un método de acceso que retorna el correo del destinatario de la pregunta.
+     * @return retorna el correo del artista.
+     */
+    public String getArtistEmail() {
+        return artistEmail;
+    }
+
+    /**
+     * Es un método de acceso que modifica el correo del destinatario de la pregunta.
+     * @param artistEmail es el correo del artista.
+     */
+    public void setArtistEmail(String artistEmail) {
+        this.artistEmail = artistEmail;
+    }
+    
+    
 }
