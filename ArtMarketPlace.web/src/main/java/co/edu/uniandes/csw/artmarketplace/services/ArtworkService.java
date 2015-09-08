@@ -136,7 +136,7 @@ public class ArtworkService {
         dto.setDate(new Date());
         try {
             ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
-            // Se carga la información de la sesión de correo
+            // Se carga la información de la sesion de correo
             String path = context.getInitParameter("emailConfig");
             InputStream data = context.getResourceAsStream(path);
             Properties props = new Properties();
