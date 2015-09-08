@@ -30,36 +30,98 @@
 
             var self = this;
             this.recordActions = {
-                    addToCart: {
-                        name: 'addToCart',
-                        displayName: 'Add to Cart',
-                        icon: 'shopping-cart',
-                        class: 'primary',
-                        fn: function (artwork) {
-                            return cartItemSvc.addItem({
-                                artwork: artwork,
-                                name: artwork.name,
-                                quantity: 1});
-                        },
-                        show: function () {
-                            return true;
-                    }
+                addToCart: {
+                    name: 'addToCart',
+                    displayName: 'Add to Cart',
+                    icon: 'shopping-cart',
+                    class: 'primary',
+                    fn: function (artwork) {
+                        return cartItemSvc.addItem({
+                            artwork: artwork,
+                            name: artwork.name,
+                            quantity: 1});
                     },
-                    remarks: {
-                        displayName: 'Remarks',
-                        icon: 'list',
-                        class: 'info',
-                        fn: function (record) {
+                    show: function () {
+                        return true;
+                    }
+                },
+                remarks: {
+                    displayName: 'Remarks',
+                    icon: 'list',
+                    class: 'info',
+                    fn: function (record) {
+                        artworkSvc.api.get(record.id).then(function (data) {
+                            self.detailsMode = true;
+                            $scope.artworkRecord = data;
+                        });
+                    },
+                    show: function () {
+                        return !self.detailsMode;
+                    }
+                },
+                makeQuestion: {
+                    name: 'question',
+                    displayName: 'Question',
+                    icon: 'question-sign',
+                    class: 'info',
+                    fn: function (record)
+                    {
+                        if (authSvc.getCurrentUser())
+                        {
                             artworkSvc.api.get(record.id).then(function (data) {
-                                self.detailsMode = true;
-                                $scope.artworkRecord = data;
+                                $('#questionModal').modal('show');
+                                $('#userQuestion').html("<b>User</b>: " + authSvc.getCurrentUser().name + "<br>");
+                                $('#artworkRef').html("<b>Reference</b>: <label id=artRef>" + data.id + "</label><br>");
+                                $('#artworkName').html("<b>Artwork's name</b>: " + data.name + "<br>");
+                                $("#question").val("Escriba aquí su pregunta");
                             });
-                        },
-                        show: function () {
-                            return !self.detailsMode;
                         }
-                    }};
+                        else
+                        {
+                            $location.path('/login');
+                        }
+                    },
+                    show: function () {
+                        return true;
+                    }
+                }
+            };
 
+            this.saveQuestion = [
+                {
+                    fn: function ()
+                    {
+                        if (authSvc.getCurrentUser())
+                        {
+                            if ($("#question").val().length !== 0)
+                            {
+                                var artRef = $("#artRef").val();
+                                console.log("Referencia de arte: " + artRef)
+                                artworkSvc.api.get(artRef).then(function (data) {
+                                    var question = {
+                                        client: authSvc.getCurrentUser(),
+                                        artwork: data,
+                                        question: $("#question").val()
+                                    }
+                                    console.log(question);
+                                    svc.saveQuestion(question).then(function ()
+                                    {
+                                        alert("La pregunta ha sido enviada satisfactoriamente");
+                                        $('#questionModal').modal('hide');
+                                    });
+                                });
+                            }
+                            else
+                            {
+                                alert("Advertencia: Por favor, escriba su pregunta.");
+                            }
+                        }
+                        else
+                        {
+                            $location.path('/login');
+                        }
+                    }
+                }];
             this.fetchRecords();
         }]);
 })(window.angular);

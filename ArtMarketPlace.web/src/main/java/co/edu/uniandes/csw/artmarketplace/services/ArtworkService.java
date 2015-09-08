@@ -5,10 +5,20 @@ import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IQuestionLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,6 +32,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 /**
  * @generated
@@ -46,7 +57,8 @@ public class ArtworkService {
     @QueryParam("q")
     private String artworkName;
     private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
-
+    @javax.ws.rs.core.Context
+    private ServletContext context;
     /**
      * @generated
      */
@@ -92,13 +104,13 @@ public class ArtworkService {
     public List<ArtworkDTO> searchArtistWithCheapestArtwork(@PathParam("artworkName") String artworkName) {
         return artworkLogic.searchArtistWithCheapestArtwork(artworkName);
     }
-    
+
     @GET
     @Path("/cheapestArtworkOfAnArtist/{artistName}")
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(@PathParam("artistName") String artistName) {
         return artworkLogic.searchCheapestArtworkOfAnArtist(artistName);
     }
-    
+
     /**
      * @generated
      */
@@ -117,13 +129,42 @@ public class ArtworkService {
     public void deleteArtwork(@PathParam("id") Long id) {
         artworkLogic.deleteArtwork(id);
     }
-    
+
     @POST
-    @Path("/question/{id: \\d+}")
-    public QuestionDTO createQuestion(@PathParam("id") Long id, QuestionDTO dto){
-        if(id != null){
-            return questionLogic.createQuestion(dto);
+    @Path("/questions")
+    public QuestionDTO createQuestion(QuestionDTO dto) {
+        dto.setDate(new Date());
+        try {
+            ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+            // Se carga la información de la sesión de correo
+            String path = context.getInitParameter("emailConfig");
+            InputStream data = context.getResourceAsStream(path);
+            Properties props = new Properties();
+            props.load(data);
+            // Se obtiene el correo del usuario quien envia el mensaje
+            Subject currentUser = SecurityUtils.getSubject();
+            Map<String, String> userAttributes = (Map<String, String>) currentUser.getPrincipals().oneByType(java.util.Map.class);
+            dto.setEmail(userAttributes.get("email"));
+            dto.setClient(client);
+            // Se busca el destinatario
+            
+            
+            // Se guarda la pregunta.
+            dto = questionLogic.createQuestion(dto);
+            // Se envia el correo al artista propietario de la obra.
+            dto.setClient(client);
+            questionLogic.sendEmail(dto,props);
+            
+        } catch (FileNotFoundException ex) {
+            System.err.println("Archivo porperties no encontrado.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            System.err.println("Error con el archivo porperties.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            System.err.println("Error: el archivo porperties no ha sido encontrado porque no existe.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return dto;
     }
 }
