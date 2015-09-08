@@ -150,7 +150,7 @@ public class ArtworkService {
             
             
             // Se guarda la pregunta.
-            dto = questionLogic.createQuestion(dto);
+            questionLogic.createQuestion(dto);
             // Se envia el correo al artista propietario de la obra.
             dto.setClient(client);
             questionLogic.sendEmail(dto,props);
