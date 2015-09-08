@@ -3,10 +3,12 @@ package co.edu.uniandes.csw.artmarketplace.services;
 import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IQuestionLogic;
+import co.edu.uniandes.csw.artmarketplace.api.IRemarkLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.RemarkDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,6 +50,8 @@ public class ArtworkService {
     private IArtistLogic artistLogic;
     @Inject
     private IQuestionLogic questionLogic;
+    @Inject
+    private IRemarkLogic remarkLogic;
     @Context
     private HttpServletResponse response;
     @QueryParam("page")
@@ -57,6 +61,7 @@ public class ArtworkService {
     @QueryParam("q")
     private String artworkName;
     private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
+    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
     @javax.ws.rs.core.Context
     private ServletContext context;
     /**
@@ -166,5 +171,27 @@ public class ArtworkService {
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dto;
+    }
+    
+    /**
+     * Adiciona un comentario a una obra de arte.
+     * @param id
+     * @param newRemark
+     * @return 
+     */
+    @GET
+    @Path("/postRemark/{id}/{newRemark}")
+    public ArtworkDTO postRemark(@PathParam("id") Long id, @PathParam("newRemark") String newRemark) {
+        
+        ArtworkDTO dto = artworkLogic.getArtwork(id);
+        RemarkDTO remark = new RemarkDTO();
+        remark.setArtwork(dto);
+        remark.setDescription(newRemark);
+        remark.setRemarkDate(new Date());
+        remark.setRemarkUser(client.getName());
+        remark = remarkLogic.createRemark(remark);
+        remark.setArtwork(dto);
+        dto.getRemarks().add(remark);
+        return artworkLogic.updateArtwork(dto);
     }
 }

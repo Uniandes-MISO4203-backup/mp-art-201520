@@ -27,6 +27,13 @@
                     $scope.artworks = results;
                 });
             };
+            
+            $scope.postRemark = function (id, newRemark) {
+                artworkSvc.postRemark(id, newRemark).then(function (result) {
+                    $scope.artworkRecord = [];
+                    $scope.artworkRecord = result;
+                });
+            };
 
             var self = this;
             this.recordActions = {
@@ -123,5 +130,18 @@
                     }
                 }];
             this.fetchRecords();
+            
+            $http.get($location.absUrl().replace("#"+$location.path(),"")+'webresources/users/currentUser').success(function(data){
+                    var elem = document.getElementById("divAdmin");     
+                    if(data.role === "Admin"){
+                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/client\">Clients</a> </li><li> <a href=\"#/artist\">Artists</a></li></ul>";
+                    }
+                    else if(data.role === "Artist"){
+                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li class=\"active\"> <a href=\"#/artwork\"><span class=\"glyphicon glyphicon-cog\" ></span>Manage Artoworks</a> </li></ul>";
+                    }else{
+                        elem.innerHTML = "";
+                }        
+
+             });
         }]);
 })(window.angular);

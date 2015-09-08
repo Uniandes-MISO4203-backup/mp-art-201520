@@ -16,5 +16,8 @@
                     console.log("La pregunta fue exitosamente guardada");
                 });
             };
+            this.postRemark = function(id, newRemark){
+                return this.api.one("postRemark/"+ id + "/" + newRemark).get();
+            };
         }]);
 })(window.angular);
