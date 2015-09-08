@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('artworkModule');
 
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc) {
+    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', '$http'  , function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc,$http) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
@@ -108,6 +108,7 @@
                                     var question = {
                                         client: authSvc.getCurrentUser(),
                                         artwork: data,
+                                        artistEmail: data.artist.name,
                                         question: $("#question").val()
                                     }
                                     console.log(question);

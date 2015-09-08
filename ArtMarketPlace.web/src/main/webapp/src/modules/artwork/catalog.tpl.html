@@ -42,7 +42,7 @@
 </div>
 <!-- Vista del modal-->
 <div class="modal fade" id="questionModal" role="dialog">
-    <!-- Definición del espacio del modal -->
+    <!-- Definicion del espacio del modal -->
     <div class="modal-dialog">
         <!-- Contenido definido para el Modal -->  
         <div class="modal-content">
@@ -57,7 +57,7 @@
             <div id = "userQuestion"></div>
             <div id = "artworkRef"></div>
             <div id = "artworkName"></div>
-            <!-- Definición del formulario para la pregunta -->
+            <!-- Definicion del formulario para la pregunta -->
             <form ng-repeat="action in ctrl.saveQuestion" id="questionForm" method="post" class="form-horizontal" ng-submit="action.fn(record)">
                 <!-- Forma del Formulario para la pregunta -->
                 <div class="modal-body">
@@ -65,11 +65,11 @@
                         <textarea class="form-control" rows="4" id="question" style = "wmargin: 0 auto;"></textarea>
                     </div>         
                 </div>
-                <!-- Footer del formulario de envión de preguntas -->
+                <!-- Footer del formulario de envio de preguntas -->
                 <div class="modal-footer">
-                    <!-- Boton de Close para cancelar el envió de la pregunta -->
+                    <!-- Boton de Close para cancelar el envio de la pregunta -->
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <!-- Boton de Send, para hacer envión de la rpeunta -->
+                    <!-- Boton de Send, para hacer envio de la pregunta -->
                     <button type="submit" class="btn btn-success">Send</button>
                 </div>
             </form>
