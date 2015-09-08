@@ -81,9 +81,10 @@
                 logoutURL: 'logout',
                 nameCookie: 'userCookie'
             });
-            auth.setRoles({'user': 'Client', 'artists': 'Artist'});
+            auth.setRoles({'user': 'Client', 'artists': 'Artist', 'admin':'Admin'});
+            
         }]);
-
+    
     mainApp.run(function (editableOptions) {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. For Xeditable plugin Angular
     });
