@@ -20,6 +20,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public int countPayments() {
         return persistence.count();
     }
@@ -27,6 +28,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public List<PaymentDTO> getPayments(Integer page, Integer maxRecords) {
         return PaymentConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -41,6 +43,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public PaymentDTO createPayment(PaymentDTO dto) {
         PaymentEntity entity = PaymentConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -50,6 +53,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public PaymentDTO updatePayment(PaymentDTO dto) {
         PaymentEntity entity = persistence.update(PaymentConverter.fullDTO2Entity(dto));
         return PaymentConverter.fullEntity2DTO(entity);
@@ -58,6 +62,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public void deletePayment(Long id) {
         persistence.delete(id);
     }
@@ -65,10 +70,14 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public List<PaymentDTO> findByName(String name) {
         return PaymentConverter.listEntity2DTO(persistence.findByName(name));
     }
     
+    /**
+     * @generated
+     */
     public List<PaymentDTO> findAll(){
         return PaymentConverter.listEntity2DTO(persistence.findAll(1, 1));
     }

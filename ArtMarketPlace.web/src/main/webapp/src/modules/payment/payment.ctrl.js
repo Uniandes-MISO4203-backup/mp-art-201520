@@ -40,7 +40,7 @@
                     self.showWarning("A valid card number is necessary.");
                 }
                 else {
-                    $scope.newPayment = paymentSvc.createItem({
+                    paymentSvc.createItem({
                         method: $scope.paymentMethod,
                         subtotal: $scope.total,
                         taxes: $scope.taxes,
@@ -52,7 +52,6 @@
                     }
                     $scope.paymentMethod = '1';
                     $scope.cardNumber = '';
-                    console.log($scope.newPayment);
                     $location.path('payf');
                 }
             };
