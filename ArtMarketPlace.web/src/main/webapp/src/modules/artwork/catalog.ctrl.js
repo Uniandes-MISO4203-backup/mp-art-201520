@@ -75,6 +75,9 @@
                     var elem = document.getElementById("divAdmin");     
                     if(data.role === "Admin"){
                         elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/client\">Clients</a> </li><li> <a href=\"#/artist\">Artists</a></li></ul>";
+                    }
+                    else if(data.role === "Artist"){
+                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li class=\"active\"> <a href=\"#/artwork\"><span class=\"glyphicon glyphicon-cog\" ></span>Manage Artoworks</a> </li></ul>";
                     }else{
                         elem.innerHTML = "";
                 }        

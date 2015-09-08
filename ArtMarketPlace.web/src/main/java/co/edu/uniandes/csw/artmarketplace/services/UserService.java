@@ -113,8 +113,15 @@ public class UserService {
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
             AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+            ArtistDTO artist = artistLogic.getArtistByUserId(currentUser.getPrincipal().toString());
             if(admin!=null){
                 user.setRole("Admin");
+            }
+            else if (artist!=null){
+                user.setRole("Artist");
+            }
+            else{
+                user.setRole("Client");
             }
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
