@@ -81,7 +81,8 @@ public class QuestionLogic implements IQuestionLogic {
                     + "la obra de arte " + dto.getArtwork().getName() + ".\n \n "
                     + "Pregunta:\n"
                     + "" + dto.getQuestion() + "\n"
-                    + "\nFecha de creación: " + dto.getDate().toLocaleString();
+                    + "\nFecha de creación: " + dto.getDate().toLocaleString()+""
+                    + "Esta es la copia de la pregunta enviada.";
 
             // Construimos el mensaje
             MimeMessage message = new MimeMessage(session);
