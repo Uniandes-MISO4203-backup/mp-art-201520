@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
 <resources>
-    <!--<jdbc-connection-pool 
-        name="ArtMarketPlace_pool"
-        datasource-classname="org.postgresql.ds.PGConnectionPoolDataSource"
-        res-type="javax.sql.ConnectionPoolDataSource">
-        <property name="serverName" value="157.253.238.75"/>
-        <property name="portNumber" value="5432"/>
-        <property name="databaseName" value="mp-art"/>
-        <property name="User" value="grupo1"/>
-        <property name="Password" value="Grupo1"/>
-    </jdbc-connection-pool>
-    -->
     <jdbc-connection-pool 
         name="ArtMarketPlace_pool"
         datasource-classname="org.postgresql.ds.PGConnectionPoolDataSource"
         res-type="javax.sql.ConnectionPoolDataSource">
-        <property name="serverName" value="localhost"/>
+        <property name="serverName" value="157.253.238.75"/>
         <property name="portNumber" value="5432"/>
         <property name="databaseName" value="mp-art"/>
         <property name="User" value="grupo1"/>
