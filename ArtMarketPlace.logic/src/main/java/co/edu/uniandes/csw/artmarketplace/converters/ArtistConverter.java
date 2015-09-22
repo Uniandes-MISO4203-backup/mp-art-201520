@@ -83,12 +83,15 @@ public abstract class ArtistConverter {
     }
 
     /**
-     * @generated
+     * Metodo que obtiene la entidad completa incluidas las relaciones del artista.
+     * @param entity. Entidad del artista.
+     * @return El DTO del mismo artista que incluye sus ralciones.
      */
     public static ArtistDTO fullEntity2DTO(ArtistEntity entity) {
         if (entity != null) {
             ArtistDTO dto = basicEntity2DTO(entity);
             dto.setArtwork(ArtworkConverter.listEntity2DTO(entity.getArtwork()));
+            dto.setResume(ResumeConverter.refEntity2DTO(entity.getResume()));
             return dto;
         } else {
             return null;
@@ -96,12 +99,15 @@ public abstract class ArtistConverter {
     }
 
     /**
-     * @generated
+     * Metodo que obtiene el dto completa incluidas las relaciones del artista.
+     * @param dto. DTO del artista.
+     * @return La entidad del mismo artista que incluye sus ralciones.
      */
     public static ArtistEntity fullDTO2Entity(ArtistDTO dto) {
         if (dto != null) {
             ArtistEntity entity = basicDTO2Entity(dto);
             entity.setArtwork(ArtworkConverter.childListDTO2Entity(dto.getArtwork(), entity));
+            entity.setResume(ResumeConverter.refDTO2Entity(dto.getResume()));
             return entity;
         } else {
             return null;

@@ -13,6 +13,25 @@ public class ArtistDTO {
     private String name;
     private String userId;
     private List<ArtworkDTO> artwork;
+    
+    /**
+     * Hoja de vida del artista.
+     */
+    private ResumeDTO resume;
+    /**
+     * Metodo para obtener la hoja de vida del artista
+     * @return ResumeDTO. DTO con la hoja de vida.
+     */
+    public ResumeDTO getResume() {
+        return resume;
+    }
+    /**
+     * Metodo para actualizar la hoja de vida del artista.
+     * @param resume. Nueva hoja de vida del artista.
+     */
+    public void setResume(ResumeDTO resume) {
+        this.resume = resume;
+    }
     /**
      * @generated
      */
