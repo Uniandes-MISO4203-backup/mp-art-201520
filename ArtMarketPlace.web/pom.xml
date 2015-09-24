@@ -100,6 +100,12 @@
             <artifactId>httpcore</artifactId>
             <version>4.3.3</version>
         </dependency>
+        <!-- ini4j -->
+        <dependency>
+                <groupId>org.ini4j</groupId>
+                <artifactId>ini4j</artifactId>
+                <version>0.5.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
