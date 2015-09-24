@@ -3,6 +3,9 @@
 
     mod.service('artworkService', ['CrudCreator','artworkContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
+            this.searchArtworksBetweenPrices = function(artworkMinPrice,artworkMaxPrice){
+                return this.api.one("artworksBetweenPrices/"+ artworkMinPrice+"/"+artworkMaxPrice).get();
+            };
             this.searchArtistWithCheapestArtwork = function(artworkName){
                 return this.api.one("artistWithCheapestArtwork/"+ artworkName).get();
             };

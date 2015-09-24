@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.artmarketplace.ejbs.ArtworkLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ArtworkConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
+import co.edu.uniandes.csw.artmarketplace.entities.ArtistEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ArtworkPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.*;
@@ -108,6 +109,50 @@ public class ArtworkLogicTest {
             em.persist(entity);
             data.add(entity);
         }
+        insertArtworksForSearch();
+    }
+    
+    private void insertArtworksForSearch() {
+        
+        ArtistEntity artistEntityOne = new ArtistEntity();
+        artistEntityOne.setName("Artista1");
+        em.persist(artistEntityOne);
+        
+        ArtistEntity artistEntityTwo = new ArtistEntity();
+        artistEntityTwo.setName("Artista2");
+        em.persist(artistEntityTwo);
+        
+        ArtworkEntity entityOne = new ArtworkEntity();
+        entityOne.setName("Pintura1");
+        entityOne.setPicture("Pintura1");
+        entityOne.setPrice(10000);
+        entityOne.setArtist(artistEntityOne);
+        em.persist(entityOne);
+        data.add(entityOne);
+        
+        ArtworkEntity entityTwo = new ArtworkEntity();
+        entityTwo.setName("Pintura2");
+        entityTwo.setPicture("Pintura2");
+        entityTwo.setPrice(20000);
+        entityTwo.setArtist(artistEntityOne);
+        em.persist(entityTwo);
+        data.add(entityTwo);
+        
+        ArtworkEntity entityThree = new ArtworkEntity();
+        entityThree.setName("Pintura3");
+        entityThree.setPicture("Pintura3");
+        entityThree.setPrice(30000);
+        entityThree.setArtist(artistEntityTwo);
+        em.persist(entityThree);
+        data.add(entityThree);
+        
+        ArtworkEntity entityFour = new ArtworkEntity();
+        entityFour.setName("Pintura3");
+        entityFour.setPicture("Pintura3");
+        entityFour.setPrice(40000);
+        entityFour.setArtist(artistEntityOne);
+        em.persist(entityFour);
+        data.add(entityFour);
     }
 
     /**
@@ -208,7 +253,7 @@ public class ArtworkLogicTest {
         //Page 2
         List<ArtworkDTO> dto2 = artworkLogic.getArtworks(2, 2);
         Assert.assertNotNull(dto2);
-        Assert.assertEquals(1, dto2.size());
+        Assert.assertEquals(2, dto2.size());
 
         for (ArtworkDTO dto : dto1) {
             boolean found = false;
@@ -258,5 +303,87 @@ public class ArtworkLogicTest {
                 Assert.fail();
             }
         }
+    }
+    /**
+     * Test for search Artist With Cheapest Artwork
+     */
+    @Test
+    public void searchArtistWithCheapestArtwork(){
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("");
+        Assert.assertEquals(0, artworkEntitys.size());
+        
+        artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("Pintura3");
+        Assert.assertEquals(1, artworkEntitys.size());
+        Assert.assertEquals("Pintura3", artworkEntitys.get(0).getName());
+        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals("Artista2", artworkEntitys.get(0).getArtist().getName());
+        
+        artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("Pintura1");
+        Assert.assertEquals(1, artworkEntitys.size());
+        Assert.assertEquals("Pintura1", artworkEntitys.get(0).getName());
+        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals("Artista1", artworkEntitys.get(0).getArtist().getName());
+        
+    }
+    /**
+     * Test for search Cheapest Artwork Of An Artist
+     */
+    @Test
+    public void searchCheapestArtworkOfAnArtist(){
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("");
+        Assert.assertEquals(0, artworkEntitys.size());
+        
+        artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("Artista1");
+        Assert.assertEquals(1, artworkEntitys.size());
+        Assert.assertEquals("Pintura1", artworkEntitys.get(0).getName());
+        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals("Artista1", artworkEntitys.get(0).getArtist().getName());
+        
+        artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("Artista2");
+        Assert.assertEquals(1, artworkEntitys.size());
+        Assert.assertEquals("Pintura3", artworkEntitys.get(0).getName());
+        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals("Artista2", artworkEntitys.get(0).getArtist().getName());
+    }
+    /**
+     *  Test for search Artworks Between Prices
+     */
+    @Test
+    public void searchArtworksBetweenPrices(){
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,1);
+        Assert.assertEquals(0, artworkEntitys.size());
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,10000);
+        Assert.assertEquals(1, artworkEntitys.size());
+        for(ArtworkDTO a:artworkEntitys){
+            Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 10000);
+        }
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,20000);
+        Assert.assertEquals(2, artworkEntitys.size());
+        for(ArtworkDTO a:artworkEntitys){
+            Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 20000);
+        }
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,30000);
+        Assert.assertEquals(3, artworkEntitys.size());
+        for(ArtworkDTO a:artworkEntitys){
+            Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 30000);
+        }
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,40000);
+        Assert.assertEquals(4, artworkEntitys.size());
+        for(ArtworkDTO a:artworkEntitys){
+            Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 40000);
+        }
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(25000,35000);
+        Assert.assertEquals(1, artworkEntitys.size());
+        for(ArtworkDTO a:artworkEntitys){
+            Assert.assertTrue(a.getPrice() >= 25000 && a.getPrice() <= 35000);
+        }
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(50000,90000);
+        Assert.assertEquals(0, artworkEntitys.size());
     }
 }
