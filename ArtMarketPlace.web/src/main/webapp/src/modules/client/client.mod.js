@@ -6,12 +6,22 @@
     mod.constant('clientModel', {
         fields: [{
                 name: 'name',
+                displayName: 'Username',
+                type: 'String',
+                required: true
+            }, {
+                name: 'firstName',
                 displayName: 'Name',
                 type: 'String',
                 required: true
             }, {
-                name: 'userId',
-                displayName: 'UserId',
+                name: 'lastname',
+                displayName: 'LastName',
+                type: 'String',
+                required: true
+            }, {
+                name: 'email',
+                displayName: 'Email',
                 type: 'String',
                 required: true
             }], 

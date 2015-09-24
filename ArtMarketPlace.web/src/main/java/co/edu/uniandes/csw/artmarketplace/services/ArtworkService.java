@@ -104,12 +104,32 @@ public class ArtworkService {
         return artworkLogic.getArtwork(id);
     }
 
+    /**
+     * Search artworks between prices
+     * @param artworkMinPrice
+     * @param artworkMaxPrice
+     * @return 
+     */
+    @GET
+    @Path("/artworksBetweenPrices/{artworkMinPrice}/{artworkMaxPrice}")
+    public List<ArtworkDTO> searchArtworksBetweenPrices(@PathParam("artworkMinPrice") int artworkMinPrice,@PathParam("artworkMaxPrice") int artworkMaxPrice) {
+        return artworkLogic.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice);
+    }
+    /**
+     * Search artist with cheapest artwork
+     * @param artworkName
+     * @return 
+     */
     @GET
     @Path("/artistWithCheapestArtwork/{artworkName}")
     public List<ArtworkDTO> searchArtistWithCheapestArtwork(@PathParam("artworkName") String artworkName) {
         return artworkLogic.searchArtistWithCheapestArtwork(artworkName);
     }
-
+    /**
+     * Search cheapest artwork of an artist
+     * @param artistName
+     * @return 
+     */
     @GET
     @Path("/cheapestArtworkOfAnArtist/{artistName}")
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(@PathParam("artistName") String artistName) {

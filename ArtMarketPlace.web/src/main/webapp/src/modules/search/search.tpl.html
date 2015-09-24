@@ -10,7 +10,11 @@
         <button ng-click="searchArtistWithCheapestArtwork(artworkName)" class="btn btn-default">Search an Artist with the Cheapest Artwork</button>
     </div>
 
-
+    <div class="navbar-form navbar-left">
+        <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Min Value Here..." ng-model="artworkMinPrice" required>
+        <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Max Value Here..." ng-model="artworkMaxPrice" required>
+        <button ng-click="searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice)" class="btn btn-default">Search Artworks Between Prices</button>
+    </div>
 
 
     <div class="col-sm-12">

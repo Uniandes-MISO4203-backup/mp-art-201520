@@ -3,6 +3,16 @@ package co.edu.uniandes.csw.artmarketplace.services;
 import co.edu.uniandes.csw.artmarketplace.api.IClientLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.api.ApiKey;
+import com.stormpath.sdk.api.ApiKeys;
+import com.stormpath.sdk.client.Client;
+import com.stormpath.sdk.client.Clients;
+import com.stormpath.sdk.resource.ResourceException;
+import com.sun.media.jfxmedia.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +27,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.ini4j.Wini;
 
 /**
  * @generated
@@ -48,7 +59,33 @@ public class ClientService {
         if (page != null && maxRecords != null) {
             this.response.setIntHeader("X-Total-Count", clientLogic.countClients());
         }
-        return clientLogic.getClients(page, maxRecords);
+        try {
+            URL url = ArtistService.class.getResource("ArtistService.class");
+            String className = url.getFile();
+            String filePath = className.substring(0,className.indexOf("WEB-INF") + "WEB-INF".length());
+            Wini ini = new Wini(new File(filePath+"/shiro.ini"));
+            String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
+            ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+            Client client = Clients.builder().setApiKey(apiKey).build();
+            List<ClientDTO> clients = clientLogic.getClients(page, maxRecords);
+            for(ClientDTO clientDTO:clients){
+                try {
+                   Account account = client.getResource(clientDTO.getUserId(), Account.class);
+                   clientDTO.setFirstName(account.getGivenName());
+                   clientDTO.setLastname(account.getSurname());
+                   clientDTO.setEmail(account.getEmail()); 
+                } catch (ResourceException e) {
+                    Logger.logMsg(Logger.ERROR, "The account with userid: "+clientDTO.getUserId()+" does not exist.");
+                }
+
+
+            }
+            return clients;
+        } catch (IOException e) {
+             Logger.logMsg(Logger.ERROR, e.getMessage());
+            return null;
+        }
+        
     }
 
     /**

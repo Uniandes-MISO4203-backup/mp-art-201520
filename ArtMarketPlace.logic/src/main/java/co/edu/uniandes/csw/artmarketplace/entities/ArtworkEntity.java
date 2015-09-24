@@ -15,12 +15,17 @@ import javax.persistence.OneToMany;
  * @generated
  */
 @Entity
-@NamedQueries({
+@NamedQueries(
+{
+        @NamedQuery(name = "ArtworkEntity.searchArtworksBetweenPrices", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE a.price BETWEEN :artworkMinPrice AND :artworkMaxPrice"),
+    
         @NamedQuery(name = "ArtworkEntity.searchArtistWithCheapestArtwork", 
                     query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.name) like UPPER(:artworkName) ORDER BY a.price"),
     
         @NamedQuery(name = "ArtworkEntity.searchCheapestArtworkOfAnArtist", 
-                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artist.name) like UPPER(:artistName) ORDER BY a.price")}
+                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artist.name) like UPPER(:artistName) ORDER BY a.price")
+}
         
 )
 public class ArtworkEntity implements Serializable {
