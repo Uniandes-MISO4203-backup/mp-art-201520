@@ -10,9 +10,12 @@ import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -82,8 +85,18 @@ public class ResumeService {
     @PUT
     @Path("{id: \\d+}")
     public ResumeDTO updateResume(@PathParam("id") Long id, ResumeDTO dto) {
-        dto.setId(id);
-        return resumeLogic.updateResume(dto);
+        if (artist != null)
+        {
+            dto.setArtist(artist);
+            dto.setId(id);
+            return resumeLogic.updateResume(dto);
+        }else
+            return null;
+    }
+    
+    @GET
+    public List<ResumeDTO> getResumes() {
+        return new ArrayList<ResumeDTO>();
     }
     
 }

@@ -35,6 +35,7 @@ public abstract class ResumeConverter {
             dto.setCountry(entity.getCountry());
             dto.setWebsite(entity.getWebsite());
             dto.setLastName(entity.getLastName());
+            dto.setPhoto(entity.getPhoto());
             
             return dto;
         } else {
@@ -72,6 +73,7 @@ public abstract class ResumeConverter {
             dto.setCountry(entity.getCountry());
             dto.setWebsite(entity.getWebsite());
             dto.setLastName(entity.getLastName());
+            dto.setPhoto(entity.getPhoto());
             
             return dto;
         } else {
@@ -92,6 +94,7 @@ public abstract class ResumeConverter {
             entity.setCountry(dto.getCountry());
             entity.setWebsite(dto.getWebsite());
             entity.setLastName(dto.getLastName());
+            entity.setPhoto(dto.getPhoto());
             
             return entity;
         }else {

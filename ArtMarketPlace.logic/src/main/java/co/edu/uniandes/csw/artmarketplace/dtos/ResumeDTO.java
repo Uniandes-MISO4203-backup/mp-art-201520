@@ -16,6 +16,11 @@ public class ResumeDTO {
      */
     private Long id;
     /**
+     * Foto del artista
+     */
+    private String photo;
+
+    /**
      * Ciudad del artista.
      */
     private String city;
@@ -140,5 +145,19 @@ public class ResumeDTO {
     public void setWebsite(String website) {
         this.website = website;
     }
+    /**
+     * Metodo para obtener la foto del artista
+     * @return Url de la foto
+     */
+    public String getPhoto() {
+        return photo;
+    }
+    /**
+     * Metodo para actualizar la foto
+     * @param photo Nueva Url de la foto del artista.
+     */
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    } 
       
 }

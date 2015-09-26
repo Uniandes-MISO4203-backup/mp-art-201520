@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -28,6 +30,11 @@ public class ResumeEntity implements Serializable {
     @Id
     @GeneratedValue(generator = "Resume")
     private Long id;
+    /**
+     * Foto del artista
+     */
+    private String photo;
+
     /**
      * Ciudad del artista.
      */
@@ -50,7 +57,8 @@ public class ResumeEntity implements Serializable {
     /**
      * Artista de la hoja de vida.
      */
-    @OneToOne
+    @OneToOne(optional=false, fetch=FetchType.EAGER)
+    @JoinColumn(name="ARTIST_ID")
     private ArtistEntity artist;
     /**
      * Apellido del artista.
@@ -157,6 +165,19 @@ public class ResumeEntity implements Serializable {
     public void setWebsite(String website) {
         this.website = website;
     }
-       
+    /**
+     * Metodo para obtener la foto del artista
+     * @return Url de la foto
+     */
+    public String getPhoto() {
+        return photo;
+    }
+    /**
+     * Metodo para actualizar la foto
+     * @param photo Nueva Url de la foto del artista.
+     */
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }   
     
 }

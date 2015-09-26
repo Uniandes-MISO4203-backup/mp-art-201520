@@ -10,6 +10,7 @@
         'clientModule',
         'paymentModule',
         'questionModule',
+        'resumeModule',
         'ngRoute',
         'ngCrud'
     ]);
@@ -64,6 +65,11 @@
                     .when('/search', {
                         templateUrl: 'src/modules/search/search.tpl.html',
                         controller: 'catalogCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/resume', {
+                        templateUrl: 'src/modules/resume/resume.tpl.html',
+                        controller: 'resumeCtrl',
                         controllerAs: alias
                     })
                     .otherwise('/catalog');

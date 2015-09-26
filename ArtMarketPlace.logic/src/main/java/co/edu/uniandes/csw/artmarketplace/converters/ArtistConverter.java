@@ -91,7 +91,7 @@ public abstract class ArtistConverter {
         if (entity != null) {
             ArtistDTO dto = basicEntity2DTO(entity);
             dto.setArtwork(ArtworkConverter.listEntity2DTO(entity.getArtwork()));
-            dto.setResume(ResumeConverter.refEntity2DTO(entity.getResume()));
+            //dto.setResume(ResumeConverter.refEntity2DTO(entity.getResume()));
             return dto;
         } else {
             return null;
@@ -107,7 +107,7 @@ public abstract class ArtistConverter {
         if (dto != null) {
             ArtistEntity entity = basicDTO2Entity(dto);
             entity.setArtwork(ArtworkConverter.childListDTO2Entity(dto.getArtwork(), entity));
-            entity.setResume(ResumeConverter.refDTO2Entity(dto.getResume()));
+            //entity.setResume(ResumeConverter.refDTO2Entity(dto.getResume()));
             return entity;
         } else {
             return null;

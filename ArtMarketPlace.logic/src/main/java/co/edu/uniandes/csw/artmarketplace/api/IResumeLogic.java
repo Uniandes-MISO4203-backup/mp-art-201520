@@ -26,4 +26,5 @@ public interface IResumeLogic {
      * @return Objeto DTO que se persistio.
      */
     public ResumeDTO updateResume(ResumeDTO dto) ;
+    
 }

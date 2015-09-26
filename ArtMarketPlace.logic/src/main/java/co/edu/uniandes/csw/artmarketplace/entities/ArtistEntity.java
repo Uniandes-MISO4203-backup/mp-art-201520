@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+
 
 /**
  * @generated
@@ -31,25 +31,6 @@ public class ArtistEntity implements Serializable {
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArtworkEntity> artwork;
     
-    /**
-     * Hoja de vida del artista.
-     */
-    @OneToOne(mappedBy = "artist")
-    private ResumeEntity resume;
-    /**
-     * Metodo para obtener la hoja de vida del artista
-     * @return ResumeEntity. Entidad con la hoja de vida.
-     */
-    public ResumeEntity getResume() {
-        return resume;
-    }
-    /**
-     * Metodo para actualizar la hoja de vida del artista.
-     * @param resume. Nueva hoja de vida del artista.
-     */
-    public void setResume(ResumeEntity resume) {
-        this.resume = resume;
-    }
     /**
      * @generated
      */

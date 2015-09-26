@@ -1,0 +1,70 @@
+<div id="Resume-header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{name}}-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Portfolio</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="resume-navbar">
+                <button id="save-resume" class="btn btn-default navbar-btn" ng-click="save()"><span class="glyphicon glyphicon-plus"></span> Save</button>
+                <button id="cancel-resume" class="btn btn-default navbar-btn" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+            </div>
+        </div>
+    </nav>
+</div>
+<div>
+    <!--Display Alerts -->
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Personal Information</div>
+      <div class="panel-body">
+          <form novalidate name="form" id="Resume-form" role="form">
+            <fieldset>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[0].name}}" class="col-md-2 control-label">{{model.fields[0].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[0].name}}" name="{{model.fields[0].name}}" class="form-control" type="text" ng-model="record.lastname" ng-required="model.fields[0].required" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[1].name}}" class="col-md-2 control-label">{{model.fields[1].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[1].name}}" name="{{model.fields[1].name}}" class="form-control" type="text" ng-model="record.city" ng-required="model.fields[1].required" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[2].name}}" class="col-md-2 control-label">{{model.fields[2].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[2].name}}" name="{{model.fields[2].name}}" class="form-control" type="text" ng-model="record.country" ng-required="model.fields[2].required" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[4].name}}" class="col-md-2 control-label">{{model.fields[4].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[4].name}}" name="{{model.fields[4].name}}" class="form-control" type="text" ng-model="record.photo" ng-required="model.fields[4].required" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[3].name}}" class="col-md-2 control-label">{{model.fields[3].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[3].name}}" name="{{model.fields[3].name}}" class="form-control" type="text" ng-model="record.website" ng-required="model.fields[3].required" />
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Experience & Education</div>
+      <div class="panel-body">Coming Soon!</div>
+    </div>
+</div>
