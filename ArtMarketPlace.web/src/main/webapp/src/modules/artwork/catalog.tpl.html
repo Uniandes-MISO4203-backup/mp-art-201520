@@ -11,7 +11,7 @@
                 <div class="caption" >
                     <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
                     <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
-                    <p><strong>{{model.fields[3].displayName}}: </strong> {{record.artist.name}}</p>
+                    <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:black">{{record.artist.name}}</a></p>
                     <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
                 </div>
                 <p class="text-center">

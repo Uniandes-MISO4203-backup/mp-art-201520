@@ -10,8 +10,18 @@ import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.api.ApiKey;
+import com.stormpath.sdk.api.ApiKeys;
+import com.stormpath.sdk.client.Client;
+import com.stormpath.sdk.client.Clients;
+import com.stormpath.sdk.resource.ResourceException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import com.sun.media.jfxmedia.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -25,6 +35,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
+import org.ini4j.Wini;
 
 /**
  * Servicio de la hoja de vida de un artista
@@ -97,6 +108,36 @@ public class ResumeService {
     @GET
     public List<ResumeDTO> getResumes() {
         return new ArrayList<ResumeDTO>();
+    }
+    
+        
+    
+    @GET
+    @Path("{id: \\d+}")
+    public ResumeDTO getResume(@PathParam("id") Long id){
+        ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(id);
+        try {
+            URL url = ArtistService.class.getResource("ArtistService.class");
+            String className = url.getFile();
+            String filePath = className.substring(0,className.indexOf("WEB-INF") + "WEB-INF".length());
+            Wini ini = new Wini(new File(filePath+"/shiro.ini"));
+            String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
+            ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+            Client client = Clients.builder().setApiKey(apiKey).build();
+            try {
+                   Account account = client.getResource(resumeDTO.getArtist().getUserId(), Account.class);
+                   resumeDTO.getArtist().setFirstName(account.getGivenName());
+                   resumeDTO.getArtist().setLastname(account.getSurname());
+                   resumeDTO.getArtist().setEmail(account.getEmail()); 
+                } catch (ResourceException e) {
+                    Logger.logMsg(Logger.ERROR, "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
+                }
+            return resumeDTO;
+        } catch (IOException e) {
+         Logger.logMsg(Logger.ERROR, e.getMessage());
+        return resumeDTO;
+        }
+        
     }
     
 }

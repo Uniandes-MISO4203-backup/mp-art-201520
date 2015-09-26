@@ -43,4 +43,9 @@ public class ResumeLogic implements IResumeLogic{
         ResumeEntity entity = persistence.update(ResumeConverter.fullDTO2Entity(dto));
         return ResumeConverter.fullEntity2DTO(entity);
     }
+    
+    
+    public ResumeDTO getResumebyAristId(Long id) {
+        return ResumeConverter.fullEntity2DTO(persistence.getResumeByArtistId(id));
+    }
 }

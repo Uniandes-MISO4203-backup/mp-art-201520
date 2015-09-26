@@ -1,8 +1,10 @@
 (function (ng) {
     var mod = ng.module('resumeModule');
 
-    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService', 'resumeModel', function (CrudCreator, $scope,$location, svc, model) {
+    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService', 'resumeModel','$routeParams', function (CrudCreator, $scope,$location, svc, model, $routeParams) {
             CrudCreator.extendController(this, svc, $scope, model, 'resume', 'Resume');
+            var idArtist = $routeParams.id;
+            $scope.param1 = idArtist;
             $scope.save = function () {
                 svc.save({
                     lastName: $scope.record.lastname,
@@ -17,7 +19,13 @@
             $scope.cancel = function () {
                 $location.url('/catalog');
             };
-            
+            if(idArtist !== ""){
+                svc.getResume(idArtist).then(function (result) {
+                    $scope.prueba = result;
+                    $scope.record = [];
+                    $scope.record = result;
+                });
+            }
             
         }]);
 })(window.angular);

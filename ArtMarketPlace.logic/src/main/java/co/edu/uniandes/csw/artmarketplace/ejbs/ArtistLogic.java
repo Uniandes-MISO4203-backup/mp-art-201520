@@ -71,5 +71,5 @@ public class ArtistLogic implements IArtistLogic {
 
     public ArtistDTO getArtistByUserId(String userId) {
         return ArtistConverter.refEntity2DTO(persistence.getArtistByUserId(userId));
-    }
+    }  
 }

@@ -1,0 +1,96 @@
+<div id="Resume-header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{name}}-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Resume</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+        </div>
+    </nav>
+</div>
+<div>
+    <!--Display Alerts -->
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Personal Information</div>
+      <div class="panel-body">
+          <form novalidate name="form" id="Resume-form" role="form">
+            <fieldset>
+                <div class="col-md-12">
+                    <div class="img-thumbnail" id="cover" ng-if="record.photo">
+                        <a ng-href="{{record.photo}}" target="_blank"><img class="img-responsive" style="height: 15vw;" ng-src="{{record.photo}}" alt="{{record.photo}}"></a>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label class="col-md-2 control-label">Name</label>
+                    <div class="col-md-10">
+                        <input id="name" name="name" class="form-control" type="text" ng-model="record.artist.firstName+' '+record.artist.lastname" readonly/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[1].name}}" class="col-md-2 control-label">{{model.fields[1].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[1].name}}" name="{{model.fields[1].name}}" class="form-control" type="text" ng-model="record.city" readonly/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[2].name}}" class="col-md-2 control-label">{{model.fields[2].displayName}}</label>
+                    <div class="col-md-10">
+                        <input id="{{model.fields[2].name}}" name="{{model.fields[2].name}}" class="form-control" type="text" ng-model="record.country" readonly/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="{{model.fields[3].name}}" class="col-md-2 control-label">{{model.fields[3].displayName}}</label>
+                    <div class="col-md-10">
+                        <a href="{{record.website}}" target="_blank">{{record.website}}</a>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Experience & Education</div>
+       <div ng-repeat="exp in record.experience">
+           <div class="panel-body">
+            <form novalidate name="form" id="Resume-form" role="form">
+            <fieldset>
+            <div class="form-group col-md-12">
+                <label class="col-md-2 control-label">Title</label>
+                    <div class="col-md-10">
+                        <input id="title" name="title" class="form-control" type="text" ng-model="exp.title" readonly/>
+                    </div>
+            </div>
+            <div class="form-group col-md-12">
+            <label class="col-md-2 control-label">Place</label>
+                <div class="col-md-10">
+                    <input id="title" name="title" class="form-control" type="text" ng-model="exp.place" readonly/>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+            <label class="col-md-2 control-label">Start Date</label>
+                <div class="col-md-10">
+                    <input id="title" name="title" class="form-control" type="text" ng-model="exp.startDate" readonly/>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+            <label class="col-md-2 control-label">Finish Date</label>
+                <div class="col-md-10">
+                    <input id="title" name="title" class="form-control" type="text" ng-model="exp.finishDate" readonly/>
+                </div>
+            </div>
+            </fieldset>
+            </form>
+       </div>
+    </div>
+</div>

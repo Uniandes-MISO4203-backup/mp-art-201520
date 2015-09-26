@@ -7,5 +7,8 @@
                  var self = this;
                 self.saveRecord(resume);
             };
+            this.getResume = function(id){
+                return this.api.one(id).get();
+            };
     }]);
 })(window.angular);
