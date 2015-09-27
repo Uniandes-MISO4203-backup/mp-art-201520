@@ -17,6 +17,9 @@
             $scope.cancel = function () {
                 $location.url('/catalog');
             };
+            $scope.addExperience =function() {
+                $('#experienceModal').modal('show');
+            }
             
             
         }]);
