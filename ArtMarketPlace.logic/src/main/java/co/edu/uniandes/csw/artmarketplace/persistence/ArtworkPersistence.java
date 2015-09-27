@@ -37,6 +37,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
+    
     /**
      * Search cheapest artwork of an artist
      * @param artistName
@@ -55,6 +56,24 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
+    
+   /**
+     * Search cheapest artwork of an artist
+     * @param name
+     * @return 
+     */
+    public List<ArtworkEntity> searchArtworksOfAnArtist(String name) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("name", name);
+            result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+    
     /**
      * Search atrworks between prices
      * @param artworkMinPrice

@@ -142,7 +142,7 @@ public class ArtworkService {
      * @return 
      */
     @GET
-    @Path("/artworksOfAnArtist/{artistId}")
+    @Path("/searchArtworksOfAnArtist/{artistId}")
     public List<ArtworkDTO> searchArtworksOfAnArtist(@PathParam("artistId") String artistId) {
         return artworkLogic.searchArtworksOfAnArtist(artistId);
     }

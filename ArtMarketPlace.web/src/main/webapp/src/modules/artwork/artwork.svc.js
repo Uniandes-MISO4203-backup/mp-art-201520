@@ -12,6 +12,9 @@
             this.searchCheapestArtworkOfAnArtist = function(artistName){
                 return this.api.one("cheapestArtworkOfAnArtist/"+ artistName).get();
             };
+            this.searchArtworksOfAnArtist = function(artistId){
+                return this.api.one("searchArtworksOfAnArtist/"+ artistId).get();
+            };
             this.saveQuestion = function (data)
             {
                 return this.api.one("questions/").customPOST(data).then(function ()

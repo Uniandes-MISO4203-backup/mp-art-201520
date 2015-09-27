@@ -23,6 +23,9 @@ import javax.persistence.OneToMany;
         @NamedQuery(name = "ArtworkEntity.searchArtistWithCheapestArtwork", 
                     query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.name) like UPPER(:artworkName) ORDER BY a.price"),
     
+        @NamedQuery(name = "ArtworkEntity.searchArtworksOfAnArtist", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artist.name) like UPPER(:name) ORDER BY a.price"),
+    
         @NamedQuery(name = "ArtworkEntity.searchCheapestArtworkOfAnArtist", 
                     query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artist.name) like UPPER(:artistName) ORDER BY a.price")
 }
