@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.artmarketplace.services;
 
 import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
+import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
@@ -57,6 +59,12 @@ public class ResumeService {
      */
     @Inject
     private IResumeLogic resumeLogic;
+    /**
+     * Expone los servicios del backup de experiencia 
+     */
+    @Inject
+    private IExperienceLogic experienceLogic;
+    
     
     //-------Manejo de REST-----------------------------------------
     @Context
@@ -86,6 +94,7 @@ public class ResumeService {
         }
         return null;
     }
+    
     
     /**
      * Metodo encargado de actualizar una hoja de vida.
@@ -138,6 +147,21 @@ public class ResumeService {
         return resumeDTO;
         }
         
+    }
+    
+    /**
+     * Metodo encargado de crear una nueva experiencia
+     * @param dto
+     * @return 
+     */
+    @POST
+    @Path("/experience")
+    public ExperienceDTO createExperience(ExperienceDTO dto) {
+        if (artist != null) {
+            return experienceLogic.createResume(dto,artist);
+        }
+        return null;
+
     }
     
 }

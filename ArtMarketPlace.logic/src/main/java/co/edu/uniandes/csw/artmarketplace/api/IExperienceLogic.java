@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.artmarketplace.api;
 
+import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 
 /**
@@ -15,7 +16,9 @@ public interface IExperienceLogic {
     /**
      * Metodo encargado de crear la entidad y persistirla en la base de datos.
      * @param dto. objeto DTO con la hoja de vida.
+     * @param artist. Artista con la experiencia.
      * @return Objeto DTO que se persistio.
      */
-    public ExperienceDTO createResume(ExperienceDTO dto);
+    public ExperienceDTO createResume(ExperienceDTO dto, ArtistDTO artist);
+
 }

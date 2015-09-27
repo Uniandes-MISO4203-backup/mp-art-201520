@@ -10,5 +10,12 @@
             this.getResume = function(id){
                 return this.api.one(id).get();
             };
+            this.addExperience = function (data)
+            {
+                return this.api.one("experience/").customPOST(data).then(function ()
+                {
+                    console.log("El registro fue exitosamente guardada");
+                });
+            };
     }]);
 })(window.angular);

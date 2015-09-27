@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ExperienceEntity;
+import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -42,6 +44,26 @@ public class ExperiencePersistence  extends CrudPersistence<ExperienceEntity>{
             return q.getResultList();
         } catch (Exception e) {
             System.err.println("Error on listByResume" + e.getMessage());
+            return null;
+        }
+    }
+    /**
+     * Metodo que ejecuta el query para obtener la hoja de vida de un artista.
+     * @param id. Identificador del artista.
+     * @return Resumeentity. Hoja de vida del artista solicitado.
+     */
+    public ResumeEntity getResumeByArtistId(Long id) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artist_id", id);
+            List<ResumeEntity> resumes = this.executeListNamedQuery("Resume.getByArtistId", params);
+            if(resumes.isEmpty()){
+                return null;
+            }else{
+                return resumes.get(0);
+            }
+        } catch (NoResultException e) {
+            System.err.println("ERROR getResumeByArtistID "+ e.getMessage());
             return null;
         }
     }

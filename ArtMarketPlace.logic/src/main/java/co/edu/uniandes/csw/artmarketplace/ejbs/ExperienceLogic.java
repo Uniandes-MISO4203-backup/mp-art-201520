@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.artmarketplace.ejbs;
 
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ExperienceConverter;
+import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
+import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ExperienceEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ExperiencePersistence;
@@ -26,9 +28,11 @@ public class ExperienceLogic implements IExperienceLogic{
     /**
      * Metodo encargado de crear la entidad y persistirla en la base de datos.
      * @param dto. objeto DTO con la hoja de vida.
+     * @param artist. Artista con la experiencia.
      * @return Objeto DTO que se persistio.
      */
-    public ExperienceDTO createResume(ExperienceDTO dto) {
+    public ExperienceDTO createResume(ExperienceDTO dto, ArtistDTO artist) {
+        dto.setResume(ResumeConverter.refEntity2DTO(persistence.getResumeByArtistId(artist.getId())));
         ExperienceEntity entity = ExperienceConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         return ExperienceConverter.fullEntity2DTO(entity);

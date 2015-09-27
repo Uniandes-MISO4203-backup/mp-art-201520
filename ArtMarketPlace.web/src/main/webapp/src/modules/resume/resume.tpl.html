@@ -69,7 +69,7 @@
           <div class="col-md-5">
               <h3>Education</h3>
               <textarea rows="15" cols="50"
-                    style="resize: none;"></textarea>
+                    style="resize: none;">{{experience}}</textarea>
           </div>
           <div class="col-md-2">
             <div class="btn-group-vertical">
@@ -102,7 +102,7 @@
                 <h4 class="modal-title" id = "titleModal">Education & Experience</h4>
             </div>
             <!-- Definicion del formulario para la pregunta -->
-            <form id="experienceForm" method="post" class="form-horizontal" ng-submit="action.fn(record)">
+            <form id="experienceForm" method="post" class="form-horizontal" ng-submit="saveExperience()">
                 <!-- Forma del Formulario para la pregunta -->
                 <div class="modal-body">
                     <div class="form-group">

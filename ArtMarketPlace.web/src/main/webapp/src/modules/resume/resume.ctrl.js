@@ -22,6 +22,12 @@
             $scope.addExperience =function() {
                 $('#experienceModal').modal('show');
             }
+            $scope.saveExperience =function() {
+                svc.addExperience($scope.experience).then(function () {
+                   $('#experienceModal').modal('hide');
+                   
+                });
+            }
             
             if(idArtist !== ""){
                 svc.getResume(idArtist).then(function (result) {
