@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
@@ -31,7 +32,12 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("artist_id", id);
-            return this.executeSingleNamedQuery("Resume.getByArtistId", params);
+            List<ResumeEntity> resumes = this.executeListNamedQuery("Resume.getByArtistId", params);
+            if(resumes.isEmpty()){
+                return null;
+            }else{
+                return resumes.get(0);
+            }
         } catch (NoResultException e) {
             System.err.println("ERROR getResumeByArtistID "+ e.getMessage());
             return null;

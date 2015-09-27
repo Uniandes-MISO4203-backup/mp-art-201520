@@ -27,4 +27,6 @@ public interface IResumeLogic {
      */
     public ResumeDTO updateResume(ResumeDTO dto) ;
     
+    public ResumeDTO getResumebyAristId(Long id);
+    
 }

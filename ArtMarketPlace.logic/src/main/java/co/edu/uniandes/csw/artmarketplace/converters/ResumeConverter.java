@@ -36,7 +36,7 @@ public abstract class ResumeConverter {
             dto.setWebsite(entity.getWebsite());
             dto.setLastName(entity.getLastName());
             dto.setPhoto(entity.getPhoto());
-            
+
             return dto;
         } else {
             System.err.println("Entidad de Hoja de vida vacia");

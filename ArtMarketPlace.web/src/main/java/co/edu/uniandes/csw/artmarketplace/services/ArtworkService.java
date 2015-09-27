@@ -135,6 +135,18 @@ public class ArtworkService {
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(@PathParam("artistName") String artistName) {
         return artworkLogic.searchCheapestArtworkOfAnArtist(artistName);
     }
+    
+    /**
+     * Search artworks of an artist
+     * @param artistId
+     * @return 
+     */
+    @GET
+    @Path("/artworksOfAnArtist/{artistId}")
+    public List<ArtworkDTO> searchArtworksOfAnArtist(@PathParam("artistId") String artistId) {
+        return artworkLogic.searchArtworksOfAnArtist(artistId);
+    }
+    
 
     /**
      * @generated

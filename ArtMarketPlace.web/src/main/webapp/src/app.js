@@ -72,6 +72,11 @@
                         controller: 'resumeCtrl',
                         controllerAs: alias
                     })
+                    .when('/resume/:id', {
+                        templateUrl: 'src/modules/resume/resumeView.tpl.html',
+                        controller: 'resumeCtrl',
+                        controllerAs: alias
+                    })
                     .otherwise('/catalog');
         }]);
 
