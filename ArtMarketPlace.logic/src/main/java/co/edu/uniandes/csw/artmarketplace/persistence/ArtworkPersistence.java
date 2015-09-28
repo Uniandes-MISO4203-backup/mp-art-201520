@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import javax.ejb.Stateless;
+import com.sun.media.jfxmedia.logging.Logger;
 
 /**
  * @generated
@@ -33,7 +34,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchArtistWithCheapestArtwork", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }
@@ -52,7 +53,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchCheapestArtworkOfAnArtist", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }
@@ -69,7 +70,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }
@@ -88,7 +89,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }

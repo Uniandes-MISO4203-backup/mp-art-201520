@@ -20,6 +20,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public int countArtists() {
         return persistence.count();
     }
@@ -27,6 +28,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public List<ArtistDTO> getArtists(Integer page, Integer maxRecords) {
         return ArtistConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -34,6 +36,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public ArtistDTO getArtist(Long id) {
         return ArtistConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -41,6 +44,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public ArtistDTO createArtist(ArtistDTO dto) {
         ArtistEntity entity = ArtistConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -50,6 +54,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public ArtistDTO updateArtist(ArtistDTO dto) {
         ArtistEntity entity = persistence.update(ArtistConverter.fullDTO2Entity(dto));
         return ArtistConverter.fullEntity2DTO(entity);
@@ -58,6 +63,7 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public void deleteArtist(Long id) {
         persistence.delete(id);
     }
@@ -65,10 +71,12 @@ public class ArtistLogic implements IArtistLogic {
     /**
      * @generated
      */
+    @Override
     public List<ArtistDTO> findByName(String name) {
         return ArtistConverter.listEntity2DTO(persistence.findByName(name));
     }
-
+    
+    @Override
     public ArtistDTO getArtistByUserId(String userId) {
         return ArtistConverter.refEntity2DTO(persistence.getArtistByUserId(userId));
     }  
