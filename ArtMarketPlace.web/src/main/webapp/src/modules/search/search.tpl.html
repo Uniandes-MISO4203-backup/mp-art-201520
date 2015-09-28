@@ -1,20 +1,42 @@
-<div style="padding-top: 100px;">
+<script>
+    var selected = "tabSearchArtworksBetweenPrices";
+    var disp = "searchArtworksBetweenPrices";
+	
+	var tabSearchArtworksBetweenPrices = "tabSearchArtworksBetweenPrices";
+	var tabSearchCheapestArtworkOfAnArtist = "tabSearchCheapestArtworkOfAnArtist";
+	var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
+	
+    function show(tab,content){
+		document.getElementById(disp).style.display = "none";
+		document.getElementById(content).style.display = "block";
+		selected = tab;
+		disp = content;
+		$('li.active').removeClass('active');
+	}
+</script>
+<div style="padding-top: 70px;">
+    
+	<ul class="nav nav-pills nav-justified" style="background: #3E3F3A;">
+            <li id="tabSearchArtworksBetweenPrices" style="border:1px solid black;" class="active" onclick="show('tabSearchArtworksBetweenPrices','searchArtworksBetweenPrices')"><a href="#/search"><strong>Search Artworks Between Prices</strong></a></li>
+		<li id="tabSearchCheapestArtworkOfAnArtist" style="border:1px solid black;" onclick="show('tabSearchCheapestArtworkOfAnArtist','searchCheapestArtworkOfAnArtist')" ><a href="#/search"><strong>Search The Cheapest Artwork of an Artist</strong></a></li>
+		<li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;" onclick="show('tabSearchArtistWithCheapestArtwork','searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
+	</ul>
 
-    <div class="navbar-form navbar-left">
-        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="artistName" required>
-        <button ng-click="searchCheapestArtworkOfAnArtist(artistName)" class="btn btn-default">Search The Cheapest Artwork of an Artist</button>
-    </div>
-
-    <div class="navbar-form navbar-left">
-        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Name Here..." ng-model="artworkName" required>
-        <button ng-click="searchArtistWithCheapestArtwork(artworkName)" class="btn btn-default">Search an Artist with the Cheapest Artwork</button>
-    </div>
-
-    <div class="navbar-form navbar-left">
+	<div id="searchArtworksBetweenPrices" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: block;">
         <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Min Value Here..." ng-model="artworkMinPrice" required>
         <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Max Value Here..." ng-model="artworkMaxPrice" required>
-        <button ng-click="searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice)" class="btn btn-default">Search Artworks Between Prices</button>
+        <button ng-click="searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
+	
+    <div id="searchCheapestArtworkOfAnArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="artistName" required>
+        <button ng-click="searchCheapestArtworkOfAnArtist(artistName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
+
+    <div id="searchArtistWithCheapestArtwork" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;" >
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Name Here..." ng-model="artworkName" required>
+        <button ng-click="searchArtistWithCheapestArtwork(artworkName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>  
 
 
     <div class="col-sm-12">
