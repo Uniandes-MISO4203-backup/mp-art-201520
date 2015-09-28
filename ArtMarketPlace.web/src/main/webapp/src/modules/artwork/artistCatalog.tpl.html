@@ -1,10 +1,119 @@
+<script>
+    jQuery(document).ready(function ($) {
+
+        $('#checkbox').change(function () {
+            setInterval(function () {
+                moveRight();
+            }, 3000);
+        });
+        var slideWidth = $('#slider ul li').width();
+        var slideHeight = $('#slider ul li').height();
+
+        $('#slider').css({width: slideWidth, height: slideHeight});
+
+        $('#slider ul li:last-child').prependTo('#slider ul');
+
+        function moveLeft() {
+            $('#slider ul').animate({
+                left: +slideWidth
+            }, 200, function () {
+                $('#slider ul li:last-child').prependTo('#slider ul');
+                $('#slider ul').css('left', '');
+            });
+        }
+        ;
+
+        function moveRight() {
+            $('#slider ul').animate({
+                left: -slideWidth
+            }, 200, function () {
+                $('#slider ul li:first-child').appendTo('#slider ul');
+                $('#slider ul').css('left', '');
+            });
+        }
+        ;
+
+        $('a.control_prev').click(function () {
+            moveLeft();
+        });
+
+        $('a.control_next').click(function () {
+            moveRight();
+        });
+
+    });
+</script>
+<div id="Resume-header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{name}}-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Artist catalog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+        </div>
+    </nav>
+</div>
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
-<div ng-hide="ctrl.detailsMode">
-    <div class="col-sm-12" style="margin-top: 20px; text-align: center;">
-        <img src="asdfasdf" alt="Artist picture" width="100" height="100" />
-        <h1>{{artistName}}</h1>
-        <button type="submit" class="btn btn-success">Basic information</button>
+
+<div class="col-sm-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">Artist</div>
+        <div class="panel-body" style="text-align: center;">
+            <img src="{{artistResume.photo}}" alt="Artist picture" width="100%" />
+            <h1>{{artistResume.lastName}}</h1>
+            <a href="#/resume/{{artistName}}" class="btn btn-success">Personal information</a>
+            <div id="slider" style="width: 100%;">
+                <a href="" class="control_next">>></a>
+                <a href="" class="control_prev"><<</a>
+                <ul>
+                    <li ng-repeat="record in artistArtworks">
+                        <img src="{{record.picture}}" alt="{{record.picture}}" width="100%">
+                    </li>
+                </ul>  
+            </div>
+            <div class="slider_option">
+                <input type="checkbox" id="checkbox">
+                <label for="checkbox">Autoplay</label>
+            </div> 
+        </div>
     </div>
+</div>
+<div class="col-sm-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">Catalogo</div>        
+        <div class="panel-body" style="text-align: center;">
+            <div class="col-sm-12" style="margin-top: 20px;">
+                <div ng-repeat="record in artistArtworks">
+                    <div class="col-sm-4 well text-center">
+                        <div class="col-md-12">
+                            <div class="img-thumbnail" id="cover" ng-if="record.picture">
+                                <a ng-href="{{record.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.picture}}" alt="{{record.picture}}"></a>
+                            </div>
+                        </div>
+                        <div class="caption" >
+                            <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
+                            <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
+                            <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:black">{{record.artist.name}}</a></p>
+                            <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
+                        </div>
+                        <p class="text-center">
+                            <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-hide="ctrl.detailsMode">
     <div class="col-sm-12" style="margin-top: 20px; text-align: center;">
         <div ng-repeat="record in artistArtworks" ng-hide="!isCurrentSlideIndex($index)"
              class="slide-animation">
@@ -17,30 +126,10 @@
                 <ul class="pagination">
                     <li class="dot" ng-repeat="record in artistArtworks">
                         <a href="" ng-class="{'active':isCurrentSlideIndex($index)}"
-                           ng-click="setCurrentSlideIndex($index);">{{$index+1}}</a></li>
+                           ng-click="setCurrentSlideIndex($index);">{{$index + 1}}</a></li>
                 </ul>
             </div>
         </nav>
-    </div>
-    <div class="col-sm-12" style="margin-top: 20px;">
-        <div ng-repeat="record in artistArtworks">
-            <div class="col-sm-4 well text-center">
-                <div class="col-md-12">
-                    <div class="img-thumbnail" id="cover" ng-if="record.picture">
-                        <a ng-href="{{record.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.picture}}" alt="{{record.picture}}"></a>
-                    </div>
-                </div>
-                <div class="caption" >
-                    <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
-                    <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
-                    <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:black">{{record.artist.name}}</a></p>
-                    <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
-                </div>
-                <p class="text-center">
-                    <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
-                </p>
-            </div>
-        </div>
     </div>
 </div>
 <div ng-show="ctrl.detailsMode" ng-if="artworkRecord">

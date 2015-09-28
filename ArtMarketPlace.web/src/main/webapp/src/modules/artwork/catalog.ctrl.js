@@ -3,20 +3,25 @@
 
     mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService',
         'artworkModel', 'cartItemService', '$location', 'authService',
-        'artworkService', '$http', '$routeParams',
+        'artworkService', '$http', '$routeParams','resumeService',
         function (CrudCreator, $scope, svc, model, cartItemSvc, $location,
-                authSvc, artworkSvc, $http, $routeParams) {
+                authSvc, artworkSvc, $http, $routeParams,resumeSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
             this.detailsMode = false;
             $scope.artistName = $routeParams.artistId;
             if ($scope.artistName !== null) {
-                svc.searchArtworksOfAnArtist($scope.artistName).then(function (results) {
-                    $scope.artistArtworks = [];
-                    $scope.artistArtworks = results;
-                    $scope.currentIndex = 0;
-                });
+                resumeSvc.getResume($scope.artistName).then(function (result) {
+                    $scope.artistResume = [];
+                    $scope.artistResume = result;
+                    var name = $scope.artistResume.artist.name;
+                    svc.searchArtworksOfAnArtist(name).then(function (results) {
+                        $scope.artistArtworks = [];
+                        $scope.artistArtworks = results;
+                        $scope.currentIndex = 0;
+                    });
+                });      
             }
 
             //This functions are necesary for the slider
@@ -173,27 +178,5 @@
                 }
 
             });
-        }])
-    mod.animation('.slide-animation', function () {
-        return {
-            addClass: function (element, className, done) {
-                if (className === 'ng-hide') {
-                    TweenMax.to(element, 0.5, {left: -element.parent().width(), onComplete: done });
-                }
-                else {
-                    done();
-                }
-            },
-            removeClass: function (element, className, done) {
-                if (className === 'ng-hide') {
-                    element.removeClass('ng-hide');
-
-                    TweenMax.set(element, { left: element.parent().width() });
-                    TweenMax.to(element, 0.5, {left: 0, onComplete: done });
-                }
-                else {
-                    done();
-                }
-            }
-        }});    
+        }]);    
 })(window.angular);
