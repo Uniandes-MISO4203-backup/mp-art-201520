@@ -68,6 +68,7 @@ public class RemarkConverter
             RemarkDTO dto = new RemarkDTO();
             dto.setId(entity.getId());
             dto.setRemarkUser(entity.getRemarkUser());
+            dto.setUserType(entity.getUserType());
             dto.setDescription(entity.getDescription());
             dto.setRemarkDate(entity.getRemarkDate());
 
@@ -85,6 +86,7 @@ public class RemarkConverter
             RemarkEntity entity = new RemarkEntity();
             entity.setId(dto.getId());
             entity.setRemarkUser(dto.getRemarkUser());
+            entity.setUserType(dto.getUserType());
             entity.setDescription(dto.getDescription());
             entity.setRemarkDate(dto.getRemarkDate());
 

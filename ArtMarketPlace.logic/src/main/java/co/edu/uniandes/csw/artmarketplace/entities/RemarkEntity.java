@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,6 +30,11 @@ public class RemarkEntity implements Serializable
     private String remarkUser;
     
     /*
+    Tipo de usuario: artista o cliente.
+    */
+    private String userType;
+    
+    /*
     Texto del comentario.
     */
     private String description;
@@ -38,7 +43,7 @@ public class RemarkEntity implements Serializable
     Fecha del comentario.
     */
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date remarkDate;
+    private Calendar remarkDate;
 
     /*
     Obra de arte a la que pertenece el comentario.
@@ -81,6 +86,24 @@ public class RemarkEntity implements Serializable
     {
         this.remarkUser = remarkUser;
     }
+    
+    /**
+     * Retorna el tipo de usuario.
+     * @return userType
+     */
+    public String getUserType()
+    {
+        return userType;
+    }
+    
+    /**
+     * Establece el tipo de usuario.
+     * @param userType
+     */
+    public void setUserType(String userType)
+    {
+        this.userType = userType;
+    }
 
     /**
      * Retorna la descripción del comentario.
@@ -104,7 +127,7 @@ public class RemarkEntity implements Serializable
      * Retorna la fecha del comentario.
      * @return remarkDate
      */
-    public Date getRemarkDate()
+    public Calendar getRemarkDate()
     {
         return remarkDate;
     }
@@ -113,7 +136,7 @@ public class RemarkEntity implements Serializable
      * Establece la fecha del comentario.
      * @param remarkDate
      */
-    public void setRemarkDate(Date remarkDate)
+    public void setRemarkDate(Calendar remarkDate)
     {
         this.remarkDate = remarkDate;
     }
