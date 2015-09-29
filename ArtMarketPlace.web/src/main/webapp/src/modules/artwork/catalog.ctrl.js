@@ -1,11 +1,37 @@
 (function (ng) {
     var mod = ng.module('artworkModule');
 
-    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService', 'artworkModel', 'cartItemService', '$location', 'authService', 'artworkService', '$http'  , function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, artworkSvc,$http) {
+    mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService',
+        'artworkModel', 'cartItemService', '$location', 'authService',
+        'artworkService', '$http', '$routeParams','resumeService',
+        function (CrudCreator, $scope, svc, model, cartItemSvc, $location,
+                authSvc, artworkSvc, $http, $routeParams,resumeSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
             this.detailsMode = false;
+            $scope.artistName = $routeParams.artistId;
+            if ($scope.artistName !== null) {
+                resumeSvc.getResume($scope.artistName).then(function (result) {
+                    $scope.artistResume = [];
+                    $scope.artistResume = result;
+                    var name = $scope.artistResume.artist.name;
+                    svc.searchArtworksOfAnArtist(name).then(function (results) {
+                        $scope.artistArtworks = [];
+                        $scope.artistArtworks = results;
+                        $scope.currentIndex = 0;
+                    });
+                });      
+            }
+
+            //This functions are necesary for the slider
+            $scope.setCurrentSlideIndex = function (index) {
+                $scope.currentIndex = index;
+            };
+
+            $scope.isCurrentSlideIndex = function (index) {
+                return $scope.currentIndex === index;
+            };
 
             this.searchByName = function (artworkName) {
                 var search;
@@ -14,13 +40,14 @@
                 }
                 $location.url('/catalog' + search);
             };
-             $scope.searchArtworksBetweenPrices = function (artworkMinPrice,artworkMaxPrice) {
-                svc.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice).then(function (results) {
+
+            $scope.searchArtworksBetweenPrices = function (artworkMinPrice, artworkMaxPrice) {
+                svc.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice).then(function (results) {
                     $scope.artworks = [];
                     $scope.artworks = results;
                 });
             };
-            
+
             $scope.searchArtistWithCheapestArtwork = function (artworkName) {
                 svc.searchArtistWithCheapestArtwork(artworkName).then(function (results) {
                     $scope.artworks = [];
@@ -34,7 +61,7 @@
                     $scope.artworks = results;
                 });
             };
-            
+
             $scope.postRemark = function (id, newRemark) {
                 artworkSvc.postRemark(id, newRemark).then(function (result) {
                     $scope.artworkRecord = [];
@@ -138,18 +165,18 @@
                     }
                 }];
             this.fetchRecords();
-            
-            $http.get($location.absUrl().replace("#"+$location.path(),"")+'webresources/users/currentUser').success(function(data){
-                    var elem = document.getElementById("divAdmin");     
-                    if(data.role === "Admin"){
-                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/client\">Clients</a> </li><li> <a href=\"#/artist\">Artists</a></li></ul>";
-                    }
-                    else if(data.role === "Artist"){
-                        elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li class=\"active\"> <a href=\"#/artwork\"><span class=\"glyphicon glyphicon-cog\" ></span>Manage Artoworks</a> </li><li class=\"active\"> <a href=\"#/resume\"><span class=\"glyphicon glyphicon-cog\" ></span>Resume</a> </li></ul>";
-                    }else{
-                        elem.innerHTML = "";
-                }        
 
-             });
-        }]);
+            $http.get($location.absUrl().replace("#" + $location.path(), "") + 'webresources/users/currentUser').success(function (data) {
+                var elem = document.getElementById("divAdmin");
+                if (data.role === "Admin") {
+                    elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/client\">Clients</a> </li><li> <a href=\"#/artist\">Artists</a></li></ul>";
+                }
+                else if (data.role === "Artist") {
+                    elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li class=\"active\"> <a href=\"#/artwork\"><span class=\"glyphicon glyphicon-cog\" ></span>Manage Artoworks</a> </li><li class=\"active\"> <a href=\"#/resume\"><span class=\"glyphicon glyphicon-cog\" ></span>Resume</a> </li></ul>";
+                } else {
+                    elem.innerHTML = "";
+                }
+
+            });
+        }]);    
 })(window.angular);

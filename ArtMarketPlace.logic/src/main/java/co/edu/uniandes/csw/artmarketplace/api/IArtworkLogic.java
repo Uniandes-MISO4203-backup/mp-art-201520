@@ -23,6 +23,13 @@ public interface IArtworkLogic {
      * @return 
      */
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(String artistName);
+    
+    /**
+     * Search cheapest artwork of an artist
+     * @param name
+     * @return 
+     */
+    public List<ArtworkDTO> searchArtworksOfAnArtist(String name);
     /**
      * Search artworks betewwn prices
      * @param artworkMinPrice

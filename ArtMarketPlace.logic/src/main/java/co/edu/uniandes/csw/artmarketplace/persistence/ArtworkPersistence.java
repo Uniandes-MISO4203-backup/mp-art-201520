@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import javax.ejb.Stateless;
+import com.sun.media.jfxmedia.logging.Logger;
 
 /**
  * @generated
@@ -33,10 +34,11 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchArtistWithCheapestArtwork", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }
+    
     /**
      * Search cheapest artwork of an artist
      * @param artistName
@@ -51,10 +53,28 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchCheapestArtworkOfAnArtist", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }
+    
+   /**
+     * Search cheapest artwork of an artist
+     * @param name
+     * @return 
+     */
+    public List<ArtworkEntity> searchArtworksOfAnArtist(String name) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("name", name);
+            result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
+        } catch (Exception e) {
+            Logger.logMsg(Logger.ERROR, e.getMessage());
+        }
+        return result;
+    }
+    
     /**
      * Search atrworks between prices
      * @param artworkMinPrice
@@ -69,7 +89,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Logger.logMsg(Logger.ERROR, e.getMessage());
         }
         return result;
     }

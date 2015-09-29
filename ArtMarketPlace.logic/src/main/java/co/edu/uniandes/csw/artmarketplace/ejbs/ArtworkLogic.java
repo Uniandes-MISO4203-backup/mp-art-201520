@@ -86,6 +86,17 @@ public class ArtworkLogic implements IArtworkLogic {
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(String artistName) {
         return ArtworkConverter.listEntity2DTO(persistence.searchCheapestArtworkOfAnArtist(artistName));
     }
+    
+    /**
+     * Search cheapest artwork of an artist
+     * @param name
+     * @return 
+     */
+    @Override
+    public List<ArtworkDTO> searchArtworksOfAnArtist(String name) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchArtworksOfAnArtist(name));
+    }
+    
     /**
      * Search artworks beteween prices
      * @param artworkMinPrice

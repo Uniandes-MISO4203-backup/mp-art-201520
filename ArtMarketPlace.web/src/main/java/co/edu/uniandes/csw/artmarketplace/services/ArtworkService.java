@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -142,7 +143,7 @@ public class ArtworkService {
      * @return 
      */
     @GET
-    @Path("/artworksOfAnArtist/{artistId}")
+    @Path("/searchArtworksOfAnArtist/{artistId}")
     public List<ArtworkDTO> searchArtworksOfAnArtist(@PathParam("artistId") String artistId) {
         return artworkLogic.searchArtworksOfAnArtist(artistId);
     }
@@ -214,16 +215,32 @@ public class ArtworkService {
     @GET
     @Path("/postRemark/{id}/{newRemark}")
     public ArtworkDTO postRemark(@PathParam("id") Long id, @PathParam("newRemark") String newRemark) {
-        
-        ArtworkDTO dto = artworkLogic.getArtwork(id);
-        RemarkDTO remark = new RemarkDTO();
-        remark.setArtwork(dto);
-        remark.setDescription(newRemark);
-        remark.setRemarkDate(new Date());
-        remark.setRemarkUser(client.getName());
-        remark = remarkLogic.createRemark(remark);
-        remark.setArtwork(dto);
-        dto.getRemarks().add(remark);
-        return artworkLogic.updateArtwork(dto);
+                
+        if(client != null || artist != null)
+        {
+            ArtworkDTO dto = artworkLogic.getArtwork(id);
+            RemarkDTO remark = new RemarkDTO();
+            remark.setArtwork(dto);
+            remark.setDescription(newRemark);
+            remark.setRemarkDate(new GregorianCalendar());
+            if(client != null)
+            {
+                remark.setRemarkUser(client.getName());
+                remark.setUserType("Cliente");
+            }
+            else if(artist != null)
+            {
+                remark.setRemarkUser(artist.getName());
+                remark.setUserType("Artista");
+            }
+            remark = remarkLogic.createRemark(remark);
+            remark.setArtwork(dto);
+            dto.getRemarks().add(remark);
+            return artworkLogic.updateArtwork(dto);
+        }
+        else
+        {
+            return artworkLogic.getArtwork(id);
+        }
     }
 }

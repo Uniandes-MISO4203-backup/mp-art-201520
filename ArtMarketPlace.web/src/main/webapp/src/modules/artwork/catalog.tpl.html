@@ -11,7 +11,7 @@
                 <div class="caption" >
                     <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
                     <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
-                    <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:black">{{record.artist.name}}</a></p>
+                    <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
                     <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
                 </div>
                 <p class="text-center">
@@ -30,10 +30,14 @@
     <div class="panel panel-default">
         <div class="panel-heading">{{artworkRecord.name}}</div>
         <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
-            <li class="list-group-item">
-                {{remark.remarkDate}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
+            <li ng-if="remark.userType === 'Artista'" style="background-color: lavender;" class="list-group-item">
+                <h6>Remark of artist {{remark.remarkUser}}</h6>
+                {{remark.description}} - {{remark.remarkDate | date:'yyyy-MM-dd'}}
             </li>
-        </ul>    
+            <li ng-if="remark.userType === 'Cliente'" class="list-group-item">
+                {{remark.remarkDate | date:'yyyy-MM-dd'}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
+            </li>
+        </ul>
     </div>
     <a class="btn btn-default" ng-click="ctrl.detailsMode = false" >Back</a>
     <button ng-click="postRemark(artworkRecord.id, newRemark)" class="btn btn-default">POST</button>

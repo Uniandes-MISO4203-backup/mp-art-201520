@@ -73,6 +73,11 @@
                         controller: 'resumeCtrl',
                         controllerAs: alias
                     })
+                    .when('/artistCatalog/:artistId', {
+                        templateUrl: 'src/modules/artwork/artistCatalog.tpl.html',
+                        controller: 'catalogCtrl',
+                        controllerAs: alias
+                    })
                     .when('/resume/:id', {
                         templateUrl: 'src/modules/resume/resumeView.tpl.html',
                         controller: 'resumeCtrl',
