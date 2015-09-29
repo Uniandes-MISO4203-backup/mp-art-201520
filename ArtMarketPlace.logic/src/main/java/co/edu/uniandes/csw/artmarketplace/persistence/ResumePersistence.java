@@ -17,7 +17,7 @@ import javax.persistence.NoResultException;
 public class ResumePersistence extends CrudPersistence<ResumeEntity> {
     
     /**
-     * Método constructor de la clase ResumePersistence.
+     * Metodo constructor de la clase ResumePersistence.
      * Permite asignar al entityClass del crud la entidad del resumen (hoja de vida).
      */
     public ResumePersistence(){

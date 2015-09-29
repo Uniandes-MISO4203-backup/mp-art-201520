@@ -72,7 +72,7 @@ public class QuestionLogic implements IQuestionLogic {
     public boolean sendEmail(QuestionDTO dto, Properties props) {
         boolean sucessful = false;
         try {
-            // Sesión de Usuario
+            // Sesion de Usuario
             Session session = Session.getDefaultInstance(props);
             String destinatario = dto.getEmail();
             String emisor = props.getProperty("mail.smtp.user");
@@ -81,7 +81,7 @@ public class QuestionLogic implements IQuestionLogic {
                     + "la obra de arte " + dto.getArtwork().getName() + ".\n \n "
                     + "Pregunta:\n"
                     + "" + dto.getQuestion() + "\n"
-                    + "\nFecha de creación: " + dto.getDate().toLocaleString()+""
+                    + "\nFecha de creacion: " + dto.getDate().toLocaleString()+""
                     + "Esta es la copia de la pregunta enviada.";
 
             // Construimos el mensaje

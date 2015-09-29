@@ -14,9 +14,9 @@ import java.util.List;
 
 /**
  * La Clase QuestionConverter tiene como finalidad sevir como intermediadora
- * entre la capa logica y de persistencia de la aplicación, mediante la
- * implementación del patron DTO, de la cual esta se encarga de hacer la
- * conversión de DTO a Entity y viseversa.
+ * entre la capa logica y de persistencia de la aplicacion, mediante la
+ * implementacion del patron DTO, de la cual esta se encarga de hacer la
+ * conversion de DTO a Entity y viseversa.
  *
  * @author lf.mendivelso10
  */
@@ -26,11 +26,11 @@ public abstract class QuestionConverter {
     }
 
     /**
-     * Este método se encarga de hacer la conversión de un objeto del tipo
+     * Este metodo se encarga de hacer la conversion de un objeto del tipo
      * Entity a un objeto DTO del tipo Question solo con fines de referencia.
      *
      * @param entity es la entidad a convertir.
-     * @return questionDTO es el resultado de la conversión.
+     * @return questionDTO es el resultado de la conversion.
      */
     public static QuestionDTO refEntity2DTO(QuestionEntity entity) {
         if (entity != null) {
@@ -47,10 +47,10 @@ public abstract class QuestionConverter {
     }
 
     /**
-     * El método refDTO2Entity tiene como propósito hacer la conversión de la referencia de un DTO a
+     * El metodo refDTO2Entity tiene como proposito hacer la conversion de la referencia de un DTO a
      * una Entity, par proposito de consulta. 
      * @param dto es la referencia en DTO
-     * @return entity es la referencia en Entidad obtenida despues de la conversión.
+     * @return entity es la referencia en Entidad obtenida despues de la conversion.
      */
     public static QuestionEntity refDTO2Entity(QuestionDTO dto) {
         if (dto != null) {
@@ -63,10 +63,10 @@ public abstract class QuestionConverter {
     }
 
     /**
-     * El método basicDTO2Entity esta diseñado para hacer la coversión completa de una objetivo
+     * El metodo basicDTO2Entity esta disennado para hacer la coversion completa de una objetivo
      * del tipo DTO a un objeto Entity del tipo Question.
      * @param dto es el objeto DTO a convertir
-     * @return entity es el objeto Entity producto de la conversión. 
+     * @return entity es el objeto Entity producto de la conversion. 
      */
     public static QuestionEntity basicDTO2Entity(QuestionDTO dto) {
         if (dto != null) {
@@ -85,11 +85,11 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * Este método se encarga de hacer la conversión de un objeto del tipo
+     * Este metodo se encarga de hacer la conversion de un objeto del tipo
      * Entity a un objeto DTO del tipo Question.
      *
      * @param entity es la entidad a convertir.
-     * @return questionDTO es el resultado de la conversión.
+     * @return questionDTO es el resultado de la conversion.
      */
     public static QuestionDTO basicEntity2DTO(QuestionEntity entity) {
         if (entity != null) {
@@ -108,10 +108,10 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método fullDTO2Entity se encarga de hacer la conversión completa de un objeto DTO a un
+     * El metodo fullDTO2Entity se encarga de hacer la conversion completa de un objeto DTO a un
      * Objeto Entity del tipo Question.
      * @param dto es el objeto tipo DTO a convertir.
-     * @return entity es el objeto del tipo Entity producto de la conversión.
+     * @return entity es el objeto del tipo Entity producto de la conversion.
      */
     public static QuestionEntity fullDTO2Entity(QuestionDTO dto) {
         if (dto != null) {
@@ -123,10 +123,10 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método fullEntity2DTO se encarga de hacer la conversión completa de un objeto Entity a un
+     * El metodo fullEntity2DTO se encarga de hacer la conversion completa de un objeto Entity a un
      * Objeto DTO del tipo Question.
      * @param dto es el objeto tipo DTO a convertir.
-     * @return entity es el objeto del tipo Entity producto de la conversión.
+     * @return entity es el objeto del tipo Entity producto de la conversion.
      */
     public static QuestionDTO fullEntity2DTO(QuestionEntity entity) {
         if (entity != null) {
@@ -138,10 +138,10 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método listEntity2DTO tiene como funcionalidad hacer la conversión de una listas de objetos
+     * El metodo listEntity2DTO tiene como funcionalidad hacer la conversion de una listas de objetos
      * del tipo QuestionEntity a una lista de Objetos del tipo QuestionDTO.
      * @param entities es la lista de objetos del tipo QuestionEntity a convertir
-     * @return dtos es la lista de objetos del tipo QuestionDTO resutado de la conversión
+     * @return dtos es la lista de objetos del tipo QuestionDTO resutado de la conversion
      */
     public static List<QuestionDTO> listEntity2DTO(List<QuestionEntity> entities) {
         List<QuestionDTO> dtos = new LinkedList<QuestionDTO>();
@@ -154,10 +154,10 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método listDTO2Entity tiene como funcionalidad hacer la conversión de una listas de objetos
+     * El metodo listDTO2Entity tiene como funcionalidad hacer la conversion de una listas de objetos
      * del tipo QuestionDTO a una lista de Objetos del tipo QuestionEntity.
      * @param dtos es la lista de objetos del tipo QuestionEntity a convertir
-     * @return entities es la lista de objetos del tipo QuestionDTO resutado de la conversión
+     * @return entities es la lista de objetos del tipo QuestionDTO resutado de la conversion
      */
     public static List<QuestionEntity> listDTO2Entity(List<QuestionDTO> dtos) {
         List<QuestionEntity> entities = new LinkedList<QuestionEntity>();
@@ -170,11 +170,11 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método childDTO2Entity tiene como propósito el ayudar al manejo de la relación uno a muchas pregunas 
+     * El metodo childDTO2Entity tiene como proposito el ayudar al manejo de la relacion uno a muchas pregunas 
      * asociadas a una obra de arte, en el que su uso asigna a la pregunta, la obra de arte a la cual esta asociada.
-     * @param question es la pregunta en objetivo tipo QuestionDTO con la información de la pregunta.
+     * @param question es la pregunta en objetivo tipo QuestionDTO con la informacion de la pregunta.
      * @param artwork es la obra frente a la cual se hace la pregunta.
-     * @return entity es el objeto del tipo QuestionEntity con la asignación de la obra de arte a la pregunta.
+     * @return entity es el objeto del tipo QuestionEntity con la asignacion de la obra de arte a la pregunta.
      */
     public static QuestionEntity childDTO2Entity(QuestionDTO question, ArtworkEntity artwork){
         QuestionEntity entity = basicDTO2Entity(question);
@@ -183,7 +183,7 @@ public abstract class QuestionConverter {
     }
     
     /**
-     * El método childDTO2Entity tiene como finalidad el manejo de la relación uno a muchos entre
+     * El metodo childDTO2Entity tiene como finalidad el manejo de la relacion uno a muchos entre
      * la obra de arte y las preguntas realizadas por los compradores frente a lo obra de arte.
      * @param questions es el conjunto de preguntas asociadas a la obra de arte.
      * @param artwork es la obra de arte sobre la cual se hacen las preguntas.

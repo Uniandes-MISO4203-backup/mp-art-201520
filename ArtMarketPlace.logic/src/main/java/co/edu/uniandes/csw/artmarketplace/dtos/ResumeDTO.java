@@ -98,7 +98,7 @@ public class ResumeDTO {
         this.experience = experience;
     }
     /**
-     * Método para obtener el identificador de la hoja de vida
+     * Metodo para obtener el identificador de la hoja de vida
      * @return Long. Identificador de la hoja de vida.
      */
     public Long getId() {
@@ -106,21 +106,21 @@ public class ResumeDTO {
     }
     
     /**
-     * Método para actualizar el identificador de la hoja de vida
+     * Metodo para actualizar el identificador de la hoja de vida
      * @param id. Nuevo identificador de la hoja de vida del artista. 
      */
     public void setId(Long id) {
         this.id = id;
     }
     /**
-     * Método para obtener la ciudad del artista de la hoja de vida
+     * Metodo para obtener la ciudad del artista de la hoja de vida
      * @return String. Nombre de la ciudad a la que pertenece el artista.
      */
     public String getCity() {
         return city;
     }
     /**
-     * Método para actualizar el identificador de la hoja de vida
+     * Metodo para actualizar el identificador de la hoja de vida
      * @param city. Nuevo nombre de la ciudad del artista de la hoja de vida. 
      */
     public void setCity(String city) {

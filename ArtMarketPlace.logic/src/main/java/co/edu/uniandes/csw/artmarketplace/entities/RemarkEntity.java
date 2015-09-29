@@ -25,7 +25,7 @@ public class RemarkEntity implements Serializable
     private Long id;
     
     /*
-    Usuario que realizó el comentario.
+    Usuario que realizo el comentario.
     */
     private String remarkUser;
     
@@ -106,7 +106,7 @@ public class RemarkEntity implements Serializable
     }
 
     /**
-     * Retorna la descripción del comentario.
+     * Retorna la descripcion del comentario.
      * @return description
      */
     public String getDescription()
@@ -115,7 +115,7 @@ public class RemarkEntity implements Serializable
     }
 
     /**
-     * Establece la descripción del comentario.
+     * Establece la descripcion del comentario.
      * @param description 
      */
     public void setDescription(String description)
