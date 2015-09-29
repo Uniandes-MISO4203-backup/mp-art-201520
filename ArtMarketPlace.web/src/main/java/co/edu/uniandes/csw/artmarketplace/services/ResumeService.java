@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import com.sun.media.jfxmedia.logging.Logger;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -36,6 +36,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.ini4j.Wini;
 
@@ -47,7 +48,7 @@ import org.ini4j.Wini;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ResumeService {
-    
+    final static Logger logger = Logger.getLogger(ResumeService.class);
     /**
      * Expone los servicios del Backup del artista
      */
@@ -139,11 +140,12 @@ public class ResumeService {
                    resumeDTO.getArtist().setLastname(account.getSurname());
                    resumeDTO.getArtist().setEmail(account.getEmail()); 
                 } catch (ResourceException e) {
-                    Logger.logMsg(Logger.ERROR, "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
+                    logger.error( "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
+                    
                 }
             return resumeDTO;
         } catch (IOException e) {
-         Logger.logMsg(Logger.ERROR, e.getMessage());
+         logger.error( e.getMessage());
         return resumeDTO;
         }
         
