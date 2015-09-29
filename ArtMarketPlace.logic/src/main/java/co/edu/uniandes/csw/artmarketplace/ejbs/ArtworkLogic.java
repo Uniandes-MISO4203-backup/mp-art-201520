@@ -107,12 +107,5 @@ public class ArtworkLogic implements IArtworkLogic {
     public List<ArtworkDTO> searchArtworksBetweenPrices(int artworkMinPrice, int artworkMaxPrice) {
         return ArtworkConverter.listEntity2DTO(persistence.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice));
     }
-    /**
-     * Mauricio POR FAVOR REVISA ESTO
-     * @param artistId
-     * @return 
-     */
-    public List<ArtworkDTO> searchArtworksOfAnArtist(String artistId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
