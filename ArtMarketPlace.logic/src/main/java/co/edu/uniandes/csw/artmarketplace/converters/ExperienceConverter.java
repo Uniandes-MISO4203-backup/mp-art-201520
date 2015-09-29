@@ -166,11 +166,11 @@ public class ExperienceConverter {
         return dtos;
     }        
     /**
-     * Método childDTO2Entity ayuda al manejo de la relación uno a muchas registros de experiencia 
+     * Metodo childDTO2Entity ayuda al manejo de la relacion uno a muchas registros de experiencia 
      * asociadas a una hoja de vida del artista, en el que su uso asigna a el registro, la hoja de vida a la cual esta asociada.
      * @param dto es el registro.
      * @param parent es la hoja de vida asociada al registro.
-     * @return entity es el objeto del tipo ExperienceEntity con la asignación de la hoja de vida al registro.
+     * @return entity es el objeto del tipo ExperienceEntity con la asignacion de la hoja de vida al registro.
      */
     public static ExperienceEntity childDTO2Entity(ExperienceDTO dto, ResumeEntity parent){
         ExperienceEntity entity = basicDTO2Entity(dto);
@@ -179,7 +179,7 @@ public class ExperienceConverter {
     }
     
     /**
-     * Método childDTO2Entity que maneja la relación uno a muchos entre
+     * Metodo childDTO2Entity que maneja la relacion uno a muchos entre
      * la hoja de vida y los registros de experiencia realizadas por los artistas.
      * @param dtos es el conjunto de registros asociadas a la hoja de vida.
      * @param parent es el registro de experiencia.
