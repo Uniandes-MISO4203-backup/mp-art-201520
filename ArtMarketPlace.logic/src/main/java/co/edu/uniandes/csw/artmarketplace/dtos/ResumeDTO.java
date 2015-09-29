@@ -45,6 +45,16 @@ public class ResumeDTO {
      * Apellido del artista.
      */
     private String lastName;
+    
+    /**
+     * ratingSum es la variable utilizada para acumular las calificaciones recibidas por los clientes hacia el artista, para finales del calculo del promedio.
+     */
+    private Float ratingSum;
+    
+    /**
+     * ratingVotes es la variable utilizada para totalizar la cantidad de votos recibidos por parte de los clientes hacia el artisita, para finles del calculo de su promedio.
+     */
+    private Float ratingVotes;
     /**
      * Metodo que obtiene el apellido del artista.
      * @return String Apellido del artista.
@@ -159,5 +169,37 @@ public class ResumeDTO {
     public void setPhoto(String photo) {
         this.photo = photo;
     } 
+    
+    /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingSum del artista.
+     * @return ratingSum es la sumatoria de calificaciones recibidas por el artista.
+     */
+    public Float getRatingSum() {
+        return ratingSum;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad modificar el valor actual del ratingSum del artista. 
+     * @param ratingSum 
+     */
+    public void setRatingSum(Float ratingSum) {
+        this.ratingSum = ratingSum;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingVotes del artista.
+     * @return ratingVotes es la cantidad de votos de calificaci?n recibidas por el artista.
+     */
+    public Float getRatingVotes() {
+        return ratingVotes;
+    }
+
+    /**
+     * Es un metodo de acceso que tienen como finalidad modificar el valor actual del ratingVotes del artista.
+     * @param ratingVotes es el nuevo valor del total de votos de calificacion recibidas por el artista.
+     */
+    public void setRatingVotes(Float ratingVotes) {
+        this.ratingVotes = ratingVotes;
+    }
       
 }

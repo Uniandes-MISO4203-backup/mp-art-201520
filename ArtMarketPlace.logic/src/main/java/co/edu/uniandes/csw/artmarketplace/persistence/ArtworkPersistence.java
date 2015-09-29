@@ -23,7 +23,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
     /**
      * Search artist with cheapest artwork
      * @param artworkName
-     * @return 
+     * @return
      */
     public List<ArtworkEntity> searchArtistWithCheapestArtwork(String artworkName) {
         List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
@@ -38,11 +38,11 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
-    
+
     /**
      * Search cheapest artwork of an artist
      * @param artistName
-     * @return 
+     * @return
      */
     public List<ArtworkEntity> searchCheapestArtworkOfAnArtist(String artistName) {
         List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
@@ -57,11 +57,11 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
-    
+
    /**
      * Search cheapest artwork of an artist
      * @param name
-     * @return 
+     * @return
      */
     public List<ArtworkEntity> searchArtworksOfAnArtist(String name) {
         List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
@@ -74,12 +74,12 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
-    
+
     /**
      * Search atrworks between prices
      * @param artworkMinPrice
      * @param artworkMaxPrice
-     * @return 
+     * @return
      */
     public List<ArtworkEntity> searchArtworksBetweenPrices(int artworkMinPrice, int artworkMaxPrice) {
         List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();

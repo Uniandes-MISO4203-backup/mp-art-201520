@@ -36,6 +36,8 @@ public abstract class ResumeConverter {
             dto.setWebsite(entity.getWebsite());
             dto.setLastName(entity.getLastName());
             dto.setPhoto(entity.getPhoto());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
 
             return dto;
         } else {
@@ -74,6 +76,8 @@ public abstract class ResumeConverter {
             dto.setWebsite(entity.getWebsite());
             dto.setLastName(entity.getLastName());
             dto.setPhoto(entity.getPhoto());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
             
             return dto;
         } else {
@@ -95,6 +99,8 @@ public abstract class ResumeConverter {
             entity.setWebsite(dto.getWebsite());
             entity.setLastName(dto.getLastName());
             entity.setPhoto(dto.getPhoto());
+            entity.setRatingSum(dto.getRatingSum());
+            entity.setRatingVotes(dto.getRatingVotes());
             
             return entity;
         }else {
