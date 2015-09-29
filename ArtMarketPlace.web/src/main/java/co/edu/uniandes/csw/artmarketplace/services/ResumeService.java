@@ -140,4 +140,10 @@ public class ResumeService {
         
     }
     
+    @POST
+    @Path("{id: \\d+}/rate/{rate: \\d+}")
+    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
+        resumeLogic.rateArtist(id, rate);
+    }
+    
 }
