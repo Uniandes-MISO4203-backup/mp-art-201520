@@ -13,6 +13,7 @@
                     <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
                     <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
                     <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
+                    <p ng-if=!record.discount><br/></p>
                 </div>
                 <p class="text-center">
                     <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
