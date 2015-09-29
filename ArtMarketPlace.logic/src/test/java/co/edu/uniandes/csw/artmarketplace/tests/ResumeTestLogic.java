@@ -26,6 +26,7 @@ import co.edu.uniandes.csw.artmarketplace.ejbs.ResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
+import co.edu.uniandes.csw.artmarketplace.entities.ArtistEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
 
@@ -107,6 +108,10 @@ public class ResumeTestLogic {
      * @generated
      */
     private void insertData() {
+        ArtistEntity artistEntityOne = new ArtistEntity();
+        artistEntityOne.setName("Artista1");
+        em.persist(artistEntityOne);
+        
         for (int i = 0; i < 3; i++) {
             
             ResumeEntity entity = new ResumeEntity();
@@ -115,10 +120,40 @@ public class ResumeTestLogic {
             entity.setWebsite(generateRandom(String.class));
             entity.setLastName(generateRandom(String.class));
             entity.setPhoto(generateRandom(String.class));
+            entity.setArtist(artistEntityOne);
             em.persist(entity);
             data.add(entity);
         }
     }
+    /**
+     * Prueba sobre la creación de un resumen
+     */
+    @Test
+    public void createResumeTest() {
+        ArtistEntity artistEntityTwo = new ArtistEntity();
+        artistEntityTwo.setName("Artista2");
+        em.persist(artistEntityTwo);
+        
+        ResumeDTO dto = new ResumeDTO();
+        dto.setCity(generateRandom(String.class));
+        dto.setCountry(generateRandom(String.class));
+        dto.setWebsite(generateRandom(String.class));
+        dto.setLastName(generateRandom(String.class));
+        dto.setPhoto(generateRandom(String.class));
+
+        ResumeDTO result = resumeLogic.createResume(dto);
+
+        Assert.assertNotNull(result);
+
+        ResumeEntity entity = em.find(ResumeEntity.class, result.getId());
+
+        Assert.assertEquals(dto.getCity(), entity.getCity());
+        Assert.assertEquals(dto.getCountry(), entity.getCountry());
+        Assert.assertEquals(dto.getWebsite(), entity.getWebsite());
+        Assert.assertEquals(dto.getPhoto(), entity.getPhoto());
+        
+    }
+    
     @Test
     public void ratingResume(){
         ResumeEntity resume = data.get(0);
