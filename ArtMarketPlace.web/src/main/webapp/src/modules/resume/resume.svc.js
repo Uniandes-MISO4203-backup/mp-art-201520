@@ -17,5 +17,9 @@
                     console.log("El registro fue exitosamente guardada");
                 });
             };
+            this.getArtist = function ()
+            {
+                return this.api.one("artist/").get();
+            };
     }]);
 })(window.angular);

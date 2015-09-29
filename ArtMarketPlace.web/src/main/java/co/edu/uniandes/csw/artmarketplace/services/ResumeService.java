@@ -151,17 +151,46 @@ public class ResumeService {
     
     /**
      * Metodo encargado de crear una nueva experiencia
-     * @param dto
-     * @return 
+     * @param dto. Nuevo registro de experiencia o educacion.
+     * @return Registro guardado o null en caso de un error.
      */
     @POST
     @Path("/experience")
     public ExperienceDTO createExperience(ExperienceDTO dto) {
-        if (artist != null) {
+        ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
+        if (artist != null && resumeDTO != null) {
             return experienceLogic.createResume(dto,artist);
+        }else if(artist != null && resumeDTO == null){
+            resumeDTO = new ResumeDTO();
+            resumeDTO.setArtist(artist);
+            resumeDTO = resumeLogic.createResume(resumeDTO);
+            if(resumeDTO != null){
+                dto.setResume(resumeDTO);
+                return experienceLogic.createResume(dto,artist);
+            }else{
+                return null;
+            }
+            
+        }else
+            return null;
+
+    }
+    
+    /**
+     * Metodo que retorna el identificador del artista solo si tiene una hoja de vida creada
+     * @pre Debe existir el artista.
+     * @return Long. Identificador del artista.
+     */
+    @GET
+    @Path("/artist")
+    public ResumeDTO getArtistResume() {
+        
+        if (artist != null) {
+            ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
+            if(resumeDTO != null)
+                return resumeDTO;
         }
         return null;
-
     }
     
 }

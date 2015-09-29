@@ -7,9 +7,11 @@ package co.edu.uniandes.csw.artmarketplace.ejbs;
 
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
+import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -25,13 +27,21 @@ public class ResumeLogic implements IResumeLogic{
     
     /**
      * Metodo encargado de crear la entidad y persistirla en la base de datos.
+     * En caso de que ya exista actualiza los datos.
      * @param dto. objeto DTO con la hoja de vida.
      * @return Objeto DTO que se persistio.
      */
     public ResumeDTO createResume(ResumeDTO dto) {
-        ResumeEntity entity = ResumeConverter.fullDTO2Entity(dto);
-        persistence.create(entity);
-        return ResumeConverter.fullEntity2DTO(entity);
+        ResumeDTO resumeDTO=getResumebyAristId(dto.getArtist().getId());
+        if(resumeDTO != null){
+            dto.setId(resumeDTO.getId());
+            return updateResume(dto);
+        }else{
+            ResumeEntity entity = ResumeConverter.fullDTO2Entity(dto);
+            persistence.create(entity);
+            return ResumeConverter.fullEntity2DTO(entity);
+        }
+         
     }
 
     /**

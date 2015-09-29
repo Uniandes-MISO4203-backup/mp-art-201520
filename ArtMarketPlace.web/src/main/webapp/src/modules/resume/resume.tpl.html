@@ -68,8 +68,11 @@
       <div class="panel-body">
           <div class="col-md-5">
               <h3>Education</h3>
-              <textarea rows="15" cols="50"
-                    style="resize: none;">{{experience}}</textarea>
+              <div>
+                  <textarea rows="15" cols="50"
+                    style="resize: none;" ng-model="listEducation">{{listEducation}}</textarea>
+              </div>
+              
           </div>
           <div class="col-md-2">
             <div class="btn-group-vertical">
