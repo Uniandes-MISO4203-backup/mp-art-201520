@@ -6,13 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import javax.ejb.Stateless;
-import com.sun.media.jfxmedia.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 /**
  * @generated
  */
 @Stateless
 public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
+    final static Logger logger = Logger.getLogger(ArtworkPersistence.class);
 
     /**
      * @generated
@@ -34,7 +36,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchArtistWithCheapestArtwork", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            Logger.logMsg(Logger.ERROR, e.getMessage());
+           logger.error(e.getMessage());
         }
         return result;
     }
@@ -53,7 +55,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             list = executeListNamedQuery("ArtworkEntity.searchCheapestArtworkOfAnArtist", params);
             result = list.subList(0, 1);
         } catch (Exception e) {
-            Logger.logMsg(Logger.ERROR, e.getMessage());
+            logger.error(e.getMessage());
         }
         return result;
     }
@@ -70,7 +72,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-            Logger.logMsg(Logger.ERROR, e.getMessage());
+           logger.error(e.getMessage());
         }
         return result;
     }
@@ -89,7 +91,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            Logger.logMsg(Logger.ERROR, e.getMessage());
+            logger.error(e.getMessage());
         }
         return result;
     }
