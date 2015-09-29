@@ -9,8 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
- * La clase QuestionPersistence esta diseñada para gestionar la creación,
- * modificación y eleminación de preguntas realizadas por los comprador sobre
+ * La clase QuestionPersistence esta disennada para gestionar la creacion,
+ * modificacion y eleminacion de preguntas realizadas por los comprador sobre
  * las obras de arte.
  *
  * @author lf.mendivelso10
@@ -19,8 +19,8 @@ import javax.persistence.Query;
 public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
 
     /**
-     * El método constructor de QuestionPersistence no contiene parametro, y en
-     * su ejecución, hace la asignación del tipo de EntityClass requerida para
+     * El metodo constructor de QuestionPersistence no contiene parametro, y en
+     * su ejecucion, hace la asignacion del tipo de EntityClass requerida para
      * la uso del CrudPersistence.
      */
     public QuestionPersistence() {
