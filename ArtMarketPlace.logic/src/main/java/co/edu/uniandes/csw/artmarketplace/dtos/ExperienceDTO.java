@@ -61,84 +61,84 @@ public class ExperienceDTO {
         this.type = type;
     }
     /**
-     * Método para obtener la hoja de vida del registro de experiencia o educacion.
+     * Metodo para obtener la hoja de vida del registro de experiencia o educacion.
      * @return ResumeEntity. Hoja de vida del registro.
      */
     public ResumeDTO getResume() {
         return resume;
     }
     /**
-     * Método para actualizar la hoja de vida del registro de experiencia o educacion.
+     * Metodo para actualizar la hoja de vida del registro de experiencia o educacion.
      * @param resume. Hoja de vida del registro. 
      */
     public void setResume(ResumeDTO resume) {
         this.resume = resume;
     }
     /**
-     * Método para obtener el identificador del registro de experiencia o educacion.
+     * Metodo para obtener el identificador del registro de experiencia o educacion.
      * @return Long. Identificador del registro.
      */
     public Long getId() {
         return id;
     }
     /**
-     * Método para actualizar el identificador del registro de experiencia o educacion.
+     * Metodo para actualizar el identificador del registro de experiencia o educacion.
      * @param id. Long -  Identificador del registro.
      */
     public void setId(Long id) {
         this.id = id;
     }
     /**
-     * Método para obtener el titulo del registro de experiencia o educacion.
+     * Metodo para obtener el titulo del registro de experiencia o educacion.
      * @return String. Titulo del registro.
      */
     public String getTitle() {
         return title;
     }
     /**
-     * Método para actualizar el titulo del registro de experiencia o educacion.
+     * Metodo para actualizar el titulo del registro de experiencia o educacion.
      * @param title. String - Titulo del registro.
      */
     public void setTitle(String title) {
         this.title = title;
     }
     /**
-     * Método para obtener el lugar del registro de experiencia o educacion.
+     * Metodo para obtener el lugar del registro de experiencia o educacion.
      * @return String. Lugar del registro. (Empresa, Universidad, etc...)
      */
     public String getPlace() {
         return place;
     }
     /**
-     * Método para actualizar el lugar del registro de experiencia o educacion.
+     * Metodo para actualizar el lugar del registro de experiencia o educacion.
      * @param place. String - Lugar del registro. (Empresa, Universidad, etc...)
      */
     public void setPlace(String place) {
         this.place = place;
     }
     /**
-     * Método para obtener la fecha de inicio del registro de experiencia o educacion.
+     * Metodo para obtener la fecha de inicio del registro de experiencia o educacion.
      * @return Date. Fecha de inicio del registro. 
      */
     public Date getStartDate() {
         return startDate;
     }
     /**
-     * Método para actualizar la fecha de inicio del registro de experiencia o educacion.
+     * Metodo para actualizar la fecha de inicio del registro de experiencia o educacion.
      * @param startDate. Date - Fecha de inicio del registro. 
      */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
     /**
-     * Método para obtener la fecha de fin del registro de experiencia o educacion.
+     * Metodo para obtener la fecha de fin del registro de experiencia o educacion.
      * @return Date. Fecha de fin del registro. 
      */
     public Date getFinishDate() {
         return finishDate;
     }
     /**
-     * Método para actualizar la fecha de fin del registro de experiencia o educacion.
+     * Metodo para actualizar la fecha de fin del registro de experiencia o educacion.
      * @param finishDate. Date - Fecha de fin del registro. 
      */
     public void setFinishDate(Date finishDate) {

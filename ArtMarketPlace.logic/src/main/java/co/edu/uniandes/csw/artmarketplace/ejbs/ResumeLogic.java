@@ -16,18 +16,21 @@ import javax.inject.Inject;
 
 /**
  * Implementa la interfaz para el manejo de la hoja de vida
+ *
  * @author vp.salcedo93
  */
-public class ResumeLogic implements IResumeLogic{
-     
+public class ResumeLogic implements IResumeLogic {
+
     /**
      * Objeto que maneja la persistencia de la hoja de vida.
      */
-    @Inject private ResumePersistence persistence;
-    
+    @Inject
+    private ResumePersistence persistence;
+
     /**
      * Metodo encargado de crear la entidad y persistirla en la base de datos.
      * En caso de que ya exista actualiza los datos.
+     *
      * @param dto. objeto DTO con la hoja de vida.
      * @return Objeto DTO que se persistio.
      */
@@ -47,6 +50,7 @@ public class ResumeLogic implements IResumeLogic{
 
     /**
      * Metodo encargado de actualizar la hoja de vida.
+     *
      * @param dto. objeto DTO con la hoja de vida.
      * @return Objeto DTO que se persistio.
      */
@@ -63,29 +67,30 @@ public class ResumeLogic implements IResumeLogic{
     public ResumeDTO getResumebyAristId(Long id) {
         return ResumeConverter.fullEntity2DTO(persistence.getResumeByArtistId(id));
     }
-    
+
     /**
-     * Este metodo esta diseñado para recibir la votacion realizar por un
+     * Este metodo esta disennado para recibir la votacion realizar por un
      * cliente frente a un artista en especifico.
      *
      * @param rating es la valoracion hecha por el cliente.
      * @param id es el identificador unico del artista.
-     * @return confirmation es la variable designada para confirmar que se ha hecho la calificacion de un artista.
+     * @return confirmation es la variable designada para confirmar que se ha
+     * hecho la calificacion de un artista.
      */
     public Boolean rateArtist(Long id, Float rating) {
         boolean confirmation = false;
-        ResumeEntity resume =  persistence.find(id);
+        ResumeEntity resume = persistence.getResumeByArtistId(id);
         if (resume != null) {
             if (resume.getRatingVotes() != null && resume.getRatingSum() != null) {
                 resume.setRatingSum(resume.getRatingSum() + rating);
                 resume.setRatingVotes((float) 1 + resume.getRatingVotes());
-                persistence.update(resume);
-                confirmation = true;
-            }
-            else{
+
+            } else {
                 resume.setRatingSum(rating);
                 resume.setRatingVotes(1.0000f);
             }
+            persistence.update(resume);
+            confirmation = true;
         }
         return confirmation;
     }
@@ -99,7 +104,7 @@ public class ResumeLogic implements IResumeLogic{
      * artista.
      */
     public Float getRatingArtist(Long id) {
-        ResumeEntity resume = persistence.find(id);
+        ResumeEntity resume = persistence.getResumeByArtistId(id);
         Float rating = 0.0000f;
         if (resume.getRatingVotes() != null && resume.getRatingSum() != null) {
             if (resume.getRatingVotes() > 0) {

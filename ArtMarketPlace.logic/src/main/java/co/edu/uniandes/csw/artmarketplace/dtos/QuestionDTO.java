@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * QuestionDTO es una clase que tiene como finalidad sevir de intermediador entre las distintas
- * capas de lógicas del software, principalmente para el manejo de las preguntas realizadas por
+ * capas de logicas del software, principalmente para el manejo de las preguntas realizadas por
  * los comprador respecto una obra de arte. 
  * @author lf.mendivelso10
  */
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class QuestionDTO {
     /**
-     * Id es el campo de identificador único de la pregunta realizada por el comprador.
+     * Id es el campo de identificador unico de la pregunta realizada por el comprador.
      */
     private Long id;
     
@@ -30,7 +30,7 @@ public class QuestionDTO {
     
     
     /**
-     * date es la fecha de creación de la pregunta sobre la obra de arte.
+     * date es la fecha de creacion de la pregunta sobre la obra de arte.
      */
     private Date date;
     
@@ -52,23 +52,23 @@ public class QuestionDTO {
     private String artistEmail;
     
     /**
-     * Es un método de acceso que retorna el identificador único de la pregunta.
-     * @return id es el identificador único de la pregunta.
+     * Es un metodo de acceso que retorna el identificador unico de la pregunta.
+     * @return id es el identificador unico de la pregunta.
      */ 
     public Long getId() {
         return id;
     }
 
     /**
-     * Es un método de acceso que modifica el identificador único de la pregunta.
-     * @param id es nuevo identificador único asignado a la pregunta.
+     * Es un metodo de acceso que modifica el identificador unico de la pregunta.
+     * @param id es nuevo identificador unico asignado a la pregunta.
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Es un método de acceso que retorna la obra de arte de la cual el comprador hace la pregunta.
+     * Es un metodo de acceso que retorna la obra de arte de la cual el comprador hace la pregunta.
      * @return artwork es la obra de arte.
      */
     public ArtworkDTO getArtwork() {
@@ -76,7 +76,7 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que módifica la información de la obra de arte de la cual un comprador hizo la pregunta.
+     * Es un metodo de acceso que modifica la informacion de la obra de arte de la cual un comprador hizo la pregunta.
      * @param artwork es la nueva referenciada de obra de arte asignada a la pregunta.
      */
     public void setArtwork(ArtworkDTO artwork) {
@@ -84,24 +84,24 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que retorno la fecha de creación de la pregunta realizada por un comprador
+     * Es un metodo de acceso que retorno la fecha de creacion de la pregunta realizada por un comprador
      * sobre una obra de arte.
-     * @return date es la fecha de creación de la pregunta.
+     * @return date es la fecha de creacion de la pregunta.
      */
     public Date getDate() {
         return date;
     }
 
     /**
-     * Es un método de acceso que modifica la fecha de creación de la pregunta realizada por un comprador.
-     * @param date es la modificación hecha la fecha de creación de la pregunta.
+     * Es un metodo de acceso que modifica la fecha de creacion de la pregunta realizada por un comprador.
+     * @param date es la modificacion hecha la fecha de creacion de la pregunta.
      */
     public void setDate(Date date) {
         this.date = date;
     }
 
     /**
-     * Es un método de acceso que retorno la información del cliente quien realiza la pregunta. 
+     * Es un metodo de acceso que retorno la informacion del cliente quien realiza la pregunta. 
      * @return clien es el comprador que hace la pregunta.
      */
     public ClientDTO getClient() {
@@ -109,7 +109,7 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que modifica la informacion del comprador que realiza una pregunta
+     * Es un metodo de acceso que modifica la informacion del comprador que realiza una pregunta
      * respecto a una obra de arte.
      * @param client es el nuevo comprador asignado a la pregunta.
      */
@@ -118,7 +118,7 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de accesso que retorna el correo de contacto del comprador que realiza la pregunta
+     * Es un metodo de accesso que retorna el correo de contacto del comprador que realiza la pregunta
      * sobre una obra de arte.
      * @return email es el correo del comprador.
      */
@@ -127,7 +127,7 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que modifíca el correo de contacto del comprador que
+     * Es un metodo de acceso que modifica el correo de contacto del comprador que
      * hace la pregunta sobre una obra de arte.
      * @param email es el nuevo correo de contacto del comprador.
      */
@@ -136,8 +136,8 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que retorna la pregunta realizada por un comprador sobre una
-     * obra de arte en específico.
+     * Es un metodo de acceso que retorna la pregunta realizada por un comprador sobre una
+     * obra de arte en especifico.
      * @return 
      */
     public String getQuestion() {
@@ -145,16 +145,16 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que modifica la pregunta realizada por el comprador sobre la
+     * Es un metodo de acceso que modifica la pregunta realizada por el comprador sobre la
      * obra de artes de su interes.
-     * @param question es la modificación de la pregunta del comprador.
+     * @param question es la modificacion de la pregunta del comprador.
      */
     public void setQuestion(String question) {
         this.question = question;
     }
 
     /**
-     * Es un método de acceso que retorna el correo del destinatario de la pregunta.
+     * Es un metodo de acceso que retorna el correo del destinatario de la pregunta.
      * @return retorna el correo del artista.
      */
     public String getArtistEmail() {
@@ -162,7 +162,7 @@ public class QuestionDTO {
     }
 
     /**
-     * Es un método de acceso que modifica el correo del destinatario de la pregunta.
+     * Es un metodo de acceso que modifica el correo del destinatario de la pregunta.
      * @param artistEmail es el correo del artista.
      */
     public void setArtistEmail(String artistEmail) {

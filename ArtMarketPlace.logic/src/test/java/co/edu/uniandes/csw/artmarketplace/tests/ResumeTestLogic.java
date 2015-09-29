@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.artmarketplace.tests;
 
+import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.junit.runner.RunWith;
 
 import co.edu.uniandes.csw.artmarketplace.ejbs.ResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
+import co.edu.uniandes.csw.artmarketplace.converters.ArtistConverter;
 import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtistEntity;
@@ -59,6 +61,8 @@ public class ResumeTestLogic {
      */
     @Inject
     private IResumeLogic resumeLogic;
+    @Inject
+    private IArtistLogic artistLogic;
 
     /**
      * @generated
@@ -97,12 +101,14 @@ public class ResumeTestLogic {
      */
     private void clearData() {
         em.createQuery("delete from ResumeEntity").executeUpdate();
+        em.createQuery("delete from ArtistEntity").executeUpdate();
     }
 
     /**
      * @generated
      */
     private List<ResumeEntity> data = new ArrayList<ResumeEntity>();
+    private ArtistEntity artist;
 
     /**
      * @generated
@@ -163,20 +169,20 @@ public class ResumeTestLogic {
         Float rating2 = (float)(1 + (int)(Math.random()*5));
         Float rating3 = (float)(1 + (int)(Math.random()*5));
         // Sin ninguna votaci?n.
-        Assert.assertEquals(0.0000f,resumeLogic.getRatingArtist(resume.getId()),0.0002f);
+        Assert.assertEquals(0.0000f,resumeLogic.getRatingArtist(resume.getArtist().getId()),0.0002f);
         // Primera calificacion
-        resumeLogic.rateArtist(resume.getId(), rating1);
+        resumeLogic.rateArtist(resume.getArtist().getId(), rating1);
         // Validaci?n de la primera calificacion 
-        Assert.assertEquals(rating1,resumeLogic.getRatingArtist(resume.getId()),0.0002f);
+        Assert.assertEquals(rating1,resumeLogic.getRatingArtist(resume.getArtist().getId()),0.0002f);
         // Segunda calificacion
         Float currentRating = (rating1+rating2)/2.0000f;
-        resumeLogic.rateArtist(resume.getId(), rating2);
+        resumeLogic.rateArtist(resume.getArtist().getId(), rating2);
         // Validaci?n de la primera calificacion 
-        Assert.assertEquals(currentRating,resumeLogic.getRatingArtist(resume.getId()),0.0002f);
+        Assert.assertEquals(currentRating,resumeLogic.getRatingArtist(resume.getArtist().getId()),0.0002f);
         // Segunda calificacion
         currentRating = (rating1+rating2+rating3)/3.0000f;
-        resumeLogic.rateArtist(resume.getId(), rating3);
+        resumeLogic.rateArtist(resume.getArtist().getId(), rating3);
         // Validaci?n de la primera calificacion 
-        Assert.assertEquals(currentRating,resumeLogic.getRatingArtist(resume.getId()),0.0002f);
+        Assert.assertEquals(currentRating,resumeLogic.getRatingArtist(resume.getArtist().getId()),0.0002f);
     }
 }

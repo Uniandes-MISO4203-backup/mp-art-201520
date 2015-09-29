@@ -16,7 +16,7 @@ import java.util.Calendar;
     private Long id;
     
     /*
-    Usuario que realizó el comentario.
+    Usuario que realizo el comentario.
     */
     private String remarkUser;
     
@@ -95,7 +95,7 @@ import java.util.Calendar;
     }
 
     /**
-     * Retorna la descripción del comentario.
+     * Retorna la descripcion del comentario.
      * @return description
      */
     public String getDescription()
@@ -104,7 +104,7 @@ import java.util.Calendar;
     }
 
     /**
-     * Establece la descripción del comentario.
+     * Establece la descripcion del comentario.
      * @param description 
      */
     public void setDescription(String description)
