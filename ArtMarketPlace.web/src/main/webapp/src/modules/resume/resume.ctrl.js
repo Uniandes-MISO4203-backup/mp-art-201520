@@ -26,14 +26,23 @@
             //var idArtist = $routeParams.id;
             $scope.param1 = idArtist;
             $scope.save = function () {
-                svc.save({
+                if($scope.record !=="undifined")
+                {
+                    var resume =svc.save({
                     lastName: $scope.record.lastname,
                     city: $scope.record.city,
                     country: $scope.record.country,
                     website: $scope.record.website,
                     photo: $scope.record.photo
                 });
-                $location.url('/catalog');
+                if(resume!=="undifined")
+                {
+                    alert("Debe ingresar como artista");
+                    $location.url('/login');
+                }else
+                    $location.url('/catalog');
+                }
+                
             };
             
             $scope.cancel = function () {
