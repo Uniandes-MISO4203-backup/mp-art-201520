@@ -107,4 +107,5 @@ public class ArtworkLogic implements IArtworkLogic {
     public List<ArtworkDTO> searchArtworksBetweenPrices(int artworkMinPrice, int artworkMaxPrice) {
         return ArtworkConverter.listEntity2DTO(persistence.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice));
     }
+    
 }

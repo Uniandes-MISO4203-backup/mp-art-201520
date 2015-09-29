@@ -5,7 +5,7 @@
 
     mod.constant('resumeModel', {
         fields: [{
-                name: 'lastName',
+                name: 'lastname',
                 displayName: 'Last Name',
                 type: 'String',
                 required: true

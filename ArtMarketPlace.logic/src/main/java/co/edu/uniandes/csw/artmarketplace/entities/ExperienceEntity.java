@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 
 /**
@@ -19,6 +21,9 @@ import javax.persistence.Temporal;
  * @author vp.salcedo93
  */
 @Entity
+@NamedQueries(
+{@NamedQuery(name = "Experience.getResumeByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.experience WHERE r.artist.id=:artist_id")}
+)
 public class ExperienceEntity implements Serializable {
     
     /**

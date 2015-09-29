@@ -11,6 +11,7 @@
         'paymentModule',
         'questionModule',
         'resumeModule',
+        'experienceModule',
         'ngRoute',
         'ngCrud'
     ]);

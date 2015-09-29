@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.artmarketplace.services;
 
 import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
+import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
@@ -57,6 +59,12 @@ public class ResumeService {
      */
     @Inject
     private IResumeLogic resumeLogic;
+    /**
+     * Expone los servicios del backup de experiencia 
+     */
+    @Inject
+    private IExperienceLogic experienceLogic;
+    
     
     //-------Manejo de REST-----------------------------------------
     @Context
@@ -86,6 +94,7 @@ public class ResumeService {
         }
         return null;
     }
+    
     
     /**
      * Metodo encargado de actualizar una hoja de vida.
@@ -138,6 +147,50 @@ public class ResumeService {
         return resumeDTO;
         }
         
+    }
+    
+    /**
+     * Metodo encargado de crear una nueva experiencia
+     * @param dto. Nuevo registro de experiencia o educacion.
+     * @return Registro guardado o null en caso de un error.
+     */
+    @POST
+    @Path("/experience")
+    public ExperienceDTO createExperience(ExperienceDTO dto) {
+        ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
+        if (artist != null && resumeDTO != null) {
+            return experienceLogic.createResume(dto,artist);
+        }else if(artist != null && resumeDTO == null){
+            resumeDTO = new ResumeDTO();
+            resumeDTO.setArtist(artist);
+            resumeDTO = resumeLogic.createResume(resumeDTO);
+            if(resumeDTO != null){
+                dto.setResume(resumeDTO);
+                return experienceLogic.createResume(dto,artist);
+            }else{
+                return null;
+            }
+            
+        }else
+            return null;
+
+    }
+    
+    /**
+     * Metodo que retorna el identificador del artista solo si tiene una hoja de vida creada
+     * @pre Debe existir el artista.
+     * @return Long. Identificador del artista.
+     */
+    @GET
+    @Path("/artist")
+    public ResumeDTO getArtistResume() {
+        
+        if (artist != null) {
+            ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
+            if(resumeDTO != null)
+                return resumeDTO;
+        }
+        return null;
     }
     
     @POST
