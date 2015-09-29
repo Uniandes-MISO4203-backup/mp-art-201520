@@ -113,25 +113,6 @@
         </div>
     </div>
 </div>
-<div ng-hide="ctrl.detailsMode">
-    <div class="col-sm-12" style="margin-top: 20px; text-align: center;">
-        <div ng-repeat="record in artistArtworks" ng-hide="!isCurrentSlideIndex($index)"
-             class="slide-animation">
-            <img  class="img-responsive" style="height: 200px; margin: auto;" 
-                  ng-src="{{record.picture}}" alt="{{record.picture}}">
-            <b>{{record.name}}</b>
-        </div>
-        <nav class="nav">
-            <div class="wrapper">
-                <ul class="pagination">
-                    <li class="dot" ng-repeat="record in artistArtworks">
-                        <a href="" ng-class="{'active':isCurrentSlideIndex($index)}"
-                           ng-click="setCurrentSlideIndex($index);">{{$index + 1}}</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
 <div ng-show="ctrl.detailsMode" ng-if="artworkRecord">
     <div class="panel panel-default">
         <div class="panel-heading">{{artworkRecord.name}}</div>
