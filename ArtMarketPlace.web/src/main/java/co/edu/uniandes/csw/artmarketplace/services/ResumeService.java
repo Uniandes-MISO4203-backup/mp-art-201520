@@ -191,6 +191,8 @@ public class ResumeService {
                 return resumeDTO;
         }
         return null;
+    }
+    
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")
     public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
