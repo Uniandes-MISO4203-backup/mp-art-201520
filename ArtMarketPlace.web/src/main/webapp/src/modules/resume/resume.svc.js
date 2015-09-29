@@ -10,5 +10,11 @@
             this.getResume = function(id){
                 return this.api.one(id).get();
             };
+            this.rateArtist = function(data){
+                this.api.one(data['id']+"/rate/"+data['rate']).customPOST().then(function ()
+                {
+                    console.log("El rating fue exitosamente guardada");
+                }); 
+            };
     }]);
 })(window.angular);

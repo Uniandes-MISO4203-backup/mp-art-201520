@@ -29,6 +29,16 @@
                 displayName: 'Photo',
                 type: 'Image',
                 required: false
+            }, {
+                name: 'ratingSum',
+                displayName: 'ratingSum',
+                type: 'Number',
+                required: false
+            }, {
+                name: 'ratingVotes',
+                displayName: 'ratingVotes',
+                type: 'Number',
+                required: false
             }]
         
     });
