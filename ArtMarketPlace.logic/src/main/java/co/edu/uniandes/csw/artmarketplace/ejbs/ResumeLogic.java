@@ -35,6 +35,7 @@ public class ResumeLogic implements IResumeLogic{
         ResumeDTO resumeDTO=getResumebyAristId(dto.getArtist().getId());
         if(resumeDTO != null){
             dto.setId(resumeDTO.getId());
+            dto.setExperience(resumeDTO.getExperience());
             return updateResume(dto);
         }else{
             ResumeEntity entity = ResumeConverter.fullDTO2Entity(dto);
@@ -54,7 +55,11 @@ public class ResumeLogic implements IResumeLogic{
         return ResumeConverter.fullEntity2DTO(entity);
     }
     
-    
+    /**
+     * Metodo que obtiene el resumen de un artista por identificador.
+     * @param id
+     * @return 
+     */
     public ResumeDTO getResumebyAristId(Long id) {
         return ResumeConverter.fullEntity2DTO(persistence.getResumeByArtistId(id));
     }

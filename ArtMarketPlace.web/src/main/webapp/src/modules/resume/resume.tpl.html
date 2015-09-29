@@ -30,9 +30,15 @@
           <form novalidate name="form" id="Resume-form" role="form">
             <fieldset>
                 <div class="form-group col-md-12">
+                    <label for="name" class="col-md-2 control-label">Name</label>
+                    <div class="col-md-10">
+                        <input id="name" name="name" class="form-control" type="text" ng-model="record.artist.name" readonly/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
                     <label for="{{model.fields[0].name}}" class="col-md-2 control-label">{{model.fields[0].displayName}}</label>
                     <div class="col-md-10">
-                        <input id="{{model.fields[0].name}}" name="{{model.fields[0].name}}" class="form-control" type="text" ng-model="record.lastname" ng-required="model.fields[0].required" />
+                        <input id="{{model.fields[0].name}}" name="{{model.fields[0].name}}" class="form-control" type="text" ng-model="record.artist.lastname" readonly/>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
@@ -77,13 +83,13 @@
           <div class="col-md-2">
             <div class="btn-group-vertical">
                 <button class="btn btn-default" ng-click="addExperience()" style="margin-top: 100px; padding-top: 20px; top: 0px;">Add</button>
-                <button class="btn btn-default" style="margin-top: 20px;">Edit</button>
+                <!-- Boton para editar el registro<button class="btn btn-default" style="margin-top: 20px;">Edit</button>-->
             </div>
           </div>
           <div class="col-md-5">
               <h3>Experience</h3>
               <textarea rows="15" cols="50"
-                    style="resize: none;"></textarea>
+                    style="resize: none;" ng-model="listExperience">{{listExperience}}</textarea>
           </div>
           
       </div>
@@ -130,15 +136,15 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6" align="center">
-                            <label  class="col-md-2 control-label">Year:</label>
+                            <label  class="col-md-2 control-label">From:</label>
                             <div class="col-md-10">
-                                <input id="fechaInicio" name="fechaInicio" class="form-control" type="number" ng-model="experience.startDate" required="true" />
+                                <input id="fechaInicio" name="fechaInicio" class="form-control" type="date" placeholder="yyyy-MM-dd" ng-model="experience.startDate" required="true" />
                             </div>
                         </div>
                         <div class="form-group col-md-6" align="center">
                             <label  class="col-md-2 control-label"> to </label>
                             <div class="col-md-10">
-                                <input id="fechaFin" name="fechaFin" class="form-control" type="number" ng-model="experience.finishDate" required="false" />
+                                <input id="fechaFin" name="fechaFin" class="form-control" type="date" placeholder="yyyy-MM-dd" ng-model="experience.finishDate" required="false" />
                             </div>
                         </div>
                     </div>         

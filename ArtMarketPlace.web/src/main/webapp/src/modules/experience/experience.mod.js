@@ -22,12 +22,12 @@
             }, {
                 name: 'startDate',
                 displayName: 'Start Date',
-                type: 'Integer',
+                type: 'Date',
                 required: true
             }, {
                 name: 'finishDate',
                 displayName: 'Finish Date',
-                type: 'Integer',
+                type: 'Date',
                 required: true
             }]
         
