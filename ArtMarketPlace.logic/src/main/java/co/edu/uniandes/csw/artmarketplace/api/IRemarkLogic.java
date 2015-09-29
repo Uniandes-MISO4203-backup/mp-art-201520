@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.artmarketplace.api;
 import co.edu.uniandes.csw.artmarketplace.dtos.RemarkDTO;
 
 /**
- * Lógica para manejar los comentarios.
+ * Logica para manejar los comentarios.
  */
 public interface IRemarkLogic {
     public RemarkDTO createRemark(RemarkDTO dto);

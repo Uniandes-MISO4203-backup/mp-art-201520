@@ -69,7 +69,7 @@ public class ResumeLogic implements IResumeLogic {
     }
 
     /**
-     * Este metodo esta diseñado para recibir la votacion realizar por un
+     * Este metodo esta disennado para recibir la votacion realizar por un
      * cliente frente a un artista en especifico.
      *
      * @param rating es la valoracion hecha por el cliente.
