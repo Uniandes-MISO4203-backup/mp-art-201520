@@ -9,7 +9,6 @@ import com.stormpath.sdk.api.ApiKeys;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.sdk.client.Clients;
 import com.stormpath.sdk.resource.ResourceException;
-import com.sun.media.jfxmedia.logging.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +26,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.log4j.Logger;
 import org.ini4j.Wini;
 
 /**
@@ -36,7 +36,7 @@ import org.ini4j.Wini;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ClientService {
-
+    final static Logger logger = Logger.getLogger(ArtistService.class);
     @Inject private IClientLogic clientLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
@@ -75,14 +75,14 @@ public class ClientService {
                    clientDTO.setLastname(account.getSurname());
                    clientDTO.setEmail(account.getEmail()); 
                 } catch (ResourceException e) {
-                    Logger.logMsg(Logger.ERROR, "The account with userid: "+clientDTO.getUserId()+" does not exist.");
+                    logger.error("The account with userid: "+e.getMessage()+" does not exist.");
                 }
 
 
             }
             return clients;
         } catch (IOException e) {
-             Logger.logMsg(Logger.ERROR, e.getMessage());
+             logger.error(e.getMessage());
             return null;
         }
         
