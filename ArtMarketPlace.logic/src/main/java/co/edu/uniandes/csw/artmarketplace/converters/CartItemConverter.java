@@ -53,7 +53,9 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param entity
+     * @return 
      */
     private static CartItemDTO basicEntity2DTO(CartItemEntity entity) {
         if (entity != null) {
@@ -72,7 +74,9 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param dto
+     * @return 
      */
     private static CartItemEntity basicDTO2Entity(CartItemDTO dto) {
         if (dto != null) {
@@ -91,33 +95,36 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param entity
+     * @return 
      */
     public static CartItemDTO fullEntity2DTO(CartItemEntity entity) {
         if (entity != null) {
-            CartItemDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
     }
 
     /**
-     * @generated
+     * 
+     * @param dto
+     * @return 
      */
     public static CartItemEntity fullDTO2Entity(CartItemDTO dto) {
         if (dto != null) {
-            CartItemEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
     }
 
     /**
-     * @generated
+     * 
+     * @param entities
+     * @return 
      */
-
     public static List<CartItemDTO> listEntity2DTO(List<CartItemEntity> entities) {
         List<CartItemDTO> dtos = new ArrayList<CartItemDTO>();
         if (entities != null) {
@@ -129,7 +136,9 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param dtos
+     * @return 
      */
     public static List<CartItemEntity> listDTO2Entity(List<CartItemDTO> dtos) {
         List<CartItemEntity> entities = new ArrayList<CartItemEntity>();
@@ -142,7 +151,10 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param dto
+     * @param parent
+     * @return 
      */
     public static CartItemEntity childDTO2Entity(CartItemDTO dto, ClientEntity parent){
         CartItemEntity entity = basicDTO2Entity(dto);
@@ -151,7 +163,10 @@ public abstract class CartItemConverter {
     }
 
     /**
-     * @generated
+     * 
+     * @param dtos
+     * @param parent
+     * @return 
      */
     public static List<CartItemEntity> childListDTO2Entity(List<CartItemDTO> dtos, ClientEntity parent) {
         List<CartItemEntity> entities = new ArrayList<CartItemEntity>();

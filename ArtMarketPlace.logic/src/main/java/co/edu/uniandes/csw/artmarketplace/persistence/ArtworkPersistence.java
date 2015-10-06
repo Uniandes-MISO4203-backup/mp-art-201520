@@ -6,15 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import javax.ejb.Stateless;
-import org.apache.log4j.Logger;
-
 
 /**
  * @generated
  */
 @Stateless
 public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
-    final static Logger logger = Logger.getLogger(ArtworkPersistence.class);
 
     /**
      * @generated
@@ -34,9 +31,11 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkName", artworkName);
             List<ArtworkEntity> list = new ArrayList<ArtworkEntity>();
             list = executeListNamedQuery("ArtworkEntity.searchArtistWithCheapestArtwork", params);
-            result = list.subList(0, 1);
+            if(list != null && !list.isEmpty()){
+                result = list.subList(0, 1);
+            }
         } catch (Exception e) {
-           logger.error(e.getMessage());
+           throw new RuntimeException(e);
         }
         return result;
     }
@@ -53,9 +52,11 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artistName", artistName);
             List<ArtworkEntity> list = new ArrayList<ArtworkEntity>();
             list = executeListNamedQuery("ArtworkEntity.searchCheapestArtworkOfAnArtist", params);
-            result = list.subList(0, 1);
+            if(list != null && !list.isEmpty()){
+                result = list.subList(0, 1);
+            }
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            throw new RuntimeException(e);
         }
         return result;
     }
@@ -72,7 +73,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-           logger.error(e.getMessage());
+           throw new RuntimeException(e);
         }
         return result;
     }
@@ -91,7 +92,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            throw new RuntimeException(e);
         }
         return result;
     }

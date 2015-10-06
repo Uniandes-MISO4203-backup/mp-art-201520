@@ -15,11 +15,13 @@ import javax.inject.Inject;
  *
  * @author ms.lancheros10
  */
-public class AdminLogic implements IAdminLogic{
-    
-    @Inject private AdminPersistence persistence;
-    
-     public AdminDTO getAdminByUserId(String userId) {
+public class AdminLogic implements IAdminLogic {
+
+    @Inject
+    private AdminPersistence persistence;
+
+    @Override
+    public AdminDTO getAdminByUserId(String userId) {
         return AdminConverter.refEntity2DTO(persistence.getAdminByUserId(userId));
     }
 }
