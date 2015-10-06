@@ -46,9 +46,10 @@
                 $scope.taxes = $scope.total * 0.16;
             };
 
+            //guarda la cantidad anterior
             $scope.verify = function (quantity) {
                 $scope.lastQuantity = quantity;
-            };//guarda la cantidad anterior
+            };
 
             $scope.postVerify = function (record) {
                 var patron = /^\d*$/; //^[0-9]{3}$
@@ -59,10 +60,13 @@
                     record.quantity = $scope.lastQuantity;
                     $scope.currentRecord = record;
                 }
-            };//Realiza la validacion de la nueva cantidad asignada.
+            };
+            
+            //Realiza la validacion de la nueva cantidad asignada.
             $scope.checkout = function () {
                 self.showWarning("Not implemented yet");
             };
+            
             $scope.subtotal = function (record) {
                 if(record.artwork.discount)
                 {

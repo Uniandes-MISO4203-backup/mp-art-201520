@@ -19,7 +19,7 @@
             {
                 return this.api.one("questions/").customPOST(data).then(function ()
                 {
-                    console.log("La pregunta fue exitosamente guardada");
+                    //console.log("La pregunta fue exitosamente guardada");
                 });
             };
             this.postRemark = function(id, newRemark){

@@ -23,11 +23,11 @@
                 name: 'email',
                 displayName: 'Email',
                 type: 'String',
-                required: true
-            }], 
+                required: true}],
         childs: [{
                 name: 'artwork',
                 displayName: 'Artwork',
                 //template: '', //override generic template
-                ctrl: 'artworksCtrl'            }        ]});
+                ctrl: 'artworksCtrl'}]
+    });
 })(window.angular);

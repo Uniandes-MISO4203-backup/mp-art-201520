@@ -28,8 +28,6 @@
                 name: 'discount',
                 displayName: 'Special Discount',
                 type: 'Integer',
-                required: false
-            }]
-        
+                required: false}]
     });
 })(window.angular);
