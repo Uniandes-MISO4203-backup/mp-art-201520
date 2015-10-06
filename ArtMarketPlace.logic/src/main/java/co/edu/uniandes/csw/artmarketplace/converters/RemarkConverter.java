@@ -17,7 +17,7 @@ import java.util.List;
 public class RemarkConverter
 {
 
-    public RemarkConverter()
+    private RemarkConverter()
     {
         
     }
@@ -103,8 +103,7 @@ public class RemarkConverter
      */
          public static RemarkDTO fullEntity2DTO(RemarkEntity entity) {
              if (entity != null) {
-                 RemarkDTO dto = basicEntity2DTO(entity);
-                 return dto;
+                 return basicEntity2DTO(entity);
              } else {
                  return null;
              }
@@ -117,8 +116,7 @@ public class RemarkConverter
           */
          public static RemarkEntity fullDTO2Entity(RemarkDTO dto) {
              if (dto != null) {
-                 RemarkEntity entity = basicDTO2Entity(dto);
-                 return entity;
+                 return basicDTO2Entity(dto);
              } else {             
                  return null;
              }

@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.artmarketplace.services;
 
-import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,8 +31,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -48,13 +44,7 @@ import org.ini4j.Wini;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ResumeService {
-    final static Logger logger = Logger.getLogger(ResumeService.class);
-    /**
-     * Expone los servicios del Backup del artista
-     */
-    @Inject
-    private IArtistLogic artistLogic;
-    
+    private static final Logger LOGGER = Logger.getLogger(ResumeService.class);
     /**
      * Expone los servicios del Backup del artista
      */
@@ -67,19 +57,11 @@ public class ResumeService {
     private IExperienceLogic experienceLogic;
     
     
-    //-------Manejo de REST-----------------------------------------
-    @Context
-    private HttpServletResponse response;
-    @QueryParam("page")
-    private Integer page;
-    @QueryParam("maxRecords")
-    private Integer maxRecords;
-    //--------------------------------------------------------------
     
     /**
      * Artista logeado
      */
-    private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
+    private final ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
     
     /**
      * Metodo encargado de crear la hoja de vida para el artista.
@@ -117,7 +99,7 @@ public class ResumeService {
     
     @GET
     public List<ResumeDTO> getResumes() {
-        return new ArrayList<ResumeDTO>();
+        return new ArrayList<>();
     }
     
         
@@ -140,15 +122,14 @@ public class ResumeService {
                    resumeDTO.getArtist().setLastname(account.getSurname());
                    resumeDTO.getArtist().setEmail(account.getEmail()); 
                 } catch (ResourceException e) {
-                    logger.error( "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
+                    LOGGER.error( "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
                     
                 }
             return resumeDTO;
         } catch (IOException e) {
-         logger.error( e.getMessage());
-        return resumeDTO;
+         LOGGER.error( e.getMessage());
         }
-        
+       return resumeDTO; 
     }
     
     /**

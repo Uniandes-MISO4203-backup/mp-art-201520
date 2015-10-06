@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -15,6 +16,8 @@ import javax.persistence.NoResultException;
  */
 @Stateless
 public class ResumePersistence extends CrudPersistence<ResumeEntity> {
+    
+    private static final Logger LOGGER = Logger.getLogger(ResumePersistence.class);
     
     /**
      * Metodo constructor de la clase ResumePersistence.
@@ -39,7 +42,7 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
                 return resumes.get(0);
             }
         } catch (NoResultException e) {
-            System.err.println("ERROR getResumeByArtistID "+ e.getMessage());
+            LOGGER.error("ERROR getResumeByArtistID "+ e.getMessage());
             return null;
         }
     }

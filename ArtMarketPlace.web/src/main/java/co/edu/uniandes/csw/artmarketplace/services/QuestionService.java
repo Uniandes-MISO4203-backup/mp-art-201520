@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.csw.artmarketplace.services;
 
-import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
-import co.edu.uniandes.csw.artmarketplace.api.IClientLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IQuestionLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
@@ -14,15 +12,12 @@ import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
 
@@ -36,13 +31,7 @@ import org.apache.shiro.SecurityUtils;
 public class QuestionService {
 
     @Inject
-    private IArtworkLogic artworkLogic;
-    @Inject
-    private IClientLogic clientLogic;
-    @Inject
     private IQuestionLogic questionLogic;
-    @Context
-    private HttpServletResponse response;
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")

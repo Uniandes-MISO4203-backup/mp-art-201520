@@ -23,6 +23,12 @@ public class RemarkLogic implements IRemarkLogic{
     
     @Inject private RemarkPersistence persistence;
 
+    /**
+     *
+     * @param dto
+     * @return
+     */
+    @Override
     public RemarkDTO createRemark(RemarkDTO dto) {
         ArtworkEntity artworkEntity = ArtworkConverter.fullDTO2Entity(dto.getArtwork());
         RemarkEntity entity = RemarkConverter.childDTO2Entity(dto, artworkEntity);

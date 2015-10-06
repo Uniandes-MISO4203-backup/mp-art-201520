@@ -5,14 +5,10 @@
  */
 package co.edu.uniandes.csw.artmarketplace.services;
 
-import co.edu.uniandes.csw.artmarketplace.api.IArtistLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
-import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
-import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
-import java.util.Date;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

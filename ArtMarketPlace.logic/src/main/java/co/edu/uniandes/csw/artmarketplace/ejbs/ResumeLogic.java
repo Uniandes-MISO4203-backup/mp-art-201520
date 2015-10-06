@@ -7,11 +7,9 @@ package co.edu.uniandes.csw.artmarketplace.ejbs;
 
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
-import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -34,6 +32,7 @@ public class ResumeLogic implements IResumeLogic {
      * @param dto. objeto DTO con la hoja de vida.
      * @return Objeto DTO que se persistio.
      */
+    @Override
     public ResumeDTO createResume(ResumeDTO dto) {
         ResumeDTO resumeDTO=getResumebyAristId(dto.getArtist().getId());
         if(resumeDTO != null){
@@ -54,6 +53,7 @@ public class ResumeLogic implements IResumeLogic {
      * @param dto. objeto DTO con la hoja de vida.
      * @return Objeto DTO que se persistio.
      */
+    @Override
     public ResumeDTO updateResume(ResumeDTO dto) {
         ResumeEntity entity = persistence.update(ResumeConverter.fullDTO2Entity(dto));
         return ResumeConverter.fullEntity2DTO(entity);
@@ -64,6 +64,7 @@ public class ResumeLogic implements IResumeLogic {
      * @param id
      * @return 
      */
+    @Override
     public ResumeDTO getResumebyAristId(Long id) {
         return ResumeConverter.fullEntity2DTO(persistence.getResumeByArtistId(id));
     }
@@ -77,6 +78,7 @@ public class ResumeLogic implements IResumeLogic {
      * @return confirmation es la variable designada para confirmar que se ha
      * hecho la calificacion de un artista.
      */
+    @Override
     public Boolean rateArtist(Long id, Float rating) {
         boolean confirmation = false;
         ResumeEntity resume = persistence.getResumeByArtistId(id);
