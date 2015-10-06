@@ -29,8 +29,7 @@
                 displayName: 'Finish Date',
                 type: 'Date',
                 required: true
-            }]
-        
+            }] 
     });
 })(window.angular);
 

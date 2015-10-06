@@ -14,6 +14,9 @@ import co.edu.uniandes.csw.artmarketplace.entities.AdminEntity;
  */
 public class AdminConverter {
     
+    private AdminConverter(){
+    }
+    
     public static AdminDTO refEntity2DTO(AdminEntity entity) {
         if (entity != null) {
             AdminDTO dto = new AdminDTO();
@@ -42,37 +45,4 @@ public class AdminConverter {
             return null;
         }
     }
-
-    /**
-     * @generated
-     */
-    private static AdminDTO basicEntity2DTO(AdminEntity entity) {
-        if (entity != null) {
-            AdminDTO dto = new AdminDTO();
-            dto.setId(entity.getId());
-            dto.setName(entity.getName());
-            dto.setUserId(entity.getUserId());
-
-            return dto;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * @generated
-     */
-    private static AdminEntity basicDTO2Entity(AdminDTO dto) {
-        if (dto != null) {
-            AdminEntity entity = new AdminEntity();
-            entity.setId(dto.getId());
-            entity.setName(dto.getName());
-            entity.setUserId(dto.getUserId());
-
-            return entity;
-        } else {
-            return null;
-        }
-    }
-
 }

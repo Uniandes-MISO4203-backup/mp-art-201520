@@ -15,7 +15,6 @@
                 type: 'String',
                 required: true
             }]
-        
     });
 })(window.angular);
 

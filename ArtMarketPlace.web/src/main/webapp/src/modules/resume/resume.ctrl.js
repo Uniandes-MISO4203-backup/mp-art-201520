@@ -11,7 +11,7 @@
                     $scope.record = result;
                     var education ="";
                     var experience="";
-                    for(i=0;i<$scope.record.experience.length;i++){
+                    for(var i = 0; i < $scope.record.experience.length; i++){
                         var exp = $scope.record.experience[i];
                         if(exp.type==="Education")
                             education += exp.title +"-"+exp.place+"-"+format(exp.startDate)+" to "+format(exp.finishDate)+" \n";
@@ -21,9 +21,7 @@
                     $scope.listEducation = education;
                     $scope.listExperience = experience;
                 });
-                
             }
-            //var idArtist = $routeParams.id;
             $scope.param1 = idArtist;
             $scope.save = function () {
                 if($scope.record !=="undifined")
@@ -41,8 +39,7 @@
                     $location.url('/login');
                 }else
                     $location.url('/catalog');
-                }
-                
+                }  
             };
 
             $scope.cancel = function () {
@@ -67,14 +64,13 @@
                 "August", "September", "October",
                 "November", "December"
               ];
-            format = function(data){
+            var format = function(data){
                 var date = new Date(data);
                 var day = date.getDate();
                 var monthIndex = date.getMonth();
                 var year = date.getFullYear();
                 return day + ' ' + monthNames[monthIndex] + ' ' + year;
             }
-            
             if(idArtist !== "" || typeof idArtist !== "undefined"){
                 svc.getResume(idArtist).then(function (result) {
                     $scope.prueba = result;
@@ -101,10 +97,9 @@
                             id: artist,
                             rate: rating
                         };
-                        svc.rateArtist(data)
+                        svc.rateArtist(data);
                         alert("Se realizado la calificacion.");
                         $('#ratingModal').modal('hide');
-                        
                     }
                 }];
 

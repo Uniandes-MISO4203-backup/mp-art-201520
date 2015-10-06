@@ -29,6 +29,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -43,6 +44,8 @@ import org.apache.shiro.subject.Subject;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
+    
+    private static final Logger LOGGER = Logger.getLogger(UserService.class);
 
     @Inject
     private IClientLogic clientLogic;
@@ -83,6 +86,7 @@ public class UserService {
                 }
             }
         } catch (AuthenticationException e) {
+            LOGGER.error( e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -98,6 +102,7 @@ public class UserService {
             currentUser.logout();
             return Response.ok().build();
         } catch (Exception e) {
+            LOGGER.error( e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
@@ -125,6 +130,7 @@ public class UserService {
             }
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
+            LOGGER.error( e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -151,9 +157,13 @@ public class UserService {
                     artist.setUserId(account.getHref());
                     artistLogic.createArtist(artist);
                     break;
+                
+                default:
+                    break;
             }
             return Response.ok().build();
         } catch (ResourceException e) {
+            LOGGER.error( e.getMessage());
             return Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)

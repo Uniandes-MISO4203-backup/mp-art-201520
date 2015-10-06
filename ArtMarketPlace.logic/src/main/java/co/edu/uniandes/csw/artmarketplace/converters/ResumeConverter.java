@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  * Convierte los objetos de DTO a Entidades y viceversa.
@@ -16,6 +17,9 @@ import java.util.List;
  * @author vp.salcedo93
  */
 public abstract class ResumeConverter {
+    
+    private static final Logger LOGGER = Logger.getLogger(ResumeConverter.class);
+    
     /**
      * Metodo constructor del conversor entre entidad y DTO de la hoja de vida.
      */
@@ -41,7 +45,7 @@ public abstract class ResumeConverter {
 
             return dto;
         } else {
-            System.err.println("Entidad de Hoja de vida vacia");
+            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
@@ -57,7 +61,7 @@ public abstract class ResumeConverter {
             
             return entity;
         }else {
-            System.err.println("DTO de Hoja de vida vacia");
+            LOGGER.error("DTO de Hoja de vida vacia");
             return null;
         }
     }
@@ -81,7 +85,7 @@ public abstract class ResumeConverter {
             
             return dto;
         } else {
-            System.err.println("Entidad de Hoja de vida vacia");
+            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
@@ -104,7 +108,7 @@ public abstract class ResumeConverter {
             
             return entity;
         }else {
-            System.err.println("DTO de Hoja de vida vacia");
+            LOGGER.error("DTO de Hoja de vida vacia");
             return null;
         }
     }
@@ -120,7 +124,7 @@ public abstract class ResumeConverter {
             dto.setExperience(ExperienceConverter.listEntity2DTO(entity.getExperience()));
             return dto;
         } else {
-            System.err.println("Entidad de Hoja de vida vacia");
+            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
@@ -137,7 +141,7 @@ public abstract class ResumeConverter {
             entity.setExperience(ExperienceConverter.childListDTO2Entity(dto.getExperience(), entity));
             return entity;
         } else {
-            System.err.println("DTO de Hoja de vida vacia");
+            LOGGER.error("DTO de Hoja de vida vacia");
             return null;
         }
     }

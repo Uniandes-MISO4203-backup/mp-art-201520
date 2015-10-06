@@ -1,6 +1,5 @@
 (function(ng){
     var mod = ng.module('resumeModule');
-    
     mod.service('resumeService', ['CrudCreator','resumeContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
             this.save = function(resume){
@@ -25,7 +24,7 @@
                 this.api.one(data['id']+"/rate/"+data['rate']).customPOST().then(function ()
                 {
                     console.log("El rating fue exitosamente guardada");
-                }); 
+                });
             };
     }]);
 })(window.angular);

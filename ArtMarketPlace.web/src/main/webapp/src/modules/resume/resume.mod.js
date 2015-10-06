@@ -40,6 +40,5 @@
                 type: 'Number',
                 required: false
             }]
-        
     });
 })(window.angular);
