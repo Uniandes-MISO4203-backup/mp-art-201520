@@ -34,32 +34,31 @@
                 $scope.taxes = $scope.total * 0.16;
                 $scope.totalandtaxes = $scope.taxes + $scope.total;
             };
-            
             $scope.endPayment = function () {
                 var error = "";
                 var valide = true;
+                var re  = "";
                 if($scope.paymentMethod === '1' || $scope.paymentMethod === '3'){
-                    var re = /^(?:4[0-9]{12}(?:[0-9]{3})?)/.exec($scope.cardNumber);
+                    re = /^(?:4[0-9]{12}(?:[0-9]{3})?)/.exec($scope.cardNumber);
                     if(re === null){   
                         valide = false;
                         error = "Please insert a validad card number. Example: 4512345678912345";
                     }
                 }
                 if($scope.paymentMethod === '2' || $scope.paymentMethod === '4'){
-                    var re = /^5[1-5][0-9]{14}/.exec($scope.cardNumber);
+                    re = /^5[1-5][0-9]{14}/.exec($scope.cardNumber);
                     if(re === null){   
                         valide = false;
                         error = "Please insert a validad card number. Example: 5156345678912345";
                     }
                 }
                 if($scope.paymentMethod === '5'){
-                    var re = /^3[47][0-9]{13}/.exec($scope.cardNumber);
+                    re = /^3[47][0-9]{13}/.exec($scope.cardNumber);
                     if(re === null){   
                         valide = false;
                         error = "Please insert a validad card number.  Example: 341234567891234";
                     }
                 }
-                console.log(error);
                 if(valide){
                     paymentSvc.createItem({
                         method: $scope.paymentMethod,
@@ -81,7 +80,6 @@
                     self.showError(error);
                 }
             };
-            
             $scope.reset = function () {
                 $scope.paymentMethod = '1';
                 $scope.cardNumber = '';
