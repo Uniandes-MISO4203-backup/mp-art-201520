@@ -9,6 +9,7 @@ import javax.ejb.EJBException;
 @Provider
 public class EJBExceptionMapper implements ExceptionMapper<EJBException> {
 
+    @Override
     public Response toResponse(EJBException exception) {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                 .entity(getInitCause(exception).getLocalizedMessage())

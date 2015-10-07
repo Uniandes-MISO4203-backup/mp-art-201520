@@ -31,10 +31,6 @@ public class CartItemService {
 
     @Inject
     private ICartItemLogic cartItemLogic;
-    @Inject
-    private IClientLogic clientLogic;
-    @Context
-    private HttpServletResponse response;
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
