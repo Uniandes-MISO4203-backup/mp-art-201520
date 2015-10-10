@@ -148,7 +148,17 @@ public class ArtworkService {
         return artworkLogic.searchArtworksOfAnArtist(artistId);
     }
     
-
+    /**
+     * Search artworks by style
+     * @param artworkStyle
+     * @return 
+     */
+    @GET
+    @Path("/searchArtworksByStyle/{artworkStyle}")
+    public List<ArtworkDTO> searchArtworksByStyle(@PathParam("artworkStyle") String artworkStyle) {
+        return artworkLogic.searchArtworksByStyle(artworkStyle);
+    }
+    
     /**
      * @generated
      */

@@ -26,6 +26,11 @@ public class ArtworkDTO {
     private Float discount;
     
     /**
+     * Artwork style
+     */
+    private String artworkStyle;
+    
+    /**
      * @generated
      */
     public Long getId() {
@@ -128,4 +133,14 @@ public class ArtworkDTO {
     {
         this.remarks = remarks;
     }
+
+    public String getArtworkStyle() {
+        return artworkStyle;
+    }
+
+    public void setArtworkStyle(String artworkStyle) {
+        this.artworkStyle = artworkStyle;
+    }
+    
+    
 }

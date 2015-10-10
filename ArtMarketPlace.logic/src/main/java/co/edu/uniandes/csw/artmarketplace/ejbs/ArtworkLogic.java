@@ -128,4 +128,13 @@ public class ArtworkLogic implements IArtworkLogic {
         return ArtworkConverter.listEntity2DTO(persistence.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice));
     }
     
+    /**
+     * Search artworks by style
+     * @param artworkStyle
+     * @return 
+     */
+    @Override
+    public List<ArtworkDTO> searchArtworksByStyle(String artworkStyle) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchArtworksByStyle(artworkStyle));
+    }    
 }

@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries(
 {
+        @NamedQuery(name = "ArtworkEntity.searchArtworksByStyle", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artworkStyle) like UPPER(:artworkStyle)"),
+    
         @NamedQuery(name = "ArtworkEntity.searchArtworksBetweenPrices", 
                     query = "SELECT a FROM ArtworkEntity a WHERE a.price BETWEEN :artworkMinPrice AND :artworkMaxPrice"),
     
@@ -46,6 +49,11 @@ public class ArtworkEntity implements Serializable {
      * Descuento de una obra
      */
     private Float discount;
+    
+    /**
+     * Artwork style
+     */
+    private String artworkStyle;
  
     /**
      * Comentarios de la obra de arte.
@@ -157,4 +165,15 @@ public class ArtworkEntity implements Serializable {
     {
        this.remarks = remarks;
     }
+
+    public String getArtworkStyle() {
+        return artworkStyle;
+    }
+
+    public void setArtworkStyle(String artworkStyle) {
+        this.artworkStyle = artworkStyle;
+    }
+    
+    
+    
 }

@@ -37,4 +37,10 @@ public interface IArtworkLogic {
      * @return 
      */
     public List<ArtworkDTO> searchArtworksBetweenPrices(int artworkMinPrice,int artworkMaxPrice);
+    /**
+     * Search artworks by style
+     * @param artworkStyle
+     * @return 
+     */
+    public List<ArtworkDTO> searchArtworksByStyle(String artworkStyle);
 }

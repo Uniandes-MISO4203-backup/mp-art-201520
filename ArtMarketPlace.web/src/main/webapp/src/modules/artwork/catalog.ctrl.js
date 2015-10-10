@@ -61,6 +61,14 @@
                     $scope.artworks = results;
                 });
             };
+            
+            $scope.searchArtworksByStyle = function (artworkStyle) {
+                svc.searchArtworksByStyle(artworkStyle).then(function (results) {
+                    $scope.artworks = [];
+                    $scope.artworks = results;
+                });
+            };
+            
 
             $scope.postRemark = function (id, newRemark) {
                 artworkSvc.postRemark(id, newRemark).then(function (result) {
@@ -114,7 +122,7 @@
                                 $('#userQuestion').html("<b>User</b>: " + authSvc.getCurrentUser().name + "<br>");
                                 $('#artworkRef').html("<b>Reference</b>: <label id=artRef>" + data.id + "</label><br>");
                                 $('#artworkName').html("<b>Artwork's name</b>: " + data.name + "<br>");
-                                $("#question").val("Escriba aquí su pregunta");
+                                $("#question").val("Escriba aquï¿½ su pregunta");
                             });
                         }
                         else
