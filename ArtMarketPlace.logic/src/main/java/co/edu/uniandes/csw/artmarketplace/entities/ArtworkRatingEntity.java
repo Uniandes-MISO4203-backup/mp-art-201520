@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -27,6 +28,9 @@ public class ArtworkRatingEntity implements Serializable{
      * Es el comprador quien realiza la votacion.
      */
     private ClientEntity client;
+    
+    @ManyToOne
+    private ArtworkEntity artwork;
 
     /**
      * Es una metodo de acceso que retorna el identificador unico de la votacion hecha por un comprador frente a una obra de arte.
@@ -58,6 +62,23 @@ public class ArtworkRatingEntity implements Serializable{
      */
     public void setClient(ClientEntity client) {
         this.client = client;
+    }
+    
+    /**
+     * Es un metodo de acceso que retorno la obra de arte a la cual se le hizo la calificacion
+     * @return es la obra de arte calificada
+     */
+    public ArtworkEntity getArtwork() {
+        return artwork;
+    }
+
+    /**
+     * Es un metodo de accesso que modifica la informacion de la calificacion realizada por un cliente
+     * frente a un obra de arte.
+     * @param artwork es la informacion de la ogra de arte en cuestion.
+     */
+    public void setArtwork(ArtworkEntity artwork) {
+        this.artwork = artwork;
     }
         
 }
