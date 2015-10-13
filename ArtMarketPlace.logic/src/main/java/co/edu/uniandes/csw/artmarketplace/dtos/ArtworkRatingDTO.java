@@ -1,6 +1,7 @@
-package co.edu.uniandes.csw.artmarketplace.ejbs;
+package co.edu.uniandes.csw.artmarketplace.dtos;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * La clase ArtworkRatingEntity esta disennada para persistir las votaciones realizadas por los compradores
@@ -9,6 +10,7 @@ import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
  * @author lf.mendivelso10
  * @version 1.0.0
  */
+@XmlRootElement 
 public class ArtworkRatingDTO {
     /**
      * Es el identificador unico de la votacion hecha por una comprador frente a una Obra de arte.
@@ -18,7 +20,7 @@ public class ArtworkRatingDTO {
     /** 
      * Es el comprador quien realiza la votacion.
      */
-    private ClientEntity client;
+    private ClientDTO client;
 
     /**
      * Es una metodo de acceso que retorna el identificador unico de la votacion hecha por un comprador frente a una obra de arte.
@@ -40,7 +42,7 @@ public class ArtworkRatingDTO {
      * Es un metodo de acceso que retorna la informacion del cliente quien hizo la valoracion de la obra de arte.
      * @return el cliente que hizo la votacion.
      */
-    public ClientEntity getClient() {
+    public ClientDTO getClient() {
         return client;
     }
 
@@ -48,7 +50,7 @@ public class ArtworkRatingDTO {
      * Es un metodo de acceso que modifica la informacion del cliente quien hizo la valoracion de la obra de arte.
      * @param client es el cliente que hizo la valoracion.
      */
-    public void setClient(ClientEntity client) {
+    public void setClient(ClientDTO client) {
         this.client = client;
     }
 }
