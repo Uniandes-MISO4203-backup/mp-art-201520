@@ -12,6 +12,7 @@
         'questionModule',
         'resumeModule',
         'experienceModule',
+        'blogModule',
         'ngRoute',
         'ngCrud'
     ]);
@@ -81,6 +82,16 @@
                     .when('/resume/:id', {
                         templateUrl: 'src/modules/resume/resumeView.tpl.html',
                         controller: 'resumeCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/blog', {
+                        templateUrl: 'src/modules/blog/templates/blog.tpl.html',
+                        controller: 'blogCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/newentry', {
+                        templateUrl: 'src/modules/blog/templates/newentry.tpl.html',
+                        controller: 'blogCtrl',
                         controllerAs: alias
                     })
                     .otherwise('/catalog');

@@ -1,0 +1,45 @@
+<script>
+        $(function() {
+            $("#entry").htmlarea({
+                // Override/Specify the Toolbar buttons to show
+                toolbar: [
+                    ["html", "bold", "italic", "underline", "strikethrough", "|", "orderedlist", "unorderedlist", "p"],
+                    ["link", "unlink", "|", "image", "horizontalrule"],
+                    ["justifyleft", "justifycenter", "justifyright"]
+                ]
+            });
+        });
+    </script>
+<div id="blog-header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{name}}-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">New Entry</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+        </div>
+    </nav>
+    
+</div>
+    
+<form role="form">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Entry</label>
+    <textarea id="entry" cols="50" rows="15" style = "width:100%;"></textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Save Entry</button>
+    <button type="button" class="btn btn-default">Cancel</button>
+</form>
+
+

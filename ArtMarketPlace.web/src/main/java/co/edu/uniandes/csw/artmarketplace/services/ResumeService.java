@@ -5,9 +5,11 @@
  */
 package co.edu.uniandes.csw.artmarketplace.services;
 
+import co.edu.uniandes.csw.artmarketplace.api.IBlogLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.BlogDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,6 +34,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -56,7 +60,10 @@ public class ResumeService {
     @Inject
     private IExperienceLogic experienceLogic;
     
-    
+    //Para el servicio de Blog...
+    @Inject private IBlogLogic BlogLogic;
+    @QueryParam("page") private Integer page;
+    @QueryParam("maxRecords") private Integer maxRecords;
     
     /**
      * Artista logeado
@@ -180,6 +187,52 @@ public class ResumeService {
     @Path("{id: \\d+}/rate/{rate: \\d+}")
     public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
         resumeLogic.rateArtist(id, rate);
+    }
+    
+    
+    /**
+     * Servicio para crear una entrada en el blog del artista...
+     * Creado por jh.rubiano10
+     */
+    @POST
+    @Path("/newentry/")
+    @StatusCreated
+    public BlogDTO createEntry(BlogDTO dto) {
+        dto.setDate(new Date());
+        return BlogLogic.createEntry(dto);
+    }
+    
+    /*
+    Traer todas las entradas de un Blog...
+    */
+    @Path("/allentrys")    
+    @GET
+    public List<BlogDTO> getEntrys(BlogDTO user)
+    {
+        List<BlogDTO> listEntrys;
+        /*if (page != null && maxRecords != null)
+        {
+            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+        }*/
+        listEntrys = BlogLogic.getEntrys(page, maxRecords);
+        
+        return listEntrys;
+    }
+   
+    
+    @Path("/entryartist/{id: \\d+}")
+    @GET
+    public List<BlogDTO> getEntryArtist(@PathParam("id") Long idArtist) {
+        List<BlogDTO> listEntrys;
+        listEntrys = BlogLogic.getEntryArtist(idArtist);
+        return listEntrys;
+    }
+    
+    
+    @Path("/getentry/{id: \\d+}")
+    @GET
+    public BlogDTO getEntry(@PathParam("id") Long id) {
+        return BlogLogic.getEntry(id);
     }
     
 }
