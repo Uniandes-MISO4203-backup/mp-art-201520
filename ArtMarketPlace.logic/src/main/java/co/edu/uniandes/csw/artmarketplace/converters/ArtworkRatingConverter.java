@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.artmarketplace.converters;
 
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkRatingDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkRatingEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * La clase ArtworkRatingConverter tiene como finalidad servir de intermediador entre los objetos DTO
@@ -27,6 +29,7 @@ public abstract class ArtworkRatingConverter {
             ArtworkRatingDTO dto = new ArtworkRatingDTO();
             dto.setId(artworkRating.getId());
             dto.setClient(ClientConverter.fullEntity2DTO(artworkRating.getClient()));
+            dto.setArtwork(ArtworkConverter.refEntity2DTO(artworkRating.getArtwork()));
             return dto;
         }
         else{
@@ -45,6 +48,7 @@ public abstract class ArtworkRatingConverter {
             ArtworkRatingEntity entity = new ArtworkRatingEntity();
             entity.setId(artworkRating.getId());
             entity.setClient(ClientConverter.fullDTO2Entity(artworkRating.getClient()));
+            entity.setArtwork(ArtworkConverter.refDTO2Entity(artworkRating.getArtwork()));
             return entity;
         }
         else{
@@ -52,4 +56,39 @@ public abstract class ArtworkRatingConverter {
         }
     }
     
+    /**
+     * Este metodo esta disennado para hacer la conversion de un lista de objectos DTO
+     * a un lista de objetos Entity correspondiente a la logica de ArtworkRating.
+     * @param list es la lista de Objetos DTO a convertir
+     * @return una lista de objectos Entity del tipo ArtworkRatingEntity.
+     */
+    public static List<ArtworkRatingEntity> listArtworkRatingDTO2Entity(List<ArtworkRatingDTO> list){
+        ArrayList<ArtworkRatingEntity> result = new ArrayList<ArtworkRatingEntity>();
+        if(list != null){
+            if(!list.isEmpty()){
+                for(ArtworkRatingDTO dto : list){
+                    result.add(basicArtworkRatingDTO2Entity(dto));
+                }
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Este metodo esta disenado para hacer la conversion de un lista de objectos Entity
+     * a un lista de objetos DTO correspondiente a la logica de ArtworkRating.
+     * @param list es la lista de Objetos DTO a convertir
+     * @return una lista de objectos Entity del tipo ArtworkRatingEntity.
+     */
+    public static List<ArtworkRatingDTO> listArtworkRatingEntity2DTO(List<ArtworkRatingEntity> list){
+        ArrayList<ArtworkRatingDTO> result = new ArrayList<ArtworkRatingDTO>();
+        if(list != null){
+            if(!list.isEmpty()){
+                for(ArtworkRatingEntity entity : list){
+                    result.add(basicArtworkRatingEntity2DTO(entity));
+                }
+            }
+        }
+        return result;
+    }
 }

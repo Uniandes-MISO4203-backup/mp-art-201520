@@ -21,6 +21,11 @@ public class ArtworkRatingDTO {
      * Es el comprador quien realiza la votacion.
      */
     private ClientDTO client;
+    
+    /**
+     * Es la obra de arte a la cual se hace referencia.
+     */
+    private ArtworkDTO artwork;
 
     /**
      * Es una metodo de acceso que retorna el identificador unico de la votacion hecha por un comprador frente a una obra de arte.
@@ -53,4 +58,23 @@ public class ArtworkRatingDTO {
     public void setClient(ClientDTO client) {
         this.client = client;
     }
+
+    /**
+     * Es un metodo de acceso que retorna la referencia de la obra de arte a la cual se hace referencia con
+     * la calificacion.
+     * @return un objecto de la clase ArtworkDTO con la informacion de referencia.
+     */
+    public ArtworkDTO getArtwork() {
+        return artwork;
+    }
+
+    /**
+     * Es un metodo de acceso que modifica la referencia de la obra de arte a la cual se hace referencia con
+     * la calificacion.
+     * @param artwork es la nueva referencia de la calificacion
+     */
+    public void setArtwork(ArtworkDTO artwork) {
+        this.artwork = artwork;
+    }
+    
 }

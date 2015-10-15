@@ -20,6 +20,8 @@ public class ArtworkDTO {
      */
     private List<RemarkDTO> remarks;
     
+    private List<ArtworkRatingDTO> ratings;
+    
     /**
      * Descuento de una obra
      */
@@ -141,6 +143,20 @@ public class ArtworkDTO {
     public void setArtworkStyle(String artworkStyle) {
         this.artworkStyle = artworkStyle;
     }
-    
-    
+
+    /**
+     * Es un metodo de acceso que retorna un lista con la calificaciones de obra de arte.
+     * @return una lista de objectos ArtworkRatingDTO con la informacion de todas las calificaciones.
+     */
+    public List<ArtworkRatingDTO> getRatings() {
+        return ratings;
+    }
+
+    /**
+     * Es un meotodo de acceso que modifica la lista de calificaciones de la obra de arte.
+     * @param ratings es la nueva referencia de lista para las calificaciones de la obra de arte.
+     */
+    public void setRatings(List<ArtworkRatingDTO> ratings) {
+        this.ratings = ratings;
+    }
 }
