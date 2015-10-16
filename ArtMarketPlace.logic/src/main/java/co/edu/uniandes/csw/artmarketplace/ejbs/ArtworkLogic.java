@@ -234,7 +234,7 @@ public class ArtworkLogic implements IArtworkLogic {
     @Override
     public Boolean checkPreviewRatingByClient(ClientDTO client, List<ArtworkRatingEntity> list) {
         Boolean result = true;
-        for (int i = 0; i < list.size() && result != true; i++) {
+        for (int i = 0; i < list.size() && result == true; i++) {
             ClientEntity c = list.get(i).getClient();
             if (c.getUserId().equals(client.getUserId())) {
                 result = false;

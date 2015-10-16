@@ -1,7 +1,5 @@
 package co.edu.uniandes.csw.artmarketplace.tests;
 
-import co.edu.uniandes.csw.artmarketplace.converters.ArtworkConverter;
-import co.edu.uniandes.csw.artmarketplace.converters.ClientConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
@@ -32,11 +30,10 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- *
+ * ArtworkRatingPersistence es una la clase desiñada para hacer las pruebas de persistencia de
+ * la calificación de las obras de arte.
  * @author lf.mendivelso10
  */
 @RunWith(Arquillian.class)
