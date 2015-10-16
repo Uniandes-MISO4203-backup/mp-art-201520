@@ -31,6 +31,8 @@ public abstract class ArtworkConverter {
             dto.setPrice(entity.getPrice());
             dto.setDiscount(entity.getDiscount());
             dto.setArtworkStyle(entity.getArtworkStyle());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
             return dto;
         } else {
             return null;
@@ -65,6 +67,8 @@ public abstract class ArtworkConverter {
             dto.setArtist(ArtistConverter.refEntity2DTO(entity.getArtist()));
             dto.setDiscount(entity.getDiscount());
             dto.setArtworkStyle(entity.getArtworkStyle());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
             return dto;
         } else {
             return null;
@@ -84,7 +88,8 @@ public abstract class ArtworkConverter {
             entity.setArtist(ArtistConverter.refDTO2Entity(dto.getArtist()));
             entity.setDiscount(dto.getDiscount());
             entity.setArtworkStyle(dto.getArtworkStyle());
-
+            entity.setRatingSum(dto.getRatingSum());
+            entity.setRatingVotes(dto.getRatingVotes());
             return entity;
         } else {
             return null;

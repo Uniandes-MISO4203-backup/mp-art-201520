@@ -20,7 +20,19 @@ public class ArtworkDTO {
      */
     private List<RemarkDTO> remarks;
     
+    /**
+     * 
+     */
     private List<ArtworkRatingDTO> ratings;
+    /**
+     * ratingSum es la variable utilizada para acumular las calificaciones recibidas por los clientes hacia la obra de arte, para finales del calculo del promedio.
+     */
+    private Float ratingSum;
+    
+    /**
+     * ratingVotes es la variable utilizada para totalizar la cantidad de votos recibidos por parte de los clientes hacia la obra de arte, para finles del calculo de su promedio.
+     */
+    private Float ratingVotes;
     
     /**
      * Descuento de una obra
@@ -158,5 +170,37 @@ public class ArtworkDTO {
      */
     public void setRatings(List<ArtworkRatingDTO> ratings) {
         this.ratings = ratings;
+    }
+    
+     /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingSum de la obra de arte.
+     * @return ratingSum es la sumatoria de calificaciones recibidas por la obra de arte.
+     */
+    public Float getRatingSum() {
+        return ratingSum;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad modificar el valor actual del ratingSum de la obra de arte. 
+     * @param ratingSum 
+     */
+    public void setRatingSum(Float ratingSum) {
+        this.ratingSum = ratingSum;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingVotes de la obra de arte.
+     * @return ratingVotes es la cantidad de votos de calificaci?n recibidas por la obra de arte.
+     */
+    public Float getRatingVotes() {
+        return ratingVotes;
+    }
+
+    /**
+     * Es un metodo de acceso que tienen como finalidad modificar el valor actual del ratingVotes de la obra de arte.
+     * @param ratingVotes es el nuevo valor del total de votos de calificacion recibidas por la obra de arte.
+     */
+    public void setRatingVotes(Float ratingVotes) {
+        this.ratingVotes = ratingVotes;
     }
 }

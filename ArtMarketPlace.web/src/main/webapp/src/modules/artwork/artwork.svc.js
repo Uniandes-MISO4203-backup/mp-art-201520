@@ -28,5 +28,12 @@
             this.postRemark = function(id, newRemark){
                 return this.api.one("postRemark/"+ id + "/" + newRemark).get();
             };
+            
+            this.rateArtwork = function(data){
+                this.api.one(data['id']+"/rate/"+data['rate']).customPOST().then(function ()
+                {
+                    console.log("El rating fue exitosamente guardada");
+                });
+            };
         }]);
 })(window.angular);

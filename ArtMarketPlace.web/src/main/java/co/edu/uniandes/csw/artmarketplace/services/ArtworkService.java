@@ -246,4 +246,11 @@ public class ArtworkService {
             return artworkLogic.getArtwork(id);
         }
     }
+    
+    @POST
+    @Path("{id: \\d+}/rate/{rate: \\d+}")
+    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
+        ClientDTO myClient = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+        artworkLogic.rateArtwork(id,myClient,rate);
+    }
 }

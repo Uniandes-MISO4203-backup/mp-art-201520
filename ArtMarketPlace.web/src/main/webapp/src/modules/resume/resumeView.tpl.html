@@ -6,6 +6,8 @@
         });
     });
 </script>-->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="src/css/ratingStars.css">
 
 <div id="Resume-header">
     <nav class="navbar navbar-default" role="navigation">
@@ -42,7 +44,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label">Rating</label>
                         <div class="col-md-10">
-                            {{record.ratingSum / record.ratingVotes | number : 2}}/5    
+                            {{record.ratingSum / record.ratingVotes| number : 2}}/5    
                             <button id="rate-artist-btn" class="btn btn-default btn-sm" ng-repeat="action in ctrl.modalRating" ng-click="action.fn()"><span class="glyphicon glyphicon-start"></span>Rate</button>
                         </div>
                     </div>
@@ -134,13 +136,13 @@
             <form id="ratingModal" ng-repeat="action in ctrl.saveRating" method="post" class="form-horizontal" ng-submit="action.fn()">
                 <!-- Forma del Formulario para el rating -->
                 <div class="modal-body">
-                    <center>
-                        1<input type="radio" name="rating" id="rating1" value="1">
-                        <input type="radio" name="rating" id="rating2" value="2">
-                        <input type="radio" name="rating" id="rating3" value="3"> 
-                        <input type="radio" name="rating" id="rating4" value="4">
-                        <input type="radio" name="rating" id="rating5" value="5">5
-                    </center>
+                    <div class="stars">
+                        <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/><label class="star star-5" for="star-5"></label>
+                        <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/><label class="star star-4" for="star-4"></label>
+                        <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/><label class="star star-3" for="star-3"></label>
+                        <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/><label class="star star-2" for="star-2"></label>
+                        <input class="star star-1" id="star-1" type="radio" name="rating" value="1"/><label class="star star-1" for="star-1"></label>
+                    </div>
                 </div>
                 <!-- Footer del formulario de envio del rating -->
                 <div class="modal-footer">

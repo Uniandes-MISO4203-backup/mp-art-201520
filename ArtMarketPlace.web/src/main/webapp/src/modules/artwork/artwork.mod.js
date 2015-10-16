@@ -35,6 +35,18 @@
                 type: 'String',
                 required: true
             }
+            ,{
+                name: 'ratingSum',
+                displayName: 'ratingSum',
+                type: 'Number',
+                required: false
+            }
+            ,{
+                name: 'ratingVotes',
+                displayName: 'ratingVotes',
+                type: 'Number',
+                required: false
+            }
         ]
     });
 })(window.angular);
