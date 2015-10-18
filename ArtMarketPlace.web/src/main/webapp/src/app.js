@@ -84,6 +84,11 @@
                         controller: 'resumeCtrl',
                         controllerAs: alias
                     })
+                    .when('/blog/:id', {
+                        templateUrl: 'src/modules/blog/templates/blog.tpl.html',
+                        controller: 'blogCtrl',
+                        controllerAs: alias
+                    })
                     .when('/blog', {
                         templateUrl: 'src/modules/blog/templates/blog.tpl.html',
                         controller: 'blogCtrl',

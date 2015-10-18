@@ -18,11 +18,14 @@ public class BlogConverter {
     
     private BlogConverter(){
     }
+    
     /**
+     * Método encarga ddoe hacer la conversion de un objeto del tipo
+     * Entity a un objeto DTO del tipo BlogEntity.
      * @param entity
-     * @return
-     * @generated
+     * @return un objeto del tipo DTO de BlogEntity
      */
+    
     public static BlogDTO refEntity2DTO(BlogEntity entity) {
         if (entity != null) {
             BlogDTO dto = new BlogDTO();

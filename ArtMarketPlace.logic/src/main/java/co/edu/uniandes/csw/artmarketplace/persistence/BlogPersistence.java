@@ -20,7 +20,11 @@ public class BlogPersistence extends CrudPersistence<BlogEntity>{
     public BlogPersistence(){
         this.entityClass = BlogEntity.class;
     }
-    
+    /**
+     * Método que trae las entradas de un artisita dado su ID
+     * @param idArtist
+     * @return 
+     */
     public List<BlogEntity> getEntryArtist (Long idArtist)
     {
         try

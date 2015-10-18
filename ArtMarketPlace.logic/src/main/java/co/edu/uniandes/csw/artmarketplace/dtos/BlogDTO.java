@@ -14,10 +14,30 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class BlogDTO {
+    
+    /**
+     * id/llave de un a entrada del Blog.
+     */
     private Long id;
+    
+    /**
+     * Texto de la entrada del Blog.
+     */
     private String entry;
+    
+    /**
+     * Título del Blog.
+     */
     private String title;
+    
+    /**
+     * Fecha de Creación de la entrada
+     */
     private Date date;
+    
+    /**
+     * Id del cliente/artista que realizó la entrada al Blog
+     */
     private Long client_id;
 
     public Long getId() {
