@@ -104,6 +104,15 @@ public class ArtistService {
     public ArtistDTO getArtist(@PathParam("id") Long id) {
         return artistLogic.getArtist(id);
     }
+    
+    /**
+     * Retorna artistas por nombre.
+     */
+    @GET
+    @Path("/searchArtist/{searchName}")
+    public List<ArtistDTO> searchArtist(@PathParam("searchName") String name) {
+        return artistLogic.findByName(name);
+    }
 
     /**
      * @generated

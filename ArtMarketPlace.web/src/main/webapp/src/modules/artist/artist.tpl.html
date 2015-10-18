@@ -1,0 +1,16 @@
+    <div id="searchArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;">
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="searchName" required>
+        <button ng-click="searchArtist(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
+
+<p style="font-size: 20px" ng-if="artists.length > 0">Artistas encontrados:</p>
+<p style="font-size: 20px" ng-if="artists.length === 0">No se encontraron artistas.</p>
+<div style="color: black;">
+    
+    <ol style="font-size: 18px">
+        <li ng-repeat="element in artists">
+            <a href="#/resume/{{element.id}}" style="color: blue; font-size: 18px;">{{element.name}}</a>
+        </li>
+    </ol>
+</div>
+    

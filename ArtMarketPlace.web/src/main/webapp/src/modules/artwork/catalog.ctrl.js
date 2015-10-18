@@ -3,9 +3,9 @@
 
     mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService',
             'artworkModel', 'cartItemService', '$location', 'authService',
-            'artworkService', '$http', '$routeParams', 'resumeService',
+            'artworkService', '$http', '$routeParams', 'resumeService', 'artistService',
             function (CrudCreator, $scope, svc, model, cartItemSvc, $location,
-                    authSvc, artworkSvc, $http, $routeParams, resumeSvc) {
+                    authSvc, artworkSvc, $http, $routeParams, resumeSvc, artistSvc) {
                 CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
                 this.asGallery = true;
                 this.readOnly = true;
@@ -74,6 +74,13 @@
                     artworkSvc.postRemark(id, newRemark).then(function (result) {
                         $scope.artworkRecord = [];
                         $scope.artworkRecord = result;
+                    });
+                };
+                
+                $scope.searchArtist = function (searchName) {
+                    artistSvc.searchArtist(searchName).then(function (results) {
+                        $scope.artists = [];
+                        $scope.artists = results;
                     });
                 };
 
