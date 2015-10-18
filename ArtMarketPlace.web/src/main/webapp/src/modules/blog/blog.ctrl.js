@@ -1,16 +1,76 @@
 (function (ng) {
-    //debugger;
     var mod = ng.module('blogModule');
-    console.log("Ingresa");
     mod.controller('blogCtrl', ['CrudCreator', '$scope', '$location', 'blogService', 'newEntryService', 'authService', '$routeParams', 
         function (CrudCreator, $scope, $location, svcEntrys, svcNewEntry, authSvc, $routeParams)
         {
-            console.log("Llega el valor", $routeParams.id);
-            svcEntrys.allEntrys(1).then(function (data) {
-                 console.log(data);
-                 tmp3 = data;
+            var idArtist = $routeParams.id || authSvc.getCurrentUser().id;
+            $("#save-entry").hide();
+            if (authSvc.getCurrentUser())
+            {
+                svcEntrys.darRole().then(function(data)
+                {
+                    if(data.role === "Artist")
+                    {
+                        $("#save-entry").show();
+                        $("#titleBlog").html(data.name);
+                    }
+                });
+            }
+          
+            svcEntrys.allEntrys(idArtist).then(function (data)
+            {
+                 var txt = "";
+                 if(data.length !== 0)
+                 {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                       txt += "<div class = 'panel panel-primary'>" + 
+                               "<div class='panel-heading'><h4>"+(data[i].title)+"</h4></div>" +
+                               "<div class='panel-body'>"+(data[i].entry)+"</div>" + 
+                              "</div>";
+                    }
+                }
+                else
+                {
+                    txt = "<div class='alert alert-danger' role='alert'>" + 
+                          "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>" + 
+                          "<span class='sr-only'>Error:</span> No existe ninguna entrada en el Blog</div>";
+                }
+                 $("#entrys").html(txt);
             });
+           
             
+            
+            
+           $("#formEntry").submit(function()
+           {
+               if (authSvc.getCurrentUser())
+                {
+                    if ($("#title").val().length !== 0)
+                    {
+                        svcNewEntry.saveEntry(
+                        {
+                            entry: $("#entry").val(),
+                            title: $("#title").val(),
+                            client_id: authSvc.getCurrentUser().id,
+                            date: new Date().toISOString().substring(0, 10)
+                        }).then(function (data) {
+                            console.log("Llega", data);
+                            $location.path('/blog');
+                            swal({title: "Guardado!", text: "La entrada de tu blog se ha guardado correctamente",  timer: 2000, type: "success"});
+                        });
+                    }
+                    else
+                    {
+                        sweetAlert("Campos Vacíos", "Por favor escribe tu entrada", "error");
+                        //console.log("error campos");
+                    }
+                }
+                else
+                {
+                    $location.path('/login');
+                }
+           }); 
             //Para traer las entradas de un blog...
             
             //Traer las entradas del artista...
@@ -60,6 +120,11 @@
            $scope.newEntry = function()
            {
                 $location.url('/newentry');
+           };
+           
+           $scope.cancel = function()
+           {
+                $location.url('/blog');
            };
         }]);
 })(window.angular);

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,7 +29,10 @@ public class BlogEntity implements Serializable {
     @Id
     @GeneratedValue(generator = "Blog")
     private Long id;
+    
+    @Column(columnDefinition="TEXT")
     private String entry;
+    
     private String title;
     
     @Temporal(TemporalType.DATE)
