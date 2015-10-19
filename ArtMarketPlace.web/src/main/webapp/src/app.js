@@ -99,11 +99,6 @@
                         controller: 'blogCtrl',
                         controllerAs: alias
                     })
-                    .when('/searchArtist', {
-                        templateUrl: 'src/modules/artist/artist.tpl.html',
-                        controller: 'catalogCtrl',
-                        controllerAs: alias
-                    })
                     .otherwise('/catalog');
         }]);
 

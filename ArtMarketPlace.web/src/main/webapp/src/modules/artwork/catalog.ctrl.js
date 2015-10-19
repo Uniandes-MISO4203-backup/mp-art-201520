@@ -45,6 +45,7 @@
                     svc.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -52,6 +53,7 @@
                     svc.searchArtistWithCheapestArtwork(artworkName).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -59,6 +61,7 @@
                     svc.searchCheapestArtworkOfAnArtist(artistName).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -66,6 +69,7 @@
                     svc.searchArtworksByStyle(artworkStyle).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -81,6 +85,7 @@
                     artistSvc.searchArtist(searchName).then(function (results) {
                         $scope.artists = [];
                         $scope.artists = results;
+                        $scope.artworks = [];
                     });
                 };
 
