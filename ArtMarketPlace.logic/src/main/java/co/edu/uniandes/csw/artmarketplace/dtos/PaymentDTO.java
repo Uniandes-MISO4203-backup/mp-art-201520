@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
+import enums.PaymentTypeEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,8 +14,9 @@ public class PaymentDTO {
     private Integer subtotal;
     private Integer taxes;
     private Integer total;
-    private String cardNumber;
+    private String reference;
     private ClientDTO client;
+    private PaymentTypeEnum paymentType;
 
     /**
      * @generated
@@ -89,15 +91,15 @@ public class PaymentDTO {
     /**
      * @generated
      */
-    public String getCardNumber() {
-        return cardNumber;
+    public String getReference() {
+        return reference;
     }
 
     /**
      * @generated
      */
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     /**
@@ -113,5 +115,15 @@ public class PaymentDTO {
     public void setClient(ClientDTO client) {
         this.client = client;
     }
+
+    public PaymentTypeEnum getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentTypeEnum paymentType) {
+        this.paymentType = paymentType;
+    }
+    
+    
     
 }

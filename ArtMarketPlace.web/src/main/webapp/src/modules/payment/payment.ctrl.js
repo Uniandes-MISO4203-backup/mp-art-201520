@@ -5,7 +5,7 @@
         function (CrudCreator, $scope, svc, model, paymentSvc, $location) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'Payment');
             var self = this;
-            $scope.paymentMethod = '1';
+            $scope.paymentMethod = '';
             $scope.cardNumber = '';
             $scope.readonly = false;
 
@@ -38,13 +38,14 @@
                 var error = "";
                 var valide = true;
                 var re  = "";
-                if($scope.paymentMethod === '1' || $scope.paymentMethod === '3'){
+                if($scope.paymentMethod === '1' || $scope.paymentMethod === '2'){
                     re = /^(?:4[0-9]{12}(?:[0-9]{3})?)/.exec($scope.cardNumber);
                     if(re === null){   
                         valide = false;
                         error = "Please insert a validad card number. Example: 4512345678912345";
                     }
                 }
+                /*
                 if($scope.paymentMethod === '2' || $scope.paymentMethod === '4'){
                     re = /^5[1-5][0-9]{14}/.exec($scope.cardNumber);
                     if(re === null){   
@@ -58,14 +59,14 @@
                         valide = false;
                         error = "Please insert a validad card number.  Example: 341234567891234";
                     }
-                }
+                }*/
                 if(valide){
                     paymentSvc.createItem({
                         method: $scope.paymentMethod,
                         subtotal: $scope.total,
                         taxes: $scope.taxes,
                         total: $scope.totalandtaxes,
-                        cardNumber: $scope.cardNumber
+                        reference: $scope.cardNumber
                     });
                     for (var i = 0; i < $scope.records.length; i++) {
                         svc.payItem($scope.records[i]);
@@ -81,7 +82,7 @@
                 }
             };
             $scope.reset = function () {
-                $scope.paymentMethod = '1';
+                $scope.paymentMethod = '';
                 $scope.cardNumber = '';
             };
         }]);

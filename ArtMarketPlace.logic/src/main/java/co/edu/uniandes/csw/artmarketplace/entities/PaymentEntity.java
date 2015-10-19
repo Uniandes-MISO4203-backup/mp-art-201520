@@ -1,9 +1,12 @@
 package co.edu.uniandes.csw.artmarketplace.entities;
 
+import enums.PaymentTypeEnum;
 import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 /**
@@ -24,7 +27,10 @@ public class PaymentEntity implements Serializable {
 
     private Integer total;
 
-    private String cardNumber;
+    private String reference;
+    
+    @Enumerated(EnumType.STRING)
+    private PaymentTypeEnum paymentType;
 
     @ManyToOne
     private ClientEntity client;
@@ -101,15 +107,15 @@ public class PaymentEntity implements Serializable {
     /**
      * @generated
      */
-    public String getCardNumber() {
-        return cardNumber;
+    public String getReference() {
+        return reference;
     }
 
     /**
      * @generated
      */
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     /**
@@ -125,5 +131,15 @@ public class PaymentEntity implements Serializable {
     public void setClient(ClientEntity client) {
         this.client = client;
     }   
+
+    public PaymentTypeEnum getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentTypeEnum paymentType) {
+        this.paymentType = paymentType;
+    }
+    
+    
 
 }

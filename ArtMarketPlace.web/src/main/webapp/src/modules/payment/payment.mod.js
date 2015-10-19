@@ -25,8 +25,8 @@
                 type: 'Integer',
                 required: true
             }, {
-                name: 'cardNumber',
-                displayName: 'Card Number',
+                name: 'reference',
+                displayName: 'Reference',
                 type: 'String',
                 required: true
             }, {
