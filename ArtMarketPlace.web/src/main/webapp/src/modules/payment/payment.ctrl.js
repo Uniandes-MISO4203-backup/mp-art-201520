@@ -45,14 +45,15 @@
                         error = "Please insert a validad card number. Example: 4512345678912345";
                     }
                 }
-                /*
-                if($scope.paymentMethod === '2' || $scope.paymentMethod === '4'){
-                    re = /^5[1-5][0-9]{14}/.exec($scope.cardNumber);
+                
+                if($scope.paymentMethod === '3'){
+                    re = /[^@]+@[^@]+\.[a-zA-Z]{2,6}/.exec($scope.cardNumber);
                     if(re === null){   
                         valide = false;
-                        error = "Please insert a validad card number. Example: 5156345678912345";
+                        error = "Please insert a validad email address. Example: example@gmail.com";
                     }
                 }
+                /*
                 if($scope.paymentMethod === '5'){
                     re = /^3[47][0-9]{13}/.exec($scope.cardNumber);
                     if(re === null){   

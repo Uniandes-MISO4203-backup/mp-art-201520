@@ -26,6 +26,12 @@
                                                     <option value='3'>Pay Pal</option>
                                                 </select></div></td>
                                     </tr>
+                                    <tr ng-if="paymentMethod!==''">
+                                        
+                                            <a ng-if="paymentMethod==='1'" ng-href="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png" alt="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png"></a>
+                                            <a ng-if="paymentMethod==='2'" ng-href="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png" alt="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png"></a>
+                                            <a ng-if="paymentMethod==='3'" ng-href="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg" alt="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg"></a>
+                                    </tr>
                                     <tr ng-if="paymentMethod==='1'">
                                         <th>
                                             Card number:</th><td><div>
@@ -106,8 +112,8 @@
                                     
                                     <tr ng-if="paymentMethod==='3'">
                                         <th>
-                                            Account login:</th><td><div>
-                                                <input type="text" ng-model="$parent.cardNumber" name="accountLogin" maxlength="10"
+                                            Account email:</th><td><div>
+                                                <input type="text" ng-model="$parent.cardNumber" name="accountLogin" maxlength="30"
                                                        class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
                                                        ></div></td>
                                     </tr>
