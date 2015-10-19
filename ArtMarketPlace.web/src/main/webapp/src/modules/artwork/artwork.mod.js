@@ -24,10 +24,29 @@
                 displayName: 'Artist',
                 type: 'Reference',
                 required: true
-            }, {
+            },{
                 name: 'discount',
                 displayName: 'Special Discount',
                 type: 'Integer',
-                required: false}]
+                required: false
+            },{
+                name: 'artworkStyle',
+                displayName: 'Artwork Style',
+                type: 'String',
+                required: true
+            }
+            ,{
+                name: 'ratingSum',
+                displayName: 'ratingSum',
+                type: 'Number',
+                required: false
+            }
+            ,{
+                name: 'ratingVotes',
+                displayName: 'ratingVotes',
+                type: 'Number',
+                required: false
+            }
+        ]
     });
 })(window.angular);

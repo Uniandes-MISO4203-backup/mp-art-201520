@@ -118,6 +118,7 @@ public class ArtworkPersistenceTest {
         entityOne.setName("Pintura1");
         entityOne.setPicture("Pintura1");
         entityOne.setPrice(10000);
+        entityOne.setArtworkStyle("Realismo");
         entityOne.setArtist(artistEntityOne);
         em.persist(entityOne);
         data.add(entityOne);
@@ -126,6 +127,7 @@ public class ArtworkPersistenceTest {
         entityTwo.setName("Pintura2");
         entityTwo.setPicture("Pintura2");
         entityTwo.setPrice(20000);
+        entityTwo.setArtworkStyle("Impresionismo");
         entityTwo.setArtist(artistEntityOne);
         em.persist(entityTwo);
         data.add(entityTwo);
@@ -134,6 +136,7 @@ public class ArtworkPersistenceTest {
         entityThree.setName("Pintura3");
         entityThree.setPicture("Pintura3");
         entityThree.setPrice(30000);
+        entityThree.setArtworkStyle("Realismo");
         entityThree.setArtist(artistEntityTwo);
         em.persist(entityThree);
         data.add(entityThree);
@@ -142,6 +145,7 @@ public class ArtworkPersistenceTest {
         entityFour.setName("Pintura3");
         entityFour.setPicture("Pintura3");
         entityFour.setPrice(40000);
+        entityFour.setArtworkStyle("Impresionismo");
         entityFour.setArtist(artistEntityOne);
         em.persist(entityFour);
         data.add(entityFour);
@@ -379,4 +383,28 @@ public class ArtworkPersistenceTest {
         Assert.assertEquals(0, artworkEntitys.size());
     }
     
+    
+    /**
+     *  Test for search Artworks By Style
+     */
+    @Test
+    public void searchArtworksByStyle(){
+        List<ArtworkEntity> artworkEntitys = artworkPersistence.searchArtworksByStyle("");
+        Assert.assertEquals(0, artworkEntitys.size());
+        
+        artworkEntitys = artworkPersistence.searchArtworksByStyle("Nada");
+        Assert.assertEquals(0, artworkEntitys.size());
+        
+        artworkEntitys = artworkPersistence.searchArtworksByStyle("Realismo");
+        Assert.assertEquals(2, artworkEntitys.size());
+        for(ArtworkEntity a:artworkEntitys){
+            Assert.assertTrue(a.getArtworkStyle().equals("Realismo"));
+        }
+        
+        artworkEntitys = artworkPersistence.searchArtworksByStyle("Impresionismo");
+        Assert.assertEquals(2, artworkEntitys.size());
+        for(ArtworkEntity a:artworkEntitys){
+            Assert.assertTrue(a.getArtworkStyle().equals("Impresionismo"));
+        }
+    }
 }

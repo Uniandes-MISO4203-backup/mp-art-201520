@@ -96,4 +96,20 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
+    /**
+     * Search artwork by style
+     * @param artworkStyle
+     * @return 
+     */
+    public List<ArtworkEntity> searchArtworksByStyle(String artworkStyle) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artworkStyle", artworkStyle);
+            result = executeListNamedQuery("ArtworkEntity.searchArtworksByStyle", params);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 }

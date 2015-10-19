@@ -30,7 +30,9 @@ public abstract class ArtworkConverter {
             dto.setPicture(entity.getPicture());
             dto.setPrice(entity.getPrice());
             dto.setDiscount(entity.getDiscount());
-
+            dto.setArtworkStyle(entity.getArtworkStyle());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
             return dto;
         } else {
             return null;
@@ -46,7 +48,6 @@ public abstract class ArtworkConverter {
         if (dto != null) {
             ArtworkEntity entity = new ArtworkEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -65,7 +66,9 @@ public abstract class ArtworkConverter {
             dto.setPrice(entity.getPrice());
             dto.setArtist(ArtistConverter.refEntity2DTO(entity.getArtist()));
             dto.setDiscount(entity.getDiscount());
-
+            dto.setArtworkStyle(entity.getArtworkStyle());
+            dto.setRatingSum(entity.getRatingSum());
+            dto.setRatingVotes(entity.getRatingVotes());
             return dto;
         } else {
             return null;
@@ -84,7 +87,9 @@ public abstract class ArtworkConverter {
             entity.setPrice(dto.getPrice());
             entity.setArtist(ArtistConverter.refDTO2Entity(dto.getArtist()));
             entity.setDiscount(dto.getDiscount());
-
+            entity.setArtworkStyle(dto.getArtworkStyle());
+            entity.setRatingSum(dto.getRatingSum());
+            entity.setRatingVotes(dto.getRatingVotes());
             return entity;
         } else {
             return null;
@@ -98,6 +103,7 @@ public abstract class ArtworkConverter {
         if (entity != null) {
             ArtworkDTO dto = basicEntity2DTO(entity);
             dto.setRemarks(RemarkConverter.listEntity2DTO(entity.getRemarks()));
+            dto.setRatings(ArtworkRatingConverter.listArtworkRatingEntity2DTO(entity.getRatings()));
             return dto;
         } else {
             return null;
@@ -111,6 +117,7 @@ public abstract class ArtworkConverter {
         if (dto != null) {
             ArtworkEntity entity = basicDTO2Entity(dto);
             entity.setRemarks(RemarkConverter.childListDTO2Entity(dto.getRemarks(), entity));
+            entity.setRatings(ArtworkRatingConverter.listArtworkRatingDTO2Entity(dto.getRatings()));
             return entity;
         } else {
             return null;

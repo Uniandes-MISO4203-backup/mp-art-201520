@@ -12,6 +12,7 @@
                     <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
                     <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
                     <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
+                    <p><strong>Rating: </strong> {{record.ratingSum / record.ratingVotes| number : 2}}/5</p>
                     <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
                     <p ng-if=!record.discount><br/></p>
                 </div>
@@ -33,10 +34,10 @@
         <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
             <li ng-if="remark.userType === 'Artista'" style="background-color: lavender;" class="list-group-item">
                 <h6>Remark of artist {{remark.remarkUser}}</h6>
-                {{remark.description}} - {{remark.remarkDate | date:'yyyy-MM-dd'}}
+                {{remark.description}} - {{remark.remarkDate| date:'yyyy-MM-dd'}}
             </li>
             <li ng-if="remark.userType === 'Cliente'" class="list-group-item">
-                {{remark.remarkDate | date:'yyyy-MM-dd'}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
+                {{remark.remarkDate| date:'yyyy-MM-dd'}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
             </li>
         </ul>
     </div>
@@ -45,7 +46,7 @@
     <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Enter remark here..." maxlength="255" ng-model="newRemark" required>
 
 </div>
-<!-- Vista del modal-->
+
 <div class="modal fade" id="questionModal" role="dialog">
     <!-- Definicion del espacio del modal -->
     <div class="modal-dialog">
@@ -75,6 +76,52 @@
                     <!-- Boton de Close para cancelar el envio de la pregunta -->
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <!-- Boton de Send, para hacer envio de la pregunta -->
+                    <button type="submit" class="btn btn-success">Send</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Rating -->
+<!-- Vista del modal-->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="src/css/ratingStars.css">
+<div class="modal fade" id="ratingModal" role="dialog">
+    <!-- Definicion del espacio del modal -->
+    <div class="modal-dialog">
+        <!-- Contenido definido para el Modal -->  
+        <div class="modal-content">
+            <!-- Encabezado -->
+            <div class="modal-header">
+                <!-- Boton de cerrado -->
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- Titulo del Modal -->
+                <h4 class="modal-title" id = "titleModal">Rate the Artist</h4>
+            </div>
+            <!-- Definicion del formulario para el rating -->
+            <form id="ratingModal" ng-repeat="action in ctrl.saveRating" method="post" class="form-horizontal" ng-submit="action.fn()">
+                <!-- Forma del Formulario para el rating -->
+                <p>Ref. Artwork:</p>
+                <center>
+                    <div id="artworkRating"></div>
+                    <div class="modal-body">
+                        <div class="stars">
+                            <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/><label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/><label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/><label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/><label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" id="star-1" type="radio" name="rating" value="1"/><label class="star star-1" for="star-1"></label>
+                        </div>
+                    </div>
+                </center>
+                <!-- Footer del formulario de envio del rating -->
+                <div class="modal-footer">
+                    <!-- Boton de Close para cancelar el envio de la Rating -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!-- Boton de Send, para hacer envio de la Rating -->
                     <button type="submit" class="btn btn-success">Send</button>
                 </div>
             </form>

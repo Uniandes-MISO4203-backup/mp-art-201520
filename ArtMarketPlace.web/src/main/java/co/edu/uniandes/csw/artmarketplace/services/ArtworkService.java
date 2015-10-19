@@ -148,7 +148,17 @@ public class ArtworkService {
         return artworkLogic.searchArtworksOfAnArtist(artistId);
     }
     
-
+    /**
+     * Search artworks by style
+     * @param artworkStyle
+     * @return 
+     */
+    @GET
+    @Path("/searchArtworksByStyle/{artworkStyle}")
+    public List<ArtworkDTO> searchArtworksByStyle(@PathParam("artworkStyle") String artworkStyle) {
+        return artworkLogic.searchArtworksByStyle(artworkStyle);
+    }
+    
     /**
      * @generated
      */
@@ -173,34 +183,27 @@ public class ArtworkService {
     public QuestionDTO createQuestion(QuestionDTO dto) {
         dto.setDate(new Date());
         try {
-            ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
-            // Se carga la informacion de la sesion de correo
+            ClientDTO myClient = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
             String path = context.getInitParameter("emailConfig");
             InputStream data = context.getResourceAsStream(path);
             Properties props = new Properties();
             props.load(data);
-            // Se obtiene el correo del usuario quien envia el mensaje
             Subject currentUser = SecurityUtils.getSubject();
             Map<String, String> userAttributes = (Map<String, String>) currentUser.getPrincipals().oneByType(java.util.Map.class);
             dto.setEmail(userAttributes.get("email"));
-            dto.setClient(client);
-            // Se busca el destinatario
-            
-            
-            // Se guarda la pregunta.
+            dto.setClient(myClient);
             questionLogic.createQuestion(dto);
-            // Se envia el correo al artista propietario de la obra.
-            dto.setClient(client);
+            dto.setClient(myClient);
             questionLogic.sendEmail(dto,props);
             
         } catch (FileNotFoundException ex) {
-            System.err.println("Archivo porperties no encontrado.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Archivo properties no encontrado");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            System.err.println("Error con el archivo porperties.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Error con el archivo porperties.");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex) {
-            System.err.println("Error: el archivo porperties no ha sido encontrado porque no existe.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Error: el archivo porperties no ha sido encontrado porque no existe.");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dto;
@@ -242,5 +245,12 @@ public class ArtworkService {
         {
             return artworkLogic.getArtwork(id);
         }
+    }
+    
+    @POST
+    @Path("{id: \\d+}/rate/{rate: \\d+}")
+    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
+        ClientDTO myClient = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+        artworkLogic.rateArtwork(id,myClient,rate);
     }
 }

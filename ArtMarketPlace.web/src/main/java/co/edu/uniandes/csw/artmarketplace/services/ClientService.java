@@ -12,6 +12,7 @@ import com.stormpath.sdk.resource.ResourceException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -36,11 +37,16 @@ import org.ini4j.Wini;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ClientService {
+
+    @Inject
+    private IClientLogic clientLogic;
+    @Context
+    private HttpServletResponse response;
+    @QueryParam("page")
+    private Integer page;
+    @QueryParam("maxRecords")
+    private Integer maxRecords;
     final static Logger logger = Logger.getLogger(ArtistService.class);
-    @Inject private IClientLogic clientLogic;
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
 
     /**
      * @generated
@@ -56,36 +62,38 @@ public class ClientService {
      */
     @GET
     public List<ClientDTO> getClients() {
+        List<ClientDTO> clients = new ArrayList();
         if (page != null && maxRecords != null) {
             this.response.setIntHeader("X-Total-Count", clientLogic.countClients());
         }
         try {
             URL url = ArtistService.class.getResource("ArtistService.class");
             String className = url.getFile();
-            String filePath = className.substring(0,className.indexOf("WEB-INF") + "WEB-INF".length());
-            Wini ini = new Wini(new File(filePath+"/shiro.ini"));
+            String filePath = className.substring(0, className.indexOf("WEB-INF") + "WEB-INF".length());
+            Wini ini = new Wini(new File(filePath + "/shiro.ini"));
             String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
             ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
             Client client = Clients.builder().setApiKey(apiKey).build();
-            List<ClientDTO> clients = clientLogic.getClients(page, maxRecords);
-            for(ClientDTO clientDTO:clients){
+            clients = clientLogic.getClients(page, maxRecords);
+            for (ClientDTO clientDTO : clients) {
                 try {
-                   Account account = client.getResource(clientDTO.getUserId(), Account.class);
-                   clientDTO.setFirstName(account.getGivenName());
-                   clientDTO.setLastname(account.getSurname());
-                   clientDTO.setEmail(account.getEmail()); 
+                    Account account = client.getResource(clientDTO.getUserId(), Account.class);
+                    clientDTO.setFirstName(account.getGivenName());
+                    clientDTO.setLastname(account.getSurname());
+                    clientDTO.setEmail(account.getEmail());
                 } catch (ResourceException e) {
-                    logger.error("The account with userid: "+e.getMessage()+" does not exist.");
+                    logger.error("The account with userid: " + e.getMessage() + " does not exist.");
+                    logger.error(e);
                 }
 
-
             }
-            return clients;
+            
         } catch (IOException e) {
-             logger.error(e.getMessage());
-            return null;
+            logger.error(e.getMessage());
+            logger.error(e);
+            clients.clear();
         }
-        
+        return clients;
     }
 
     /**

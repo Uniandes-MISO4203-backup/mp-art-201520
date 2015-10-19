@@ -12,6 +12,7 @@ import com.stormpath.sdk.resource.ResourceException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -36,13 +37,14 @@ import org.ini4j.Wini;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ArtistService {
-    final static Logger logger = Logger.getLogger(ArtistService.class);
+    
 
     @Inject private IArtistLogic artistLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
 
+    final static Logger logger = Logger.getLogger(ArtistService.class);
     /**
      * @generated
      */
@@ -53,10 +55,13 @@ public class ArtistService {
     }
 
     /**
+     * Este metodo retorna una lista con todos los artistas de la aplicacion.
+     * @return artists es la lista de artistas retornado.
      * @generated
      */
     @GET
     public List<ArtistDTO> getArtists() {
+        List<ArtistDTO> artists = new ArrayList();
         if (page != null && maxRecords != null) {
             this.response.setIntHeader("X-Total-Count", artistLogic.countArtists());
         }
@@ -68,7 +73,7 @@ public class ArtistService {
             String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
             ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
             Client client = Clients.builder().setApiKey(apiKey).build();
-            List<ArtistDTO> artists = artistLogic.getArtists(page, maxRecords);
+            artists = artistLogic.getArtists(page, maxRecords);
             for(ArtistDTO artistDTO:artists){
                 try {
                    Account account = client.getResource(artistDTO.getUserId(), Account.class);
@@ -77,16 +82,18 @@ public class ArtistService {
                    artistDTO.setEmail(account.getEmail()); 
                 } catch (ResourceException e) {
                      logger.error("The account with userid: "+e.getMessage()+" does not exist.");
+                     logger.error(e);
                 }
 
 
             }
-            return artists;
+            
         } catch (IOException e) {
-              logger.error(e.getMessage());
-            return null;
+            logger.error(e.getMessage());
+            logger.error(e);
+            artists.clear();
         }
-        
+        return artists;
     }
 
     /**
@@ -96,6 +103,15 @@ public class ArtistService {
     @Path("{id: \\d+}")
     public ArtistDTO getArtist(@PathParam("id") Long id) {
         return artistLogic.getArtist(id);
+    }
+    
+    /**
+     * Retorna artistas por nombre.
+     */
+    @GET
+    @Path("/searchArtist/{searchName}")
+    public List<ArtistDTO> searchArtist(@PathParam("searchName") String name) {
+        return artistLogic.findByName(name);
     }
 
     /**
