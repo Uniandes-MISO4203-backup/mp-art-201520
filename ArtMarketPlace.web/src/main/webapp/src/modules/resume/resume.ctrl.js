@@ -98,7 +98,7 @@
                             rate: rating
                         };
                         svc.rateArtist(data);
-                        alert("Se realizado la calificacion.");
+                        swal("Sucess", "The artist was rated successfully", "success");
                         $('#ratingModal').modal('hide');
                     }
                 }];
