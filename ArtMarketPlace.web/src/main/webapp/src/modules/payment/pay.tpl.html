@@ -15,28 +15,120 @@
                                     </tr>    
                                     <tr>
                                         <th>Total</th><td><div>{{totalandtaxes| currency}}</div></td>
-                                    </tr>  
+                                    </tr>                                   
                                     <tr>
                                         <th>
-                                            Seleccione de tarjeta:</th><td><div>
+                                            Select payment method:</th><td><div>
                                                 <select ng-model="paymentMethod"  class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required>
-                                                    <option value="1">Debito visa</option>
-                                                    <option value="2">Debito Maestro</option>
-                                                    <option value="3">Cr&eacute;dito visa</option>
-                                                    <option value="4">Cr&eacute;dito Mastercard</option>
-                                                    <option value="5">Cr&eacute;dito Amex</option>
+                                                    <option value=''>Payment method...</option>
+                                                    <option value='1'>Credit Card</option>
+                                                    <option value='2'>PSE</option>
+                                                    <option value='3'>Pay Pal</option>
                                                 </select></div></td>
                                     </tr>
-                                    <tr>
+                                    <tr ng-if="paymentMethod!==''">
+                                        
+                                            <a ng-if="paymentMethod==='1'" ng-href="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png" alt="http://static1.squarespace.com/static/530e5705e4b0576b4fd5b6b1/t/53c44adde4b012c9ea0e0951/1394129659548/credit-cards.png"></a>
+                                            <a ng-if="paymentMethod==='2'" ng-href="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png" alt="http://www.bancofalabella.com.co/Data/Sites/1/icons/logoPSE.png"></a>
+                                            <a ng-if="paymentMethod==='3'" ng-href="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg" target="_blank"><img class="img-responsive" style="height: 6vw;" ng-src="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg" alt="http://www.suicomunicacion.com.mx/wp-content/uploads/2015/08/paginas-de-internet-con-paypal.jpg"></a>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='1'">
                                         <th>
                                             Card number:</th><td><div>
-                                                <input type="text" ng-model="cardNumber" ng-pattern="/^[0-9]*$/" name="cardNumber"
+                                                <input type="text" ng-model="$parent.cardNumber" ng-pattern="/^[0-9]*$/" name="cardNumber" 
                                                        class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched"
+                                                       ></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='1'">
+                                        <th>
+                                            CCV:</th><td><div>
+                                                <input type="text" ng-model="ccv" ng-pattern="/^[0-9]*$/" name="ccv" maxlength="4"
+                                                       class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
+                                                       ></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='1'">
+                                        <th>
+                                            Expiration month:</th><td><div>
+                                                <select ng-model="expMM"  class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required>
+                                                    <option value=''>Month...</option>
+                                                    <option value='01'>Janaury</option>
+                                                    <option value='02'>February</option>
+                                                    <option value='03'>March</option>
+                                                    <option value='04'>April</option>
+                                                    <option value='05'>May</option>
+                                                    <option value='06'>June</option>
+                                                    <option value='07'>July</option>
+                                                    <option value='08'>August</option>
+                                                    <option value='09'>September</option>
+                                                    <option value='10'>October</option>
+                                                    <option value='11'>November</option>
+                                                    <option value='12'>December</option>
+                                                </select></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='1'">
+                                        <th>
+                                            Expiration year:</th><td><div>
+                                                <select ng-model="expYY"  class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required>
+                                                    <option value=''>Year...</option>
+                                                    <option value='01'>2015</option>
+                                                    <option value='02'>2016</option>
+                                                    <option value='03'>2017</option>
+                                                    <option value='04'>2018</option>
+                                                    <option value='05'>2019</option>
+                                                    <option value='06'>2020</option>
+                                                    <option value='07'>2021</option>
+                                                    <option value='08'>2022</option>
+                                                </select></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='2'">
+                                        <th>
+                                            Bank:</th><td><div>
+                                                <select ng-model="bank"  class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required>
+                                                    <option value=''>Bank...</option>
+                                                    <option value='01'>AV Villas</option>                                                   
+                                                    <option value='01'>Bancolombia</option>
+                                                    <option value='02'>Banco de Bogota</option>
+                                                    <option value='06'>Banco Popular</option>
+                                                    <option value='05'>City Bank</option>
+                                                    <option value='05'>Davivienda</option>
+                                                    <option value='04'>Helm Bank</option>
+                                                </select></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='2'">
+                                        <th>
+                                            Card number:</th><td><div>
+                                                <input type="text" ng-model="$parent.cardNumber" ng-pattern="/^[0-9]*$/" name="cardNumberDebit"
+                                                       class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
+                                                       ></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='2'">
+                                        <th>
+                                            Password:</th><td><div>
+                                                <input type="password" ng-model="password" ng-pattern="/^[0-9]*$/" name="password"
+                                                       maxlength="4"
+                                                       class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
+                                                       ></div></td>
+                                    </tr>
+                                    
+                                    <tr ng-if="paymentMethod==='3'">
+                                        <th>
+                                            Account email:</th><td><div>
+                                                <input type="text" ng-model="$parent.cardNumber" name="accountLogin" maxlength="30"
+                                                       class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
+                                                       ></div></td>
+                                    </tr>
+                                    <tr ng-if="paymentMethod==='3'">
+                                        <th>
+                                            Password:</th><td><div>
+                                                <input type="password" ng-model="password" name="password"
+                                                       maxlength="12"
+                                                       class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" required
                                                        ></div></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <input class="btn btn-lg btn-success btn-block" ng-click="endPayment()" type="submit" value="Pay">
+                            <input ng-if="paymentMethod===''" class="btn btn-lg btn-success btn-block" ng-click="endPayment()" type="submit" value="Pay" disabled="true">
+                            <input ng-if="paymentMethod!==''" class="btn btn-lg btn-success btn-block" ng-click="endPayment()" type="submit" value="Pay">
                             <button class="btn btn-lg btn-default btn-block" ng-click="reset()">Reset</button>
                         </form>
                     </div>

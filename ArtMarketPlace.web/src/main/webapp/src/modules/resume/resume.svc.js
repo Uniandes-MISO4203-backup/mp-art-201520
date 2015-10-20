@@ -11,20 +11,14 @@
             };
             this.addExperience = function (data)
             {
-                return this.api.one("experience/").customPOST(data).then(function ()
-                {
-//                    console.log("El registro fue exitosamente guardada");
-                });
+                return this.api.one("experience/").customPOST(data);
             };
             this.getArtist = function ()
             {
                 return this.api.one("artist/").get();
             };
-            this.rateArtist = function (data) {
-                this.api.one(data['id'] + "/rate/" + data['rate']).customPOST().then(function ()
-                {
-//                    console.log("El rating fue exitosamente guardada");
-                });
+            this.rateArtist = function(data){
+                this.api.one(data['id']+"/rate/"+data['rate']).customPOST();
             };
         }]);
 })(window.angular);

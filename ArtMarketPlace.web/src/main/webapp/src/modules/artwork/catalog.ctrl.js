@@ -45,6 +45,7 @@
                     svc.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -52,6 +53,7 @@
                     svc.searchArtistWithCheapestArtwork(artworkName).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -59,6 +61,7 @@
                     svc.searchCheapestArtworkOfAnArtist(artistName).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -66,6 +69,7 @@
                     svc.searchArtworksByStyle(artworkStyle).then(function (results) {
                         $scope.artworks = [];
                         $scope.artworks = results;
+                        $scope.artists = [];
                     });
                 };
 
@@ -81,6 +85,7 @@
                     artistSvc.searchArtist(searchName).then(function (results) {
                         $scope.artists = [];
                         $scope.artists = results;
+                        $scope.artworks = [];
                     });
                 };
 
@@ -127,9 +132,9 @@
                                 artworkSvc.api.get(record.id).then(function (data) {
                                     $('#questionModal').modal('show');
                                     $('#userQuestion').html("<b>User</b>: " + authSvc.getCurrentUser().name + "<br>");
-                                    $('#artworkRef').html("<b>Reference</b>: <label id=artRef>" + data.id + "</label><br>");
+                                    $('#artworkRef').html('<input id="artRef" name="artRef" class="form-control" type="text" value="'+data.id+'" readonly/>');
                                     $('#artworkName').html("<b>Artwork's name</b>: " + data.name + "<br>");
-                                    $("#question").val("Escriba aqu� su pregunta");
+                                    $("#question").val("Write your answer here...");
                                 });
                             }
                             else
@@ -166,7 +171,6 @@
                             return true;
                         }
                     }
-
                 };
 
                 this.saveQuestion = [
@@ -178,7 +182,6 @@
                                 if ($("#question").val().length !== 0)
                                 {
                                     var artRef = $("#artRef").val();
-                                    console.log("Referencia de arte: " + artRef)
                                     artworkSvc.api.get(artRef).then(function (data) {
                                         var question = {
                                             client: authSvc.getCurrentUser(),
@@ -186,17 +189,16 @@
                                             artistEmail: data.artist.name,
                                             question: $("#question").val()
                                         };
-                                        console.log(question);
                                         svc.saveQuestion(question).then(function ()
                                         {
-                                            alert("La pregunta ha sido enviada satisfactoriamente");
+                                            swal("Sucess", "The question was sent successfully", "success");
                                             $('#questionModal').modal('hide');
                                         });
                                     });
                                 }
                                 else
                                 {
-                                    alert("Advertencia: Por favor, escriba su pregunta.");
+                                    sweetAlert("Warning", "Please. write a question for the artist", "warning");
                                 }
                             }
                             else
@@ -218,7 +220,7 @@
                         rate: rating
                     };
                     svc.rateArtwork(data);
-                    alert("Se realizado la calificacion.");
+                    swal("Sucess", "The artwork was rated successfully", "success");
                     $('#ratingModal').modal('hide');
                 }
                 }];

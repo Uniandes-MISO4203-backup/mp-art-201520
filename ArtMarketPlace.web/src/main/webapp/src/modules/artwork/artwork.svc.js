@@ -20,20 +20,13 @@
             };
             this.saveQuestion = function (data)
             {
-                return this.api.one("questions/").customPOST(data).then(function ()
-                {
-                    //console.log("La pregunta fue exitosamente guardada");
-                });
+                return this.api.one("questions/").customPOST(data);
             };
             this.postRemark = function (id, newRemark) {
                 return this.api.one("postRemark/" + id + "/" + newRemark).get();
             };
-
-            this.rateArtwork = function (data) {
-                this.api.one(data['id'] + "/rate/" + data['rate']).customPOST().then(function ()
-                {
-//                    console.log("El rating fue exitosamente guardada");
-                });
+            this.rateArtwork = function(data){
+                this.api.one(data['id']+"/rate/"+data['rate']).customPOST();
             };
         }]);
 })(window.angular);

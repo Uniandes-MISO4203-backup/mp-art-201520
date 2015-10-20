@@ -6,6 +6,7 @@
 	var tabSearchCheapestArtworkOfAnArtist = "tabSearchCheapestArtworkOfAnArtist";
 	var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
         var tabSearchArtworksByStyle = "tabSearchArtworksByStyle";
+        var tabSearchArtist = "tabSearchArtist";
 	
     function show(tab,content){
 		document.getElementById(disp).style.display = "none";
@@ -18,10 +19,11 @@
 <div style="padding-top: 70px;">
     
 	<ul class="nav nav-pills nav-justified" style="background: #3E3F3A;">
-            <li id="tabSearchArtworksBetweenPrices" style="border:1px solid black;" class="active" onclick="show('tabSearchArtworksBetweenPrices','searchArtworksBetweenPrices')"><a href="#/search"><strong>Search Artworks Between Prices</strong></a></li>
-            <li id="tabSearchCheapestArtworkOfAnArtist" style="border:1px solid black;" onclick="show('tabSearchCheapestArtworkOfAnArtist','searchCheapestArtworkOfAnArtist')" ><a href="#/search"><strong>Search The Cheapest Artwork of an Artist</strong></a></li>
-            <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;" onclick="show('tabSearchArtistWithCheapestArtwork','searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
-            <li id="tabSearchArtworksByStyle" style="border:1px solid black;" onclick="show('tabSearchArtworksByStyle','searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
+            <li id="tabSearchArtworksBetweenPrices" style="border:1px solid black;width: 15%;" class="active" onclick="show('tabSearchArtworksBetweenPrices','searchArtworksBetweenPrices')"><a href="#/search"><strong>Search Artworks Between Prices</strong></a></li>
+            <li id="tabSearchCheapestArtworkOfAnArtist" style="border:1px solid black;width: 20%;" onclick="show('tabSearchCheapestArtworkOfAnArtist','searchCheapestArtworkOfAnArtist')" ><a href="#/search"><strong>Search The Cheapest Artwork of an Artist</strong></a></li>
+            <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;width: 20%;" onclick="show('tabSearchArtistWithCheapestArtwork','searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
+            <li id="tabSearchArtworksByStyle" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByStyle','searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
+            <li id="tabSearchArtist" style="border:1px solid black; width: 10%;" onclick="show('tabSearchArtist','searchArtist')" ><a href="#/search"><strong>Search Artist</strong></a></li>
 	</ul>
 
 	<div id="searchArtworksBetweenPrices" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: block;">
@@ -43,6 +45,19 @@
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Style Here..." ng-model="artworkStyle" required>
         <button ng-click="searchArtworksByStyle(artworkStyle)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
+    <div id="searchArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="searchName" required>
+        <button ng-click="searchArtist(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
+    
+
+        <div style="color: black;">
+            <ol style="font-size: 18px">
+                <li ng-repeat="element in artists">
+                    <a href="#/resume/{{element.id}}" style="color: blue; font-size: 18px;">{{element.name}}</a>
+                </li>
+            </ol>
+        </div>
 
 
     <div class="col-sm-12">

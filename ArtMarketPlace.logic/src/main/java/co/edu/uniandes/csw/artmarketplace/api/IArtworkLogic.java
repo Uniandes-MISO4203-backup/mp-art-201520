@@ -3,7 +3,6 @@ package co.edu.uniandes.csw.artmarketplace.api;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkRatingEntity;
-import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import java.util.List;
 
 public interface IArtworkLogic {

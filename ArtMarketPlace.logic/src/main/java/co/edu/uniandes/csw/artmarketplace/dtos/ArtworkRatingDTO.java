@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
-import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**

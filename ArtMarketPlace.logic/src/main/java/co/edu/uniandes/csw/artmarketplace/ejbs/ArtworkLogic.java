@@ -178,23 +178,21 @@ public class ArtworkLogic implements IArtworkLogic {
     public Boolean rateArtwork(Long id, ClientDTO client, Float rating) {
         Boolean confirmation = false;
         ArtworkEntity artwork = persistence.find(id);
-        if (artwork != null) {
-            if (checkPreviewRatingByClient(client, artwork.getRatings())) {
-                if (artwork.getRatingVotes() != null && artwork.getRatingSum() != null) {
-                    artwork.setRatingSum(artwork.getRatingSum() + rating);
-                    artwork.setRatingVotes((float) 1 + artwork.getRatingVotes());
+        if (artwork != null && checkPreviewRatingByClient(client, artwork.getRatings())) {
+            if (artwork.getRatingVotes() != null && artwork.getRatingSum() != null) {
+                artwork.setRatingSum(artwork.getRatingSum() + rating);
+                artwork.setRatingVotes((float) 1 + artwork.getRatingVotes());
 
-                } else {
-                    artwork.setRatingSum(rating);
-                    artwork.setRatingVotes(1.0000f);
-                }
-                persistence.update(artwork);
-                ArtworkRatingDTO artworkRating = new ArtworkRatingDTO();
-                artworkRating.setArtwork(ArtworkConverter.refEntity2DTO(artwork));
-                artworkRating.setClient(client);
-                ratingPersistence.create(ArtworkRatingConverter.basicArtworkRatingDTO2Entity(artworkRating));
-                confirmation = true;
+            } else {
+                artwork.setRatingSum(rating);
+                artwork.setRatingVotes(1.0000f);
             }
+            persistence.update(artwork);
+            ArtworkRatingDTO artworkRating = new ArtworkRatingDTO();
+            artworkRating.setArtwork(ArtworkConverter.refEntity2DTO(artwork));
+            artworkRating.setClient(client);
+            ratingPersistence.create(ArtworkRatingConverter.basicArtworkRatingDTO2Entity(artworkRating));
+            confirmation = true;
         }
         return confirmation;
     }
@@ -211,10 +209,8 @@ public class ArtworkLogic implements IArtworkLogic {
     public Float getRatingArtwork(Long id) {
         ArtworkEntity artwork = persistence.find(id);
         Float rating = 0.0000f;
-        if (artwork.getRatingVotes() != null && artwork.getRatingSum() != null) {
-            if (artwork.getRatingVotes() > 0) {
-                rating = artwork.getRatingSum() / artwork.getRatingVotes();
-            }
+        if (artwork.getRatingVotes() != null && artwork.getRatingSum() != null && artwork.getRatingVotes() > 0) {
+            rating = artwork.getRatingSum() / artwork.getRatingVotes();
         }
         return rating;
     }
@@ -232,7 +228,7 @@ public class ArtworkLogic implements IArtworkLogic {
     @Override
     public Boolean checkPreviewRatingByClient(ClientDTO client, List<ArtworkRatingEntity> list) {
         Boolean result = true;
-        for (int i = 0; i < list.size() && result == true; i++) {
+        for (int i = 0; i < list.size() && result; i++) {
             ClientEntity c = list.get(i).getClient();
             if (c.getUserId().equals(client.getUserId())) {
                 result = false;

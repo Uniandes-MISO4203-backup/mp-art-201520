@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.PaymentEntity;
+import enums.PaymentTypeEnum;
 
 /**
  * @generated
@@ -30,8 +31,10 @@ public abstract class PaymentConverter {
             dto.setSubtotal(entity.getSubtotal());
             dto.setTaxes(entity.getTaxes());
             dto.setTotal(entity.getTotal());
-            dto.setCardNumber(dto.getCardNumber());
-
+            dto.setReference(dto.getReference());
+            dto.setPaymentType(dto.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
+                    : dto.getMethod().equals("2") ? PaymentTypeEnum.PSE
+                            : PaymentTypeEnum.PAYPAL);
             return dto;
         } else {
             return null;
@@ -65,9 +68,11 @@ public abstract class PaymentConverter {
             dto.setSubtotal(entity.getSubtotal());
             dto.setTaxes(entity.getTaxes());
             dto.setTotal(entity.getTotal());
-            dto.setCardNumber(entity.getCardNumber());
+            dto.setReference(entity.getReference());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
-
+            dto.setPaymentType(dto.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
+                    : dto.getMethod().equals("2") ? PaymentTypeEnum.PSE
+                            : PaymentTypeEnum.PAYPAL);
             return dto;
         } else {
             return null;
@@ -85,9 +90,11 @@ public abstract class PaymentConverter {
             entity.setSubtotal(dto.getSubtotal());
             entity.setTaxes(dto.getTaxes());
             entity.setTotal(dto.getTotal());
-            entity.setCardNumber(dto.getCardNumber());
+            entity.setReference(dto.getReference());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
-
+            entity.setPaymentType(entity.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
+                    : entity.getMethod().equals("2") ? PaymentTypeEnum.PSE
+                            : PaymentTypeEnum.PAYPAL);
             return entity;
         } else {
             return null;
