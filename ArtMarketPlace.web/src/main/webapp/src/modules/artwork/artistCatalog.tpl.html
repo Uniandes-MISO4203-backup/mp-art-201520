@@ -94,8 +94,15 @@
                 <div ng-repeat="record in artistArtworks">
                     <div class="col-sm-4 well text-center">
                         <div class="col-md-12">
-                            <div class="img-thumbnail" id="cover" ng-if="record.picture">
-                                <a ng-href="{{record.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.picture}}" alt="{{record.picture}}"></a>
+                            <div id="slider" style="width: 100%;">
+                                <a href="" class="control_next">></a>
+                                <a href="" class="control_prev"><</a>
+                                <ul>
+                                    <li ng-repeat="item in record.artworkGaleryItems">
+                                        <img ng-if="item.type === 'photo'"ng-src="{{item.link}}" alt="{{item.link}}" width="100%">
+                                        <iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="caption" >
