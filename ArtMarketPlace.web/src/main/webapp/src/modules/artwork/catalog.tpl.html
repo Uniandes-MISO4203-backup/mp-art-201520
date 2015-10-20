@@ -1,3 +1,6 @@
+<link rel="stylesheet" type = "text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" type = "text/css" href="https://dl.dropboxusercontent.com/u/181689/jhtmlarea/ratingStars.css">
+
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.detailsMode">
     <div class="col-sm-12">
@@ -87,8 +90,6 @@
 
 <!-- Rating -->
 <!-- Vista del modal-->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//raw.githubusercontent.com/MISO4203-201520/wiki-Paint/master/Documentos/Calidad%20de%20C%C3%B3digo/ratingStars.css">
 <div class="modal fade" id="ratingModal" role="dialog">
     <!-- Definicion del espacio del modal -->
     <div class="modal-dialog">
@@ -105,7 +106,7 @@
             <form id="ratingModal" ng-repeat="action in ctrl.saveRating" method="post" class="form-horizontal" ng-submit="action.fn()">
                 <!-- Forma del Formulario para el rating -->
                 <p>Ref. Artwork:</p>
-                <center>
+                <div align="center">
                     <div id="artworkRating"></div>
                     <div class="modal-body">
                         <div class="stars">
@@ -116,7 +117,7 @@
                             <input class="star star-1" id="star-1" type="radio" name="rating" value="1"/><label class="star star-1" for="star-1"></label>
                         </div>
                     </div>
-                </center>
+                </div>
                 <!-- Footer del formulario de envio del rating -->
                 <div class="modal-footer">
                     <!-- Boton de Close para cancelar el envio de la Rating -->
