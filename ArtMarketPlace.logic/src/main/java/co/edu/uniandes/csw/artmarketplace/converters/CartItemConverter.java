@@ -64,7 +64,7 @@ public abstract class CartItemConverter {
             dto.setName(entity.getName());
             dto.setState(entity.getState());
             dto.setQuantity(entity.getQuantity());
-            dto.setArtwork(ArtworkConverter.refEntity2DTO(entity.getArtwork()));
+            dto.setArtwork(ArtworkConverter.basicEntity2DTO(entity.getArtwork()));
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
 
             return dto;
@@ -85,7 +85,7 @@ public abstract class CartItemConverter {
             entity.setName(dto.getName());
             entity.setQuantity(dto.getQuantity());
             entity.setState(dto.getState());
-            entity.setArtwork(ArtworkConverter.refDTO2Entity(dto.getArtwork()));
+            entity.setArtwork(ArtworkConverter.basicDTO2Entity(dto.getArtwork()));
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
 
             return entity;

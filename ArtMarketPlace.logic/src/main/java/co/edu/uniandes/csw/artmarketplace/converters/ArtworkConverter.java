@@ -50,7 +50,7 @@ public abstract class ArtworkConverter {
     /**
      * @generated
      */
-    private static ArtworkDTO basicEntity2DTO(ArtworkEntity entity) {
+    public static ArtworkDTO basicEntity2DTO(ArtworkEntity entity) {
         if (entity != null) {
             ArtworkDTO dto = new ArtworkDTO();
             dto.setId(entity.getId());
@@ -70,7 +70,7 @@ public abstract class ArtworkConverter {
     /**
      * @generated
      */
-    private static ArtworkEntity basicDTO2Entity(ArtworkDTO dto) {
+    public static ArtworkEntity basicDTO2Entity(ArtworkDTO dto) {
         if (dto != null) {
             ArtworkEntity entity = new ArtworkEntity();
             entity.setId(dto.getId());
