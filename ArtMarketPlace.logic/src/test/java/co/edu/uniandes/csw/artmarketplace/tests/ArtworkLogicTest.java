@@ -104,7 +104,6 @@ public class ArtworkLogicTest {
         for (int i = 0; i < 3; i++) {
             ArtworkEntity entity = new ArtworkEntity();
         	entity.setName(generateRandom(String.class));
-        	entity.setPicture(generateRandom(String.class));
         	entity.setPrice(generateRandom(Integer.class));
             em.persist(entity);
             data.add(entity);
@@ -124,7 +123,6 @@ public class ArtworkLogicTest {
         
         ArtworkEntity entityOne = new ArtworkEntity();
         entityOne.setName("Pintura1");
-        entityOne.setPicture("Pintura1");
         entityOne.setPrice(10000);
         entityOne.setArtworkStyle("Realismo");
         entityOne.setArtist(artistEntityOne);
@@ -133,7 +131,6 @@ public class ArtworkLogicTest {
         
         ArtworkEntity entityTwo = new ArtworkEntity();
         entityTwo.setName("Pintura2");
-        entityTwo.setPicture("Pintura2");
         entityTwo.setPrice(20000);
         entityTwo.setArtworkStyle("Impresionismo");
         entityTwo.setArtist(artistEntityOne);
@@ -142,7 +139,6 @@ public class ArtworkLogicTest {
         
         ArtworkEntity entityThree = new ArtworkEntity();
         entityThree.setName("Pintura3");
-        entityThree.setPicture("Pintura3");
         entityThree.setPrice(30000);
         entityThree.setArtworkStyle("Realismo");
         entityThree.setArtist(artistEntityTwo);
@@ -151,7 +147,6 @@ public class ArtworkLogicTest {
         
         ArtworkEntity entityFour = new ArtworkEntity();
         entityFour.setName("Pintura3");
-        entityFour.setPicture("Pintura3");
         entityFour.setPrice(40000);
         entityFour.setArtworkStyle("Impresionismo");
         entityFour.setArtist(artistEntityOne);
@@ -166,7 +161,6 @@ public class ArtworkLogicTest {
     public void createArtworkTest() {
         ArtworkDTO dto = new ArtworkDTO();
         dto.setName(generateRandom(String.class));
-        dto.setPicture(generateRandom(String.class));
         dto.setPrice(generateRandom(Integer.class));
 
         ArtworkDTO result = artworkLogic.createArtwork(dto);
@@ -176,7 +170,6 @@ public class ArtworkLogicTest {
         ArtworkEntity entity = em.find(ArtworkEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getPicture(), entity.getPicture());
         Assert.assertEquals(dto.getPrice(), entity.getPrice());
     }
 
@@ -207,7 +200,6 @@ public class ArtworkLogicTest {
         ArtworkDTO dto = artworkLogic.getArtwork(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
-        Assert.assertEquals(entity.getPicture(), dto.getPicture());
         Assert.assertEquals(entity.getPrice(), dto.getPrice());
     }
 
@@ -233,7 +225,6 @@ public class ArtworkLogicTest {
 
         dto.setId(entity.getId());
         dto.setName(generateRandom(String.class));
-        dto.setPicture(generateRandom(String.class));
         dto.setPrice(generateRandom(Integer.class));
 
         artworkLogic.updateArtwork(dto);
@@ -241,7 +232,6 @@ public class ArtworkLogicTest {
         ArtworkEntity resp = em.find(ArtworkEntity.class, entity.getId());
 
         Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getPicture(), resp.getPicture());
         Assert.assertEquals(dto.getPrice(), resp.getPrice());
     }
 

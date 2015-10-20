@@ -42,12 +42,14 @@ import org.ini4j.Wini;
 
 /**
  * Servicio de la hoja de vida de un artista
+ *
  * @author vp.salcedo93
  */
 @Path("/resume")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ResumeService {
+
     private static final Logger LOGGER = Logger.getLogger(ResumeService.class);
     /**
      * Expone los servicios del Backup del artista
@@ -55,23 +57,27 @@ public class ResumeService {
     @Inject
     private IResumeLogic resumeLogic;
     /**
-     * Expone los servicios del backup de experiencia 
+     * Expone los servicios del backup de experiencia
      */
     @Inject
     private IExperienceLogic experienceLogic;
-    
+
     //Para el servicio de Blog...
-    @Inject private IBlogLogic BlogLogic;
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
-    
+    @Inject
+    private IBlogLogic BlogLogic;
+    @QueryParam("page")
+    private Integer page;
+    @QueryParam("maxRecords")
+    private Integer maxRecords;
+
     /**
      * Artista logeado
      */
     private final ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
-    
+
     /**
      * Metodo encargado de crear la hoja de vida para el artista.
+     *
      * @param dto. Objeto de la hoja de vida.
      * @return ResumeDTO. Objeto creado desde el backend.
      */
@@ -84,10 +90,10 @@ public class ResumeService {
         }
         return null;
     }
-    
-    
+
     /**
      * Metodo encargado de actualizar una hoja de vida.
+     *
      * @param id. Identificador de la hoja de vida.
      * @param dto. Objeto de la hoja de vida.
      * @return ResumeDTO. Objeto actualizado desde el backend.
@@ -95,52 +101,51 @@ public class ResumeService {
     @PUT
     @Path("{id: \\d+}")
     public ResumeDTO updateResume(@PathParam("id") Long id, ResumeDTO dto) {
-        if (artist != null)
-        {
+        if (artist != null) {
             dto.setArtist(artist);
             dto.setId(id);
             return resumeLogic.updateResume(dto);
-        }else
+        } else {
             return null;
+        }
     }
-    
+
     @GET
     public List<ResumeDTO> getResumes() {
         return new ArrayList<>();
     }
-    
-        
-    
+
     @GET
     @Path("{id: \\d+}")
-    public ResumeDTO getResume(@PathParam("id") Long id){
+    public ResumeDTO getResume(@PathParam("id") Long id) {
         ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(id);
         try {
-            URL url = ArtistService.class.getResource("ArtistService.class");
-            String className = url.getFile();
-            String filePath = className.substring(0,className.indexOf("WEB-INF") + "WEB-INF".length());
-            Wini ini = new Wini(new File(filePath+"/shiro.ini"));
-            String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
-            ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
-            Client client = Clients.builder().setApiKey(apiKey).build();
-            try {
-                   Account account = client.getResource(resumeDTO.getArtist().getUserId(), Account.class);
-                   resumeDTO.getArtist().setFirstName(account.getGivenName());
-                   resumeDTO.getArtist().setLastname(account.getSurname());
-                   resumeDTO.getArtist().setEmail(account.getEmail()); 
+            if (resumeDTO != null) {
+                URL url = ArtistService.class.getResource("ArtistService.class");
+                String className = url.getFile();
+                String filePath = className.substring(0, className.indexOf("WEB-INF") + "WEB-INF".length());
+                Wini ini = new Wini(new File(filePath + "/shiro.ini"));
+                String path = ini.get("main", "stormpathClient.apiKeyFileLocation");
+                ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+                Client client = Clients.builder().setApiKey(apiKey).build();
+                try {
+                    Account account = client.getResource(resumeDTO.getArtist().getUserId(), Account.class);
+                    resumeDTO.getArtist().setFirstName(account.getGivenName());
+                    resumeDTO.getArtist().setLastname(account.getSurname());
+                    resumeDTO.getArtist().setEmail(account.getEmail());
                 } catch (ResourceException e) {
-                    LOGGER.error( "The account with userid: "+resumeDTO.getArtist().getUserId()+" does not exist.");
-                    
+                    LOGGER.error("The account with userid: " + resumeDTO.getArtist().getUserId() + " does not exist.");
                 }
-            return resumeDTO;
+            }
         } catch (IOException e) {
-         LOGGER.error( e.getMessage());
+            LOGGER.error(e.getMessage());
         }
-       return resumeDTO; 
+        return resumeDTO;
     }
-    
+
     /**
      * Metodo encargado de crear una nueva experiencia
+     *
      * @param dto. Nuevo registro de experiencia o educacion.
      * @return Registro guardado o null en caso de un error.
      */
@@ -149,50 +154,53 @@ public class ResumeService {
     public ExperienceDTO createExperience(ExperienceDTO dto) {
         ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
         if (artist != null && resumeDTO != null) {
-            return experienceLogic.createResume(dto,artist);
-        }else if(artist != null && resumeDTO == null){
+            return experienceLogic.createResume(dto, artist);
+        } else if (artist != null && resumeDTO == null) {
             resumeDTO = new ResumeDTO();
             resumeDTO.setArtist(artist);
             resumeDTO = resumeLogic.createResume(resumeDTO);
-            if(resumeDTO != null){
+            if (resumeDTO != null) {
                 dto.setResume(resumeDTO);
-                return experienceLogic.createResume(dto,artist);
-            }else{
+                return experienceLogic.createResume(dto, artist);
+            } else {
                 return null;
             }
-            
-        }else
+
+        } else {
             return null;
+        }
 
     }
-    
+
     /**
-     * Metodo que retorna el identificador del artista solo si tiene una hoja de vida creada
+     * Metodo que retorna el identificador del artista solo si tiene una hoja de
+     * vida creada
+     *
      * @pre Debe existir el artista.
      * @return Long. Identificador del artista.
      */
     @GET
     @Path("/artist")
     public ResumeDTO getArtistResume() {
-        
+
         if (artist != null) {
             ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
-            if(resumeDTO != null)
+            if (resumeDTO != null) {
                 return resumeDTO;
+            }
         }
         return null;
     }
-    
+
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")
-    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
+    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate) {
         resumeLogic.rateArtist(id, rate);
     }
-    
-    
+
     /**
-     * Servicio para crear una entrada en el blog del artista...
-     * Creado por jh.rubiano10
+     * Servicio para crear una entrada en el blog del artista... Creado por
+     * jh.rubiano10
      */
     @POST
     @Path("/newentry/")
@@ -201,25 +209,23 @@ public class ResumeService {
         dto.setDate(new Date());
         return BlogLogic.createEntry(dto);
     }
-    
+
     /*
-    Traer todas las entradas de un Blog...
-    */
-    @Path("/allentrys")    
+     Traer todas las entradas de un Blog...
+     */
+    @Path("/allentrys")
     @GET
-    public List<BlogDTO> getEntrys(BlogDTO user)
-    {
+    public List<BlogDTO> getEntrys(BlogDTO user) {
         List<BlogDTO> listEntrys;
         /*if (page != null && maxRecords != null)
-        {
-            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
-        }*/
+         {
+         this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+         }*/
         listEntrys = BlogLogic.getEntrys(page, maxRecords);
-        
+
         return listEntrys;
     }
-   
-    
+
     @Path("/entryartist/{id: \\d+}")
     @GET
     public List<BlogDTO> getEntryArtist(@PathParam("id") Long idArtist) {
@@ -227,12 +233,11 @@ public class ResumeService {
         listEntrys = BlogLogic.getEntryArtist(idArtist);
         return listEntrys;
     }
-    
-    
+
     @Path("/getentry/{id: \\d+}")
     @GET
     public BlogDTO getEntry(@PathParam("id") Long id) {
         return BlogLogic.getEntry(id);
     }
-    
+
 }

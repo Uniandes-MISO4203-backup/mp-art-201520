@@ -146,7 +146,6 @@ public class ArtworkRatingLogicTest {
 
         artwork = new ArtworkEntity();
         artwork.setName(generateRandom(String.class));
-        artwork.setPicture(generateRandom(String.class));
         artwork.setPrice(generateRandom(Integer.class));
         artwork = ArtworkConverter.fullDTO2Entity(artworkLogic.createArtwork(ArtworkConverter.fullEntity2DTO(artwork)));
     }

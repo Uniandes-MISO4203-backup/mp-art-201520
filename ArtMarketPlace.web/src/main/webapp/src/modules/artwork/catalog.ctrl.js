@@ -11,7 +11,7 @@
                 this.readOnly = true;
                 this.detailsMode = false;
                 $scope.artistName = $routeParams.artistId;
-                if ($scope.artistName !== null) {
+                if ($scope.artistName) {
                     resumeSvc.getResume($scope.artistName).then(function (result) {
                         $scope.artistResume = [];
                         $scope.artistResume = result;
@@ -185,7 +185,7 @@
                                             artwork: data,
                                             artistEmail: data.artist.name,
                                             question: $("#question").val()
-                                        }
+                                        };
                                         console.log(question);
                                         svc.saveQuestion(question).then(function ()
                                         {

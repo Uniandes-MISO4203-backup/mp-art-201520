@@ -6,44 +6,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @generated
  */
-@XmlRootElement 
+@XmlRootElement
 public class ArtworkDTO {
 
     private Long id;
     private String name;
-    private String picture;
+    private List<ArtworkGaleryItemDTO> artworkGaleryItems;
     private Integer price;
     private ArtistDTO artist;
-    
+
     /**
      * Comentarios de la obra de arte.
      */
     private List<RemarkDTO> remarks;
-    
+
     /**
-     * 
+     *
      */
     private List<ArtworkRatingDTO> ratings;
     /**
-     * ratingSum es la variable utilizada para acumular las calificaciones recibidas por los clientes hacia la obra de arte, para finales del calculo del promedio.
+     * ratingSum es la variable utilizada para acumular las calificaciones
+     * recibidas por los clientes hacia la obra de arte, para finales del
+     * calculo del promedio.
      */
     private Float ratingSum;
-    
+
     /**
-     * ratingVotes es la variable utilizada para totalizar la cantidad de votos recibidos por parte de los clientes hacia la obra de arte, para finles del calculo de su promedio.
+     * ratingVotes es la variable utilizada para totalizar la cantidad de votos
+     * recibidos por parte de los clientes hacia la obra de arte, para finles
+     * del calculo de su promedio.
      */
     private Float ratingVotes;
-    
+
     /**
      * Descuento de una obra
      */
     private Float discount;
-    
+
     /**
      * Artwork style
      */
     private String artworkStyle;
-    
+
     /**
      * @generated
      */
@@ -72,20 +76,14 @@ public class ArtworkDTO {
         this.name = name;
     }
 
-    /**
-     * @generated
-     */
-    public String getPicture() {
-        return picture;
+    public List<ArtworkGaleryItemDTO> getArtworkGaleryItems() {
+        return artworkGaleryItems;
     }
 
-    /**
-     * @generated
-     */
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setArtworkGaleryItems(List<ArtworkGaleryItemDTO> artworkGaleryItems) {
+        this.artworkGaleryItems = artworkGaleryItems;
     }
-
+    
     /**
      * @generated
      */
@@ -113,38 +111,37 @@ public class ArtworkDTO {
     public void setArtist(ArtistDTO artist) {
         this.artist = artist;
     }
-    
+
     /**
      * Metodo para obtener el descuento de una obra de arte
      */
-    public Float getDiscount()
-    {
+    public Float getDiscount() {
         return discount;
     }
+
     /**
      * Metodo para actualizar el descuento de una obra de arte
-     * 
+     *
      */
-    public void setDiscount(Float discount)
-    {
+    public void setDiscount(Float discount) {
         this.discount = discount;
     }
-    
+
     /**
      * Retorna los comentarios de la obra de arte.
-     * @return 
+     *
+     * @return
      */
-    public List<RemarkDTO> getRemarks()
-    {
+    public List<RemarkDTO> getRemarks() {
         return remarks;
     }
 
     /**
      * Establece los comentarios de la obra de arte.
-     * @param remarks 
+     *
+     * @param remarks
      */
-    public void setRemarks(List<RemarkDTO> remarks)
-    {
+    public void setRemarks(List<RemarkDTO> remarks) {
         this.remarks = remarks;
     }
 
@@ -157,48 +154,65 @@ public class ArtworkDTO {
     }
 
     /**
-     * Es un metodo de acceso que retorna un lista con la calificaciones de obra de arte.
-     * @return una lista de objectos ArtworkRatingDTO con la informacion de todas las calificaciones.
+     * Es un metodo de acceso que retorna un lista con la calificaciones de obra
+     * de arte.
+     *
+     * @return una lista de objectos ArtworkRatingDTO con la informacion de
+     * todas las calificaciones.
      */
     public List<ArtworkRatingDTO> getRatings() {
         return ratings;
     }
 
     /**
-     * Es un meotodo de acceso que modifica la lista de calificaciones de la obra de arte.
-     * @param ratings es la nueva referencia de lista para las calificaciones de la obra de arte.
+     * Es un meotodo de acceso que modifica la lista de calificaciones de la
+     * obra de arte.
+     *
+     * @param ratings es la nueva referencia de lista para las calificaciones de
+     * la obra de arte.
      */
     public void setRatings(List<ArtworkRatingDTO> ratings) {
         this.ratings = ratings;
     }
-    
-     /**
-     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingSum de la obra de arte.
-     * @return ratingSum es la sumatoria de calificaciones recibidas por la obra de arte.
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual
+     * del ratingSum de la obra de arte.
+     *
+     * @return ratingSum es la sumatoria de calificaciones recibidas por la obra
+     * de arte.
      */
     public Float getRatingSum() {
         return ratingSum;
     }
 
     /**
-     * Es un metodo de acceso que tiene como finalidad modificar el valor actual del ratingSum de la obra de arte. 
-     * @param ratingSum 
+     * Es un metodo de acceso que tiene como finalidad modificar el valor actual
+     * del ratingSum de la obra de arte.
+     *
+     * @param ratingSum
      */
     public void setRatingSum(Float ratingSum) {
         this.ratingSum = ratingSum;
     }
 
     /**
-     * Es un metodo de acceso que tiene como finalidad retornar el valor actual del ratingVotes de la obra de arte.
-     * @return ratingVotes es la cantidad de votos de calificaci?n recibidas por la obra de arte.
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual
+     * del ratingVotes de la obra de arte.
+     *
+     * @return ratingVotes es la cantidad de votos de calificaci?n recibidas por
+     * la obra de arte.
      */
     public Float getRatingVotes() {
         return ratingVotes;
     }
 
     /**
-     * Es un metodo de acceso que tienen como finalidad modificar el valor actual del ratingVotes de la obra de arte.
-     * @param ratingVotes es el nuevo valor del total de votos de calificacion recibidas por la obra de arte.
+     * Es un metodo de acceso que tienen como finalidad modificar el valor
+     * actual del ratingVotes de la obra de arte.
+     *
+     * @param ratingVotes es el nuevo valor del total de votos de calificacion
+     * recibidas por la obra de arte.
      */
     public void setRatingVotes(Float ratingVotes) {
         this.ratingVotes = ratingVotes;

@@ -96,7 +96,6 @@ public class ArtworkPersistenceTest {
         for (int i = 0; i < 3; i++) {
             ArtworkEntity entity = new ArtworkEntity();
             entity.setName(generateRandom(String.class));
-            entity.setPicture(generateRandom(String.class));
             entity.setPrice(generateRandom(Integer.class));
             em.persist(entity);
             data.add(entity);
@@ -116,7 +115,6 @@ public class ArtworkPersistenceTest {
         
         ArtworkEntity entityOne = new ArtworkEntity();
         entityOne.setName("Pintura1");
-        entityOne.setPicture("Pintura1");
         entityOne.setPrice(10000);
         entityOne.setArtworkStyle("Realismo");
         entityOne.setArtist(artistEntityOne);
@@ -125,7 +123,6 @@ public class ArtworkPersistenceTest {
         
         ArtworkEntity entityTwo = new ArtworkEntity();
         entityTwo.setName("Pintura2");
-        entityTwo.setPicture("Pintura2");
         entityTwo.setPrice(20000);
         entityTwo.setArtworkStyle("Impresionismo");
         entityTwo.setArtist(artistEntityOne);
@@ -134,7 +131,6 @@ public class ArtworkPersistenceTest {
         
         ArtworkEntity entityThree = new ArtworkEntity();
         entityThree.setName("Pintura3");
-        entityThree.setPicture("Pintura3");
         entityThree.setPrice(30000);
         entityThree.setArtworkStyle("Realismo");
         entityThree.setArtist(artistEntityTwo);
@@ -143,7 +139,6 @@ public class ArtworkPersistenceTest {
         
         ArtworkEntity entityFour = new ArtworkEntity();
         entityFour.setName("Pintura3");
-        entityFour.setPicture("Pintura3");
         entityFour.setPrice(40000);
         entityFour.setArtworkStyle("Impresionismo");
         entityFour.setArtist(artistEntityOne);
@@ -158,7 +153,6 @@ public class ArtworkPersistenceTest {
     public void createArtworkTest() {
         ArtworkEntity newEntity = new ArtworkEntity();
         newEntity.setName(generateRandom(String.class));
-        newEntity.setPicture(generateRandom(String.class));
         newEntity.setPrice(generateRandom(Integer.class));
 
         ArtworkEntity result = artworkPersistence.create(newEntity);
@@ -168,7 +162,6 @@ public class ArtworkPersistenceTest {
         ArtworkEntity entity = em.find(ArtworkEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getPicture(), entity.getPicture());
         Assert.assertEquals(newEntity.getPrice(), entity.getPrice());
     }
 
@@ -199,7 +192,6 @@ public class ArtworkPersistenceTest {
         ArtworkEntity newEntity = artworkPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getPicture(), newEntity.getPicture());
         Assert.assertEquals(entity.getPrice(), newEntity.getPrice());
     }
 
@@ -225,7 +217,6 @@ public class ArtworkPersistenceTest {
 
         newEntity.setId(entity.getId());
         newEntity.setName(generateRandom(String.class));
-        newEntity.setPicture(generateRandom(String.class));
         newEntity.setPrice(generateRandom(Integer.class));
 
         artworkPersistence.update(newEntity);
@@ -233,7 +224,6 @@ public class ArtworkPersistenceTest {
         ArtworkEntity resp = em.find(ArtworkEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getPicture(), resp.getPicture());
         Assert.assertEquals(newEntity.getPrice(), resp.getPrice());
     }
 

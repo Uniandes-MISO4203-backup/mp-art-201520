@@ -1,10 +1,8 @@
 package co.edu.uniandes.csw.artmarketplace.ejbs;
 
 import co.edu.uniandes.csw.artmarketplace.api.IArtworkLogic;
-import co.edu.uniandes.csw.artmarketplace.converters.ArtistConverter;
 import co.edu.uniandes.csw.artmarketplace.converters.ArtworkConverter;
 import co.edu.uniandes.csw.artmarketplace.converters.ArtworkRatingConverter;
-import co.edu.uniandes.csw.artmarketplace.converters.ClientConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkRatingDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;

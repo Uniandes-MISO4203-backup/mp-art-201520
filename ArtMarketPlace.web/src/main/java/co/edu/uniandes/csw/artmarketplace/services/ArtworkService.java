@@ -65,6 +65,7 @@ public class ArtworkService {
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
     @javax.ws.rs.core.Context
     private ServletContext context;
+
     /**
      * @generated
      */
@@ -107,58 +108,65 @@ public class ArtworkService {
 
     /**
      * Search artworks between prices
+     *
      * @param artworkMinPrice
      * @param artworkMaxPrice
-     * @return 
+     * @return
      */
     @GET
     @Path("/artworksBetweenPrices/{artworkMinPrice}/{artworkMaxPrice}")
-    public List<ArtworkDTO> searchArtworksBetweenPrices(@PathParam("artworkMinPrice") int artworkMinPrice,@PathParam("artworkMaxPrice") int artworkMaxPrice) {
-        return artworkLogic.searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice);
+    public List<ArtworkDTO> searchArtworksBetweenPrices(@PathParam("artworkMinPrice") int artworkMinPrice, @PathParam("artworkMaxPrice") int artworkMaxPrice) {
+        return artworkLogic.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice);
     }
+
     /**
      * Search artist with cheapest artwork
+     *
      * @param artworkName
-     * @return 
+     * @return
      */
     @GET
     @Path("/artistWithCheapestArtwork/{artworkName}")
     public List<ArtworkDTO> searchArtistWithCheapestArtwork(@PathParam("artworkName") String artworkName) {
         return artworkLogic.searchArtistWithCheapestArtwork(artworkName);
     }
+
     /**
      * Search cheapest artwork of an artist
+     *
      * @param artistName
-     * @return 
+     * @return
      */
     @GET
     @Path("/cheapestArtworkOfAnArtist/{artistName}")
     public List<ArtworkDTO> searchCheapestArtworkOfAnArtist(@PathParam("artistName") String artistName) {
         return artworkLogic.searchCheapestArtworkOfAnArtist(artistName);
     }
-    
+
     /**
      * Search artworks of an artist
+     *
      * @param artistId
-     * @return 
+     * @return
      */
     @GET
     @Path("/searchArtworksOfAnArtist/{artistId}")
     public List<ArtworkDTO> searchArtworksOfAnArtist(@PathParam("artistId") String artistId) {
         return artworkLogic.searchArtworksOfAnArtist(artistId);
     }
-    
+
     /**
      * Search artworks by style
+     *
      * @param artworkStyle
-     * @return 
+     * @return
      */
     @GET
     @Path("/searchArtworksByStyle/{artworkStyle}")
     public List<ArtworkDTO> searchArtworksByStyle(@PathParam("artworkStyle") String artworkStyle) {
         return artworkLogic.searchArtworksByStyle(artworkStyle);
     }
-    
+
     /**
      * @generated
      */
@@ -183,7 +191,7 @@ public class ArtworkService {
     public QuestionDTO createQuestion(QuestionDTO dto) {
         dto.setDate(new Date());
         try {
-            ClientDTO myClient = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+            ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
             String path = context.getInitParameter("emailConfig");
             InputStream data = context.getResourceAsStream(path);
             Properties props = new Properties();
@@ -194,45 +202,42 @@ public class ArtworkService {
             dto.setClient(myClient);
             questionLogic.createQuestion(dto);
             dto.setClient(myClient);
-            questionLogic.sendEmail(dto,props);
-            
+            questionLogic.sendEmail(dto, props);
+
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Archivo properties no encontrado");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, "Archivo properties no encontrado");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Error con el archivo porperties.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, "Error con el archivo porperties.");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex) {
-            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE,null,"Error: el archivo porperties no ha sido encontrado porque no existe.");
+            Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, "Error: el archivo porperties no ha sido encontrado porque no existe.");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dto;
     }
-    
+
     /**
      * Adiciona un comentario a una obra de arte.
+     *
      * @param id
      * @param newRemark
-     * @return 
+     * @return
      */
     @GET
     @Path("/postRemark/{id}/{newRemark}")
     public ArtworkDTO postRemark(@PathParam("id") Long id, @PathParam("newRemark") String newRemark) {
-                
-        if(client != null || artist != null)
-        {
+
+        if (client != null || artist != null) {
             ArtworkDTO dto = artworkLogic.getArtwork(id);
             RemarkDTO remark = new RemarkDTO();
             remark.setArtwork(dto);
             remark.setDescription(newRemark);
             remark.setRemarkDate(new GregorianCalendar());
-            if(client != null)
-            {
+            if (client != null) {
                 remark.setRemarkUser(client.getName());
                 remark.setUserType("Cliente");
-            }
-            else if(artist != null)
-            {
+            } else if (artist != null) {
                 remark.setRemarkUser(artist.getName());
                 remark.setUserType("Artista");
             }
@@ -240,17 +245,15 @@ public class ArtworkService {
             remark.setArtwork(dto);
             dto.getRemarks().add(remark);
             return artworkLogic.updateArtwork(dto);
-        }
-        else
-        {
+        } else {
             return artworkLogic.getArtwork(id);
         }
     }
-    
+
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")
-    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate){
-        ClientDTO myClient = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
-        artworkLogic.rateArtwork(id,myClient,rate);
+    public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate) {
+        ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+        artworkLogic.rateArtwork(id, myClient, rate);
     }
 }

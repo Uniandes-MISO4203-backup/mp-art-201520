@@ -219,7 +219,6 @@ public class ArtworkRatingPersistenceTest {
         clientPersistence.create(client);
         artwork = new ArtworkEntity();
         artwork.setName(generateRandom(String.class));
-        artwork.setPicture(generateRandom(String.class));
         artwork.setPrice(generateRandom(Integer.class));
         artworkPersistence.create(artwork);
         data  = new ArrayList<ArtworkRatingEntity>();

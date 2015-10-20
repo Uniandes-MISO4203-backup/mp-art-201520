@@ -26,13 +26,6 @@ public abstract class ArtworkConverter {
         if (entity != null) {
             ArtworkDTO dto = new ArtworkDTO();
             dto.setId(entity.getId());
-            dto.setName(entity.getName());
-            dto.setPicture(entity.getPicture());
-            dto.setPrice(entity.getPrice());
-            dto.setDiscount(entity.getDiscount());
-            dto.setArtworkStyle(entity.getArtworkStyle());
-            dto.setRatingSum(entity.getRatingSum());
-            dto.setRatingVotes(entity.getRatingVotes());
             return dto;
         } else {
             return null;
@@ -62,7 +55,6 @@ public abstract class ArtworkConverter {
             ArtworkDTO dto = new ArtworkDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setPicture(entity.getPicture());
             dto.setPrice(entity.getPrice());
             dto.setArtist(ArtistConverter.refEntity2DTO(entity.getArtist()));
             dto.setDiscount(entity.getDiscount());
@@ -83,7 +75,6 @@ public abstract class ArtworkConverter {
             ArtworkEntity entity = new ArtworkEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            entity.setPicture(dto.getPicture());
             entity.setPrice(dto.getPrice());
             entity.setArtist(ArtistConverter.refDTO2Entity(dto.getArtist()));
             entity.setDiscount(dto.getDiscount());
@@ -102,6 +93,7 @@ public abstract class ArtworkConverter {
     public static ArtworkDTO fullEntity2DTO(ArtworkEntity entity) {
         if (entity != null) {
             ArtworkDTO dto = basicEntity2DTO(entity);
+            dto.setArtworkGaleryItems(ArtworkGaleryItemConverter.listEntity2DTO(entity.getArtworkGaleryItems()));
             dto.setRemarks(RemarkConverter.listEntity2DTO(entity.getRemarks()));
             dto.setRatings(ArtworkRatingConverter.listArtworkRatingEntity2DTO(entity.getRatings()));
             return dto;
@@ -116,6 +108,7 @@ public abstract class ArtworkConverter {
     public static ArtworkEntity fullDTO2Entity(ArtworkDTO dto) {
         if (dto != null) {
             ArtworkEntity entity = basicDTO2Entity(dto);
+            entity.setArtworkGaleryItems(ArtworkGaleryItemConverter.childListDTO2Entity(dto.getArtworkGaleryItems(), entity));
             entity.setRemarks(RemarkConverter.childListDTO2Entity(dto.getRemarks(), entity));
             entity.setRatings(ArtworkRatingConverter.listArtworkRatingDTO2Entity(dto.getRatings()));
             return entity;
@@ -132,7 +125,7 @@ public abstract class ArtworkConverter {
         List<ArtworkDTO> dtos = new ArrayList<ArtworkDTO>();
         if (entities != null) {
             for (ArtworkEntity entity : entities) {
-                dtos.add(basicEntity2DTO(entity));
+                dtos.add(fullEntity2DTO(entity));
             }
         }
         return dtos;
@@ -145,7 +138,7 @@ public abstract class ArtworkConverter {
         List<ArtworkEntity> entities = new ArrayList<ArtworkEntity>();
         if (dtos != null) {
             for (ArtworkDTO dto : dtos) {
-                entities.add(basicDTO2Entity(dto));
+                entities.add(fullDTO2Entity(dto));
             }
         }
         return entities;

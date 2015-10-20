@@ -42,7 +42,8 @@ public class ArtworkEntity implements Serializable {
 
     private String name;
 
-    private String picture;
+    @OneToMany(mappedBy = "artwork", cascade = CascadeType.ALL, orphanRemoval = true)
+    private  List<ArtworkGaleryItemEntity> artworkGaleryItems;
 
     private Integer price;
     /**
@@ -108,19 +109,14 @@ public class ArtworkEntity implements Serializable {
         this.name = name;
     }
 
-    /**
-     * @generated
-     */
-    public String getPicture(){
-        return picture;
+    public List<ArtworkGaleryItemEntity> getArtworkGaleryItems() {
+        return artworkGaleryItems;
     }
 
-    /**
-     * @generated
-     */
-    public void setPicture(String picture){
-        this.picture = picture;
+    public void setArtworkGaleryItems(List<ArtworkGaleryItemEntity> artworkGaleryItems) {
+        this.artworkGaleryItems = artworkGaleryItems;
     }
+
 
     /**
      * @generated

@@ -1,13 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);	
 
-#slider {
+#slider, #slider2 {
   position: relative;
   overflow: hidden;
   margin: 20px auto 0 auto;
   border-radius: 4px;
 }
 
-#slider ul {
+#slider ul, #slider2 ul {
   position: relative;
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@
   list-style: none;
 }
 
-#slider ul li {
+#slider ul li, #slider2 ul li {
   position: relative;
   display: block;
   float: left;
@@ -26,7 +26,8 @@
   line-height: 200px;
 }
 
-a.control_prev, a.control_next {
+a.control_prev, a.control_next,
+a.control_prev2, a.control_next2{
   position: absolute;
   top: 40%;
   z-index: 999;
@@ -43,16 +44,17 @@ a.control_prev, a.control_next {
   cursor: pointer;
 }
 
-a.control_prev:hover, a.control_next:hover {
+a.control_prev:hover, a.control_next:hover,
+a.control_prev2:hover, a.control_next2:hover{
   opacity: 1;
   -webkit-transition: all 0.2s ease;
 }
 
-a.control_prev {
+a.control_prev, a.control_prev2 {
   border-radius: 0 2px 2px 0;
 }
 
-a.control_next {
+a.control_next, a.control_next2 {
   right: 0;
   border-radius: 2px 0 0 2px;
 }

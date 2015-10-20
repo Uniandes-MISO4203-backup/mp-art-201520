@@ -69,13 +69,13 @@
         <div class="panel-body" style="text-align: center;">
             <img src="{{artistResume.photo}}" alt="Artist picture" width="100%" />
             <h1>{{artistResume.lastName}}</h1>
-            <a href="#/resume/{{artistName}}" class="btn btn-success">Personal information</a>
+            <a href="#/resume/{{artistName}}" class="btn btn-success">Personal Information</a>
             <div id="slider" style="width: 100%;">
-                <a href="" class="control_next">>></a>
-                <a href="" class="control_prev"><<</a>
+                <a href="" class="control_next">></a>
+                <a href="" class="control_prev"><</a>
                 <ul>
                     <li ng-repeat="record in artistArtworks">
-                        <img src="{{record.picture}}" alt="{{record.picture}}" width="100%">
+                        <img src="{{record.artworkGaleryItems[0]}}" alt="{{record.artworkGaleryItems[0]}}" width="100%">
                     </li>
                 </ul>  
             </div>

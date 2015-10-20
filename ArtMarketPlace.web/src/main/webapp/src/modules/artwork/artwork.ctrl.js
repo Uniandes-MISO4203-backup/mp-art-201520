@@ -6,4 +6,9 @@
             this.asGallery = true;
             this.fetchRecords();
         }]);
+    
+    mod.controller('artworkGaleryItemsCtrl', ['CrudCreator', '$scope', 'artworkGaleryItemModel', function (CrudCreator, $scope, model) {
+            CrudCreator.extendCompChildCtrl(this, $scope, model, 'artworkGaleryItems', 'artwork');
+            this.loadRefOptions();
+        }]);
 })(window.angular);

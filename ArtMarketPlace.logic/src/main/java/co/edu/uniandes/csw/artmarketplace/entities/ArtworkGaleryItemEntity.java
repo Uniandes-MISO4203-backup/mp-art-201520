@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 
 /**
@@ -24,6 +25,9 @@ public class ArtworkGaleryItemEntity implements Serializable {
     private String type;
 
     private String link;
+    
+    @ManyToOne
+    private ArtworkEntity artwork;
 
     public Long getId() {
         return id;
@@ -47,5 +51,13 @@ public class ArtworkGaleryItemEntity implements Serializable {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public ArtworkEntity getArtwork() {
+        return artwork;
+    }
+
+    public void setArtwork(ArtworkEntity artwork) {
+        this.artwork = artwork;
     }
 }

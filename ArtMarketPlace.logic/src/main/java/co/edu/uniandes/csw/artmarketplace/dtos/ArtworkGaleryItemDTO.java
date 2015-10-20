@@ -11,6 +11,7 @@ public class ArtworkGaleryItemDTO {
     private Long id;
     private String type;
     private String link;
+    private ArtworkDTO artwork;
 
     public Long getId() {
         return id;
@@ -34,5 +35,13 @@ public class ArtworkGaleryItemDTO {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public ArtworkDTO getArtwork() {
+        return artwork;
+    }
+
+    public void setArtwork(ArtworkDTO artwork) {
+        this.artwork = artwork;
     }
 }

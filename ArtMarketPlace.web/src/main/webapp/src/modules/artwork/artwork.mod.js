@@ -10,11 +10,6 @@
                 type: 'String',
                 required: true
             }, {
-                name: 'picture',
-                displayName: 'Picture',
-                type: 'Image',
-                required: true
-            }, {
                 name: 'price',
                 displayName: 'Price',
                 type: 'Currency',
@@ -24,29 +19,35 @@
                 displayName: 'Artist',
                 type: 'Reference',
                 required: true
-            },{
+            }, {
                 name: 'discount',
                 displayName: 'Special Discount',
                 type: 'Integer',
                 required: false
-            },{
+            }, {
                 name: 'artworkStyle',
                 displayName: 'Artwork Style',
                 type: 'String',
                 required: true
             }
-            ,{
+            , {
                 name: 'ratingSum',
                 displayName: 'ratingSum',
                 type: 'Number',
                 required: false
             }
-            ,{
+            , {
                 name: 'ratingVotes',
                 displayName: 'ratingVotes',
                 type: 'Number',
                 required: false
             }
-        ]
+        ],
+        childs: [{
+                name: 'artworkGaleryItems',
+                displayName: 'Artwork Galery',
+                type: 'Child',
+                ctrl: 'artworkGaleryItemsCtrl'
+            }]
     });
 })(window.angular);
