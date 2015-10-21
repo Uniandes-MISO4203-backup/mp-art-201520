@@ -9,30 +9,28 @@ import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
- * Convierte los objetos de DTO a Entidades y viceversa.
- * Hoja de vida
+ * Convierte los objetos de DTO a Entidades y viceversa. Hoja de vida
+ *
  * @author vp.salcedo93
  */
 public abstract class ResumeConverter {
-    
-    private static final Logger LOGGER = Logger.getLogger(ResumeConverter.class);
-    
+
     /**
      * Metodo constructor del conversor entre entidad y DTO de la hoja de vida.
      */
-    private ResumeConverter() { 
+    private ResumeConverter() {
     }
-    
+
     /**
      * Convierte entidad a Dto de la hoja de vida.
+     *
      * @param entity. Entidad de la hoja de vida a convertir.
      * @return Objeto DTO de la hoja de vida.
      */
     public static ResumeDTO refEntity2DTO(ResumeEntity entity) {
-        if(entity != null) {
+        if (entity != null) {
             ResumeDTO dto = new ResumeDTO();
             dto.setId(entity.getId());
             dto.setCity(entity.getCity());
@@ -42,15 +40,15 @@ public abstract class ResumeConverter {
             dto.setPhoto(entity.getPhoto());
             dto.setRatingSum(entity.getRatingSum());
             dto.setRatingVotes(entity.getRatingVotes());
-
             return dto;
         } else {
-            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
+
     /**
      * Convierte DTO a Entidad de la hoja de vida.
+     *
      * @param dto. Objeto DTO de la hoja de vida.
      * @return Entidad de la hoja de vida.
      */
@@ -58,21 +56,20 @@ public abstract class ResumeConverter {
         if (dto != null) {
             ResumeEntity entity = new ResumeEntity();
             entity.setId(dto.getId());
-            
             return entity;
-        }else {
-            LOGGER.error("DTO de Hoja de vida vacia");
+        } else {
             return null;
         }
     }
-    
+
     /**
      * Conversor basico entidad a Dto de la hoja de vida.
+     *
      * @param entity. Entidad de la hoja de vida a convertir.
      * @return Objeto DTO de la hoja de vida.
      */
     public static ResumeDTO basicEntity2DTO(ResumeEntity entity) {
-        if(entity != null) {
+        if (entity != null) {
             ResumeDTO dto = new ResumeDTO();
             dto.setId(entity.getId());
             dto.setCity(entity.getCity());
@@ -82,15 +79,15 @@ public abstract class ResumeConverter {
             dto.setPhoto(entity.getPhoto());
             dto.setRatingSum(entity.getRatingSum());
             dto.setRatingVotes(entity.getRatingVotes());
-            
             return dto;
         } else {
-            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
+
     /**
      * Conversor basico DTO a Entidad de la hoja de vida.
+     *
      * @param dto. Objeto DTO de la hoja de vida.
      * @return Entidad de la hoja de vida.
      */
@@ -105,49 +102,49 @@ public abstract class ResumeConverter {
             entity.setPhoto(dto.getPhoto());
             entity.setRatingSum(dto.getRatingSum());
             entity.setRatingVotes(dto.getRatingVotes());
-            
             return entity;
-        }else {
-            LOGGER.error("DTO de Hoja de vida vacia");
+        } else {
             return null;
         }
     }
+
     /**
      * Conversor full entidad a Dto de la hoja de vida.
+     *
      * @param entity. Entidad de la hoja de vida a convertir.
      * @return Objeto DTO de la hoja de vida.
      */
     public static ResumeDTO fullEntity2DTO(ResumeEntity entity) {
-        if(entity != null) {
+        if (entity != null) {
             ResumeDTO dto = basicEntity2DTO(entity);
             dto.setArtist(ArtistConverter.refEntity2DTO(entity.getArtist()));
             dto.setExperience(ExperienceConverter.listEntity2DTO(entity.getExperience()));
             return dto;
         } else {
-            LOGGER.error("Entidad de Hoja de vida vacia");
             return null;
         }
     }
-    
+
     /**
      * Conversor full DTO a Entidad de la hoja de vida.
+     *
      * @param dto. Objeto DTO de la hoja de vida.
      * @return Entidad de la hoja de vida.
      */
-    public static ResumeEntity fullDTO2Entity (ResumeDTO dto) {
+    public static ResumeEntity fullDTO2Entity(ResumeDTO dto) {
         if (dto != null) {
             ResumeEntity entity = basicDTO2Entity(dto);
             entity.setArtist(ArtistConverter.refDTO2Entity(dto.getArtist()));
             entity.setExperience(ExperienceConverter.childListDTO2Entity(dto.getExperience(), entity));
             return entity;
         } else {
-            LOGGER.error("DTO de Hoja de vida vacia");
             return null;
         }
     }
-    
+
     /**
      * Convierte una lista de DTOs de hojas de vida a una lista con entidades.
+     *
      * @param dtos. Lista de objetos DTOs de hojas de vida.
      * @return Lista de entidades de hojas de vida.
      */
@@ -160,20 +157,20 @@ public abstract class ResumeConverter {
         }
         return entities;
     }
-    
+
     /**
      * Convierte una lista de Entidadess de hojas de vida a una lista con DTOs.
+     *
      * @param entities. Lista de entidades de hojas de vida.
      * @return Lista de objetos DTOs de hojas de vida.
      */
-    public static List<ResumeDTO> listEntity2DTO (List<ResumeEntity> entities) {
-        List <ResumeDTO> dtos = new ArrayList<ResumeDTO>();
+    public static List<ResumeDTO> listEntity2DTO(List<ResumeEntity> entities) {
+        List<ResumeDTO> dtos = new ArrayList<ResumeDTO>();
         if (entities != null) {
-            for (ResumeEntity entity: entities) {
+            for (ResumeEntity entity : entities) {
                 dtos.add(basicEntity2DTO(entity));
             }
         }
         return dtos;
-    }        
-        
+    }
 }

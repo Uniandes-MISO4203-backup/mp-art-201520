@@ -32,8 +32,8 @@ public abstract class PaymentConverter {
             dto.setTaxes(entity.getTaxes());
             dto.setTotal(entity.getTotal());
             dto.setReference(dto.getReference());
-            dto.setPaymentType(dto.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
-                    : dto.getMethod().equals("2") ? PaymentTypeEnum.PSE
+            dto.setPaymentType("1".equals(dto.getMethod()) ? PaymentTypeEnum.CREDIT_CARD
+                    : "2".equals(dto.getMethod()) ? PaymentTypeEnum.PSE
                             : PaymentTypeEnum.PAYPAL);
             return dto;
         } else {
@@ -50,7 +50,6 @@ public abstract class PaymentConverter {
         if (dto != null) {
             PaymentEntity entity = new PaymentEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -70,8 +69,8 @@ public abstract class PaymentConverter {
             dto.setTotal(entity.getTotal());
             dto.setReference(entity.getReference());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
-            dto.setPaymentType(dto.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
-                    : dto.getMethod().equals("2") ? PaymentTypeEnum.PSE
+            dto.setPaymentType("1".equals(dto.getMethod()) ? PaymentTypeEnum.CREDIT_CARD
+                    : "2".equals(dto.getMethod()) ? PaymentTypeEnum.PSE
                             : PaymentTypeEnum.PAYPAL);
             return dto;
         } else {
@@ -92,8 +91,8 @@ public abstract class PaymentConverter {
             entity.setTotal(dto.getTotal());
             entity.setReference(dto.getReference());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
-            entity.setPaymentType(entity.getMethod().equals("1") ? PaymentTypeEnum.CREDIT_CARD
-                    : entity.getMethod().equals("2") ? PaymentTypeEnum.PSE
+            entity.setPaymentType("1".equals(entity.getMethod()) ? PaymentTypeEnum.CREDIT_CARD
+                    : "2".equals(entity.getMethod()) ? PaymentTypeEnum.PSE
                             : PaymentTypeEnum.PAYPAL);
             return entity;
         } else {
@@ -126,7 +125,6 @@ public abstract class PaymentConverter {
     /**
      * @generated
      */
-
     public static List<PaymentDTO> listEntity2DTO(List<PaymentEntity> entities) {
         List<PaymentDTO> dtos = new ArrayList<PaymentDTO>();
         if (entities != null) {
@@ -153,7 +151,7 @@ public abstract class PaymentConverter {
     /**
      * @generated
      */
-    public static PaymentEntity childDTO2Entity(PaymentDTO dto, ClientEntity parent){
+    public static PaymentEntity childDTO2Entity(PaymentDTO dto, ClientEntity parent) {
         PaymentEntity entity = basicDTO2Entity(dto);
         entity.setClient(parent);
         return entity;

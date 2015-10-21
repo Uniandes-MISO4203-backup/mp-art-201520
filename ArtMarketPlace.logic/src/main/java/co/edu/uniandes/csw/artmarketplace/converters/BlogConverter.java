@@ -15,31 +15,31 @@ import java.util.List;
  * @author jh.rubiano10
  */
 public class BlogConverter {
-    
-    private BlogConverter(){
+
+    private BlogConverter() {
     }
-    
+
     /**
-     * Método encarga ddoe hacer la conversion de un objeto del tipo
-     * Entity a un objeto DTO del tipo BlogEntity.
+     * Método encarga ddoe hacer la conversion de un objeto del tipo Entity a un
+     * objeto DTO del tipo BlogEntity.
+     *
      * @param entity
      * @return un objeto del tipo DTO de BlogEntity
      */
-    
     public static BlogDTO refEntity2DTO(BlogEntity entity) {
         if (entity != null) {
             BlogDTO dto = new BlogDTO();
             dto.setId(entity.getId());
             dto.setEntry(entity.getEntry());
             dto.setTitle(entity.getTitle());
-            dto.setDate(entity.getDate());          
+            dto.setDate(entity.getDate());
             dto.setClient_id(entity.getClient_id());
             return dto;
         } else {
             return null;
         }
     }
-    
+
     /**
      * @param dto
      * @return
@@ -49,13 +49,12 @@ public class BlogConverter {
         if (dto != null) {
             BlogEntity entity = new BlogEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
         }
     }
-    
+
     /**
      * @generated
      */
@@ -72,8 +71,8 @@ public class BlogConverter {
             return null;
         }
     }
-    
-     /**
+
+    /**
      * @generated
      */
     private static BlogEntity basicDTO2Entity(BlogDTO dto) {
@@ -89,38 +88,36 @@ public class BlogConverter {
             return null;
         }
     }
-    
+
     /**
      * @param entity
-     * @return 
+     * @return
      * @generated
      */
     public static BlogDTO fullEntity2DTO(BlogEntity entity) {
         if (entity != null) {
-            BlogDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
     }
-    
+
     /**
      * @param dto
-     * @return 
+     * @return
      * @generated
      */
     public static BlogEntity fullDTO2Entity(BlogDTO dto) {
         if (dto != null) {
-            BlogEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
     }
-    
+
     /**
      * @param entities
-     * @return 
+     * @return
      */
     public static List<BlogDTO> listEntity2DTO(List<BlogEntity> entities) {
         List<BlogDTO> dtos = new ArrayList<BlogDTO>();
@@ -131,10 +128,10 @@ public class BlogConverter {
         }
         return dtos;
     }
-    
+
     /**
      * @param dtos
-     * @return 
+     * @return
      */
     public static List<BlogEntity> listDTO2Entity(List<BlogDTO> dtos) {
         List<BlogEntity> entities = new ArrayList<BlogEntity>();
