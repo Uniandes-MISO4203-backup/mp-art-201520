@@ -12,6 +12,6 @@ import javax.ejb.Stateless;
  * Maneja la persistencia de los comentarios.
  */
 @Stateless
-public class RemarkPersistence extends CrudPersistence<RemarkEntity>{
-    
+public class RemarkPersistence extends CrudPersistence<RemarkEntity> {
+
 }

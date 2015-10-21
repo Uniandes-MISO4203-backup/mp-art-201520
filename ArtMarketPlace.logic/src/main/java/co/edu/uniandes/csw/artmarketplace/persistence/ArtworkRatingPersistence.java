@@ -13,17 +13,14 @@ import javax.ejb.Stateless;
  * @author lf.mendivelso10
  */
 @Stateless
-public class ArtworkRatingPersistence extends CrudPersistence<ArtworkRatingEntity>{
-    
+public class ArtworkRatingPersistence extends CrudPersistence<ArtworkRatingEntity> {
+
     /**
-     * El metodo constructor de ArtworkRatingPersistence no contiene parametro, y en
-     * su ejecucion, hace la asignacion del tipo de EntityClass requerida para
-     * la uso del CrudPersistence.
+     * El metodo constructor de ArtworkRatingPersistence no contiene parametro,
+     * y en su ejecucion, hace la asignacion del tipo de EntityClass requerida
+     * para la uso del CrudPersistence.
      */
     public ArtworkRatingPersistence() {
         this.entityClass = ArtworkRatingEntity.class;
     }
-    
-    
-    
 }

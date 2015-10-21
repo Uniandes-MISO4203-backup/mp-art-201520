@@ -5,15 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import org.apache.log4j.Logger;
 
 /**
  * @generated
  */
 @Stateless
 public class ClientPersistence extends CrudPersistence<ClientEntity> {
-
-    private static final Logger LOGGER = Logger.getLogger(ClientPersistence.class);
 
     /**
      * @generated
@@ -28,8 +25,7 @@ public class ClientPersistence extends CrudPersistence<ClientEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Client.getByUserId", params);
         } catch (NoResultException e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

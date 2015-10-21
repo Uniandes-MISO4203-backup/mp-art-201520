@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 /**
  * @generated
  */
@@ -27,7 +28,7 @@ public abstract class CrudPersistence<T> {
     /**
      * @generated
      */
-    public T create(T entity){
+    public T create(T entity) {
         em.persist(entity);
         return entity;
     }
@@ -35,7 +36,7 @@ public abstract class CrudPersistence<T> {
     /**
      * @generated
      */
-    public T update(T entity){
+    public T update(T entity) {
         return em.merge(entity);
     }
 
@@ -50,7 +51,7 @@ public abstract class CrudPersistence<T> {
     /**
      * @generated
      */
-    public T find(Long id){
+    public T find(Long id) {
         return em.find(entityClass, id);
     }
 
@@ -69,14 +70,14 @@ public abstract class CrudPersistence<T> {
     /**
      * @generated
      */
-    public<V> List<V> executeListNamedQuery(String name){
+    public <V> List<V> executeListNamedQuery(String name) {
         return em.createNamedQuery(name).getResultList();
     }
 
     /**
      * @generated
      */
-    public<V> List<V> executeListNamedQuery(String name, Map<String,Object> params){
+    public <V> List<V> executeListNamedQuery(String name, Map<String, Object> params) {
         Query q = em.createNamedQuery(name);
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             q.setParameter(entry.getKey(), entry.getValue());
@@ -87,27 +88,27 @@ public abstract class CrudPersistence<T> {
     /**
      * @generated
      */
-    public<V> V executeSingleNamedQuery(String name){
-        return (V)em.createNamedQuery(name).getSingleResult();
+    public <V> V executeSingleNamedQuery(String name) {
+        return (V) em.createNamedQuery(name).getSingleResult();
     }
 
     /**
      * @generated
      */
-    public<V> V executeSingleNamedQuery(String name, Map<String,Object> params){
+    public <V> V executeSingleNamedQuery(String name, Map<String, Object> params) {
         Query q = em.createNamedQuery(name);
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             q.setParameter(entry.getKey(), entry.getValue());
         }
-        return (V)q.getSingleResult();
+        return (V) q.getSingleResult();
     }
 
     /**
      * @generated
      */
-    public List<T> findByName(String name){
+    public List<T> findByName(String name) {
         Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.name like :name");
-        q.setParameter("name", "%"+name+"%");
+        q.setParameter("name", "%" + name + "%");
         return q.getResultList();
     }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import org.apache.log4j.Logger;
 
 /**
  * La clase Resume hace referencia a la hoja de vida que tiene un artista. En
@@ -16,8 +15,6 @@ import org.apache.log4j.Logger;
  */
 @Stateless
 public class ResumePersistence extends CrudPersistence<ResumeEntity> {
-
-    private static final Logger LOGGER = Logger.getLogger(ResumePersistence.class);
 
     /**
      * Metodo constructor de la clase ResumePersistence. Permite asignar al
@@ -44,8 +41,7 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
                 return resumes.get(0);
             }
         } catch (NoResultException e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

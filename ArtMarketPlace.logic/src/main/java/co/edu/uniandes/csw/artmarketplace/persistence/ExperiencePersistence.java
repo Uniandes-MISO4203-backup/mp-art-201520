@@ -13,7 +13,6 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.apache.log4j.Logger;
 
 /**
  * Clase ExperiencePersistence hace referencia al manejo de un registro de
@@ -23,8 +22,6 @@ import org.apache.log4j.Logger;
  */
 @Stateless
 public class ExperiencePersistence extends CrudPersistence<ExperienceEntity> {
-    
-    private static final Logger LOGGER = Logger.getLogger(ExperiencePersistence.class);
 
     /**
      * Metodo constructor del objeto de persistencia del registro. Hace uso del
@@ -49,8 +46,7 @@ public class ExperiencePersistence extends CrudPersistence<ExperienceEntity> {
             q.setParameter("resume_id", resume);
             return q.getResultList();
         } catch (Exception e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
@@ -71,9 +67,7 @@ public class ExperiencePersistence extends CrudPersistence<ExperienceEntity> {
                 return resumes.get(0);
             }
         } catch (NoResultException e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
-
 }

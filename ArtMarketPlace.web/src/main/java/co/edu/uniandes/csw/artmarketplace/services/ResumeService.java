@@ -36,7 +36,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.ini4j.Wini;
 
@@ -50,12 +49,12 @@ import org.ini4j.Wini;
 @Produces(MediaType.APPLICATION_JSON)
 public class ResumeService {
 
-    private static final Logger LOGGER = Logger.getLogger(ResumeService.class);
     /**
      * Expone los servicios del Backup del artista
      */
     @Inject
     private IResumeLogic resumeLogic;
+
     /**
      * Expone los servicios del backup de experiencia
      */
@@ -64,7 +63,8 @@ public class ResumeService {
 
     //Para el servicio de Blog...
     @Inject
-    private IBlogLogic BlogLogic;
+    private IBlogLogic blogLogic;
+
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
@@ -134,11 +134,11 @@ public class ResumeService {
                     resumeDTO.getArtist().setLastname(account.getSurname());
                     resumeDTO.getArtist().setEmail(account.getEmail());
                 } catch (ResourceException e) {
-                    LOGGER.error("The account with userid: " + resumeDTO.getArtist().getUserId() + " does not exist.");
+                    throw new RuntimeException(e);
                 }
             }
         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+            throw new RuntimeException(e);
         }
         return resumeDTO;
     }
@@ -165,11 +165,9 @@ public class ResumeService {
             } else {
                 return null;
             }
-
         } else {
             return null;
         }
-
     }
 
     /**
@@ -182,7 +180,6 @@ public class ResumeService {
     @GET
     @Path("/artist")
     public ResumeDTO getArtistResume() {
-
         if (artist != null) {
             ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
             if (resumeDTO != null) {
@@ -207,7 +204,7 @@ public class ResumeService {
     @StatusCreated
     public BlogDTO createEntry(BlogDTO dto) {
         dto.setDate(new Date());
-        return BlogLogic.createEntry(dto);
+        return blogLogic.createEntry(dto);
     }
 
     /*
@@ -215,13 +212,12 @@ public class ResumeService {
      */
     @Path("/allentrys")
     @GET
-    public List<BlogDTO> getEntrys(BlogDTO user) {
+    public List<BlogDTO> getEntrys() {
         List<BlogDTO> listEntrys;
-        /*if (page != null && maxRecords != null)
-         {
-         this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
-         }*/
-        listEntrys = BlogLogic.getEntrys(page, maxRecords);
+//        if (page != null && maxRecords != null) {
+//            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+//        }
+        listEntrys = blogLogic.getEntrys(page, maxRecords);
 
         return listEntrys;
     }
@@ -230,14 +226,13 @@ public class ResumeService {
     @GET
     public List<BlogDTO> getEntryArtist(@PathParam("id") Long idArtist) {
         List<BlogDTO> listEntrys;
-        listEntrys = BlogLogic.getEntryArtist(idArtist);
+        listEntrys = blogLogic.getEntryArtist(idArtist);
         return listEntrys;
     }
 
     @Path("/getentry/{id: \\d+}")
     @GET
     public BlogDTO getEntry(@PathParam("id") Long id) {
-        return BlogLogic.getEntry(id);
+        return blogLogic.getEntry(id);
     }
-
 }

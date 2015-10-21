@@ -14,15 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import org.apache.log4j.Logger;
 
 /**
  * @generated
  */
 @Stateless
 public class AdminPersistence extends CrudPersistence<AdminEntity> {
-    
-    private static final Logger LOGGER = Logger.getLogger(AdminPersistence.class);
 
     /**
      * @generated
@@ -37,8 +34,7 @@ public class AdminPersistence extends CrudPersistence<AdminEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Admin.getByUserId", params);
         } catch (NoResultException e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

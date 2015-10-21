@@ -1,13 +1,11 @@
 package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.QuestionEntity;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
-import org.apache.log4j.Logger;
 
 /**
  * La clase QuestionPersistence esta disennada para gestionar la creacion,
@@ -19,8 +17,6 @@ import org.apache.log4j.Logger;
 @Stateless
 public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
     
-    private static final Logger LOGGER = Logger.getLogger(QuestionPersistence.class);
-
     /**
      * El metodo constructor de QuestionPersistence no contiene parametro, y en
      * su ejecucion, hace la asignacion del tipo de EntityClass requerida para
@@ -38,9 +34,7 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
             q.setParameter("artwork_id", artist);
             return q.getResultList();
         } catch (Exception e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
-
 }

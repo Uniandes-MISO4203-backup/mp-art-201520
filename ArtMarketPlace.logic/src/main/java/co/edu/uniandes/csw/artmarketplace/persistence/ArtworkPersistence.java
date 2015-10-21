@@ -19,8 +19,10 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
     public ArtworkPersistence() {
         this.entityClass = ArtworkEntity.class;
     }
+
     /**
      * Search artist with cheapest artwork
+     *
      * @param artworkName
      * @return
      */
@@ -31,17 +33,18 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkName", artworkName);
             List<ArtworkEntity> list = new ArrayList<ArtworkEntity>();
             list = executeListNamedQuery("ArtworkEntity.searchArtistWithCheapestArtwork", params);
-            if(list != null && !list.isEmpty()){
+            if (list != null && !list.isEmpty()) {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         return result;
     }
 
     /**
      * Search cheapest artwork of an artist
+     *
      * @param artistName
      * @return
      */
@@ -52,7 +55,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artistName", artistName);
             List<ArtworkEntity> list = new ArrayList<ArtworkEntity>();
             list = executeListNamedQuery("ArtworkEntity.searchCheapestArtworkOfAnArtist", params);
-            if(list != null && !list.isEmpty()){
+            if (list != null && !list.isEmpty()) {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
@@ -61,8 +64,9 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         return result;
     }
 
-   /**
+    /**
      * Search cheapest artwork of an artist
+     *
      * @param name
      * @return
      */
@@ -73,13 +77,14 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         return result;
     }
 
     /**
      * Search atrworks between prices
+     *
      * @param artworkMinPrice
      * @param artworkMaxPrice
      * @return
@@ -96,10 +101,12 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
+
     /**
      * Search artwork by style
+     *
      * @param artworkStyle
-     * @return 
+     * @return
      */
     public List<ArtworkEntity> searchArtworksByStyle(String artworkStyle) {
         List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();

@@ -10,15 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.NoResultException;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author jh.rubiano10
  */
 public class BlogPersistence extends CrudPersistence<BlogEntity> {
-    
-    private static final Logger LOGGER = Logger.getLogger(BlogPersistence.class);
 
     public BlogPersistence() {
         this.entityClass = BlogEntity.class;
@@ -36,8 +33,7 @@ public class BlogPersistence extends CrudPersistence<BlogEntity> {
             params.put("idArtist", idArtist);
             return executeListNamedQuery("Blog.getEntryArtist", params);
         } catch (NoResultException e) {
-            LOGGER.info(e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }
