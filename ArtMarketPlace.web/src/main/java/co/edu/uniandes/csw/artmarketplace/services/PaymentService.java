@@ -30,14 +30,17 @@ public class PaymentService {
 
     @Inject
     private IPaymentLogic paymentLogic;
+    
     @Context
     private HttpServletResponse response;
+    
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
     @QueryParam("q")
     private String paymentName;
+    
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
 
     /**
@@ -75,7 +78,7 @@ public class PaymentService {
     public PaymentDTO getPayment(@PathParam("id") Long id) {
         return paymentLogic.getPayment(id);
     }
-    
+
     /**
      * @generated
      */

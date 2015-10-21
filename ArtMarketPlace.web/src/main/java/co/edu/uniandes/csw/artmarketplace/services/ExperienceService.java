@@ -19,35 +19,37 @@ import org.apache.shiro.SecurityUtils;
 
 /**
  * Servicio de los regisdtro de experiencia de una hoja de vida
+ *
  * @author vp.salcedo93
  */
 @Path("/experience")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ExperienceService {
+
     /**
-     * Expone los servicios del backup de experiencia 
+     * Expone los servicios del backup de experiencia
      */
     @Inject
     private IExperienceLogic experienceLogic;
-    
+
     /**
      * Artista logeado
      */
     private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
-    
+
     /**
      * Metodo encargado de crear una nueva experiencia
+     *
      * @param dto
-     * @return 
+     * @return
      */
     @POST
     @StatusCreated
     public ExperienceDTO createExperience(ExperienceDTO dto) {
         if (artist != null) {
-            return experienceLogic.createResume(dto,artist);
+            return experienceLogic.createResume(dto, artist);
         }
         return null;
-
     }
 }

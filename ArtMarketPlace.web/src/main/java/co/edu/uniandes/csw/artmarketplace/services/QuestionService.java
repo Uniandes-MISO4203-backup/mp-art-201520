@@ -32,6 +32,7 @@ public class QuestionService {
 
     @Inject
     private IQuestionLogic questionLogic;
+    
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")

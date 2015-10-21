@@ -53,18 +53,27 @@ public class ArtworkService {
     private IQuestionLogic questionLogic;
     @Inject
     private IRemarkLogic remarkLogic;
+
     @Context
     private HttpServletResponse response;
+    @javax.ws.rs.core.Context
+    private ServletContext context;
+
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
     @QueryParam("q")
     private String artworkName;
+
+    /**
+     * Constante de Client pues se utiliza en múltiples llamados (baja la deuda
+     * técnica)
+     */
+    private final static String CLIENT = "Client";
+
     private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
-    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
-    @javax.ws.rs.core.Context
-    private ServletContext context;
+    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute(CLIENT);
 
     /**
      * @generated
@@ -191,7 +200,7 @@ public class ArtworkService {
     public QuestionDTO createQuestion(QuestionDTO dto) {
         dto.setDate(new Date());
         try {
-            ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+            ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute(CLIENT);
             String path = context.getInitParameter("emailConfig");
             InputStream data = context.getResourceAsStream(path);
             Properties props = new Properties();
@@ -203,7 +212,6 @@ public class ArtworkService {
             questionLogic.createQuestion(dto);
             dto.setClient(myClient);
             questionLogic.sendEmail(dto, props);
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, "Archivo properties no encontrado");
             Logger.getLogger(ArtworkService.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,7 +261,7 @@ public class ArtworkService {
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")
     public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate) {
-        ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+        ClientDTO myClient = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute(CLIENT);
         artworkLogic.rateArtwork(id, myClient, rate);
     }
 }

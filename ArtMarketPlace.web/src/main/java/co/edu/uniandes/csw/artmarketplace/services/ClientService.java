@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -27,7 +29,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.apache.log4j.Logger;
 import org.ini4j.Wini;
 
 /**
@@ -40,13 +41,14 @@ public class ClientService {
 
     @Inject
     private IClientLogic clientLogic;
+
     @Context
     private HttpServletResponse response;
+
     @QueryParam("page")
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
-    final static Logger logger = Logger.getLogger(ArtistService.class);
 
     /**
      * @generated
@@ -81,17 +83,15 @@ public class ClientService {
                     clientDTO.setFirstName(account.getGivenName());
                     clientDTO.setLastname(account.getSurname());
                     clientDTO.setEmail(account.getEmail());
-                } catch (ResourceException e) {
-                    logger.error("The account with userid: " + e.getMessage() + " does not exist.");
-                    logger.error(e);
+                }  catch (ResourceException e) {
+                    Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, "No existe el usuario con ese ID");
+                    Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, e);
                 }
-
             }
-            
         } catch (IOException e) {
-            logger.error(e.getMessage());
-            logger.error(e);
             clients.clear();
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, "Error al leer el archivo de shiro");
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, e);
         }
         return clients;
     }

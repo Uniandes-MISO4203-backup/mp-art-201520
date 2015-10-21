@@ -25,6 +25,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -134,11 +136,13 @@ public class ResumeService {
                     resumeDTO.getArtist().setLastname(account.getSurname());
                     resumeDTO.getArtist().setEmail(account.getEmail());
                 } catch (ResourceException e) {
-                    throw new RuntimeException(e);
+                    Logger.getLogger(ResumeService.class.getName()).log(Level.SEVERE, null, "No existe el usuario con ese ID");
+                    Logger.getLogger(ResumeService.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(ResumeService.class.getName()).log(Level.SEVERE, null, "Error al leer el archivo de shiro");
+            Logger.getLogger(ResumeService.class.getName()).log(Level.SEVERE, null, e);
         }
         return resumeDTO;
     }
