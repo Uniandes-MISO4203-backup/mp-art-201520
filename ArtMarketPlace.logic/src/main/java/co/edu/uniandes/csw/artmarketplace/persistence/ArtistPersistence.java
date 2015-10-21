@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import org.apache.log4j.Logger;
 
 /**
  * @generated
  */
 @Stateless
 public class ArtistPersistence extends CrudPersistence<ArtistEntity> {
+    
+    private static final Logger LOGGER = Logger.getLogger(ArtistPersistence.class);
 
     /**
      * @generated
@@ -25,6 +28,7 @@ public class ArtistPersistence extends CrudPersistence<ArtistEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Artist.getByUserId", params);
         } catch (NoResultException e) {
+            LOGGER.info(e.getMessage());
             return null;
         }
     }
