@@ -23,76 +23,76 @@
 <div>
     <!--Display Alerts -->
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
-    
+
     <div class="panel panel-default">
-      <div class="panel-heading">Personal Information</div>
-      <div class="panel-body">
-          <form novalidate name="form" id="Resume-form" role="form">
-            <fieldset>
-                <div class="form-group col-md-12">
-                    <label for="name" class="col-md-2 control-label">Name</label>
-                    <div class="col-md-10">
-                        <input id="name" name="name" class="form-control" type="text" ng-model="record.artist.firstName" readonly/>
+        <div class="panel-heading">Personal Information</div>
+        <div class="panel-body">
+            <form novalidate name="form" id="Resume-form" role="form">
+                <fieldset>
+                    <div class="form-group col-md-12">
+                        <label for="name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input id="name" name="name" class="form-control" type="text" ng-model="record.artist.firstName" readonly/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="{{model.fields[0].name}}" class="col-md-2 control-label">{{model.fields[0].displayName}}</label>
-                    <div class="col-md-10">
-                        <input id="{{model.fields[0].name}}" name="{{model.fields[0].name}}" class="form-control" type="text" ng-model="record.artist.lastname" readonly/>
+                    <div class="form-group col-md-12">
+                        <label for="{{model.fields[0].name}}" class="col-md-2 control-label">{{model.fields[0].displayName}}</label>
+                        <div class="col-md-10">
+                            <input id="{{model.fields[0].name}}" name="{{model.fields[0].name}}" class="form-control" type="text" ng-model="record.artist.lastname" readonly/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="{{model.fields[1].name}}" class="col-md-2 control-label">{{model.fields[1].displayName}}</label>
-                    <div class="col-md-10">
-                        <input id="{{model.fields[1].name}}" name="{{model.fields[1].name}}" class="form-control" type="text" ng-model="record.city" ng-required="model.fields[1].required" />
+                    <div class="form-group col-md-12">
+                        <label for="{{model.fields[1].name}}" class="col-md-2 control-label">{{model.fields[1].displayName}}</label>
+                        <div class="col-md-10">
+                            <input id="{{model.fields[1].name}}" name="{{model.fields[1].name}}" class="form-control" type="text" ng-model="record.city" ng-required="model.fields[1].required" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="{{model.fields[2].name}}" class="col-md-2 control-label">{{model.fields[2].displayName}}</label>
-                    <div class="col-md-10">
-                        <input id="{{model.fields[2].name}}" name="{{model.fields[2].name}}" class="form-control" type="text" ng-model="record.country" ng-required="model.fields[2].required" />
+                    <div class="form-group col-md-12">
+                        <label for="{{model.fields[2].name}}" class="col-md-2 control-label">{{model.fields[2].displayName}}</label>
+                        <div class="col-md-10">
+                            <input id="{{model.fields[2].name}}" name="{{model.fields[2].name}}" class="form-control" type="text" ng-model="record.country" ng-required="model.fields[2].required" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="{{model.fields[4].name}}" class="col-md-2 control-label">{{model.fields[4].displayName}}</label>
-                    <div class="col-md-10">
-                        <input id="{{model.fields[4].name}}" name="{{model.fields[4].name}}" class="form-control" type="text" ng-model="record.photo" ng-required="model.fields[4].required" />
+                    <div class="form-group col-md-12">
+                        <label for="{{model.fields[4].name}}" class="col-md-2 control-label">{{model.fields[4].displayName}}</label>
+                        <div class="col-md-10">
+                            <input id="{{model.fields[4].name}}" name="{{model.fields[4].name}}" class="form-control" type="text" ng-model="record.photo" ng-required="model.fields[4].required" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="{{model.fields[3].name}}" class="col-md-2 control-label">{{model.fields[3].displayName}}</label>
-                    <div class="col-md-10">
-                        <input id="{{model.fields[3].name}}" name="{{model.fields[3].name}}" class="form-control" type="text" ng-model="record.website" ng-required="model.fields[3].required" />
+                    <div class="form-group col-md-12">
+                        <label for="{{model.fields[3].name}}" class="col-md-2 control-label">{{model.fields[3].displayName}}</label>
+                        <div class="col-md-10">
+                            <input id="{{model.fields[3].name}}" name="{{model.fields[3].name}}" class="form-control" type="text" ng-model="record.website" ng-required="model.fields[3].required" />
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-        </form>
-      </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
     <div class="panel panel-default">
-      <div class="panel-heading">Experience & Education</div>
-      <div class="panel-body">
-          <div class="col-md-5">
-              <h3>Education</h3>
-              <div>
-                  <textarea rows="15" cols="50"
-                    style="resize: none;" ng-model="listEducation">{{listEducation}}</textarea>
-              </div>
-              
-          </div>
-          <div class="col-md-2">
-            <div class="btn-group-vertical">
-                <button class="btn btn-default" ng-click="addExperience()" style="margin-top: 100px; padding-top: 20px; top: 0px;">Add</button>
-                <!-- Boton para editar el registro<button class="btn btn-default" style="margin-top: 20px;">Edit</button>-->
+        <div class="panel-heading">Experience & Education</div>
+        <div class="panel-body">
+            <div class="col-md-5">
+                <h3>Education</h3>
+                <div>
+                    <textarea rows="15" cols="50"
+                              style="resize: none;" ng-model="listEducation">{{listEducation}}</textarea>
+                </div>
+
             </div>
-          </div>
-          <div class="col-md-5">
-              <h3>Experience</h3>
-              <textarea rows="15" cols="50"
-                    style="resize: none;" ng-model="listExperience">{{listExperience}}</textarea>
-          </div>
-          
-      </div>
+            <div class="col-md-2">
+                <div class="btn-group-vertical">
+                    <!-- Boton para editar el registro<button class="btn btn-default" style="margin-top: 20px;">Edit</button>-->
+                    <button class="btn btn-default" ng-click="addExperience()" style="margin-top: 100px; padding-top: 20px; top: 0px;">Add</button>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h3>Experience</h3>
+                <textarea rows="15" cols="50"
+                          style="resize: none;" ng-model="listExperience">{{listExperience}}</textarea>
+            </div>
+
+        </div>
     </div>
 </div>
 
@@ -116,34 +116,37 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-group col-md-12">
-                            <div  class="col-md-6" align="center">
-                                <input type="radio" name="education" value="Education" ng-model="experience.type" checked> <label  class="col-md-2 control-label">Education</label>
-                            </div>
-                            <div class="col-md-6" align="center">
-                                <input type="radio" name="experience" value="Experience" ng-model="experience.type"><label  class="col-md-2 control-label">Experience</label>
+                            <label  class="col-sm-2 control-label">Type of Information: </label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline control-label">
+                                <input type="radio" name="education" value="Education" ng-model="experience.type" checked> Education
+                            </label>
+                            <label class="checkbox-inline control-label">
+                                <input type="radio" name="experience" value="Experience" ng-model="experience.type">Experience
+                            </label>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label  class="col-md-2 control-label">Title: </label>
-                            <div class="col-md-10">
+                            <label  class="col-sm-2 control-label">Title: </label>
+                            <div class="col-sm-10">
                                 <input id="title" name="title" class="form-control" type="text" ng-model="experience.title" required="true" />
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label  class="col-md-2 control-label">Place:  </label>
-                            <div class="col-md-10">
+                            <label  class="col-sm-2 control-label">Place:  </label>
+                            <div class="col-sm-10">
                                 <input id="place" name="place" class="form-control" type="text" ng-model="experience.place" required="true" />
                             </div>
                         </div>
-                        <div class="form-group col-md-6" align="center">
-                            <label  class="col-md-2 control-label">From:</label>
-                            <div class="col-md-10">
+                        <div class="form-group col-md-12">
+                            <label  class="col-sm-2 control-label">From:  </label>
+                            <div class="col-sm-10">
                                 <input id="fechaInicio" name="fechaInicio" class="form-control" type="date" placeholder="yyyy-MM-dd" ng-model="experience.startDate" required="true" />
                             </div>
                         </div>
-                        <div class="form-group col-md-6" align="center">
-                            <label  class="col-md-2 control-label"> to </label>
-                            <div class="col-md-10">
+                        <div class="form-group col-md-12">
+                            <label  class="col-sm-2 control-label">To:  </label>
+                            <div class="col-sm-10">
                                 <input id="fechaFin" name="fechaFin" class="form-control" type="date" placeholder="yyyy-MM-dd" ng-model="experience.finishDate" required="false" />
                             </div>
                         </div>

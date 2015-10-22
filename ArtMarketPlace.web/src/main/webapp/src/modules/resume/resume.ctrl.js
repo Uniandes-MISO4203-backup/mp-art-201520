@@ -1,17 +1,20 @@
 (function (ng) {
     var mod = ng.module('resumeModule');
 
-    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService', 'resumeModel', '$routeParams', function (CrudCreator, $scope, $location, svc, model, $routeParams, $route) {
+    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService', 'resumeModel', '$routeParams', function (CrudCreator, $scope, $location, svc, model, $routeParams) {
             CrudCreator.extendController(this, svc, $scope, model, 'resume', 'Resume');
             var idArtist;
+            var education = "";
+            var experience = "";
+            
             if ($routeParams.id) {
                 idArtist = $routeParams.id;
             } else {
                 svc.getArtist().then(function (result) {
                     $scope.record = [];
                     $scope.record = result;
-                    var education = "";
-                    var experience = "";
+                    experience = "";
+                    education = "";
                     if ($scope.record) {
                         for (var i = 0; i < $scope.record.experience.length; i++) {
                             var exp = $scope.record.experience[i];
@@ -25,6 +28,7 @@
                     $scope.listExperience = experience;
                 });
             }
+            
             $scope.param1 = idArtist;
             $scope.save = function () {
                 if ($scope.record)
@@ -38,7 +42,7 @@
                     });
                     if (resume)
                     {
-                        alert("Debe ingresar como artista");
+                        sweetAlert("Warning", "Please. Sign up like an artist.", "warning");
                         $location.url('/login');
                     } else
                         $location.url('/catalog');
