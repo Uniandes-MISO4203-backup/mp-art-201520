@@ -255,7 +255,7 @@ public class ArtistPersistenceTest {
         Assert.assertEquals(entity.getUserId(), userId);
 
         try {
-            entity = artistPersistence.getArtistByUserId(null);
+            entity = artistPersistence.getArtistByUserId("-1");
             Assert.fail();
         } catch (NoResultException e) {
             Assert.assertTrue(true);
