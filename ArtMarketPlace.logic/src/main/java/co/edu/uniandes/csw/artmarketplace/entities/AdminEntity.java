@@ -20,15 +20,15 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Admin.getByUserId", query = "select u from AdminEntity u WHERE u.userId = :user_id")
 })
-public class AdminEntity implements Serializable{
-    
-   @Id
-   @GeneratedValue(generator = "Admin")
-   private Long id;
-   
-   private String name;
+public class AdminEntity implements Serializable {
 
-   private String userId;
+    @Id
+    @GeneratedValue(generator = "Admin")
+    private Long id;
+
+    private String name;
+
+    private String userId;
 
     public Long getId() {
         return id;
@@ -53,8 +53,5 @@ public class AdminEntity implements Serializable{
     public void setUserId(String userId) {
         this.userId = userId;
     }
-   
-   
-  
-   
+
 }

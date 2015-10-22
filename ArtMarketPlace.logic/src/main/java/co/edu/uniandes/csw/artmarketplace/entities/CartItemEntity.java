@@ -5,8 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 /**
  * @generated
@@ -20,52 +18,52 @@ public class CartItemEntity implements Serializable {
 
     private String name;
     private String state;
-
     private Integer quantity;
 
     @ManyToOne
     private ArtworkEntity artwork;
     @ManyToOne
     private ClientEntity client;
+
     /**
      * @generated
      */
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
     /**
      * @generated
      */
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * @generated
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     /**
      * @generated
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
     /**
      * @generated
      */
-    public Integer getQuantity(){
+    public Integer getQuantity() {
         return quantity;
     }
 
     /**
      * @generated
      */
-    public void setQuantity(Integer quantity){
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -96,22 +94,19 @@ public class CartItemEntity implements Serializable {
     public void setClient(ClientEntity client) {
         this.client = client;
     }
-    
+
     /**
      * @generated
      */
     public String getState() {
         return state;
     }
-    
+
     /**
      * @generated
      */
     public void setState(String state) {
         this.state = state;
     }
-    
-    
-    
 
 }
