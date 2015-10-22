@@ -10,13 +10,13 @@ package enums;
  * @author ms.lancheros10
  */
 public enum PaymentTypeEnum {
-    
+
     CREDIT_CARD("Credit Card"), PSE("PSE"), PAYPAL("PayPal");
-    
+
     private String name;
-    
-     PaymentTypeEnum(String name){
-        this.name=name;
+
+    PaymentTypeEnum(String name) {
+        this.name = name;
     }
 
     public String getName() {
@@ -26,7 +26,4 @@ public enum PaymentTypeEnum {
     public void setName(String name) {
         this.name = name;
     }
-     
-     
-    
 }

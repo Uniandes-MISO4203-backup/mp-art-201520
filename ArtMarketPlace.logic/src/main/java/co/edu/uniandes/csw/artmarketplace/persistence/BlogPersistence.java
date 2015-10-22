@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.artmarketplace.entities.BlogEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 
 /**
@@ -33,7 +35,8 @@ public class BlogPersistence extends CrudPersistence<BlogEntity> {
             params.put("idArtist", idArtist);
             return executeListNamedQuery("Blog.getEntryArtist", params);
         } catch (NoResultException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
         }
     }
 }

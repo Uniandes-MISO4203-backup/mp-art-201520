@@ -4,6 +4,8 @@ import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
@@ -41,7 +43,8 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
                 return resumes.get(0);
             }
         } catch (NoResultException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
         }
     }
 }

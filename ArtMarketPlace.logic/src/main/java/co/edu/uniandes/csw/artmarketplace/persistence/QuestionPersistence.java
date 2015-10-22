@@ -4,6 +4,8 @@ import co.edu.uniandes.csw.artmarketplace.entities.QuestionEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -16,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
-    
+
     /**
      * El metodo constructor de QuestionPersistence no contiene parametro, y en
      * su ejecucion, hace la asignacion del tipo de EntityClass requerida para
@@ -34,7 +36,8 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
             q.setParameter("artwork_id", artist);
             return q.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
         }
     }
 }

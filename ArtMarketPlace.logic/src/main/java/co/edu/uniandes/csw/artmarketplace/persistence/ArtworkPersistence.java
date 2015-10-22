@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 
 /**
@@ -37,7 +39,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -59,7 +61,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -77,7 +79,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -97,7 +99,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -115,7 +117,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkStyle", artworkStyle);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksByStyle", params);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }

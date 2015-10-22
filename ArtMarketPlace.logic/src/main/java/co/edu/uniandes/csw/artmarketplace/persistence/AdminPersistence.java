@@ -12,6 +12,8 @@ package co.edu.uniandes.csw.artmarketplace.persistence;
 import co.edu.uniandes.csw.artmarketplace.entities.AdminEntity;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
@@ -34,7 +36,8 @@ public class AdminPersistence extends CrudPersistence<AdminEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Admin.getByUserId", params);
         } catch (NoResultException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
         }
     }
 }
