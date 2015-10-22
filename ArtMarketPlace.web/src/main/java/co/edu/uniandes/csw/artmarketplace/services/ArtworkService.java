@@ -70,7 +70,7 @@ public class ArtworkService {
      * Constante de Client pues se utiliza en múltiples llamados (baja la deuda
      * técnica)
      */
-    private final static String CLIENT = "Client";
+    private static final String CLIENT = "Client";
 
     private ArtistDTO artist = (ArtistDTO) SecurityUtils.getSubject().getSession().getAttribute("Artist");
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute(CLIENT);

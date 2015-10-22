@@ -217,21 +217,13 @@ public class ResumeService {
     @Path("/allentrys")
     @GET
     public List<BlogDTO> getEntrys() {
-        List<BlogDTO> listEntrys;
-//        if (page != null && maxRecords != null) {
-//            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
-//        }
-        listEntrys = blogLogic.getEntrys(page, maxRecords);
-
-        return listEntrys;
+        return blogLogic.getEntrys(page, maxRecords);
     }
 
     @Path("/entryartist/{id: \\d+}")
     @GET
     public List<BlogDTO> getEntryArtist(@PathParam("id") Long idArtist) {
-        List<BlogDTO> listEntrys;
-        listEntrys = blogLogic.getEntryArtist(idArtist);
-        return listEntrys;
+        return blogLogic.getEntryArtist(idArtist);
     }
 
     @Path("/getentry/{id: \\d+}")
