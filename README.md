@@ -1,4 +1,4 @@
-[![Estado Actual](https://travis-ci.org/MISO4203-201520/mp-art.svg?branch=master)]
+[Estado Actual](https://travis-ci.org/MISO4203-201520/mp-art.svg?branch=master)
 
 #Tabla de contenidos
 -  [Introducción](#introducción)
