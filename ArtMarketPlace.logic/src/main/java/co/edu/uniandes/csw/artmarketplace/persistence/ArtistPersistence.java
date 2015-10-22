@@ -22,13 +22,14 @@ public class ArtistPersistence extends CrudPersistence<ArtistEntity> {
     }
 
     public ArtistEntity getArtistByUserId(String userId) {
+        ArtistEntity buscado = null;
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("user_id", userId);
-            return this.executeSingleNamedQuery("Artist.getByUserId", params);
+            buscado = this.executeSingleNamedQuery("Artist.getByUserId", params);
         } catch (NoResultException e) {
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return null;
         }
+        return buscado;
     }
 }

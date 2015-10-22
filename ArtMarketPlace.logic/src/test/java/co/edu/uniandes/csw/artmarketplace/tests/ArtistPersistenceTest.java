@@ -254,11 +254,7 @@ public class ArtistPersistenceTest {
         ArtistEntity entity = artistPersistence.getArtistByUserId(userId);
         Assert.assertEquals(entity.getUserId(), userId);
 
-        try {
-            entity = artistPersistence.getArtistByUserId("-1");
-            Assert.fail();
-        } catch (NoResultException e) {
-            Assert.assertTrue(true);
-        }
+        entity = artistPersistence.getArtistByUserId("-1");
+        Assert.assertEquals(entity, null);
     }
 }
