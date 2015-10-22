@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.junit.Assert;
@@ -252,5 +253,12 @@ public class ArtistPersistenceTest {
         String userId = data.get(0).getUserId();
         ArtistEntity entity = artistPersistence.getArtistByUserId(userId);
         Assert.assertEquals(entity.getUserId(), userId);
+
+        try {
+            entity = artistPersistence.getArtistByUserId(null);
+            Assert.fail();
+        } catch (NoResultException e) {
+            Assert.assertTrue(true);
+        }
     }
 }
