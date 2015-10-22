@@ -14,31 +14,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class BlogDTO {
-    
+
     /**
      * id/llave de un a entrada del Blog.
      */
     private Long id;
-    
+
     /**
      * Texto de la entrada del Blog.
      */
     private String entry;
-    
+
     /**
      * Título del Blog.
      */
     private String title;
-    
+
     /**
      * Fecha de Creación de la entrada
      */
     private Date date;
-    
+
     /**
      * Id del cliente/artista que realizó la entrada al Blog
      */
-    private Long client_id;
+    private Long clientId;
 
     public Long getId() {
         return id;
@@ -72,12 +72,11 @@ public class BlogDTO {
         this.date = date;
     }
 
-    public Long getClient_id() {
-        return client_id;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
-    
 }

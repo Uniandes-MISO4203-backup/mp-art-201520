@@ -32,7 +32,7 @@
                         svcNewEntry.saveEntry({
                             entry: $("#entry").val(),
                             title: $("#title").val(),
-                            client_id: authSvc.getCurrentUser().id,
+                            clientId: authSvc.getCurrentUser().id,
                             date: new Date().toISOString().substring(0, 10)
                         }).then(function () {
                             $location.path('/blog');

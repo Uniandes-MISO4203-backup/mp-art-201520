@@ -10,14 +10,12 @@ import co.edu.uniandes.csw.artmarketplace.converters.QuestionConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.QuestionEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.QuestionPersistence;
-import java.io.FileNotFoundException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -81,7 +79,7 @@ public class QuestionLogic implements IQuestionLogic {
                     + "la obra de arte " + dto.getArtwork().getName() + ".\n \n "
                     + "Pregunta:\n"
                     + "" + dto.getQuestion() + "\n"
-                    + "\nFecha de creacion: " + dto.getDate().toLocaleString()+""
+                    + "\nFecha de creacion: " + dto.getDate().toLocaleString() + ""
                     + "Esta es la copia de la pregunta enviada.";
 
             // Construimos el mensaje
@@ -97,8 +95,7 @@ public class QuestionLogic implements IQuestionLogic {
             Transport t = session.getTransport("smtp");
             t.connect(emisor, contrasenna);
             t.sendMessage(message, message.getAllRecipients());
-        }
-        catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             Logger.getLogger(QuestionLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
         return sucessful;

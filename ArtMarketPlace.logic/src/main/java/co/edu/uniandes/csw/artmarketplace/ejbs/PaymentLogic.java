@@ -15,7 +15,8 @@ import javax.inject.Inject;
 @Stateless
 public class PaymentLogic implements IPaymentLogic {
 
-    @Inject private PaymentPersistence persistence;
+    @Inject
+    private PaymentPersistence persistence;
 
     /**
      * @generated
@@ -36,6 +37,7 @@ public class PaymentLogic implements IPaymentLogic {
     /**
      * @generated
      */
+    @Override
     public PaymentDTO getPayment(Long id) {
         return PaymentConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -74,11 +76,11 @@ public class PaymentLogic implements IPaymentLogic {
     public List<PaymentDTO> findByName(String name) {
         return PaymentConverter.listEntity2DTO(persistence.findByName(name));
     }
-    
+
     /**
      * @generated
      */
-    public List<PaymentDTO> findAll(){
+    public List<PaymentDTO> findAll() {
         return PaymentConverter.listEntity2DTO(persistence.findAll(1, 1));
     }
 }

@@ -16,26 +16,29 @@ import javax.inject.Inject;
 
 /**
  * Implementa la interfaz para el manejo de registrso de la hoja de vida
+ *
  * @author vp.salcedo93
  */
-public class ExperienceLogic implements IExperienceLogic{
-    
+public class ExperienceLogic implements IExperienceLogic {
+
     /**
      * Objeto que maneja la persistencia de la hoja de vida.
      */
-    @Inject private ExperiencePersistence persistence;
-    
+    @Inject
+    private ExperiencePersistence persistence;
+
     /**
      * Metodo encargado de crear la entidad y persistirla en la base de datos.
+     *
      * @param dto. objeto DTO con la hoja de vida.
      * @param artist. Artista con la experiencia.
      * @return Objeto DTO que se persistio.
      */
+    @Override
     public ExperienceDTO createResume(ExperienceDTO dto, ArtistDTO artist) {
         dto.setResume(ResumeConverter.refEntity2DTO(persistence.getResumeByArtistId(artist.getId())));
         ExperienceEntity entity = ExperienceConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         return ExperienceConverter.fullEntity2DTO(entity);
     }
-    
 }

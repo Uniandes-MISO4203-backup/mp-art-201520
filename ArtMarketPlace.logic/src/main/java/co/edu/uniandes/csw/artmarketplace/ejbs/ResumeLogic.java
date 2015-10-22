@@ -34,17 +34,17 @@ public class ResumeLogic implements IResumeLogic {
      */
     @Override
     public ResumeDTO createResume(ResumeDTO dto) {
-        ResumeDTO resumeDTO=getResumebyAristId(dto.getArtist().getId());
-        if(resumeDTO != null){
+        ResumeDTO resumeDTO = getResumebyAristId(dto.getArtist().getId());
+        if (resumeDTO != null) {
             dto.setId(resumeDTO.getId());
             dto.setExperience(resumeDTO.getExperience());
             return updateResume(dto);
-        }else{
+        } else {
             ResumeEntity entity = ResumeConverter.fullDTO2Entity(dto);
             persistence.create(entity);
             return ResumeConverter.fullEntity2DTO(entity);
         }
-         
+
     }
 
     /**
@@ -58,11 +58,12 @@ public class ResumeLogic implements IResumeLogic {
         ResumeEntity entity = persistence.update(ResumeConverter.fullDTO2Entity(dto));
         return ResumeConverter.fullEntity2DTO(entity);
     }
-    
+
     /**
      * Metodo que obtiene el resumen de un artista por identificador.
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public ResumeDTO getResumebyAristId(Long id) {
@@ -105,6 +106,7 @@ public class ResumeLogic implements IResumeLogic {
      * @return rating es la variable designada para retornar la calificaci?n del
      * artista.
      */
+    @Override
     public Float getRatingArtist(Long id) {
         ResumeEntity resume = persistence.getResumeByArtistId(id);
         Float rating = 0.0000f;

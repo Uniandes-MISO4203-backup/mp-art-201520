@@ -20,39 +20,37 @@ import javax.persistence.TemporalType;
  *
  * @author jh.rubiano10
  */
-
 /**
  * Query que trae las entradas de un artisita dado el id del mismo.
+ *
  * @author jh.rubiano10
  */
-
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Blog.getEntryArtist", query = "select u from BlogEntity u WHERE u.client_id = :idArtist")
+    @NamedQuery(name = "Blog.getEntryArtist", query = "select u from BlogEntity u WHERE u.clientId = :idArtist")
 })
 public class BlogEntity implements Serializable {
-    
-    
-    
+
     /**
      * Id de la entrada
      */
     @Id
     @GeneratedValue(generator = "Blog")
     private Long id;
-    
+
     /**
-     * Texto de la entrada, en este caso de tipo TEXT para permitir más de 255 carácteres
+     * Texto de la entrada, en este caso de tipo TEXT para permitir más de 255
+     * carácteres
      */
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String entry;
-    
+
     private String title;
-    
+
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    private Long client_id;
+    private Long clientId;
 
     public Long getId() {
         return id;
@@ -86,11 +84,11 @@ public class BlogEntity implements Serializable {
         this.date = date;
     }
 
-    public Long getClient_id() {
-        return client_id;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 }
