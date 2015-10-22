@@ -28,6 +28,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class ArtistLogicTest {
+
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -102,8 +103,8 @@ public class ArtistLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             ArtistEntity entity = new ArtistEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setUserId(generateRandom(String.class));
+            entity.setName(generateRandom(String.class));
+            entity.setUserId(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -252,5 +253,35 @@ public class ArtistLogicTest {
                 Assert.fail();
             }
         }
+    }
+
+    @Test
+    public void aditionalDTOInfo() {
+        ArtistDTO dto = new ArtistDTO();
+
+        String firstName = generateRandom(String.class);
+        String lastName = generateRandom(String.class);
+        String email = generateRandom(String.class);
+
+        dto.setFirstName(firstName);
+        dto.setLastname(lastName);
+        dto.setEmail(email);
+
+        Assert.assertEquals(dto.getFirstName(), firstName);
+        Assert.assertEquals(dto.getLastname(), lastName);
+        Assert.assertEquals(dto.getEmail(), email);
+    }
+
+    @Test
+    public void countArtists() {
+        List<ArtistDTO> list = artistLogic.getArtists(null, null);
+        Assert.assertEquals(artistLogic.countArtists(), list.size());
+    }
+
+    @Test
+    public void getArtistByUserId() {
+        String userId = data.get(0).getUserId();
+        ArtistDTO dto = artistLogic.getArtistByUserId(userId);
+        Assert.assertEquals(dto.getUserId(), userId);
     }
 }

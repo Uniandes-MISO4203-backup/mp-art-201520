@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class ArtistPersistenceTest {
+
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -244,5 +245,12 @@ public class ArtistPersistenceTest {
                 Assert.fail();
             }
         }
+    }
+
+    @Test
+    public void findByUserId() {
+        String userId = data.get(0).getUserId();
+        ArtistEntity entity = artistPersistence.getArtistByUserId(userId);
+        Assert.assertEquals(entity.getUserId(), userId);
     }
 }
