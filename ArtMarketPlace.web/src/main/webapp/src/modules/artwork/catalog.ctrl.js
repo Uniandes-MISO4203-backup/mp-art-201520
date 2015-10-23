@@ -73,7 +73,6 @@
                     });
                 };
 
-
                 $scope.postRemark = function (id, newRemark) {
                     artworkSvc.postRemark(id, newRemark).then(function (result) {
                         $scope.artworkRecord = [];
@@ -159,7 +158,6 @@
                                     $('#artworkRating').html('<input id="artworkRate" name="artworkRate" class="form-control" type="text" value="'+data.id+'" readonly/>');
                                     $('#ratingModal').modal('show');
                                 });
-                                
                                 return false;
                             }
                             else
