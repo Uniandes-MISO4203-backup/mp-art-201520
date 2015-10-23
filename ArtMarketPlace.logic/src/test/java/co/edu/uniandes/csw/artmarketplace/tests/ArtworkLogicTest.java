@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class ArtworkLogicTest {
+
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -103,24 +104,24 @@ public class ArtworkLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             ArtworkEntity entity = new ArtworkEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setPrice(generateRandom(Integer.class));
+            entity.setName(generateRandom(String.class));
+            entity.setPrice(generateRandom(Integer.class));
             em.persist(entity);
             data.add(entity);
         }
         insertArtworksForSearch();
     }
-    
+
     private void insertArtworksForSearch() {
-        
+
         ArtistEntity artistEntityOne = new ArtistEntity();
         artistEntityOne.setName("Artista1");
         em.persist(artistEntityOne);
-        
+
         ArtistEntity artistEntityTwo = new ArtistEntity();
         artistEntityTwo.setName("Artista2");
         em.persist(artistEntityTwo);
-        
+
         ArtworkEntity entityOne = new ArtworkEntity();
         entityOne.setName("Pintura1");
         entityOne.setPrice(10000);
@@ -128,7 +129,7 @@ public class ArtworkLogicTest {
         entityOne.setArtist(artistEntityOne);
         em.persist(entityOne);
         data.add(entityOne);
-        
+
         ArtworkEntity entityTwo = new ArtworkEntity();
         entityTwo.setName("Pintura2");
         entityTwo.setPrice(20000);
@@ -136,7 +137,7 @@ public class ArtworkLogicTest {
         entityTwo.setArtist(artistEntityOne);
         em.persist(entityTwo);
         data.add(entityTwo);
-        
+
         ArtworkEntity entityThree = new ArtworkEntity();
         entityThree.setName("Pintura3");
         entityThree.setPrice(30000);
@@ -144,7 +145,7 @@ public class ArtworkLogicTest {
         entityThree.setArtist(artistEntityTwo);
         em.persist(entityThree);
         data.add(entityThree);
-        
+
         ArtworkEntity entityFour = new ArtworkEntity();
         entityFour.setName("Pintura3");
         entityFour.setPrice(40000);
@@ -298,111 +299,114 @@ public class ArtworkLogicTest {
             }
         }
     }
+
     /**
      * Test for search Artist With Cheapest Artwork
      */
     @Test
-    public void searchArtistWithCheapestArtwork(){
+    public void searchArtistWithCheapestArtwork() {
         List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("");
         Assert.assertEquals(0, artworkEntitys.size());
-        
+
         artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("Pintura3");
         Assert.assertEquals(1, artworkEntitys.size());
         Assert.assertEquals("Pintura3", artworkEntitys.get(0).getName());
-        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(), 0.1D);
         Assert.assertEquals("Artista2", artworkEntitys.get(0).getArtist().getName());
-        
+
         artworkEntitys = artworkLogic.searchArtistWithCheapestArtwork("Pintura1");
         Assert.assertEquals(1, artworkEntitys.size());
         Assert.assertEquals("Pintura1", artworkEntitys.get(0).getName());
-        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(), 0.1D);
         Assert.assertEquals("Artista1", artworkEntitys.get(0).getArtist().getName());
-        
+
     }
+
     /**
      * Test for search Cheapest Artwork Of An Artist
      */
     @Test
-    public void searchCheapestArtworkOfAnArtist(){
+    public void searchCheapestArtworkOfAnArtist() {
         List<ArtworkDTO> artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("");
         Assert.assertEquals(0, artworkEntitys.size());
-        
+
         artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("Artista1");
         Assert.assertEquals(1, artworkEntitys.size());
         Assert.assertEquals("Pintura1", artworkEntitys.get(0).getName());
-        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals(10000, artworkEntitys.get(0).getPrice(), 0.1D);
         Assert.assertEquals("Artista1", artworkEntitys.get(0).getArtist().getName());
-        
+
         artworkEntitys = artworkLogic.searchCheapestArtworkOfAnArtist("Artista2");
         Assert.assertEquals(1, artworkEntitys.size());
         Assert.assertEquals("Pintura3", artworkEntitys.get(0).getName());
-        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(),0.1D);
+        Assert.assertEquals(30000, artworkEntitys.get(0).getPrice(), 0.1D);
         Assert.assertEquals("Artista2", artworkEntitys.get(0).getArtist().getName());
     }
+
     /**
-     *  Test for search Artworks Between Prices
+     * Test for search Artworks Between Prices
      */
     @Test
-    public void searchArtworksBetweenPrices(){
-        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,1);
+    public void searchArtworksBetweenPrices() {
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0, 1);
         Assert.assertEquals(0, artworkEntitys.size());
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,10000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0, 10000);
         Assert.assertEquals(1, artworkEntitys.size());
-        for(ArtworkDTO a:artworkEntitys){
+        for (ArtworkDTO a : artworkEntitys) {
             Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 10000);
         }
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,20000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0, 20000);
         Assert.assertEquals(2, artworkEntitys.size());
-        for(ArtworkDTO a:artworkEntitys){
+        for (ArtworkDTO a : artworkEntitys) {
             Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 20000);
         }
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,30000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0, 30000);
         Assert.assertEquals(3, artworkEntitys.size());
-        for(ArtworkDTO a:artworkEntitys){
+        for (ArtworkDTO a : artworkEntitys) {
             Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 30000);
         }
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0,40000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(0, 40000);
         Assert.assertEquals(4, artworkEntitys.size());
-        for(ArtworkDTO a:artworkEntitys){
+        for (ArtworkDTO a : artworkEntitys) {
             Assert.assertTrue(a.getPrice() >= 0 && a.getPrice() <= 40000);
         }
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(25000,35000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(25000, 35000);
         Assert.assertEquals(1, artworkEntitys.size());
-        for(ArtworkDTO a:artworkEntitys){
+        for (ArtworkDTO a : artworkEntitys) {
             Assert.assertTrue(a.getPrice() >= 25000 && a.getPrice() <= 35000);
         }
-        
-        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(50000,90000);
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenPrices(50000, 90000);
         Assert.assertEquals(0, artworkEntitys.size());
     }
-    
+
     /**
-     *  Test for search Artworks By Style
+     * Test for search Artworks By Style
      */
     @Test
-    public void searchArtworksByStyle(){
+    public void searchArtworksByStyle() {
         List<ArtworkDTO> artworkDTOs = artworkLogic.searchArtworksByStyle("");
         Assert.assertEquals(0, artworkDTOs.size());
-        
+
         artworkDTOs = artworkLogic.searchArtworksByStyle("Nada");
         Assert.assertEquals(0, artworkDTOs.size());
-        
+
         artworkDTOs = artworkLogic.searchArtworksByStyle("Realismo");
         Assert.assertEquals(2, artworkDTOs.size());
-        for(ArtworkDTO a:artworkDTOs){
+        for (ArtworkDTO a : artworkDTOs) {
             Assert.assertTrue(a.getArtworkStyle().equals("Realismo"));
         }
-        
+
         artworkDTOs = artworkLogic.searchArtworksByStyle("Impresionismo");
         Assert.assertEquals(2, artworkDTOs.size());
-        for(ArtworkDTO a:artworkDTOs){
+        for (ArtworkDTO a : artworkDTOs) {
             Assert.assertTrue(a.getArtworkStyle().equals("Impresionismo"));
         }
     }
-    
+
 }
