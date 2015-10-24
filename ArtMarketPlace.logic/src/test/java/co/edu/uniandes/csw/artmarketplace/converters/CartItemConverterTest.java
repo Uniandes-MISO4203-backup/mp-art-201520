@@ -10,17 +10,20 @@ import co.edu.uniandes.csw.artmarketplace.entities.CartItemEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import java.util.ArrayList;
 import java.util.List;
+import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author a.perez15
  */
+@RunWith(Arquillian.class)
 public class CartItemConverterTest {
     
     public CartItemConverterTest() {

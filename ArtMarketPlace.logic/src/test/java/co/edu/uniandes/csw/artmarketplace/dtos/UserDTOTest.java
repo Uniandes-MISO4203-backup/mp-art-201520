@@ -5,17 +5,20 @@
  */
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
+import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author a.perez15
  */
+@RunWith(Arquillian.class)
 public class UserDTOTest {
     
     public UserDTOTest() {
