@@ -126,6 +126,9 @@ public class CartItemLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getQuantity(), entity.getQuantity());
+        Assert.assertEquals(4, cartItemLogic.countCartItems());
+        
+        Assert.assertEquals(0, cartItemLogic.countCartItemsByClient(0L));
     }
 
     /**
