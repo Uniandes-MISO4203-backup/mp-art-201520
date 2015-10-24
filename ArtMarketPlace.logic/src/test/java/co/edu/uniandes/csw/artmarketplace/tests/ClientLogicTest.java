@@ -117,6 +117,9 @@ public class ClientLogicTest {
         ClientDTO dto = new ClientDTO();
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
+        dto.setFirstName(null);
+        dto.setLastname(null);
+        dto.setEmail(null);
 
         ClientDTO result = clientLogic.createClient(dto);
 
@@ -126,6 +129,9 @@ public class ClientLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        Assert.assertNull(dto.getFirstName());
+        Assert.assertNull(dto.getLastname());
+        Assert.assertNull(dto.getEmail());
     }
 
     /**
