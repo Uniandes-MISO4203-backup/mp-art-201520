@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
 /**
  *
  * @author jh.rubiano10
  */
+@Stateless
 public class BlogPersistence extends CrudPersistence<BlogEntity> {
 
     public BlogPersistence() {

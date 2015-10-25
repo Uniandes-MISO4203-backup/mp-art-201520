@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,13 +42,12 @@ public class BlogEntity implements Serializable {
      * Texto de la entrada, en este caso de tipo TEXT para permitir más de 255
      * carácteres
      */
-    @Column(columnDefinition = "TEXT")
     private String entry;
 
     private String title;
 
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Calendar dateEntry;
 
     private Long clientId;
 
@@ -76,13 +75,15 @@ public class BlogEntity implements Serializable {
         this.title = title;
     }
 
-    public Date getDate() {
-        return date;
+    public Calendar getDateEntry() {
+        return dateEntry;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateEntry(Calendar dateEntry) {
+        this.dateEntry = dateEntry;
     }
+
+    
 
     public Long getClientId() {
         return clientId;

@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
-import java.util.Date;
+import java.util.Calendar;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,7 +33,7 @@ public class BlogDTO {
     /**
      * Fecha de Creación de la entrada
      */
-    private Date date;
+    private Calendar dateEntry;
 
     /**
      * Id del cliente/artista que realizó la entrada al Blog
@@ -64,13 +64,15 @@ public class BlogDTO {
         this.title = title;
     }
 
-    public Date getDate() {
-        return date;
+    public Calendar getDateEntry() {
+        return dateEntry;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateEntry(Calendar dateEntry) {
+        this.dateEntry = dateEntry;
     }
+
+    
 
     public Long getClientId() {
         return clientId;
