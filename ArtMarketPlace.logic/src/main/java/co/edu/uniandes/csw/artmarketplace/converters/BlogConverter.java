@@ -32,7 +32,7 @@ public class BlogConverter {
             dto.setId(entity.getId());
             dto.setEntry(entity.getEntry());
             dto.setTitle(entity.getTitle());
-            dto.setDate(entity.getDate());
+            dto.setDateEntry(entity.getDateEntry());
             dto.setClientId(entity.getClientId());
             return dto;
         } else {
@@ -64,7 +64,7 @@ public class BlogConverter {
             dto.setId(entity.getId());
             dto.setEntry(entity.getEntry());
             dto.setTitle(entity.getTitle());
-            dto.setDate(entity.getDate());
+            dto.setDateEntry(entity.getDateEntry());
             dto.setClientId(entity.getClientId());
             return dto;
         } else {
@@ -81,7 +81,7 @@ public class BlogConverter {
             entity.setId(dto.getId());
             entity.setEntry(dto.getEntry());
             entity.setTitle(dto.getTitle());
-            dto.setDate(entity.getDate());
+            dto.setDateEntry(entity.getDateEntry());
             entity.setClientId(dto.getClientId());
             return entity;
         } else {

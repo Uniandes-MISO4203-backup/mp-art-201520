@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -202,12 +203,14 @@ public class ResumeService {
     /**
      * Servicio para crear una entrada en el blog del artista... Creado por
      * jh.rubiano10
+     * @param dto
+     * @return 
      */
     @POST
     @Path("/newentry/")
     @StatusCreated
     public BlogDTO createEntry(BlogDTO dto) {
-        dto.setDate(new Date());
+        dto.setDateEntry(new GregorianCalendar());
         return blogLogic.createEntry(dto);
     }
 

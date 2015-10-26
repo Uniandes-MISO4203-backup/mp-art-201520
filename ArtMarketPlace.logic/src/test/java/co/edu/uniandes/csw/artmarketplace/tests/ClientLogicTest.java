@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.artmarketplace.ejbs.ClientLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IClientLogic;
 import co.edu.uniandes.csw.artmarketplace.converters.ClientConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.UserDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ClientPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.*;
@@ -19,6 +20,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,6 +120,9 @@ public class ClientLogicTest {
         ClientDTO dto = new ClientDTO();
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
+        dto.setFirstName(null);
+        dto.setLastname(null);
+        dto.setEmail(null);
 
         ClientDTO result = clientLogic.createClient(dto);
 
@@ -126,6 +132,9 @@ public class ClientLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        Assert.assertNull(dto.getFirstName());
+        Assert.assertNull(dto.getLastname());
+        Assert.assertNull(dto.getEmail());
     }
 
     /**
@@ -252,5 +261,25 @@ public class ClientLogicTest {
                 Assert.fail();
             }
         }
+    }
+    
+    @Test
+    public void testGetName() {
+        UserDTO instance = new UserDTO();
+        instance.setName("name");
+        instance.setLastName("lastname");
+        instance.setEmail("email");
+        instance.setPassword("pass");
+        instance.setRememberMe(true);
+        instance.setRole("role");
+        instance.setUserName("username");
+        
+        assertEquals("name",instance.getName());
+        assertEquals("lastname",instance.getLastName());
+        assertEquals("email",instance.getEmail());
+        assertEquals("pass",instance.getPassword());
+        assertTrue(instance.isRememberMe());
+        assertEquals("role",instance.getRole());
+        assertEquals("username",instance.getUserName());
     }
 }
