@@ -72,7 +72,7 @@ public class ResumeEntity implements Serializable {
     /**
      * Artista de la hoja de vida.
      */
-    @OneToOne(optional=false, fetch=FetchType.EAGER)
+    @OneToOne(optional=false, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="ARTIST_ID")
     private ArtistEntity artist;
     /**
