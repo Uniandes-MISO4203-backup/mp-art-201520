@@ -77,10 +77,4 @@ public class PaymentLogic implements IPaymentLogic {
         return PaymentConverter.listEntity2DTO(persistence.findByName(name));
     }
 
-    /**
-     * @generated
-     */
-    public List<PaymentDTO> findAll() {
-        return PaymentConverter.listEntity2DTO(persistence.findAll(1, 1));
-    }
 }
