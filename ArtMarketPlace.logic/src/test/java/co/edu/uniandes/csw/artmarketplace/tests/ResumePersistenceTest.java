@@ -137,20 +137,20 @@ public class ResumePersistenceTest{
         }
     }
     
-    @Test
-    public void getResumesTest() {
-        List<ResumeEntity> list = resumePersistence.findAll(null, null);
-        Assert.assertEquals(data.size(), list.size());
-        for (ResumeEntity ent : list) {
-            boolean found = false;
-            for (ResumeEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+//    @Test
+//    public void getResumesTest() {
+//        List<ResumeEntity> list = resumePersistence.findAll(null, null);
+//        Assert.assertEquals(data.size(), list.size());
+//        for (ResumeEntity ent : list) {
+//            boolean found = false;
+//            for (ResumeEntity entity : data) {
+//                if (ent.getId().equals(entity.getId())) {
+//                    found = true;
+//                }
+//            }
+//            Assert.assertTrue(found);
+//        }
+//    }
 
     /**
      * @generated
