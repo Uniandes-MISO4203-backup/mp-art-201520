@@ -49,4 +49,12 @@ public interface IResumeLogic {
      * @return 
      */
     public List<ResumeDTO> searchArtistByName(String artistName);
+    
+    /**
+     * search Artists Between Ratings
+     * @param artistMinRating
+     * @param artistMaxRating
+     * @return 
+     */
+    public List<ResumeDTO> searchArtistsBetweenRatings(float artistMinRating,float artistMaxRating);
 }

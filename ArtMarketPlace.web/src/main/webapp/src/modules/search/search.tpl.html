@@ -50,6 +50,7 @@
     var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
     var tabSearchArtworksByStyle = "tabSearchArtworksByStyle";
     var tabSearchArtist = "tabSearchArtist";
+    var tabSearchArtistsBetweenRatings = "tabSearchArtistsBetweenRatings";
 
     function show(tab, content) {
         document.getElementById(disp).style.display = "none";
@@ -68,6 +69,7 @@
         <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;width: 20%;" onclick="show('tabSearchArtistWithCheapestArtwork', 'searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
         <li id="tabSearchArtworksByStyle" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByStyle', 'searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
         <li id="tabSearchArtist" style="border:1px solid black; width: 10%;" onclick="show('tabSearchArtist', 'searchArtist')" ><a href="#/search"><strong>Search Artist</strong></a></li>
+        <li id="tabSearchArtistsBetweenRatings" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtistsBetweenRatings', 'searchArtistsBetweenRatings')"><a href="#/search"><strong>Search Artists Between Ratings</strong></a></li>
     </ul>
 
 
@@ -99,23 +101,30 @@
     </div>
     <div id="searchArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="searchName" required>
-        <button ng-click="searchArtist(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+        <button ng-click="searchArtistByName(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
 
+    <div id="searchArtistsBetweenRatings" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
+        <input style="border:1px solid #000000" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="Min Value Here..." ng-model="artistMinRating" required>
+        <input style="border:1px solid #000000" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="Max Value Here..." ng-model="artistMaxRating" required>
+        <button ng-click="searchArtistsBetweenRatings(artistMinRating, artistMaxRating)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
 
     <div style="color: black;">
         <ol style="font-size: 18px">
             <li ng-repeat="element in artists">
-                <div class="col-sm-2 well text-center">
-                    <div class="caption" >
-                        <div class="col-md-12">
-                            <a href="#/resume/{{element.artist.id}}" style="color: blue; font-size: 20px;">{{element.artist.name}}</a>
+                <div class="container">
+                    <div class="col-sm-2 well text-center">
+                        <div class="caption" >
+                            <div class="col-md-12">
+                                <a href="#/resume/{{element.artist.id}}" style="color: blue; font-size: 20px;">{{element.artist.name}}</a>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <a href="#/resume/{{element.artist.id}}"><img ng-if="element.photo"ng-src="{{element.photo}}" alt="{{element.photo}}" width="100%"></a>
-                    </div>
+                        <div>
+                            <a href="#/resume/{{element.artist.id}}"><img ng-if="element.photo"ng-src="{{element.photo}}" alt="{{element.photo}}" width="100%"></a>
+                        </div>
 
+                    </div>
                 </div>
             </li>
         </ol>

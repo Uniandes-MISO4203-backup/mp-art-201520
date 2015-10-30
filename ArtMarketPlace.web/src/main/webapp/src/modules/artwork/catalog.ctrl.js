@@ -88,8 +88,16 @@
                     });
                 };
                 
-                $scope.searchArtist = function (searchName) {
+                $scope.searchArtistByName = function (searchName) {
                     resumeSvc.searchArtistByName(searchName).then(function (results) {
+                        $scope.artists = [];
+                        $scope.artists = results;
+                        $scope.artworks = [];
+                    });
+                };
+                
+                $scope.searchArtistsBetweenRatings = function (artistMinRating,artistMaxRating) {
+                    resumeSvc.searchArtistsBetweenRatings(artistMinRating,artistMaxRating).then(function (results) {
                         $scope.artists = [];
                         $scope.artists = results;
                         $scope.artworks = [];

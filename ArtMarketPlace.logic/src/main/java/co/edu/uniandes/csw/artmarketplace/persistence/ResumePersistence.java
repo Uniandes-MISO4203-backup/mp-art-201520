@@ -60,4 +60,18 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
         }
         return result;
     }
+    
+    public List<ResumeEntity> searchArtistsBetweenRatings(float artistMinRating,float artistMaxRating) {
+        List<ResumeEntity> result = new ArrayList<ResumeEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artistMinRating", artistMinRating);
+            params.put("artistMaxRating", artistMaxRating);
+            result = executeListNamedQuery("Resume.searchArtistsBetweenRatings", params);
+        } catch (Exception e) {
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+    }
+    
 }
