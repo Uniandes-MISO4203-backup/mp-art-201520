@@ -126,6 +126,8 @@ public class ArtworkLogicTest {
         entityOne.setName("Pintura1");
         entityOne.setPrice(10000);
         entityOne.setArtworkStyle("Realismo");
+        entityOne.setRatingSum(8F);
+        entityOne.setRatingVotes(2F);
         entityOne.setArtist(artistEntityOne);
         em.persist(entityOne);
         data.add(entityOne);
@@ -134,6 +136,8 @@ public class ArtworkLogicTest {
         entityTwo.setName("Pintura2");
         entityTwo.setPrice(20000);
         entityTwo.setArtworkStyle("Impresionismo");
+        entityTwo.setRatingSum(10F);
+        entityTwo.setRatingVotes(2F);
         entityTwo.setArtist(artistEntityOne);
         em.persist(entityTwo);
         data.add(entityTwo);
@@ -142,6 +146,8 @@ public class ArtworkLogicTest {
         entityThree.setName("Pintura3");
         entityThree.setPrice(30000);
         entityThree.setArtworkStyle("Realismo");
+        entityThree.setRatingSum(9F);
+        entityThree.setRatingVotes(2F);
         entityThree.setArtist(artistEntityTwo);
         em.persist(entityThree);
         data.add(entityThree);
@@ -150,6 +156,8 @@ public class ArtworkLogicTest {
         entityFour.setName("Pintura3");
         entityFour.setPrice(40000);
         entityFour.setArtworkStyle("Impresionismo");
+        entityFour.setRatingSum(6F);
+        entityFour.setRatingVotes(2F);
         entityFour.setArtist(artistEntityOne);
         em.persist(entityFour);
         data.add(entityFour);
@@ -384,7 +392,27 @@ public class ArtworkLogicTest {
         artworkEntitys = artworkLogic.searchArtworksBetweenPrices(50000, 90000);
         Assert.assertEquals(0, artworkEntitys.size());
     }
+    /**
+     * Test search Artworks Between Ratings
+     */
+    @Test
+    public void searchArtworksBetweenRatings() {
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksBetweenRatings(0F, 1F);
+        Assert.assertEquals(0, artworkEntitys.size());
 
+        artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 3F);
+        Assert.assertEquals(1, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 4F);
+        Assert.assertEquals(2, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 4.5F);
+        Assert.assertEquals(3, artworkEntitys.size());
+        
+        artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 5F);
+        Assert.assertEquals(4, artworkEntitys.size());
+    }
+    
     /**
      * Test for search Artworks By Style
      */
