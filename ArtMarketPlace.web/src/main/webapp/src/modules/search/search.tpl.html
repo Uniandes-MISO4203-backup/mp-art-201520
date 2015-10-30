@@ -132,6 +132,7 @@
                     <p><strong>Price:</strong> {{element.price}}</p>
                     <p><strong>Artist:</strong> {{element.artist.name}}</p>
                     <p><strong>Artwork Style:</strong> {{element.artworkStyle}}</p>
+                    <p><strong>Rating: </strong> {{element.ratingSum / element.ratingVotes| number : 2}}/5</p>
                     <p ng-if=element.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{element.discount}} &#37; </p>
                 </div>
                 <p class="text-center">
