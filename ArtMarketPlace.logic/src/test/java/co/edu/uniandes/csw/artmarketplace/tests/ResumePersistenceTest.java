@@ -119,8 +119,8 @@ public class ResumePersistenceTest{
             entity.setWebsite(generateRandom(String.class));
             entity.setLastName(generateRandom(String.class));
             entity.setPhoto(generateRandom(String.class));
-            entity.setRatingSum(new Random().nextFloat());
-            entity.setRatingVotes(new Random().nextFloat());
+            entity.setRatingSum(10F);
+            entity.setRatingVotes(2F);
             entity.setCountry(generateRandom(String.class));
             entity.setArtist(artist);
             ExperienceEntity exp = new ExperienceEntity();
@@ -135,6 +135,54 @@ public class ResumePersistenceTest{
             data.add(entity);
             em.persist(entity);
         }
+        insertDataForSearch();
+    }
+    
+    private void insertDataForSearch() {
+        ArtistEntity artist = new ArtistEntity();
+        artist.setId(generateRandom(Long.class));
+        artist.setName("Artista1");
+        artist.setUserId(generateRandom(String.class));
+        ResumeEntity entity = new ResumeEntity();
+        entity.setArtist(artist);
+        entity.setCity(generateRandom(String.class));
+        entity.setWebsite(generateRandom(String.class));
+        entity.setLastName(generateRandom(String.class));
+        entity.setPhoto(generateRandom(String.class));
+        entity.setRatingSum(10F);
+        entity.setRatingVotes(2F);
+        data.add(entity);
+        em.persist(entity);
+        
+        ArtistEntity artist2 = new ArtistEntity();
+        artist2.setId(generateRandom(Long.class));
+        artist2.setName("Artista2");
+        artist2.setUserId(generateRandom(String.class));
+        ResumeEntity entity2 = new ResumeEntity();
+        entity2.setArtist(artist2);
+        entity2.setCity(generateRandom(String.class));
+        entity2.setWebsite(generateRandom(String.class));
+        entity2.setLastName(generateRandom(String.class));
+        entity2.setPhoto(generateRandom(String.class));
+        entity2.setRatingSum(8F);
+        entity2.setRatingVotes(2F);
+        data.add(entity2);
+        em.persist(entity2);
+        
+        ArtistEntity artist3 = new ArtistEntity();
+        artist3.setId(generateRandom(Long.class));
+        artist3.setName("Artista3");
+        artist3.setUserId(generateRandom(String.class));
+        ResumeEntity entity3 = new ResumeEntity();
+        entity3.setArtist(artist3);
+        entity3.setCity(generateRandom(String.class));
+        entity3.setWebsite(generateRandom(String.class));
+        entity3.setLastName(generateRandom(String.class));
+        entity3.setPhoto(generateRandom(String.class));
+        entity3.setRatingSum(6F);
+        entity3.setRatingVotes(2F);
+        data.add(entity3);
+        em.persist(entity3);
     }
     
 //    @Test
@@ -153,6 +201,49 @@ public class ResumePersistenceTest{
 //    }
 
     /**
+     * test Search Artist By Name
+     */
+    @Test
+    public void testSearchArtistByName() {
+        List<ResumeEntity> results = resumePersistence.searchArtistByName("Artista1");
+        
+        for(ResumeEntity r: results){
+            Assert.assertEquals("Artista1", r.getArtist().getName());
+        }
+        
+        results = resumePersistence.searchArtistByName("Artista2");
+        
+        for(ResumeEntity r: results){
+            Assert.assertEquals("Artista2", r.getArtist().getName());
+        }
+        
+        results = resumePersistence.searchArtistByName("Artista3");
+        
+        for(ResumeEntity r: results){
+            Assert.assertEquals("Artista3", r.getArtist().getName());
+        }
+    }
+
+    /**
+     * test Search Artist Between Ratings
+     */
+    @Test
+    public void testSearchArtistBetweenRatings() {
+        List<ResumeEntity> results = resumePersistence.searchArtistsBetweenRatings(0F, 1F);
+        Assert.assertEquals(0, results.size());
+        
+        results = resumePersistence.searchArtistsBetweenRatings(1F, 2F);
+        Assert.assertEquals(0, results.size());
+        
+        results = resumePersistence.searchArtistsBetweenRatings(1F, 3F);
+        Assert.assertEquals(1, results.size());
+        
+        results = resumePersistence.searchArtistsBetweenRatings(1F, 4F);
+        Assert.assertEquals(2, results.size());
+        
+    }
+    
+    /**
      * @generated
      */
     @Test
@@ -167,8 +258,8 @@ public class ResumePersistenceTest{
         newEntity.setWebsite(generateRandom(String.class));
         newEntity.setLastName(generateRandom(String.class));
         newEntity.setPhoto(generateRandom(String.class));
-        newEntity.setRatingSum(new Random().nextFloat());
-        newEntity.setRatingVotes(new Random().nextFloat());
+        newEntity.setRatingSum(10F);
+        newEntity.setRatingVotes(2F);
         newEntity.setCountry(generateRandom(String.class));
         newEntity.setArtist(artist);
 
@@ -187,6 +278,7 @@ public class ResumePersistenceTest{
         data.add(newEntity);
     }
 
+    
     
     
 

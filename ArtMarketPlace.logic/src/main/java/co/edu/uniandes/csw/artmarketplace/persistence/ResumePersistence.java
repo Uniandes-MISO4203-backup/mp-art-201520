@@ -49,6 +49,11 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
         }
     }
     
+    /**
+     * search Artist By Name
+     * @param artistName
+     * @return 
+     */
     public List<ResumeEntity> searchArtistByName(String artistName) {
         List<ResumeEntity> result = new ArrayList<ResumeEntity>();
         try {
@@ -60,7 +65,13 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
         }
         return result;
     }
-    
+
+    /**
+     * search Artists Between Ratings
+     * @param artistMinRating
+     * @param artistMaxRating
+     * @return 
+     */
     public List<ResumeEntity> searchArtistsBetweenRatings(float artistMinRating,float artistMaxRating) {
         List<ResumeEntity> result = new ArrayList<ResumeEntity>();
         try {
