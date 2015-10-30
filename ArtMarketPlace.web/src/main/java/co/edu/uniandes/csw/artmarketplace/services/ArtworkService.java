@@ -127,6 +127,18 @@ public class ArtworkService {
     public List<ArtworkDTO> searchArtworksBetweenPrices(@PathParam("artworkMinPrice") int artworkMinPrice, @PathParam("artworkMaxPrice") int artworkMaxPrice) {
         return artworkLogic.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice);
     }
+    
+    /**
+     * Search Artworks Between Ratings
+     * @param artworkMinRating
+     * @param artworkMaxRating
+     * @return 
+     */
+    @GET
+    @Path("/artworksBetweenRatings/{artworkMinRating}/{artworkMaxRating}")
+    public List<ArtworkDTO> searchArtworksBetweenRatings(@PathParam("artworkMinRating") float artworkMinRating, @PathParam("artworkMaxRating") float artworkMaxRating) {
+        return artworkLogic.searchArtworksBetweenRatings(artworkMinRating, artworkMaxRating);
+    }
 
     /**
      * Search artist with cheapest artwork

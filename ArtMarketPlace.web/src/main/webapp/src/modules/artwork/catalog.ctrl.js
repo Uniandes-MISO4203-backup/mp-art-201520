@@ -41,6 +41,14 @@
                     $location.url('/catalog' + search);
                 };
 
+                $scope.searchArtworksBetweenRatings = function (artworkMinRating, artworkMaxRating) {
+                    svc.searchArtworksBetweenRatings(artworkMinRating, artworkMaxRating).then(function (results) {
+                        $scope.artworks = [];
+                        $scope.artworks = results;
+                        $scope.artists = [];
+                    });
+                };
+
                 $scope.searchArtworksBetweenPrices = function (artworkMinPrice, artworkMaxPrice) {
                     svc.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice).then(function (results) {
                         $scope.artworks = [];

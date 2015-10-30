@@ -236,4 +236,14 @@ public class ArtworkLogic implements IArtworkLogic {
         }
         return result;
     }
+
+    /**
+     * search atrworks between ratings
+     * @param artworkMinRating
+     * @param artworkMaxRating
+     * @return 
+     */
+    public List<ArtworkDTO> searchArtworksBetweenRatings(float artworkMinRating, float artworkMaxRating) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchArtworksBetweenRatings(artworkMinRating, artworkMaxRating));
+    }
 }
