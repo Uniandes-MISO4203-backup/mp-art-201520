@@ -89,7 +89,7 @@
                 };
                 
                 $scope.searchArtist = function (searchName) {
-                    artistSvc.searchArtist(searchName).then(function (results) {
+                    resumeSvc.searchArtistByName(searchName).then(function (results) {
                         $scope.artists = [];
                         $scope.artists = results;
                         $scope.artworks = [];

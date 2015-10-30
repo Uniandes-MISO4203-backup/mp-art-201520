@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.artmarketplace.converters.ResumeConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -116,5 +117,9 @@ public class ResumeLogic implements IResumeLogic {
             }
         }
         return rating;
+    }
+
+    public List<ResumeDTO> searchArtistByName(String artistName) {
+        return ResumeConverter.listEntity2DTO(persistence.searchArtistByName(artistName));
     }
 }

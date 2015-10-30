@@ -25,7 +25,10 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @NamedQueries(
-{@NamedQuery(name = "Resume.getByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.experience WHERE r.artist.id=:artist_id")}
+{
+    @NamedQuery(name = "Resume.getByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.experience WHERE r.artist.id=:artist_id"),
+    @NamedQuery(name = "Resume.searchArtistsByName", query = "SELECT r FROM ResumeEntity r WHERE UPPER(r.artist.name) LIKE UPPER(:artistName)")
+}
 )
 public class ResumeEntity implements Serializable {
     

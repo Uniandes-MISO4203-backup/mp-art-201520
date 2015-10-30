@@ -6,6 +6,9 @@
                 var self = this;
                 self.saveRecord(resume);
             };
+            this.searchArtistByName = function (searchName) {
+                return this.api.one("searchArtistByName/"+searchName).get();
+            };
             this.getResume = function (id) {
                 return this.api.one(id).get();
             };

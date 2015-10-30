@@ -168,7 +168,7 @@ public abstract class ResumeConverter {
         List<ResumeDTO> dtos = new ArrayList<ResumeDTO>();
         if (entities != null) {
             for (ResumeEntity entity : entities) {
-                dtos.add(basicEntity2DTO(entity));
+                dtos.add(fullEntity2DTO(entity));
             }
         }
         return dtos;

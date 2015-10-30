@@ -193,6 +193,12 @@ public class ResumeService {
         }
         return null;
     }
+    
+    @Path("/searchArtistByName/{artistName}")
+    @GET
+    public List<ResumeDTO> searchArtistByName(@PathParam("artistName") String artistName) {
+        return resumeLogic.searchArtistByName(artistName);
+    }
 
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")

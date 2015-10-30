@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,5 +47,17 @@ public class ResumePersistence extends CrudPersistence<ResumeEntity> {
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
             return null;
         }
+    }
+    
+    public List<ResumeEntity> searchArtistByName(String artistName) {
+        List<ResumeEntity> result = new ArrayList<ResumeEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artistName", artistName);
+            result = executeListNamedQuery("Resume.searchArtistsByName", params);
+        } catch (Exception e) {
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
     }
 }

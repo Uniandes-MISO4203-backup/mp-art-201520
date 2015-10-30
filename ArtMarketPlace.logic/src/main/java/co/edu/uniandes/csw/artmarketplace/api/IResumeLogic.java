@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.artmarketplace.api;
 
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
+import java.util.List;
 
 
 /**
@@ -41,4 +42,11 @@ public interface IResumeLogic {
      * @return rating es la variable designada para retornar la calificaci?n del artista.
      */
     public Float getRatingArtist(Long id);
+    
+    /**
+     * Search artists by name
+     * @param artistName
+     * @return 
+     */
+    public List<ResumeDTO> searchArtistByName(String artistName);
 }
