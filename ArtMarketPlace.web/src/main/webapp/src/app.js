@@ -15,7 +15,8 @@
         'experienceModule',
         'blogModule',
         'ngRoute',
-        'ngCrud'
+        'ngCrud',
+        'ui.bootstrap'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -115,9 +116,9 @@
                 logoutURL: 'logout',
                 nameCookie: 'userCookie'
             });
-            auth.setRoles({'user': 'Client', 'artists': 'Artist', 'admin':'Admin'});
+            auth.setRoles({'user': 'Client', 'artists': 'Artist', 'admin': 'Admin'});
         }]);
-    
+
     mainApp.run(function (editableOptions) {
         // bootstrap3 theme. For Xeditable plugin Angular
         editableOptions.theme = 'bs3';

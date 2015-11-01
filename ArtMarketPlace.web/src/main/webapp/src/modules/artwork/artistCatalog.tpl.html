@@ -1,48 +1,3 @@
-<script>
-    jQuery(document).ready(function ($) {
-
-        $('#checkbox').change(function () {
-            setInterval(function () {
-                moveRight();
-            }, 3000);
-        });
-        var slideWidth = $('#slider ul li').width();
-        var slideHeight = $('#slider ul li').height();
-
-        $('#slider').css({width: slideWidth, height: slideHeight});
-
-        $('#slider ul li:last-child').prependTo('#slider ul');
-
-        function moveLeft() {
-            $('#slider ul').animate({
-                left: +slideWidth
-            }, 200, function () {
-                $('#slider ul li:last-child').prependTo('#slider ul');
-                $('#slider ul').css('left', '');
-            });
-        }
-        ;
-
-        function moveRight() {
-            $('#slider ul').animate({
-                left: -slideWidth
-            }, 200, function () {
-                $('#slider ul li:first-child').appendTo('#slider ul');
-                $('#slider ul').css('left', '');
-            });
-        }
-        ;
-
-        $('a.control_prev').click(function () {
-            moveLeft();
-        });
-
-        $('a.control_next').click(function () {
-            moveRight();
-        });
-
-    });
-</script>
 <div id="Resume-header">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -70,19 +25,13 @@
             <img src="{{artistResume.photo}}" alt="Artist picture" width="100%" />
             <h1>{{artistResume.lastName}}</h1>
             <a href="#/resume/{{artistName}}" class="btn btn-success">Personal Information</a>
-            <div id="slider" style="width: 100%;">
-                <a href="" class="control_next">></a>
-                <a href="" class="control_prev"><</a>
-                <ul>
-                    <li ng-repeat="record in artistArtworks">
-                        <img src="{{record.artworkGaleryItems[0]}}" alt="{{record.artworkGaleryItems[0]}}" width="100%">
-                    </li>
-                </ul>  
+            <div style="height: 200px; margin-top: 20px">
+                <uib-carousel interval="5000" no-wrap="false">
+                    <uib-slide ng-repeat="record in artistArtworks" active="slide.active">
+                        <img ng-if="record.artworkGaleryItems[0].type === 'photo'" ng-src="{{record.artworkGaleryItems[0].link}}" style="margin:auto; height: 200px">
+                    </uib-slide>
+                </uib-carousel>
             </div>
-            <div class="slider_option">
-                <input type="checkbox" id="checkbox">
-                <label for="checkbox">Autoplay</label>
-            </div> 
         </div>
     </div>
 </div>
@@ -93,27 +42,27 @@
             <div class="col-sm-12" style="margin-top: 20px;">
                 <div ng-repeat="record in artistArtworks">
                     <div class="col-sm-4 well text-center">
-                        <div class="col-md-12">
-                            <div id="slider" style="width: 100%;">
-                                <a href="" class="control_next">></a>
-                                <a href="" class="control_prev"><</a>
-                                <ul>
-                                    <li ng-repeat="item in record.artworkGaleryItems">
-                                        <img ng-if="item.type === 'photo'"ng-src="{{item.link}}" alt="{{item.link}}" width="100%">
-                                        <iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>
-                                    </li>
-                                </ul>
+                        <div class="col-sm-12">
+                            <div style="height: 300px">
+                                <uib-carousel interval="5000" no-wrap="false">
+                                    <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
+                                        <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px">
+                                        <!--<iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>-->
+                                    </uib-slide>
+                                </uib-carousel>
                             </div>
+                            <div class="caption" style="margin-top: 10px">
+                                <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
+                                <p><strong>{{model.fields[1].displayName}}: </strong> {{record.price| currency}}</p>
+                                <p><strong>{{model.fields[2].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
+                                <p><strong>Rating: </strong> {{record.ratingSum / record.ratingVotes| number : 2}}/5</p>
+                                <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[3].displayName}}: </strong>{{record.discount}} &#37; </p>
+                                <p ng-if=!record.discount><br/></p>
+                            </div>
+                            <p class="text-center">
+                                <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                            </p>
                         </div>
-                        <div class="caption" >
-                            <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
-                            <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
-                            <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:black">{{record.artist.name}}</a></p>
-                            <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
-                        </div>
-                        <p class="text-center">
-                            <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
-                        </p>
                     </div>
                 </div>
             </div>

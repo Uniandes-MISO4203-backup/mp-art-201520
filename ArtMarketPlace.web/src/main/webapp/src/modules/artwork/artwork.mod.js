@@ -1,5 +1,5 @@
 (function (ng) {
-    var mod = ng.module('artworkModule', ['ngCrud']);
+    var mod = ng.module('artworkModule', ['ngCrud', 'ui.bootstrap']);
 
     mod.constant('artworkContext', 'artworks');
 

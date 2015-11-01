@@ -1,78 +1,32 @@
-<link rel="stylesheet" type = "text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" type = "text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel="stylesheet" type = "text/css" href="https://dl.dropboxusercontent.com/u/181689/jhtmlarea/ratingStars.css">
 
-<script>
-    jQuery(document).ready(function ($) {
-        var slideWidth = $('#slider2 ul li').width();
-        var slideHeight = 250;
-
-        $('#slider2').css({width: slideWidth, height: slideHeight});
-
-        $('#slider2 ul li:last-child').prependTo('#slider2 ul');
-
-        function moveLeft() {
-            $('#slider2 ul').animate({
-                left: +slideWidth
-            }, 200, function () {
-                $('#slider2 ul li:last-child').prependTo('#slider2 ul');
-                $('#slider2 ul').css('left', '');
-            });
-        }
-        ;
-
-        function moveRight() {
-            $('#slider2 ul').animate({
-                left: -slideWidth
-            }, 200, function () {
-                $('#slider2 ul li:first-child').appendTo('#slider2 ul');
-                $('#slider2 ul').css('left', '');
-            });
-        }
-        ;
-
-        $('a.control_prev2').click(function () {
-            moveLeft();
-        });
-
-        $('a.control_next2').click(function () {
-            moveRight();
-        });
-
-    });
-</script>
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.detailsMode">
     <div class="col-sm-12">
         <div ng-repeat="record in records">
             <div class="col-sm-4 well text-center">
                 <div class="col-sm-12">
-<!--                    <div class="img-thumbnail" id="cover" ng-if="record.artworkGaleryItems">
-                        <a ng-href="{{record.artworkGaleryItems[0].link}}" target="_blank">
-                            <img class="img-responsive" style="height: 20vw;" ng-src="{{record.artworkGaleryItems[0].link}}" alt="{{record.artworkGaleryItems[0].link}}">
-                        </a>
-                    </div>-->
-                    <div id="slider2" style="width: 100%;">
-                        <a href="" class="control_next2">></a>
-                        <a href="" class="control_prev2"><</a>
-                        <ul>
-                            <li ng-repeat="item in record.artworkGaleryItems">
-                                <img ng-if="item.type === 'photo'"ng-src="{{item.link}}" alt="{{item.link}}" width="100%">
-                                <iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>
-                            </li>
-                        </ul>
+                    <div style="height: 350px">
+                        <uib-carousel interval="5000" no-wrap="false">
+                            <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
+                                <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px">
+                                <!--<iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>-->
+                            </uib-slide>
+                        </uib-carousel>
                     </div>
+                    <div class="caption" style="margin-top: 10px">
+                        <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
+                        <p><strong>{{model.fields[1].displayName}}: </strong> {{record.price| currency}}</p>
+                        <p><strong>{{model.fields[2].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
+                        <p><strong>Rating: </strong> {{record.ratingSum / record.ratingVotes| number : 2}}/5</p>
+                        <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[3].displayName}}: </strong>{{record.discount}} &#37; </p>
+                        <p ng-if=!record.discount><br/></p>
+                    </div>
+                    <p class="text-center">
+                        <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                    </p>
                 </div>
-                <div class="caption" >
-                    <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
-                    <p><strong>{{model.fields[2].displayName}}: </strong> {{record.price| currency}}</p>
-                    <p><strong>{{model.fields[3].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
-                    <p><strong>Rating: </strong> {{record.ratingSum / record.ratingVotes| number : 2}}/5</p>
-                    <p ng-if=record.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{record.discount}} &#37; </p>
-                    <p ng-if=!record.discount><br/></p>
-                </div>
-                <p class="text-center">
-                    <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
-                </p>
             </div>
         </div>
     </div>
@@ -85,20 +39,21 @@
 <div ng-show="ctrl.detailsMode" ng-if="artworkRecord">
     <div class="panel panel-default">
         <div class="panel-heading">{{artworkRecord.name}}</div>
-        <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
-            <li ng-if="remark.userType === 'Artista'" style="background-color: lavender;" class="list-group-item">
-                <h6>Remark of artist {{remark.remarkUser}}</h6>
-                {{remark.description}} - {{remark.remarkDate| date:'yyyy-MM-dd'}}
-            </li>
-            <li ng-if="remark.userType === 'Cliente'" class="list-group-item">
-                {{remark.remarkDate| date:'yyyy-MM-dd'}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
-            </li>
-        </ul>
+        <div class="panel-body">
+            <ul class="list-group" ng-repeat="remark in artworkRecord.remarks">
+                <li ng-if="remark.userType === 'Artista'" style="background-color: lavender;" class="list-group-item">
+                    <h6>Remark of artist {{remark.remarkUser}}</h6>
+                    {{remark.description}} - {{remark.remarkDate| date:'yyyy-MM-dd'}}
+                </li>
+                <li ng-if="remark.userType === 'Cliente'" class="list-group-item">
+                    {{remark.remarkDate| date:'yyyy-MM-dd'}} - {{remark.description}} - <em>{{remark.remarkUser}}</em>
+                </li>
+            </ul>
+        </div>
     </div>
     <a class="btn btn-default" ng-click="ctrl.detailsMode = false" >Back</a>
     <button ng-click="postRemark(artworkRecord.id, newRemark)" class="btn btn-default">POST</button>
     <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Enter remark here..." maxlength="255" ng-model="newRemark" required>
-
 </div>
 
 <div class="modal fade" id="questionModal" role="dialog">
@@ -106,7 +61,6 @@
     <div class="modal-dialog">
         <!-- Contenido definido para el Modal -->  
         <div class="modal-content">
-
             <!-- Encabezado -->
             <div class="modal-header">
                 <!-- Boton de cerrado -->
@@ -114,16 +68,18 @@
                 <!-- Titulo del Modal -->
                 <h4 class="modal-title" id = "titleModal">Question for the Artist</h4>
             </div>
-            <div id = "userQuestion"></div>
-            <div id = "artworkRef"></div>
-            <div id = "artworkName"></div>
             <!-- Definicion del formulario para la pregunta -->
             <form ng-repeat="action in ctrl.saveQuestion" id="questionForm" method="post" class="form-horizontal" ng-submit="action.fn(record)">
-                <!-- Forma del Formulario para la pregunta -->
                 <div class="modal-body">
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4" id="question" style = "wmargin: 0 auto;"></textarea>
-                    </div>         
+                    <div id = "userQuestion"></div>
+                    <div id = "artworkRef" style="margin-top: 10px"></div>
+                    <div id = "artworkName" style="margin-top: 10px"></div>
+                    <!-- Forma del Formulario para la pregunta -->
+                    <div style="margin-top: 10px">
+                        <b>Question:</b><br>
+                        <textarea class="form-control" rows="4" id="question" style = "margin: 0 auto; resize: vertical" 
+                                  placeholder="Write your answer here..."></textarea>
+                    </div>
                 </div>
                 <!-- Footer del formulario de envio de preguntas -->
                 <div class="modal-footer">
@@ -137,7 +93,6 @@
 
     </div>
 </div>
-
 
 <!-- Rating -->
 <!-- Vista del modal-->
@@ -155,11 +110,11 @@
             </div>
             <!-- Definicion del formulario para el rating -->
             <form id="ratingModal" ng-repeat="action in ctrl.saveRating" method="post" class="form-horizontal" ng-submit="action.fn()">
-                <!-- Forma del Formulario para el rating -->
-                <p>Ref. Artwork:</p>
-                <div align="center">
-                    <div id="artworkRating"></div>
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <!-- Forma del Formulario para el rating -->
+                    <p>Ref. Artwork:</p>
+                    <div align="center">
+                        <div id="artworkRating"></div>
                         <div class="stars">
                             <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/><label class="star star-5" for="star-5"></label>
                             <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/><label class="star star-4" for="star-4"></label>
