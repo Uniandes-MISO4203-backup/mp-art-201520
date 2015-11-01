@@ -1,12 +1,13 @@
 (function (ng) {
     var mod = ng.module('resumeModule');
 
-    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService', 'resumeModel', '$routeParams', function (CrudCreator, $scope, $location, svc, model, $routeParams) {
+    mod.controller('resumeCtrl', ['CrudCreator', '$scope', '$location', 'resumeService',
+        'resumeModel', '$routeParams',
+        function (CrudCreator, $scope, $location, svc, model, $routeParams) {
             CrudCreator.extendController(this, svc, $scope, model, 'resume', 'Resume');
             var idArtist;
             var education = "";
             var experience = "";
-            
             if ($routeParams.id) {
                 idArtist = $routeParams.id;
             } else {
@@ -28,7 +29,6 @@
                     $scope.listExperience = experience;
                 });
             }
-            
             $scope.param1 = idArtist;
             $scope.save = function () {
                 if ($scope.record)
@@ -85,7 +85,6 @@
                     $scope.record = result;
                 });
             }
-
             this.modalRating = [
                 {
                     fn: function ()
@@ -109,6 +108,5 @@
                         $('#ratingModal').modal('hide');
                     }
                 }];
-
         }]);
 })(window.angular);

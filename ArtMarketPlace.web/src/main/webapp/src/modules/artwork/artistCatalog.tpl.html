@@ -28,8 +28,8 @@
             <div style="height: 200px; margin-top: 20px">
                 <uib-carousel interval="5000" no-wrap="false">
                     <uib-slide ng-repeat="record in artistArtworks" active="slide.active">
-                        <img ng-if="record.artworkGaleryItems[0].type === 'photo'" 
-                             ng-src="{{record.artworkGaleryItems[0].link}}" style="margin:auto; height: 200px;  width: 100%">
+                        <img ng-if="record.artworkGaleryItems[0].type === 'photo'" ng-src="{{record.artworkGaleryItems[0].link}}" 
+                             style="margin:auto; height: 200px;  width: 100%" alt="{{record.name}}">
                     </uib-slide>
                 </uib-carousel>
             </div>
@@ -47,7 +47,8 @@
                             <div style="height: 300px">
                                 <uib-carousel interval="5000" no-wrap="false">
                                     <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
-                                        <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px; width: 100%">
+                                        <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px; width: 100%"
+                                             alt="{{record.name}}">
                                         <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 300px; width: 100%"></youtube-video>
                                     </uib-slide>
                                 </uib-carousel>
