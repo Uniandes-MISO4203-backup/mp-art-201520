@@ -1,5 +1,5 @@
 (function (ng) {
-    var mod = ng.module('artworkModule', ['ngCrud', 'ui.bootstrap']);
+    var mod = ng.module('artworkModule', ['ngCrud', 'ui.bootstrap', 'youtube-embed']);
 
     mod.constant('artworkContext', 'artworks');
 

@@ -16,7 +16,8 @@
         'blogModule',
         'ngRoute',
         'ngCrud',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'youtube-embed'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {

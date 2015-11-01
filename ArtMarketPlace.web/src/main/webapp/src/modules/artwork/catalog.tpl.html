@@ -1,6 +1,3 @@
-<link rel="stylesheet" type = "text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" type = "text/css" href="https://dl.dropboxusercontent.com/u/181689/jhtmlarea/ratingStars.css">
-
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.detailsMode">
     <div class="col-sm-12">
@@ -10,8 +7,8 @@
                     <div style="height: 350px">
                         <uib-carousel interval="5000" no-wrap="false">
                             <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
-                                <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px">
-                                <!--<iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>-->
+                                <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px; width: 100%">
+                                <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 350px; width: 100%"></youtube-video>
                             </uib-slide>
                         </uib-carousel>
                     </div>
@@ -90,7 +87,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -133,6 +129,5 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>

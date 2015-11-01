@@ -18,7 +18,7 @@
 </div>
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 
-<div class="col-sm-2">
+<div class="col-sm-3">
     <div class="panel panel-default">
         <div class="panel-heading">Artist</div>
         <div class="panel-body" style="text-align: center;">
@@ -28,26 +28,27 @@
             <div style="height: 200px; margin-top: 20px">
                 <uib-carousel interval="5000" no-wrap="false">
                     <uib-slide ng-repeat="record in artistArtworks" active="slide.active">
-                        <img ng-if="record.artworkGaleryItems[0].type === 'photo'" ng-src="{{record.artworkGaleryItems[0].link}}" style="margin:auto; height: 200px">
+                        <img ng-if="record.artworkGaleryItems[0].type === 'photo'" 
+                             ng-src="{{record.artworkGaleryItems[0].link}}" style="margin:auto; height: 200px;  width: 100%">
                     </uib-slide>
                 </uib-carousel>
             </div>
         </div>
     </div>
 </div>
-<div class="col-sm-10">
+<div class="col-sm-9">
     <div class="panel panel-default">
         <div class="panel-heading">Catalogo</div>        
         <div class="panel-body" style="text-align: center;">
             <div class="col-sm-12" style="margin-top: 20px;">
                 <div ng-repeat="record in artistArtworks">
-                    <div class="col-sm-4 well text-center">
+                    <div class="col-sm-6 well text-center">
                         <div class="col-sm-12">
                             <div style="height: 300px">
                                 <uib-carousel interval="5000" no-wrap="false">
                                     <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
-                                        <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px">
-                                        <!--<iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>-->
+                                        <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px; width: 100%">
+                                        <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 300px; width: 100%"></youtube-video>
                                     </uib-slide>
                                 </uib-carousel>
                             </div>
