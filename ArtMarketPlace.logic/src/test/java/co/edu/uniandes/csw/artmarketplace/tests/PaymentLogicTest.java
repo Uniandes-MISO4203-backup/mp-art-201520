@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.artmarketplace.tests;
 
 import co.edu.uniandes.csw.artmarketplace.api.IPaymentLogic;
+import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.PaymentDTO;
 import co.edu.uniandes.csw.artmarketplace.ejbs.PaymentLogic;
+import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.PaymentEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.PaymentPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
@@ -143,4 +145,110 @@ public class PaymentLogicTest {
         Assert.assertEquals(dto.getTaxes(), entity.getTaxes());
         Assert.assertEquals(dto.getTotal(), entity.getTotal());
     }
+    
+     /**
+     * @generated
+     */
+    @Test
+    public void getPaymentPaginationTest() {
+        //Page 1
+        List<PaymentDTO> dto1 = paymentLogic.getPayments(1, 2);
+        Assert.assertNotNull(dto1);
+        Assert.assertEquals(2, dto1.size());
+        //Page 2
+        List<PaymentDTO> dto2 = paymentLogic.getPayments(2, 2);
+        Assert.assertNotNull(dto2);
+        Assert.assertEquals(1, dto2.size());
+
+        for (PaymentDTO dto : dto1) {
+            boolean found = false;
+            for (PaymentEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+
+        for (PaymentDTO dto : dto2) {
+            boolean found = false;
+            for (PaymentEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getPaymentsTest() {
+        List<PaymentDTO> list = paymentLogic.getPayments(null, null);
+        Assert.assertEquals(data.size(), list.size());
+        for (PaymentDTO dto : list) {
+            boolean found = false;
+            for (PaymentEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getPaymentTest() {
+        PaymentEntity entity = data.get(0);
+        PaymentDTO dto = paymentLogic.getPayment(entity.getId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getMethod(), dto.getMethod());
+        Assert.assertEquals(entity.getPaymentType(), dto.getPaymentType());
+        Assert.assertEquals(entity.getReference(), dto.getReference());
+        Assert.assertEquals(entity.getSubtotal(), dto.getSubtotal());
+        Assert.assertEquals(entity.getTaxes(), dto.getTaxes());
+        Assert.assertEquals(entity.getTotal(), dto.getTotal());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deletePaymentTest() {
+        PaymentEntity entity = data.get(0);
+        paymentLogic.deletePayment(entity.getId());
+        PaymentEntity deleted = em.find(PaymentEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void updatePaymentTest() {
+        PaymentEntity entity = data.get(0);
+
+        PaymentDTO dto = new PaymentDTO();
+
+        dto.setId(entity.getId());
+        dto.setMethod(generateRandom(String.class));
+        dto.setSubtotal(generateRandom(Integer.class));
+        dto.setTaxes(generateRandom(Integer.class));
+        dto.setTotal(generateRandom(Integer.class));
+
+        paymentLogic.updatePayment(dto);
+
+        PaymentEntity resp = em.find(PaymentEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getMethod(), resp.getMethod());
+        Assert.assertEquals(dto.getSubtotal(), resp.getSubtotal());
+        Assert.assertEquals(dto.getTaxes(), resp.getTaxes());
+        Assert.assertEquals(dto.getTotal(), resp.getTotal());
+    }
+
 }

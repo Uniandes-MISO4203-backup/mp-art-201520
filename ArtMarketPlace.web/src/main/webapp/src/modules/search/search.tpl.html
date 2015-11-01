@@ -1,37 +1,91 @@
+<link rel="stylesheet" type = "text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" type = "text/css" href="https://dl.dropboxusercontent.com/u/181689/jhtmlarea/ratingStars.css">
+
+<script>
+    jQuery(document).ready(function ($) {
+        var slideWidth = $('#slider2 ul li').width();
+        var slideHeight = 250;
+
+        $('#slider2').css({width: slideWidth, height: slideHeight});
+
+        $('#slider2 ul li:last-child').prependTo('#slider2 ul');
+
+        function moveLeft() {
+            $('#slider2 ul').animate({
+                left: +slideWidth
+            }, 200, function () {
+                $('#slider2 ul li:last-child').prependTo('#slider2 ul');
+                $('#slider2 ul').css('left', '');
+            });
+        }
+        ;
+
+        function moveRight() {
+            $('#slider2 ul').animate({
+                left: -slideWidth
+            }, 200, function () {
+                $('#slider2 ul li:first-child').appendTo('#slider2 ul');
+                $('#slider2 ul').css('left', '');
+            });
+        }
+        ;
+
+        $('a.control_prev2').click(function () {
+            moveLeft();
+        });
+
+        $('a.control_next2').click(function () {
+            moveRight();
+        });
+
+    });
+</script>
 <script>
     var selected = "tabSearchArtworksBetweenPrices";
     var disp = "searchArtworksBetweenPrices";
-	
-	var tabSearchArtworksBetweenPrices = "tabSearchArtworksBetweenPrices";
-	var tabSearchCheapestArtworkOfAnArtist = "tabSearchCheapestArtworkOfAnArtist";
-	var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
-        var tabSearchArtworksByStyle = "tabSearchArtworksByStyle";
-        var tabSearchArtist = "tabSearchArtist";
-	
-    function show(tab,content){
-		document.getElementById(disp).style.display = "none";
-		document.getElementById(content).style.display = "block";
-		selected = tab;
-		disp = content;
-		$('li.active').removeClass('active');
-	}
+
+    var tabSearchArtworksBetweenPrices = "tabSearchArtworksBetweenPrices";
+    var tabSearchArtworksBetweenRatings = "tabSearchArtworksBetweenRatings";
+    var tabSearchCheapestArtworkOfAnArtist = "tabSearchCheapestArtworkOfAnArtist";
+    var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
+    var tabSearchArtworksByStyle = "tabSearchArtworksByStyle";
+    var tabSearchArtist = "tabSearchArtist";
+    var tabSearchArtistsBetweenRatings = "tabSearchArtistsBetweenRatings";
+
+    function show(tab, content) {
+        document.getElementById(disp).style.display = "none";
+        document.getElementById(content).style.display = "block";
+        selected = tab;
+        disp = content;
+        $('li.active').removeClass('active');
+    }
 </script>
 <div style="padding-top: 70px;">
-    
-	<ul class="nav nav-pills nav-justified" style="background: #3E3F3A;">
-            <li id="tabSearchArtworksBetweenPrices" style="border:1px solid black;width: 15%;" class="active" onclick="show('tabSearchArtworksBetweenPrices','searchArtworksBetweenPrices')"><a href="#/search"><strong>Search Artworks Between Prices</strong></a></li>
-            <li id="tabSearchCheapestArtworkOfAnArtist" style="border:1px solid black;width: 20%;" onclick="show('tabSearchCheapestArtworkOfAnArtist','searchCheapestArtworkOfAnArtist')" ><a href="#/search"><strong>Search The Cheapest Artwork of an Artist</strong></a></li>
-            <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;width: 20%;" onclick="show('tabSearchArtistWithCheapestArtwork','searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
-            <li id="tabSearchArtworksByStyle" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByStyle','searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
-            <li id="tabSearchArtist" style="border:1px solid black; width: 10%;" onclick="show('tabSearchArtist','searchArtist')" ><a href="#/search"><strong>Search Artist</strong></a></li>
-	</ul>
 
-	<div id="searchArtworksBetweenPrices" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: block;">
+    <ul class="nav nav-pills nav-justified" style="background: #3E3F3A;">
+        <li id="tabSearchArtworksBetweenPrices" style="border:1px solid black;width: 15%;" class="active" onclick="show('tabSearchArtworksBetweenPrices', 'searchArtworksBetweenPrices')"><a href="#/search"><strong>Search Artworks Between Prices</strong></a></li>
+        <li id="tabSearchArtworksBetweenRatings" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksBetweenRatings', 'searchArtworksBetweenRatings')"><a href="#/search"><strong>Search Artworks Between Ratings</strong></a></li>
+        <li id="tabSearchCheapestArtworkOfAnArtist" style="border:1px solid black;width: 20%;" onclick="show('tabSearchCheapestArtworkOfAnArtist', 'searchCheapestArtworkOfAnArtist')" ><a href="#/search"><strong>Search The Cheapest Artwork of an Artist</strong></a></li>
+        <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;width: 20%;" onclick="show('tabSearchArtistWithCheapestArtwork', 'searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
+        <li id="tabSearchArtworksByStyle" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByStyle', 'searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
+        <li id="tabSearchArtist" style="border:1px solid black; width: 10%;" onclick="show('tabSearchArtist', 'searchArtist')" ><a href="#/search"><strong>Search Artist</strong></a></li>
+        <li id="tabSearchArtistsBetweenRatings" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtistsBetweenRatings', 'searchArtistsBetweenRatings')"><a href="#/search"><strong>Search Artists Between Ratings</strong></a></li>
+    </ul>
+
+
+
+    <div id="searchArtworksBetweenPrices" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: block;">
         <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Min Value Here..." ng-model="artworkMinPrice" required>
         <input style="border:1px solid #000000" type="number" min="0" step="10000" class="form-control" placeholder="Max Value Here..." ng-model="artworkMaxPrice" required>
-        <button ng-click="searchArtworksBetweenPrices(artworkMinPrice,artworkMaxPrice)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+        <button ng-click="searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
-	
+
+    <div id="searchArtworksBetweenRatings" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
+        <input style="border:1px solid #000000" type="number" min="0" step="0.5" max="5" class="form-control" placeholder="Min Value Here..." ng-model="artworkMinRating" required>
+        <input style="border:1px solid #000000" type="number" min="0" step="0.5" max="5" class="form-control" placeholder="Max Value Here..." ng-model="artworkMaxRating" required>
+        <button ng-click="searchArtworksBetweenRatings(artworkMinRating, artworkMaxRating)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
+
     <div id="searchCheapestArtworkOfAnArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="artistName" required>
         <button ng-click="searchCheapestArtworkOfAnArtist(artistName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
@@ -47,25 +101,49 @@
     </div>
     <div id="searchArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="searchName" required>
-        <button ng-click="searchArtist(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+        <button ng-click="searchArtistByName(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
-    
 
-        <div style="color: black;">
-            <ol style="font-size: 18px">
-                <li ng-repeat="element in artists">
-                    <a href="#/resume/{{element.id}}" style="color: blue; font-size: 18px;">{{element.name}}</a>
-                </li>
-            </ol>
-        </div>
+    <div id="searchArtistsBetweenRatings" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
+        <input style="border:1px solid #000000" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="Min Value Here..." ng-model="artistMinRating" required>
+        <input style="border:1px solid #000000" type="number" min="0" max="5" step="0.5" class="form-control" placeholder="Max Value Here..." ng-model="artistMaxRating" required>
+        <button ng-click="searchArtistsBetweenRatings(artistMinRating, artistMaxRating)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
+
+    <div style="color: black;">
+        <ol style="font-size: 18px">
+            <li ng-repeat="element in artists">
+                <div class="container">
+                    <div class="col-sm-2 well text-center">
+                        <div class="caption" >
+                            <div class="col-md-12">
+                                <a href="#/resume/{{element.artist.id}}" style="color: blue; font-size: 20px;">{{element.artist.name}}</a>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#/resume/{{element.artist.id}}"><img ng-if="element.photo"ng-src="{{element.photo}}" alt="{{element.photo}}" width="100%"></a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
 
 
     <div class="col-sm-12">
         <div ng-repeat="element in artworks">
             <div class="col-sm-4 well text-center">
                 <div class="col-md-12">
-                    <div class="img-thumbnail" id="cover" ng-if="element.picture">
-                        <a ng-href="{{element.picture}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{element.picture}}" alt="{{element.picture}}"></a>
+                    <div id="slider2" style="width: 100%;">
+                        <a href="" class="control_next2">></a>
+                        <a href="" class="control_prev2"><</a>
+                        <ul>
+                            <li ng-repeat="item in element.artworkGaleryItems">
+                                <img ng-if="item.type === 'photo'"ng-src="{{item.link}}" alt="{{item.link}}" width="100%">
+                                <iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="caption" >
@@ -73,6 +151,7 @@
                     <p><strong>Price:</strong> {{element.price}}</p>
                     <p><strong>Artist:</strong> {{element.artist.name}}</p>
                     <p><strong>Artwork Style:</strong> {{element.artworkStyle}}</p>
+                    <p><strong>Rating: </strong> {{element.ratingSum / element.ratingVotes| number : 2}}/5</p>
                     <p ng-if=element.discount ng-style="{color:'red'}"><strong >{{model.fields[4].displayName}}: </strong>{{element.discount}} &#37; </p>
                 </div>
                 <p class="text-center">

@@ -121,4 +121,23 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
         }
         return result;
     }
+    
+    /**
+     * Search artwork between ratings
+     * @param artworkMinRating
+     * @param artworkMaxRating
+     * @return 
+     */
+    public List<ArtworkEntity> searchArtworksBetweenRatings(float artworkMinRating, float artworkMaxRating) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artworkMinRating", artworkMinRating);
+            params.put("artworkMaxRating", artworkMaxRating);
+            result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenRatings", params);
+        } catch (Exception e) {
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+    }
 }

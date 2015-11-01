@@ -193,7 +193,30 @@ public class ResumeService {
         }
         return null;
     }
+    
+    /**
+     * search Artist By Name
+     * @param artistName
+     * @return 
+     */
+    @Path("/searchArtistByName/{artistName}")
+    @GET
+    public List<ResumeDTO> searchArtistByName(@PathParam("artistName") String artistName) {
+        return resumeLogic.searchArtistByName(artistName);
+    }
 
+    /**
+     * search Artists Between Ratings
+     * @param artistMinRating
+     * @param artistMaxRating
+     * @return 
+     */
+    @Path("/searchArtistsBetweenRatings/{artistMinRating}/{artistMaxRating}")
+    @GET
+    public List<ResumeDTO> searchArtistsBetweenRatings(@PathParam("artistMinRating") float artistMinRating,@PathParam("artistMaxRating") float artistMaxRating){
+        return resumeLogic.searchArtistsBetweenRatings(artistMinRating, artistMaxRating);
+    }
+    
     @POST
     @Path("{id: \\d+}/rate/{rate: \\d+}")
     public void rateArtist(@PathParam("id") Long id, @PathParam("rate") Float rate) {

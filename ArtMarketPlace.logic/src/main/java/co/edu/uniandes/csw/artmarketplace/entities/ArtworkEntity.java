@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries(
 {
+        @NamedQuery(name = "ArtworkEntity.searchArtworksBetweenRatings", 
+                    query = "SELECT a FROM ArtworkEntity a WHERE (a.ratingSum / a.ratingVotes) BETWEEN :artworkMinRating AND :artworkMaxRating"),
+    
         @NamedQuery(name = "ArtworkEntity.searchArtworksByStyle", 
                     query = "SELECT a FROM ArtworkEntity a WHERE UPPER(a.artworkStyle) like UPPER(:artworkStyle)"),
     

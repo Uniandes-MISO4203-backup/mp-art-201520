@@ -39,6 +39,11 @@
                 displayName: 'ratingVotes',
                 type: 'Number',
                 required: false
+            }, {
+                name: 'artist',
+                displayName: 'Artist',
+                type: 'Reference',
+                required: false
             }]
     });
 })(window.angular);
