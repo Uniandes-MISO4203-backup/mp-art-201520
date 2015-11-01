@@ -52,13 +52,6 @@
                         error = "Please insert a validad email address. Example: example@gmail.com";
                     }
                 }
-//                if ($scope.paymentMethod === '5') {
-//                    re = /^3[47][0-9]{13}/.exec($scope.cardNumber);
-//                    if (re === null) {
-//                        valide = false;
-//                        error = "Please insert a validad card number.  Example: 341234567891234";
-//                    }
-//                }
                 if (valide) {
                     paymentSvc.createItem({
                         method: $scope.paymentMethod,

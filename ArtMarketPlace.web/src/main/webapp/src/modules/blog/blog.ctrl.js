@@ -1,8 +1,8 @@
 (function (ng) {
     var mod = ng.module('blogModule');
-    mod.controller('blogCtrl', ['CrudCreator', '$scope', '$location', 'blogService', 
-        'newEntryService', 'authService', '$routeParams', 
-        function (CrudCreator, $scope, $location, svcEntrys, svcNewEntry, authSvc, $routeParams){
+    mod.controller('blogCtrl', ['$scope', '$location', 'blogService',
+        'newEntryService', 'authService', '$routeParams',
+        function ($scope, $location, svcEntrys, svcNewEntry, authSvc, $routeParams){
             var idArtist = $routeParams.id || authSvc.getCurrentUser().id;
             $("#save-entry").hide();
             if (authSvc.getCurrentUser()){

@@ -31,8 +31,7 @@
             }
             $scope.param1 = idArtist;
             $scope.save = function () {
-                if ($scope.record)
-                {
+                if ($scope.record) {
                     var resume = svc.save({
                         lastName: $scope.record.lastname,
                         city: $scope.record.city,
@@ -40,15 +39,13 @@
                         website: $scope.record.website,
                         photo: $scope.record.photo
                     });
-                    if (resume)
-                    {
+                    if (resume) {
                         sweetAlert("Warning", "Please. Sign up like an artist.", "warning");
                         $location.url('/login');
                     } else
                         $location.url('/catalog');
                 }
             };
-
             $scope.cancel = function () {
                 $location.url('/catalog');
             };
@@ -87,16 +84,14 @@
             }
             this.modalRating = [
                 {
-                    fn: function ()
-                    {
+                    fn: function () {
                         $('#ratingModal').modal('show');
                         return false;
                     }
                 }];
             this.saveRating = [
                 {
-                    fn: function ()
-                    {
+                    fn: function () {
                         var rating = $('input:radio[name=rating]:checked').val();
                         var artist = $routeParams.id;
                         var data = {
