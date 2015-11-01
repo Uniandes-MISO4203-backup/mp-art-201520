@@ -146,10 +146,9 @@
                             {
                                 artworkSvc.api.get(record.id).then(function (data) {
                                     $('#questionModal').modal('show');
-                                    $('#userQuestion').html("<b>User</b>: " + authSvc.getCurrentUser().name + "<br>");
-                                    $('#artworkRef').html('<input id="artRef" name="artRef" class="form-control" type="text" value="'+data.id+'" readonly/>');
-                                    $('#artworkName').html("<b>Artwork's name</b>: " + data.name + "<br>");
-                                    $("#question").val("Write your answer here...");
+                                    $('#userQuestion').html("<b>User</b>:<br>" + authSvc.getCurrentUser().name + "<br>");
+                                    $('#artworkRef').html('<b>Artwork Ref:</b>:<br><input id="artRef" name="artRef" class="form-control" type="text" value="'+data.id+'" readonly/>');
+                                    $('#artworkName').html("<b>Artwork's name</b>:<br>" + data.name + "<br>");
                                 });
                             }
                             else
