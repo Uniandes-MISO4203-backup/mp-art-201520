@@ -20,20 +20,6 @@ public class PaymentDTO extends BasicDTO {
     /**
      * @generated
      */
-    public String getMethod() {
-        return method;
-    }
-
-    /**
-     * @generated
-     */
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    /**
-     * @generated
-     */
     public Integer getSubtotal() {
         return subtotal;
     }
@@ -48,15 +34,15 @@ public class PaymentDTO extends BasicDTO {
     /**
      * @generated
      */
-    public Integer getTaxes() {
-        return taxes;
+    public String getMethod() {
+        return method;
     }
 
     /**
      * @generated
      */
-    public void setTaxes(Integer taxes) {
-        this.taxes = taxes;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     /**
@@ -76,6 +62,20 @@ public class PaymentDTO extends BasicDTO {
     /**
      * @generated
      */
+    public Integer getTaxes() {
+        return taxes;
+    }
+
+    /**
+     * @generated
+     */
+    public void setTaxes(Integer taxes) {
+        this.taxes = taxes;
+    }
+
+    /**
+     * @generated
+     */
     public String getReference() {
         return reference;
     }
@@ -85,6 +85,14 @@ public class PaymentDTO extends BasicDTO {
      */
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public PaymentTypeEnum getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentTypeEnum paymentType) {
+        this.paymentType = paymentType;
     }
 
     /**
@@ -99,13 +107,5 @@ public class PaymentDTO extends BasicDTO {
      */
     public void setClient(ClientDTO client) {
         this.client = client;
-    }
-
-    public PaymentTypeEnum getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(PaymentTypeEnum paymentType) {
-        this.paymentType = paymentType;
     }
 }

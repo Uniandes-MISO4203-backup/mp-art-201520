@@ -35,14 +35,6 @@ public class BlogDTO extends BasicDTO {
      */
     private Long clientId;
 
-    public String getEntry() {
-        return entry;
-    }
-
-    public void setEntry(String entry) {
-        this.entry = entry;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -51,12 +43,12 @@ public class BlogDTO extends BasicDTO {
         this.title = title;
     }
 
-    public Calendar getDateEntry() {
-        return dateEntry;
+    public String getEntry() {
+        return entry;
     }
 
-    public void setDateEntry(Calendar dateEntry) {
-        this.dateEntry = dateEntry;
+    public void setEntry(String entry) {
+        this.entry = entry;
     }
 
     public Long getClientId() {
@@ -65,5 +57,13 @@ public class BlogDTO extends BasicDTO {
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
+    }
+
+    public Calendar getDateEntry() {
+        return dateEntry;
+    }
+
+    public void setDateEntry(Calendar dateEntry) {
+        this.dateEntry = dateEntry;
     }
 }

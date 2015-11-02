@@ -38,24 +38,6 @@ public class RemarkDTO extends BasicDTO {
     private ArtworkDTO artwork;
 
     /**
-     * Retorna el usuario del comentario.
-     *
-     * @return remarkUser
-     */
-    public String getRemarkUser() {
-        return remarkUser;
-    }
-
-    /**
-     * Establece el usuario del comentario.
-     *
-     * @param remarkUser
-     */
-    public void setRemarkUser(String remarkUser) {
-        this.remarkUser = remarkUser;
-    }
-
-    /**
      * Retorna el tipo de usuario.
      *
      * @return userType
@@ -74,21 +56,21 @@ public class RemarkDTO extends BasicDTO {
     }
 
     /**
-     * Retorna la descripcion del comentario.
+     * Retorna el usuario del comentario.
      *
-     * @return description
+     * @return remarkUser
      */
-    public String getDescription() {
-        return description;
+    public String getRemarkUser() {
+        return remarkUser;
     }
 
     /**
-     * Establece la descripcion del comentario.
+     * Establece el usuario del comentario.
      *
-     * @param description
+     * @param remarkUser
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRemarkUser(String remarkUser) {
+        this.remarkUser = remarkUser;
     }
 
     /**
@@ -107,6 +89,24 @@ public class RemarkDTO extends BasicDTO {
      */
     public void setRemarkDate(Calendar remarkDate) {
         this.remarkDate = remarkDate;
+    }
+
+    /**
+     * Retorna la descripcion del comentario.
+     *
+     * @return description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Establece la descripcion del comentario.
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

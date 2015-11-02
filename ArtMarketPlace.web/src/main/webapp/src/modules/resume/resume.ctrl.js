@@ -13,6 +13,9 @@
                 var monthIndex = date.getMonth();
                 return date.getDate() + ' ' + monthNames[monthIndex] + ' ' + date.getFullYear();
             };
+            var idArtist;
+            var education = "";
+            var experience = "";
             function getArtistFunc() {
                 svc.getArtist().then(function (result) {
                     $scope.record = [];
@@ -32,9 +35,6 @@
                     $scope.listExperience = experience;
                 });
             }
-            var idArtist;
-            var education = "";
-            var experience = "";
             if ($routeParams.id) {
                 idArtist = $routeParams.id;
             } else {

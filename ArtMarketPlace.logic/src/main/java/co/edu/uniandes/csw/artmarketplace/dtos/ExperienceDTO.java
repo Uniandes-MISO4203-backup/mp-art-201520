@@ -82,24 +82,6 @@ public class ExperienceDTO extends BasicDTO {
     public void setResume(ResumeDTO resume) {
         this.resume = resume;
     }
-    
-    /**
-     * Metodo para obtener el titulo del registro de experiencia o educacion.
-     *
-     * @return String. Titulo del registro.
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Metodo para actualizar el titulo del registro de experiencia o educacion.
-     *
-     * @param title. String - Titulo del registro.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     /**
      * Metodo para obtener el lugar del registro de experiencia o educacion.
@@ -120,23 +102,21 @@ public class ExperienceDTO extends BasicDTO {
     }
 
     /**
-     * Metodo para obtener la fecha de inicio del registro de experiencia o
-     * educacion.
+     * Metodo para obtener el titulo del registro de experiencia o educacion.
      *
-     * @return Date. Fecha de inicio del registro.
+     * @return String. Titulo del registro.
      */
-    public Date getStartDate() {
-        return startDate;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * Metodo para actualizar la fecha de inicio del registro de experiencia o
-     * educacion.
+     * Metodo para actualizar el titulo del registro de experiencia o educacion.
      *
-     * @param startDate. Date - Fecha de inicio del registro.
+     * @param title. String - Titulo del registro.
      */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -159,4 +139,23 @@ public class ExperienceDTO extends BasicDTO {
         this.finishDate = finishDate;
     }
 
+    /**
+     * Metodo para obtener la fecha de inicio del registro de experiencia o
+     * educacion.
+     *
+     * @return Date. Fecha de inicio del registro.
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Metodo para actualizar la fecha de inicio del registro de experiencia o
+     * educacion.
+     *
+     * @param startDate. Date - Fecha de inicio del registro.
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 }

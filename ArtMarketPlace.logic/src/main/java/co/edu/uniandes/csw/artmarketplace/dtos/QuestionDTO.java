@@ -89,26 +89,6 @@ public class QuestionDTO extends BasicDTO {
     }
 
     /**
-     * Es un metodo de acceso que retorno la informacion del cliente quien
-     * realiza la pregunta.
-     *
-     * @return clien es el comprador que hace la pregunta.
-     */
-    public ClientDTO getClient() {
-        return client;
-    }
-
-    /**
-     * Es un metodo de acceso que modifica la informacion del comprador que
-     * realiza una pregunta respecto a una obra de arte.
-     *
-     * @param client es el nuevo comprador asignado a la pregunta.
-     */
-    public void setClient(ClientDTO client) {
-        this.client = client;
-    }
-
-    /**
      * Es un metodo de accesso que retorna el correo de contacto del comprador
      * que realiza la pregunta sobre una obra de arte.
      *
@@ -129,23 +109,23 @@ public class QuestionDTO extends BasicDTO {
     }
 
     /**
-     * Es un metodo de acceso que retorna la pregunta realizada por un comprador
-     * sobre una obra de arte en especifico.
+     * Es un metodo de acceso que retorno la informacion del cliente quien
+     * realiza la pregunta.
      *
-     * @return
+     * @return clien es el comprador que hace la pregunta.
      */
-    public String getQuestion() {
-        return question;
+    public ClientDTO getClient() {
+        return client;
     }
 
     /**
-     * Es un metodo de acceso que modifica la pregunta realizada por el
-     * comprador sobre la obra de artes de su interes.
+     * Es un metodo de acceso que modifica la informacion del comprador que
+     * realiza una pregunta respecto a una obra de arte.
      *
-     * @param question es la modificacion de la pregunta del comprador.
+     * @param client es el nuevo comprador asignado a la pregunta.
      */
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setClient(ClientDTO client) {
+        this.client = client;
     }
 
     /**
@@ -168,4 +148,23 @@ public class QuestionDTO extends BasicDTO {
         this.artistEmail = artistEmail;
     }
 
+    /**
+     * Es un metodo de acceso que retorna la pregunta realizada por un comprador
+     * sobre una obra de arte en especifico.
+     *
+     * @return
+     */
+    public String getQuestion() {
+        return question;
+    }
+
+    /**
+     * Es un metodo de acceso que modifica la pregunta realizada por el
+     * comprador sobre la obra de artes de su interes.
+     *
+     * @param question es la modificacion de la pregunta del comprador.
+     */
+    public void setQuestion(String question) {
+        this.question = question;
+    }
 }

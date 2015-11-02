@@ -112,24 +112,6 @@ public class ResumeDTO extends BasicDTO {
     }
 
     /**
-     * Metodo para obtener la ciudad del artista de la hoja de vida
-     *
-     * @return String. Nombre de la ciudad a la que pertenece el artista.
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * Metodo para actualizar el identificador de la hoja de vida
-     *
-     * @param city. Nuevo nombre de la ciudad del artista de la hoja de vida.
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
      * Metodo para obtener el pais del artista de la hoja de vida
      *
      * @return String. Nombre del pais al que pertenece el artista.
@@ -148,21 +130,21 @@ public class ResumeDTO extends BasicDTO {
     }
 
     /**
-     * Metodo para obtener la pagina web del artista.
+     * Metodo para obtener la ciudad del artista de la hoja de vida
      *
-     * @return String. Cadena de caracteres con la URL del artista.
+     * @return String. Nombre de la ciudad a la que pertenece el artista.
      */
-    public String getWebsite() {
-        return website;
+    public String getCity() {
+        return city;
     }
 
     /**
-     * Metodo para actualizar la pagina web del artista.
+     * Metodo para actualizar el identificador de la hoja de vida
      *
-     * @param website. Nueva cadena de caracteres con la URL del artista.
+     * @param city. Nuevo nombre de la ciudad del artista de la hoja de vida.
      */
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**
@@ -184,24 +166,21 @@ public class ResumeDTO extends BasicDTO {
     }
 
     /**
-     * Es un metodo de acceso que tiene como finalidad retornar el valor actual
-     * del ratingSum del artista.
+     * Metodo para obtener la pagina web del artista.
      *
-     * @return ratingSum es la sumatoria de calificaciones recibidas por el
-     * artista.
+     * @return String. Cadena de caracteres con la URL del artista.
      */
-    public Float getRatingSum() {
-        return ratingSum;
+    public String getWebsite() {
+        return website;
     }
 
     /**
-     * Es un metodo de acceso que tiene como finalidad modificar el valor actual
-     * del ratingSum del artista.
+     * Metodo para actualizar la pagina web del artista.
      *
-     * @param ratingSum
+     * @param website. Nueva cadena de caracteres con la URL del artista.
      */
-    public void setRatingSum(Float ratingSum) {
-        this.ratingSum = ratingSum;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     /**
@@ -224,6 +203,27 @@ public class ResumeDTO extends BasicDTO {
      */
     public void setRatingVotes(Float ratingVotes) {
         this.ratingVotes = ratingVotes;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad retornar el valor actual
+     * del ratingSum del artista.
+     *
+     * @return ratingSum es la sumatoria de calificaciones recibidas por el
+     * artista.
+     */
+    public Float getRatingSum() {
+        return ratingSum;
+    }
+
+    /**
+     * Es un metodo de acceso que tiene como finalidad modificar el valor actual
+     * del ratingSum del artista.
+     *
+     * @param ratingSum
+     */
+    public void setRatingSum(Float ratingSum) {
+        this.ratingSum = ratingSum;
     }
 
 }
