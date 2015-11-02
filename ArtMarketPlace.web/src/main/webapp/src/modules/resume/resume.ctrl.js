@@ -5,12 +5,15 @@
         'resumeModel', '$routeParams',
         function (CrudCreator, $scope, $location, svc, model, $routeParams) {
             CrudCreator.extendController(this, svc, $scope, model, 'resume', 'Resume');
-            var idArtist;
-            var education = "";
-            var experience = "";
-            if ($routeParams.id) {
-                idArtist = $routeParams.id;
-            } else {
+            var monthNames = [
+                "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+            ];
+            var format = function (data) {
+                var date = new Date(data);
+                var monthIndex = date.getMonth();
+                return date.getDate() + ' ' + monthNames[monthIndex] + ' ' + date.getFullYear();
+            };
+            function getArtistFunc() {
                 svc.getArtist().then(function (result) {
                     $scope.record = [];
                     $scope.record = result;
@@ -28,6 +31,14 @@
                     $scope.listEducation = education;
                     $scope.listExperience = experience;
                 });
+            }
+            var idArtist;
+            var education = "";
+            var experience = "";
+            if ($routeParams.id) {
+                idArtist = $routeParams.id;
+            } else {
+                getArtistFunc();
             }
             $scope.param1 = idArtist;
             $scope.save = function () {
@@ -62,19 +73,6 @@
                         $scope.listExperience += data.title + " - " + data.place + " - " + format(data.startDate) + " to " + format(data.finishDate) + " \n";
                 });
             };
-            var monthNames = [
-                "January", "February", "March",
-                "April", "May", "June", "July",
-                "August", "September", "October",
-                "November", "December"
-            ];
-            var format = function (data) {
-                var date = new Date(data);
-                var day = date.getDate();
-                var monthIndex = date.getMonth();
-                var year = date.getFullYear();
-                return day + ' ' + monthNames[monthIndex] + ' ' + year;
-            };
             if (idArtist) {
                 svc.getResume(idArtist).then(function (result) {
                     $scope.prueba = result;
@@ -82,15 +80,13 @@
                     $scope.record = result;
                 });
             }
-            this.modalRating = [
-                {
+            this.modalRating = [{
                     fn: function () {
                         $('#ratingModal').modal('show');
                         return false;
                     }
                 }];
-            this.saveRating = [
-                {
+            this.saveRating = [{
                     fn: function () {
                         var rating = $('input:radio[name=rating]:checked').val();
                         var artist = $routeParams.id;

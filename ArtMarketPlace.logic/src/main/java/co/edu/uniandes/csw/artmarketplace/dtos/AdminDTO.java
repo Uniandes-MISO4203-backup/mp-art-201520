@@ -9,19 +9,10 @@ package co.edu.uniandes.csw.artmarketplace.dtos;
  *
  * @author ms.lancheros10
  */
-public class AdminDTO {
-    
-    private Long id;
+public class AdminDTO extends BasicDTO {
+
     private String name;
     private String userId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -38,6 +29,4 @@ public class AdminDTO {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    
-    
 }

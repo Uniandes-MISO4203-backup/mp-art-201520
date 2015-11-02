@@ -13,12 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jh.rubiano10
  */
 @XmlRootElement
-public class BlogDTO {
-
-    /**
-     * id/llave de un a entrada del Blog.
-     */
-    private Long id;
+public class BlogDTO extends BasicDTO {
 
     /**
      * Texto de la entrada del Blog.
@@ -39,14 +34,6 @@ public class BlogDTO {
      * Id del cliente/artista que realizó la entrada al Blog
      */
     private Long clientId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEntry() {
         return entry;
@@ -71,8 +58,6 @@ public class BlogDTO {
     public void setDateEntry(Calendar dateEntry) {
         this.dateEntry = dateEntry;
     }
-
-    
 
     public Long getClientId() {
         return clientId;

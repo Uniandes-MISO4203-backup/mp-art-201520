@@ -5,21 +5,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @generated
  */
-@XmlRootElement 
-public class ArtworkGaleryItemDTO {
+@XmlRootElement
+public class ArtworkGaleryItemDTO extends BasicDTO {
 
-    private Long id;
     private String type;
     private String link;
     private ArtworkDTO artwork;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getType() {
         return type;

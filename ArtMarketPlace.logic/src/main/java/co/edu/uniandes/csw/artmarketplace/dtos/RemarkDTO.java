@@ -10,141 +10,120 @@ import java.util.Calendar;
 /**
  * DTO para comentario
  */
- public class RemarkDTO
- {
-     
-    private Long id;
-    
+public class RemarkDTO extends BasicDTO {
+
     /*
-    Usuario que realizo el comentario.
-    */
+     Usuario que realizo el comentario.
+     */
     private String remarkUser;
-    
+
     /*
-    Tipo de usuario: artista o cliente.
-    */
+     Tipo de usuario: artista o cliente.
+     */
     private String userType;
-    
+
     /*
-    Texto del comentario.
-    */
+     Texto del comentario.
+     */
     private String description;
-    
+
     /*
-    Fecha del comentario.
-    */
+     Fecha del comentario.
+     */
     private Calendar remarkDate;
 
     /*
-    Obra de arte a la que pertenece el comentario.
-    */
+     Obra de arte a la que pertenece el comentario.
+     */
     private ArtworkDTO artwork;
 
     /**
-     * Retorna el Id del comentario.
-     * @return id
-     */
-    public Long getId()
-    {
-        return id;
-    }
-
-    /**
-     * Establece el Id del comentario.
-     * @param id 
-     */
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    /**
      * Retorna el usuario del comentario.
+     *
      * @return remarkUser
      */
-    public String getRemarkUser()
-    {
+    public String getRemarkUser() {
         return remarkUser;
     }
 
     /**
      * Establece el usuario del comentario.
+     *
      * @param remarkUser
      */
-    public void setRemarkUser(String remarkUser)
-    {
+    public void setRemarkUser(String remarkUser) {
         this.remarkUser = remarkUser;
     }
-    
+
     /**
      * Retorna el tipo de usuario.
+     *
      * @return userType
      */
-    public String getUserType()
-    {
+    public String getUserType() {
         return userType;
     }
-    
+
     /**
      * Establece el tipo de usuario.
+     *
      * @param userType
      */
-    public void setUserType(String userType)
-    {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
     /**
      * Retorna la descripcion del comentario.
+     *
      * @return description
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
     /**
      * Establece la descripcion del comentario.
-     * @param description 
+     *
+     * @param description
      */
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     /**
      * Retorna la fecha del comentario.
+     *
      * @return remarkDate
      */
-    public Calendar getRemarkDate()
-    {
+    public Calendar getRemarkDate() {
         return remarkDate;
     }
 
     /**
      * Establece la fecha del comentario.
+     *
      * @param remarkDate
      */
-    public void setRemarkDate(Calendar remarkDate)
-    {
+    public void setRemarkDate(Calendar remarkDate) {
         this.remarkDate = remarkDate;
     }
 
     /**
      * Retorna la obra de arte a la que pertenece el comentario.
+     *
      * @return artwork
      */
-    public ArtworkDTO getArtwork()
-    {
+    public ArtworkDTO getArtwork() {
         return artwork;
-    } 
+    }
 
     /**
      * Establece la obra de arte a la que pertenece el comentario.
-     * @param artwork 
+     *
+     * @param artwork
      */
-    public void setArtwork(ArtworkDTO artwork)
-    {
+    public void setArtwork(ArtworkDTO artwork) {
         this.artwork = artwork;
     }
- }
+}

@@ -7,9 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @XmlRootElement
-public class ArtworkDTO {
+public class ArtworkDTO extends BasicDTO {
 
-    private Long id;
     private String name;
     private List<ArtworkGaleryItemDTO> artworkGaleryItems;
     private Integer price;
@@ -48,30 +47,10 @@ public class ArtworkDTO {
      */
     private String artworkStyle;
 
-    /**
-     * @generated
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @generated
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @generated
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @generated
-     */
     public void setName(String name) {
         this.name = name;
     }
@@ -83,31 +62,19 @@ public class ArtworkDTO {
     public void setArtworkGaleryItems(List<ArtworkGaleryItemDTO> artworkGaleryItems) {
         this.artworkGaleryItems = artworkGaleryItems;
     }
-    
-    /**
-     * @generated
-     */
+
     public Integer getPrice() {
         return price;
     }
 
-    /**
-     * @generated
-     */
     public void setPrice(Integer price) {
         this.price = price;
     }
 
-    /**
-     * @generated
-     */
     public ArtistDTO getArtist() {
         return artist;
     }
 
-    /**
-     * @generated
-     */
     public void setArtist(ArtistDTO artist) {
         this.artist = artist;
     }

@@ -2,7 +2,6 @@ package co.edu.uniandes.csw.artmarketplace.api;
 
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
-import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkRatingEntity;
 import java.util.List;
 

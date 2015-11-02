@@ -30,5 +30,4 @@ public class DateAdapter extends XmlAdapter<String, Date> {
         }
         return DATE_FORMAT_TL.get().format(v);
     }
-
 }

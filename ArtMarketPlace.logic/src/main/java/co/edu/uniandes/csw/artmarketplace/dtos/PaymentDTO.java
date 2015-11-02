@@ -6,10 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @generated
  */
-@XmlRootElement 
-public class PaymentDTO { 
-    
-    private Long id;
+@XmlRootElement
+public class PaymentDTO extends BasicDTO {
+
     private String method;
     private Integer subtotal;
     private Integer taxes;
@@ -17,20 +16,6 @@ public class PaymentDTO {
     private String reference;
     private ClientDTO client;
     private PaymentTypeEnum paymentType;
-
-    /**
-     * @generated
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @generated
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @generated
@@ -123,7 +108,4 @@ public class PaymentDTO {
     public void setPaymentType(PaymentTypeEnum paymentType) {
         this.paymentType = paymentType;
     }
-    
-    
-    
 }
