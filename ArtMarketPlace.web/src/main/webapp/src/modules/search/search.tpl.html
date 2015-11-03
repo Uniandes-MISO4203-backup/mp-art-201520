@@ -1,45 +1,3 @@
-<link rel="stylesheet" type = "text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" type = "text/css" href="https://dl.dropboxusercontent.com/u/181689/jhtmlarea/ratingStars.css">
-
-<script>
-    jQuery(document).ready(function ($) {
-        var slideWidth = $('#slider2 ul li').width();
-        var slideHeight = 250;
-
-        $('#slider2').css({width: slideWidth, height: slideHeight});
-
-        $('#slider2 ul li:last-child').prependTo('#slider2 ul');
-
-        function moveLeft() {
-            $('#slider2 ul').animate({
-                left: +slideWidth
-            }, 200, function () {
-                $('#slider2 ul li:last-child').prependTo('#slider2 ul');
-                $('#slider2 ul').css('left', '');
-            });
-        }
-        ;
-
-        function moveRight() {
-            $('#slider2 ul').animate({
-                left: -slideWidth
-            }, 200, function () {
-                $('#slider2 ul li:first-child').appendTo('#slider2 ul');
-                $('#slider2 ul').css('left', '');
-            });
-        }
-        ;
-
-        $('a.control_prev2').click(function () {
-            moveLeft();
-        });
-
-        $('a.control_next2').click(function () {
-            moveRight();
-        });
-
-    });
-</script>
 <script>
     var selected = "tabSearchArtworksBetweenPrices";
     var disp = "searchArtworksBetweenPrices";
@@ -135,6 +93,16 @@
         <div ng-repeat="element in artworks">
             <div class="col-sm-4 well text-center">
                 <div class="col-md-12">
+                    <div style="height: 350px">
+                        <uib-carousel no-wrap="false">
+                            <uib-slide ng-repeat="item in element.artworkGaleryItems" active="slide.active">
+                                <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px; width: 100%"
+                                     alt="{{element.name}}">
+                                <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 350px; width: 100%"></youtube-video>
+                            </uib-slide>
+                        </uib-carousel>
+                    </div>
+                    <!--
                     <div id="slider2" style="width: 100%;">
                         <a href="" class="control_next2">></a>
                         <a href="" class="control_prev2"><</a>
@@ -145,6 +113,7 @@
                             </li>
                         </ul>
                     </div>
+                    -->
                 </div>
                 <div class="caption" >
                     <p><strong>Name:</strong> {{element.name}}</p>
