@@ -26,7 +26,7 @@
             <h1>{{artistResume.lastName}}</h1>
             <a href="#/resume/{{artistName}}" class="btn btn-success">Personal Information</a>
             <div style="height: 200px; margin-top: 20px">
-                <uib-carousel interval="5000" no-wrap="false">
+                <uib-carousel interval="5000" no-wrap="false" style="height: 100%">
                     <uib-slide ng-repeat="record in artistArtworks" active="slide.active">
                         <img ng-if="record.artworkGaleryItems[0].type === 'photo'" ng-src="{{record.artworkGaleryItems[0].link}}" 
                              style="margin:auto; height: 200px;  width: 100%" alt="{{record.name}}">
@@ -44,16 +44,18 @@
                 <div ng-repeat="record in artistArtworks">
                     <div class="col-sm-6 well text-center">
                         <div class="col-sm-12">
-                            <div style="height: 300px">
-                                <uib-carousel interval="5000" no-wrap="false">
+                            <div style="height: 300px; margin-bottom: 10px"">
+                                <uib-carousel interval="5000" no-wrap="false" style="height: 100%">
                                     <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
                                         <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 300px; width: 100%"
                                              alt="{{record.name}}">
-                                        <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 300px; width: 100%"></youtube-video>
+                                        <div class="col-sm-10 col-sm-offset-1" style="padding: 0; margin-top: 0; margin-bottom: 0">
+                                            <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 300px; width: 100%"></youtube-video>
+                                        </div>
                                     </uib-slide>
                                 </uib-carousel>
                             </div>
-                            <div class="caption" style="margin-top: 10px">
+                            <div class="caption">
                                 <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
                                 <p><strong>{{model.fields[1].displayName}}: </strong> {{record.price| currency}}</p>
                                 <p><strong>{{model.fields[2].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
@@ -83,15 +85,14 @@
     <a class="btn btn-default" ng-click="ctrl.detailsMode = false" >Back</a>
     <button ng-click="postRemark(artworkRecord.id, newRemark)" class="btn btn-default">POST</button>
     <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Enter remark here..." maxlength="255" ng-model="newRemark" required>
-
 </div>
+
 <!-- Vista del modal-->
 <div class="modal fade" id="questionModal" role="dialog">
     <!-- Definicion del espacio del modal -->
     <div class="modal-dialog">
         <!-- Contenido definido para el Modal -->  
         <div class="modal-content">
-
             <!-- Encabezado -->
             <div class="modal-header">
                 <!-- Boton de cerrado -->
@@ -99,16 +100,18 @@
                 <!-- Titulo del Modal -->
                 <h4 class="modal-title" id = "titleModal">Question for the Artist</h4>
             </div>
-            <div id = "userQuestion"></div>
-            <div id = "artworkRef"></div>
-            <div id = "artworkName"></div>
             <!-- Definicion del formulario para la pregunta -->
             <form ng-repeat="action in ctrl.saveQuestion" id="questionForm" method="post" class="form-horizontal" ng-submit="action.fn(record)">
-                <!-- Forma del Formulario para la pregunta -->
                 <div class="modal-body">
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4" id="question" style = "wmargin: 0 auto;"></textarea>
-                    </div>         
+                    <div id = "userQuestion"></div>
+                    <div id = "artworkRef" style="margin-top: 10px"></div>
+                    <div id = "artworkName" style="margin-top: 10px"></div>
+                    <!-- Forma del Formulario para la pregunta -->
+                    <div style="margin-top: 10px">
+                        <strong>Question:</strong><br>
+                        <textarea class="form-control" rows="4" id="question" style = "margin: 0 auto; resize: vertical" 
+                                  placeholder="Write your answer here..."></textarea>
+                    </div>
                 </div>
                 <!-- Footer del formulario de envio de preguntas -->
                 <div class="modal-footer">
@@ -119,6 +122,47 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
 
+<!-- Rating -->
+<!-- Vista del modal-->
+<div class="modal fade" id="ratingModal" role="dialog">
+    <!-- Definicion del espacio del modal -->
+    <div class="modal-dialog">
+        <!-- Contenido definido para el Modal -->  
+        <div class="modal-content">
+            <!-- Encabezado -->
+            <div class="modal-header">
+                <!-- Boton de cerrado -->
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- Titulo del Modal -->
+                <h4 class="modal-title" id = "titleModal">Rate the Artist</h4>
+            </div>
+            <!-- Definicion del formulario para el rating -->
+            <form id="ratingModal" ng-repeat="action in ctrl.saveRating" method="post" class="form-horizontal" ng-submit="action.fn()">
+                <div class="modal-body">
+                    <!-- Forma del Formulario para el rating -->
+                    <p>Ref. Artwork:</p>
+                    <div style="margin: 0 auto; text-align: center">
+                        <div id="artworkRating"></div>
+                        <div class="stars">
+                            <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/><label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/><label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/><label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/><label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" id="star-1" type="radio" name="rating" value="1"/><label class="star star-1" for="star-1"></label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer del formulario de envio del rating -->
+                <div class="modal-footer">
+                    <!-- Boton de Close para cancelar el envio de la Rating -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!-- Boton de Send, para hacer envio de la Rating -->
+                    <button type="submit" class="btn btn-success">Send</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
