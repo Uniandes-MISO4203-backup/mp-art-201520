@@ -19,18 +19,15 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import junit.framework.TestCase;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
+
 
 /**
  * La clase ResumenPersistenceTest tiene como finalidad evaluar el modelo de
@@ -184,21 +181,6 @@ public class ResumePersistenceTest{
         data.add(entity3);
         em.persist(entity3);
     }
-    
-//    @Test
-//    public void getResumesTest() {
-//        List<ResumeEntity> list = resumePersistence.findAll(null, null);
-//        Assert.assertEquals(data.size(), list.size());
-//        for (ResumeEntity ent : list) {
-//            boolean found = false;
-//            for (ResumeEntity entity : data) {
-//                if (ent.getId().equals(entity.getId())) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
 
     /**
      * test Search Artist By Name

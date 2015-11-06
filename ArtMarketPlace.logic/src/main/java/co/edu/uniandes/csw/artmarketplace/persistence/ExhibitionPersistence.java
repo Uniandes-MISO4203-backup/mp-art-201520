@@ -61,18 +61,18 @@ public class ExhibitionPersistence  extends CrudPersistence<ExhibitionEntity>{
      * @return Resumeentity. Hoja de vida del artista solicitado.
      */
     public ResumeEntity getResumeByArtistId(Long id) {
+        ResumeEntity result=null;
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("artist_id", id);
             List<ResumeEntity> resumes = this.executeListNamedQuery("Resume.getByArtistId", params);
-            if (resumes.isEmpty()) {
-                return null;
-            } else {
-                return resumes.get(0);
+            if (!resumes.isEmpty()) {
+                result= resumes.get(0);
             }
         } catch (NoResultException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e); 
         }
+        return result;
     }
 
 }

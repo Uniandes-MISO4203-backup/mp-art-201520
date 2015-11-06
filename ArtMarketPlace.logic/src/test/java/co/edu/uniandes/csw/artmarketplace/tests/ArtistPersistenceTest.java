@@ -5,10 +5,8 @@ import co.edu.uniandes.csw.artmarketplace.persistence.ArtistPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.junit.Assert;

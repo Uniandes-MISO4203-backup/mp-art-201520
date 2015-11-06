@@ -19,7 +19,11 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries(
-{@NamedQuery(name = "Exhibition.getResumeByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.experience WHERE r.artist.id=:artist_id")}
+{
+    @NamedQuery(name = "Exhibition.getResumeByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.exhibitions WHERE r.artist.id=:artist_id"),
+    @NamedQuery(name = "ExhibitionEntity.listByResume", query = "SELECT r FROM ExhibitionEntity r WHERE r.resume.id=:resume_id")
+}
+        
 )
 public class ExhibitionEntity implements Serializable {
     
