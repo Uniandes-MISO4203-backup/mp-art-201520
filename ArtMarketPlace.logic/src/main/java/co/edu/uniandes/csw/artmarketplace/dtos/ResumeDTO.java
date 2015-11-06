@@ -34,6 +34,11 @@ public class ResumeDTO extends BasicDTO {
      * Registros de educacion o experiencia.
      */
     private List<ExperienceDTO> experience;
+    
+    /**
+     * Registro de exhibiciones en las que el artista ha participado.
+     */
+    private List<ExhibitionDTO> exhibitions;
     /**
      * Artista de la hoja de vida.
      */
@@ -226,4 +231,19 @@ public class ResumeDTO extends BasicDTO {
         this.ratingSum = ratingSum;
     }
 
+    /**
+     * Es un metodo de acceso que retorna una lista con las exhibiciones del resumen.
+     * @return exhibitions
+     */
+    public List<ExhibitionDTO> getExhibitions() {
+        return exhibitions;
+    }
+
+    /**
+     * Es un metodo de acceso que modifica la lista de exhibiciones del resumen.
+     * @param exhibitions 
+     */
+    public void setExhibitions(List<ExhibitionDTO> exhibitions) {
+        this.exhibitions = exhibitions;
+    }
 }

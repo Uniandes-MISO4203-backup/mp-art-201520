@@ -1,28 +1,21 @@
-package co.edu.uniandes.csw.artmarketplace.entities;
+package co.edu.uniandes.csw.artmarketplace.dtos;
 
-import java.io.Serializable;
+import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * ExhibitionEntity es una clase disenada para gestionar la informacion
+ * ExhibitionDTO es una clase disenada para gestionar la informacion
  * correspondente a exhibiciones en las que un artista participado y desea reflejar
  * en su resumen.
  * @version 1.0.0
  * @author lf.mendivelso10
  */
-@Entity
-public class ExhibitionEntity implements Serializable {
-    
+@XmlRootElement
+public class ExhibitionDTO {
     /**
      * Identificador unico de la exhibicion registrado en el resumen del artista
      */
-    @Id
-    @GeneratedValue(generator = "Exhibition")
     private Long id;
     
     /**
@@ -37,15 +30,12 @@ public class ExhibitionEntity implements Serializable {
     
     /**
      * Fecha de inicio de la exhibicion
-     */
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
+     */    
     private Date startDate;
     
     /**
      * Fecha de fin de la exhibicion
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
     
     /**
@@ -66,9 +56,8 @@ public class ExhibitionEntity implements Serializable {
     /**
      * Resumen al cual pertenece el registro de la exhibicion.
      */
-    @ManyToOne
     private ResumeEntity resume;
-
+    
     /**
      * Metodo de acceso para la variable id.
      * @return 
@@ -213,4 +202,3 @@ public class ExhibitionEntity implements Serializable {
         this.resume = resume;
     }
 }
-
