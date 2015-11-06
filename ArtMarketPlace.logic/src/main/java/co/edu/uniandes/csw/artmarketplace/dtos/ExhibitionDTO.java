@@ -1,33 +1,20 @@
-package co.edu.uniandes.csw.artmarketplace.entities;
+package co.edu.uniandes.csw.artmarketplace.dtos;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * ExhibitionEntity es una clase disenada para gestionar la informacion
+ * ExhibitionDTO es una clase disenada para gestionar la informacion
  * correspondente a exhibiciones en las que un artista participado y desea reflejar
  * en su resumen.
  * @version 1.0.0
  * @author lf.mendivelso10
  */
-@Entity
-@NamedQueries(
-{@NamedQuery(name = "Exhibition.getResumeByArtistId", query = "SELECT r FROM ResumeEntity r left join fetch r.experience WHERE r.artist.id=:artist_id")}
-)
-public class ExhibitionEntity implements Serializable {
-    
+@XmlRootElement
+public class ExhibitionDTO {
     /**
      * Identificador unico de la exhibicion registrado en el resumen del artista
      */
-    @Id
-    @GeneratedValue(generator = "Exhibition")
     private Long id;
     
     /**
@@ -42,15 +29,12 @@ public class ExhibitionEntity implements Serializable {
     
     /**
      * Fecha de inicio de la exhibicion
-     */
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
+     */    
     private Date startDate;
     
     /**
      * Fecha de fin de la exhibicion
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
     
     /**
@@ -71,9 +55,8 @@ public class ExhibitionEntity implements Serializable {
     /**
      * Resumen al cual pertenece el registro de la exhibicion.
      */
-    @ManyToOne
-    private ResumeEntity resume;
-
+    private ResumeDTO resume;
+    
     /**
      * Metodo de acceso para la variable id.
      * @return 
@@ -206,7 +189,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de acceso para la variable resume.
      * @return 
      */
-    public ResumeEntity getResume() {
+    public ResumeDTO getResume() {
         return resume;
     }
 
@@ -214,8 +197,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de modificación para la variable resume.
      * @param resume 
      */
-    public void setResume(ResumeEntity resume) {
+    public void setResume(ResumeDTO resume) {
         this.resume = resume;
     }
 }
-

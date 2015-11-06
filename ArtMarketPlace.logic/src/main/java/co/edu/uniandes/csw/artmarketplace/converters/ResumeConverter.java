@@ -119,6 +119,7 @@ public abstract class ResumeConverter {
             ResumeDTO dto = basicEntity2DTO(entity);
             dto.setArtist(ArtistConverter.refEntity2DTO(entity.getArtist()));
             dto.setExperience(ExperienceConverter.listEntity2DTO(entity.getExperience()));
+            dto.setExhibitions(ExhibitionConverter.listEntity2DTO(entity.getExhibitions()));
             return dto;
         } else {
             return null;
@@ -136,6 +137,7 @@ public abstract class ResumeConverter {
             ResumeEntity entity = basicDTO2Entity(dto);
             entity.setArtist(ArtistConverter.refDTO2Entity(dto.getArtist()));
             entity.setExperience(ExperienceConverter.childListDTO2Entity(dto.getExperience(), entity));
+            entity.setExhibitions(ExhibitionConverter.childListDTO2Entity(dto.getExhibitions(), entity));
             return entity;
         } else {
             return null;
