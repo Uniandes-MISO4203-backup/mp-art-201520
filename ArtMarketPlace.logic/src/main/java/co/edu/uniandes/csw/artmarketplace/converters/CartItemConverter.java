@@ -57,7 +57,7 @@ public abstract class CartItemConverter {
      * @param entity
      * @return 
      */
-    private static CartItemDTO basicEntity2DTO(CartItemEntity entity) {
+    public static CartItemDTO basicEntity2DTO(CartItemEntity entity) {
         if (entity != null) {
             CartItemDTO dto = new CartItemDTO();
             dto.setId(entity.getId());
@@ -78,7 +78,7 @@ public abstract class CartItemConverter {
      * @param dto
      * @return 
      */
-    private static CartItemEntity basicDTO2Entity(CartItemDTO dto) {
+    public static CartItemEntity basicDTO2Entity(CartItemDTO dto) {
         if (dto != null) {
             CartItemEntity entity = new CartItemEntity();
             entity.setId(dto.getId());

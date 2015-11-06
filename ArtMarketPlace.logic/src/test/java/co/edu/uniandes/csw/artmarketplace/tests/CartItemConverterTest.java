@@ -98,6 +98,11 @@ public class CartItemConverterTest {
         assertEquals(entity.getName(), result.getName());
         assertEquals(entity.getQuantity(), result.getQuantity());
         assertEquals(entity.getState(), result.getState());
+        
+        result = CartItemConverter.fullEntity2DTO(null);
+        
+        result = CartItemConverter.basicEntity2DTO(null);
+        result = CartItemConverter.refEntity2DTO(null);
     }
 
     /**
@@ -117,6 +122,10 @@ public class CartItemConverterTest {
         assertEquals(entity.getName(), cartItemDTO.getName());
         assertEquals(entity.getQuantity(), cartItemDTO.getQuantity());
         assertEquals(entity.getState(), cartItemDTO.getState());
+        
+        entity = CartItemConverter.fullDTO2Entity(null);
+        
+        entity = CartItemConverter.basicDTO2Entity(null);
     }
 
     /**
