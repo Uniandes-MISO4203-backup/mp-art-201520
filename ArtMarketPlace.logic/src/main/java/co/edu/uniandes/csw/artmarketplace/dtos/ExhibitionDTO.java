@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
-import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -56,7 +55,7 @@ public class ExhibitionDTO {
     /**
      * Resumen al cual pertenece el registro de la exhibicion.
      */
-    private ResumeEntity resume;
+    private ResumeDTO resume;
     
     /**
      * Metodo de acceso para la variable id.
@@ -190,7 +189,7 @@ public class ExhibitionDTO {
      * Metodo de acceso para la variable resume.
      * @return 
      */
-    public ResumeEntity getResume() {
+    public ResumeDTO getResume() {
         return resume;
     }
 
@@ -198,7 +197,7 @@ public class ExhibitionDTO {
      * Metodo de modificación para la variable resume.
      * @param resume 
      */
-    public void setResume(ResumeEntity resume) {
+    public void setResume(ResumeDTO resume) {
         this.resume = resume;
     }
 }
