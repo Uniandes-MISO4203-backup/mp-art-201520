@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.artmarketplace.services;
 
 import co.edu.uniandes.csw.artmarketplace.api.IBlogLogic;
+import co.edu.uniandes.csw.artmarketplace.api.ICommentBlogLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.BlogDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.CommentBlogDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
@@ -67,6 +69,10 @@ public class ResumeService {
     //Para el servicio de Blog...
     @Inject
     private IBlogLogic blogLogic;
+    
+    @Inject
+    private ICommentBlogLogic commentLogic;
+    
 
     @QueryParam("page")
     private Integer page;
@@ -256,5 +262,27 @@ public class ResumeService {
     @GET
     public BlogDTO getEntry(@PathParam("id") Long id) {
         return blogLogic.getEntry(id);
+    }
+    
+    //Para los comentarios en en Blog...
+    @POST
+    @Path("/newcomment/")
+    @StatusCreated
+    public CommentBlogDTO createComment(CommentBlogDTO dto) {
+        dto.setDateComment(new GregorianCalendar());
+        return commentLogic.createComment(dto);
+    }
+    
+    //Traer todos los comentarios...
+    @Path("/allcomments")
+    @GET
+    public List<CommentBlogDTO> getComments() {
+        return commentLogic.getComments(page, maxRecords);
+    }
+    
+    @Path("/getcomment/{id: \\d+}")
+    @GET
+    public List<CommentBlogDTO> getCommentBlog(@PathParam("id") Long idBlog) {
+        return commentLogic.getCommentBlog(idBlog);
     }
 }

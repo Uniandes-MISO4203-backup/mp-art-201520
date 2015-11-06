@@ -102,6 +102,11 @@
                         controller: 'blogCtrl',
                         controllerAs: alias
                     })
+                    .when('/viewentry/:idBlog', {
+                        templateUrl: 'src/modules/blog/templates/viewentry.tpl.html',
+                        controller: 'blogCtrl',
+                        controllerAs: alias
+                    })
                     .otherwise('/catalog');
         }]);
 

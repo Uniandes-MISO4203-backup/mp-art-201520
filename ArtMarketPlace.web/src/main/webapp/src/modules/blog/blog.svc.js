@@ -18,4 +18,20 @@
                 return this.api.one("../resume/newentry").customPOST(data);
             };
         }]);
+    //Para invocar el servcio de comentarios en un blog...
+    mod.service('viewEntryService', ['CrudCreator', 'viewEntryContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+            //Para mostrar sólo una entrada...
+            this.showEntry = function(idBlog){
+                return this.api.one('../resume/getentry', idBlog).get();
+            };
+            //Para guardar el comentario...
+            this.saveComment = function(data){
+                return this.api.one("../resume/newcomment").customPOST(data);
+            };
+            //Para mostrar los comentarios...
+            this.showComment = function(idBlog){
+                return this.api.one('../resume/getcomment', idBlog).get();
+            };
+        }]);
 })(window.angular);
