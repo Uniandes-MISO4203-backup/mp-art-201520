@@ -1,5 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package co.edu.uniandes.csw.artmarketplace.tests;
 
+import co.edu.uniandes.csw.artmarketplace.api.IExhibitionLogic;
+import co.edu.uniandes.csw.artmarketplace.converters.ArtistConverter;
+import co.edu.uniandes.csw.artmarketplace.converters.ExhibitionConverter;
+import co.edu.uniandes.csw.artmarketplace.dtos.ExhibitionDTO;
+import co.edu.uniandes.csw.artmarketplace.ejbs.ExhibitionLogic;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtistEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ExhibitionEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
@@ -7,44 +17,41 @@ import co.edu.uniandes.csw.artmarketplace.persistence.ArtistPersistence;
 import co.edu.uniandes.csw.artmarketplace.persistence.ExhibitionPersistence;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.runner.RunWith;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
- * La clase ExhibitionPersistenceTest esta diseñada para ejecutar las pruebas de
- * unitarias correspondiente a la persistencia de infomación de exhibiciones de
- * un artista.
+ * La clase ExhibitionLogicTest esta disenada para ejecutar las pruebas de
+ * unitarias correspondiente a la logica de infomacion de exhibiciones de un
+ * artista.
  *
  * @author lf.mendivelso10
+ * @version 1.0.0
  */
 @RunWith(Arquillian.class)
-public class ExhibitionPersistenceTest {
+public class ExhibitionLogicTest {
 
     private ArtistEntity artist;
 
     private ResumeEntity resume;
-
-    private List<ExhibitionEntity> exhibitions;
 
     /**
      * @generated
@@ -61,7 +68,7 @@ public class ExhibitionPersistenceTest {
      * @generated
      */
     @Inject
-    private ExhibitionPersistence exhibitionPersistence;
+    private IExhibitionLogic exhibitionLogic;
 
     /**
      * @generated
@@ -92,11 +99,15 @@ public class ExhibitionPersistenceTest {
                 .addPackage(ResumePersistence.class.getPackage())
                 .addPackage(ExhibitionEntity.class.getPackage())
                 .addPackage(ExhibitionPersistence.class.getPackage())
+                .addPackage(IExhibitionLogic.class.getPackage())
+                .addPackage(ExhibitionLogic.class.getPackage())
+                .addPackage(ExhibitionConverter.class.getPackage())
+                .addPackage(ArtistConverter.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
-    
-    public Float genRandomFloat(){
+
+    public Float genRandomFloat() {
         Float minX = 1.0f;
         Float maxX = 5.0f;
         Random rand = new Random();
@@ -120,21 +131,6 @@ public class ExhibitionPersistenceTest {
         this.resume.setRatingSum(genRandomFloat());
         this.resume.setRatingVotes(genRandomFloat());
         this.resume.setWebsite(generateRandom(String.class));
-
-        this.exhibitions = new ArrayList<ExhibitionEntity>();
-        for (int i = 0; i < 5; i++) {
-            ExhibitionEntity exhibition = new ExhibitionEntity();
-            exhibition.setStartDate(new Date());
-            exhibition.setId(generateRandom(Long.class));
-            exhibition.setAwards(generateRandom(String.class));
-            exhibition.setDescription(generateRandom(String.class));
-            exhibition.setKindOfEvent(generateRandom(String.class));
-            exhibition.setName(generateRandom(String.class));
-            exhibition.setResume(resume);
-            exhibition.setEndDate(new Date());
-            exhibition.setPlace(generateRandom(String.class));
-            this.exhibitions.add(exhibition);
-        }
     }
 
     /**
@@ -147,8 +143,7 @@ public class ExhibitionPersistenceTest {
             em.createQuery("delete from ResumeEntity").executeUpdate();
             em.createQuery("delete from ArtistEntity").executeUpdate();
             utx.commit();
-            if (exhibitions != null && artist != null && resume != null) {
-                this.exhibitions.clear();
+            if (artist != null && resume != null) {
                 this.artist = null;
                 this.resume = null;
             }
@@ -237,9 +232,6 @@ public class ExhibitionPersistenceTest {
             utx.begin();
             em.persist(this.artist);
             em.persist(this.resume);
-            for (ExhibitionEntity ex : this.exhibitions) {
-                em.persist(ex);
-            }
             utx.commit();
         } catch (NotSupportedException e) {
             Logger.getLogger(ExhibitionPersistenceTest.class.getName()).log(Level.SEVERE, null, e);
@@ -327,23 +319,20 @@ public class ExhibitionPersistenceTest {
         saveTestCaseData();
     }
 
-    /**
-     * @generated
-     */
     @Test
-    public void createArtistTest() {
+    public void createExhibitionTest() {
         generateTestCase();
         ExhibitionEntity exhibition = new ExhibitionEntity();
-        exhibition.setName(generateRandom(String.class));
+        exhibition.setStartDate(new Date());
+        exhibition.setId(generateRandom(Long.class));
+        exhibition.setAwards(generateRandom(String.class));
         exhibition.setDescription(generateRandom(String.class));
         exhibition.setKindOfEvent(generateRandom(String.class));
-        exhibition.setStartDate(new Date());
+        exhibition.setName(generateRandom(String.class));
         exhibition.setEndDate(new Date());
         exhibition.setPlace(generateRandom(String.class));
-        exhibition.setAwards(generateRandom(String.class));
-        exhibition.setResume(resume);
-
-        ExhibitionEntity record = exhibitionPersistence.create(exhibition);
+        
+        ExhibitionDTO record = exhibitionLogic.createExhibition(ExhibitionConverter.fullEntity2DTO(exhibition), ArtistConverter.refEntity2DTO(artist));
         Assert.assertNotNull(record);
         Assert.assertEquals(exhibition.getName(), record.getName());
         Assert.assertEquals(exhibition.getDescription(), record.getDescription());
@@ -352,98 +341,5 @@ public class ExhibitionPersistenceTest {
         Assert.assertEquals(exhibition.getEndDate().toString(), record.getEndDate().toString());
         Assert.assertEquals(exhibition.getPlace(), record.getPlace());
         Assert.assertEquals(exhibition.getAwards(), record.getAwards());
-        Assert.assertEquals(exhibition.getResume().getArtist().getId(), record.getResume().getArtist().getId());
-    }
-
-    /**
-     * @generated
-     */
-    @Test
-    public void getExhibitionsTest() {
-        generateTestCase();
-        List<ExhibitionEntity> list = exhibitionPersistence.findAll(null, null);
-        Assert.assertEquals(exhibitions.size(), list.size());
-        for (ExhibitionEntity ent : list) {
-            boolean found = false;
-            for (ExhibitionEntity entity : exhibitions) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-
-    /**
-     * @generated
-     */
-    @Test
-    public void getArtistTest() {
-        generateTestCase();
-        ExhibitionEntity exhibition = exhibitions.get(0);
-        ExhibitionEntity record = exhibitionPersistence.find(exhibition.getId());
-        Assert.assertEquals(exhibition.getName(), record.getName());
-        Assert.assertEquals(exhibition.getDescription(), record.getDescription());
-        Assert.assertEquals(exhibition.getKindOfEvent(), record.getKindOfEvent());
-        Assert.assertEquals(exhibition.getPlace(), record.getPlace());
-        Assert.assertEquals(exhibition.getAwards(), record.getAwards());
-        Assert.assertEquals(exhibition.getResume().getArtist().getId(), record.getResume().getArtist().getId());
-    }
-
-    /**
-     * @generated
-     */
-    @Test
-    public void deleteExhibitionTest() {
-        generateTestCase();
-        ExhibitionEntity entity = exhibitions.get(0);
-        exhibitionPersistence.delete(entity.getId());
-        ExhibitionEntity deleted = em.find(ExhibitionEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
-
-    @Test
-    public void updateExhibitionTest() {
-        generateTestCase();
-        ExhibitionEntity entity = exhibitions.get(0);
-        ExhibitionEntity newEntity = new ExhibitionEntity();
-        newEntity.setId(entity.getId());
-        newEntity.setName(generateRandom(String.class));
-        exhibitionPersistence.update(newEntity);
-        ExhibitionEntity resp = em.find(ExhibitionEntity.class, entity.getId());
-        Assert.assertEquals(newEntity.getName(), resp.getName());
-    }
-
-    @Test
-    public void listByResumeTest() {
-        generateTestCase();
-        List<ExhibitionEntity> list = exhibitionPersistence.listByResume(resume.getId());
-        Assert.assertEquals(exhibitions.size(), list.size());
-        for (ExhibitionEntity ent : list) {
-            boolean found = false;
-            for (ExhibitionEntity entity : exhibitions) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-        list = exhibitionPersistence.listByResume(generateRandom(Long.class));
-        Assert.assertEquals(0, list.size());
-    }
-
-    @Test
-    public void getResumeByArtistIdTest() {
-        generateTestCase();
-        ResumeEntity result = exhibitionPersistence.getResumeByArtistId(artist.getId());
-        Assert.assertNotNull(result);
-        Assert.assertEquals(result.getId(), resume.getId());
-        Assert.assertEquals(result.getWebsite(), resume.getWebsite());
-        Assert.assertEquals(result.getCity(), resume.getCity());
-        Assert.assertEquals(result.getCountry(), resume.getCountry());
-        Assert.assertEquals(result.getLastName(), resume.getLastName());
-        Assert.assertEquals(result.getPhoto(), resume.getPhoto());
-        Assert.assertEquals(result.getRatingSum(), resume.getRatingSum(), 0.001f);
-        Assert.assertEquals(result.getRatingVotes(), resume.getRatingVotes(), 0.001f);
     }
 }

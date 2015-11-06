@@ -95,8 +95,7 @@ public class ExhibitionConverter {
             entity.setEndDate(dto.getEndDate());
             entity.setPlace(dto.getPlace());
             entity.setAwards(dto.getAwards());
-            entity.setKindOfEvent(entity.getKindOfEvent());     
-
+            entity.setKindOfEvent(dto.getKindOfEvent());     
             entity.setResume(ResumeConverter.refDTO2Entity(dto.getResume()));
 
             return entity;

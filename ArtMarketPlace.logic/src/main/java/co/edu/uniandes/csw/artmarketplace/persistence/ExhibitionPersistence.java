@@ -49,7 +49,7 @@ public class ExhibitionPersistence  extends CrudPersistence<ExhibitionEntity>{
             q.setParameter("resume_id", resume);
             exhibitions=q.getResultList();
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ExhibitionPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return exhibitions;
     }
@@ -70,7 +70,7 @@ public class ExhibitionPersistence  extends CrudPersistence<ExhibitionEntity>{
                 result= resumes.get(0);
             }
         } catch (NoResultException e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e); 
+            Logger.getLogger(ExhibitionPersistence.class.getName()).log(Level.SEVERE, null, e); 
         }
         return result;
     }
