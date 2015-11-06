@@ -147,6 +147,7 @@ public class ArtworkGaleryItemConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<ArtworkGaleryItemEntity>();
+        entities.add(new ArtworkGaleryItemEntity());
         result = ArtworkGaleryItemConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -162,6 +163,7 @@ public class ArtworkGaleryItemConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<ArtworkGaleryItemDTO>();
+        dtos.add(new ArtworkGaleryItemDTO());
         result = ArtworkGaleryItemConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -192,6 +194,7 @@ public class ArtworkGaleryItemConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<ArtworkGaleryItemDTO>();
+        dtos.add(new ArtworkGaleryItemDTO());
         result = ArtworkGaleryItemConverter.childListDTO2Entity(dtos, parent);
         assertNotNull(dtos);
     }

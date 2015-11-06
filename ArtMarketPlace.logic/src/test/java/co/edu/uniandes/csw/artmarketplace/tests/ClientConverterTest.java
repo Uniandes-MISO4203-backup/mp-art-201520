@@ -5,11 +5,10 @@
  */
 package co.edu.uniandes.csw.artmarketplace.tests;
 
-import co.edu.uniandes.csw.artmarketplace.converters.BlogConverter;
-import co.edu.uniandes.csw.artmarketplace.dtos.BlogDTO;
-import co.edu.uniandes.csw.artmarketplace.entities.BlogEntity;
+import co.edu.uniandes.csw.artmarketplace.converters.ClientConverter;
+import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
+import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
@@ -25,9 +24,9 @@ import org.junit.runner.RunWith;
  * @author a.perez15
  */
 @RunWith(Arquillian.class)
-public class BlogConverterTest {
+public class ClientConverterTest {
     
-    public BlogConverterTest() {
+    public ClientConverterTest() {
     }
     
     @BeforeClass
@@ -47,96 +46,94 @@ public class BlogConverterTest {
     }
 
     /**
-     * Test of refEntity2DTO method, of class BlogConverter.
+     * Test of refEntity2DTO method, of class ClientConverter.
      */
     @Test
     public void testRefEntity2DTO() {
         System.out.println("refEntity2DTO");
-        BlogEntity entity = null;
-        BlogDTO result = BlogConverter.refEntity2DTO(entity);
+        ClientEntity entity = null;
+        ClientDTO result = ClientConverter.refEntity2DTO(entity);
         assertNull(entity);
         
-        entity = new BlogEntity();
-        result = BlogConverter.refEntity2DTO(entity);
+        entity = new ClientEntity();
+        result = ClientConverter.refEntity2DTO(entity);
         assertNotNull(entity);
-        
-        result.setDateEntry(Calendar.getInstance());
     }
 
     /**
-     * Test of refDTO2Entity method, of class BlogConverter.
+     * Test of refDTO2Entity method, of class ClientConverter.
      */
     @Test
     public void testRefDTO2Entity() {
         System.out.println("refDTO2Entity");
-        BlogDTO dto = null;
-        BlogEntity result = BlogConverter.refDTO2Entity(dto);
+        ClientDTO dto = null;
+        ClientEntity result = ClientConverter.refDTO2Entity(dto);
         assertNull(dto);
         
-        dto = new BlogDTO();
-        result = BlogConverter.refDTO2Entity(dto);
+        dto = new ClientDTO();
+        result = ClientConverter.refDTO2Entity(dto);
         assertNotNull(dto);
     }
 
     /**
-     * Test of fullEntity2DTO method, of class BlogConverter.
+     * Test of fullEntity2DTO method, of class ClientConverter.
      */
     @Test
     public void testFullEntity2DTO() {
         System.out.println("fullEntity2DTO");
-        BlogEntity entity = null;
-        BlogDTO result = BlogConverter.fullEntity2DTO(entity);
+        ClientEntity entity = null;
+        ClientDTO result = ClientConverter.fullEntity2DTO(entity);
         assertNull(entity);
         
-        entity = new BlogEntity();
-        result = BlogConverter.fullEntity2DTO(entity);
+        entity = new ClientEntity();
+        result = ClientConverter.fullEntity2DTO(entity);
         assertNotNull(entity);
     }
 
     /**
-     * Test of fullDTO2Entity method, of class BlogConverter.
+     * Test of fullDTO2Entity method, of class ClientConverter.
      */
     @Test
     public void testFullDTO2Entity() {
         System.out.println("fullDTO2Entity");
-        BlogDTO dto = null;
-        BlogEntity result = BlogConverter.fullDTO2Entity(dto);
+        ClientDTO dto = null;
+        ClientEntity result = ClientConverter.fullDTO2Entity(dto);
         assertNull(dto);
         
-        dto = new BlogDTO();
-        result = BlogConverter.fullDTO2Entity(dto);
+        dto = new ClientDTO();
+        result = ClientConverter.fullDTO2Entity(dto);
         assertNotNull(dto);
     }
 
     /**
-     * Test of listEntity2DTO method, of class BlogConverter.
+     * Test of listEntity2DTO method, of class ClientConverter.
      */
     @Test
     public void testListEntity2DTO() {
         System.out.println("listEntity2DTO");
-        List<BlogEntity> entities = null;
-        List<BlogDTO> result = BlogConverter.listEntity2DTO(entities);
+        List<ClientEntity> entities = null;
+        List<ClientDTO> result = ClientConverter.listEntity2DTO(entities);
         assertNull(entities);
         
-        entities = new ArrayList<BlogEntity>();
-        entities.add(new BlogEntity());
-        result = BlogConverter.listEntity2DTO(entities);
+        entities = new ArrayList<ClientEntity>();
+        entities.add(new ClientEntity());
+        result = ClientConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
 
     /**
-     * Test of listDTO2Entity method, of class BlogConverter.
+     * Test of listDTO2Entity method, of class ClientConverter.
      */
     @Test
     public void testListDTO2Entity() {
         System.out.println("listDTO2Entity");
-        List<BlogDTO> dtos = null;
-        List<BlogEntity> result = BlogConverter.listDTO2Entity(dtos);
+        List<ClientDTO> dtos = null;
+        List<ClientEntity> result = ClientConverter.listDTO2Entity(dtos);
         assertNull(dtos);
         
-        dtos = new ArrayList<BlogDTO>();
-        dtos.add(new BlogDTO());
-        result = BlogConverter.listDTO2Entity(dtos);
+        dtos = new ArrayList<ClientDTO>();
+        dtos.add(new ClientDTO());
+        result = ClientConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
     

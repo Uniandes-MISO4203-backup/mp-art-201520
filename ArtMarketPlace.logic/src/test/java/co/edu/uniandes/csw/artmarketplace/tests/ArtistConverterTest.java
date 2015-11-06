@@ -113,6 +113,7 @@ public class ArtistConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<ArtistEntity>();
+        entities.add(new ArtistEntity());
         result = ArtistConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -128,6 +129,7 @@ public class ArtistConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<ArtistDTO>();
+        dtos.add(new ArtistDTO());
         result = ArtistConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }

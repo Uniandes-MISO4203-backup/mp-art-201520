@@ -86,6 +86,7 @@ public class ArtworkRatingConverterTest {
         assertNull(list);
         
         list = new ArrayList<ArtworkRatingDTO>();
+        list.add(new ArtworkRatingDTO());
         result = ArtworkRatingConverter.listArtworkRatingDTO2Entity(list);
         assertNotNull(list);
     }
@@ -101,6 +102,7 @@ public class ArtworkRatingConverterTest {
         assertNull(list);
         
         list = new ArrayList<ArtworkRatingEntity>();
+        list.add(new ArtworkRatingEntity());
         result = ArtworkRatingConverter.listArtworkRatingEntity2DTO(list);
         assertNotNull(list);
     }

@@ -119,6 +119,7 @@ public class PaymentConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<PaymentEntity>();
+        entities.add(new PaymentEntity());
         result = PaymentConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -134,6 +135,7 @@ public class PaymentConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<PaymentDTO>();
+        dtos.add( new PaymentDTO());
         result = PaymentConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -162,6 +164,7 @@ public class PaymentConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<PaymentDTO>();
+        dtos.add(new PaymentDTO());
         result = PaymentConverter.childListDTO2Entity(dtos, parent);
         assertNotNull(dtos);
     }

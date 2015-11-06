@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.artmarketplace.entities.BlogEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.BlogPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -101,6 +102,7 @@ public class BlogLogicTest {
         BlogEntity entity = em.find(BlogEntity.class, result.getId());
         Assert.assertEquals(dto.getEntry(), entity.getEntry());
         Assert.assertEquals(dto.getTitle(), entity.getTitle());
+        entity.setDateEntry(Calendar.getInstance());
     }
     
     @Test

@@ -146,6 +146,7 @@ public class ResumeConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<ResumeDTO>();
+        dtos.add(new ResumeDTO());
         result = ResumeConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -161,6 +162,7 @@ public class ResumeConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<ResumeEntity>();
+        entities.add(new ResumeEntity());
         result = ResumeConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }

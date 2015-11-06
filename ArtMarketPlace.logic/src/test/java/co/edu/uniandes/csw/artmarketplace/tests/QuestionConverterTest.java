@@ -149,6 +149,7 @@ public class QuestionConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<QuestionEntity>();
+        entities.add(new QuestionEntity());
         result = QuestionConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -164,6 +165,7 @@ public class QuestionConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<QuestionDTO>();
+        dtos.add(new QuestionDTO());
         result = QuestionConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -193,6 +195,7 @@ public class QuestionConverterTest {
         assertNull(questions);
         
         questions = new ArrayList<QuestionDTO>();
+        questions.add(new QuestionDTO());
         result = QuestionConverter.childListDTO2Entity(questions, artwork);
         assertNotNull(questions);
     }

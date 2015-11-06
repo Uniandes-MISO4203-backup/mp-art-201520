@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ArtworkRatingConverter {
 
-
+    private ArtworkRatingConverter(){}
     /**
      * Este metodo se encarga de hacer la conversion de un objeto del tipo
      * Entity a un objeto DTO del tipo ArtworkRating.
