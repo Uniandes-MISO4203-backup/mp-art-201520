@@ -307,6 +307,11 @@ public class ArtworkLogicTest {
             }
         }
     }
+    
+    @Test
+    public void countArtworks() {
+        Assert.assertEquals(data.size(),artworkLogic.countArtworks());
+    }
 
     /**
      * Test for search Artist With Cheapest Artwork

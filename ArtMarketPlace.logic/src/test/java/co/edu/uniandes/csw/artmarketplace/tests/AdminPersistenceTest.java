@@ -106,7 +106,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void createArtistTest() {
+    public void createAdminTest() {
         AdminEntity newEntity = new AdminEntity();
         newEntity.setName(generateRandom(String.class));
         newEntity.setUserId(generateRandom(String.class));
@@ -119,6 +119,24 @@ public class AdminPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getUserId(), entity.getUserId());
+    }
+    
+    @Test
+    public void updateAdminTest() {
+        AdminEntity entity = data.get(0);
+
+        AdminEntity newEntity = new AdminEntity();
+
+        newEntity.setId(entity.getId());
+        newEntity.setName(generateRandom(String.class));
+        newEntity.setUserId(generateRandom(String.class));
+
+        adminPersistence.update(newEntity);
+
+        AdminEntity resp = em.find(AdminEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+        Assert.assertEquals(newEntity.getUserId(), resp.getUserId());
     }
 
     @Test

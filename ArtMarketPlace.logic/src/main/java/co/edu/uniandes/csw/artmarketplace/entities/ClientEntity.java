@@ -29,46 +29,19 @@ public class ClientEntity implements Serializable {
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> cartItem;
+
     /**
      * @generated
      */
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
     /**
      * @generated
      */
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @generated
-     */
-    public String getName(){
-        return name;
-    }
-
-    /**
-     * @generated
-     */
-    public void setName(String name){
-        this.name = name;
-    }
-
-    /**
-     * @generated
-     */
-    public String getUserId(){
-        return userId;
-    }
-
-    /**
-     * @generated
-     */
-    public void setUserId(String userId){
-        this.userId = userId;
     }
 
     /**
@@ -85,4 +58,31 @@ public class ClientEntity implements Serializable {
         this.cartItem = cartitem;
     }
 
+    /**
+     * @generated
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @generated
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @generated
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @generated
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

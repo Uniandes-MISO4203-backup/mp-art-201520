@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
 /**
  * @generated
  */
@@ -30,47 +29,33 @@ public class ArtistEntity implements Serializable {
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArtworkEntity> artwork;
-    
+
     /**
      * @generated
      */
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
     /**
      * @generated
      */
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * @generated
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     /**
      * @generated
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @generated
-     */
-    public String getUserId(){
-        return userId;
-    }
-
-    /**
-     * @generated
-     */
-    public void setUserId(String userId){
-        this.userId = userId;
     }
 
     /**
@@ -87,4 +72,17 @@ public class ArtistEntity implements Serializable {
         this.artwork = artwork;
     }
 
+    /**
+     * @generated
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @generated
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

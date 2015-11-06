@@ -243,6 +243,7 @@ public class ArtworkLogic implements IArtworkLogic {
      * @param artworkMaxRating
      * @return 
      */
+    @Override
     public List<ArtworkDTO> searchArtworksBetweenRatings(float artworkMinRating, float artworkMaxRating) {
         return ArtworkConverter.listEntity2DTO(persistence.searchArtworksBetweenRatings(artworkMinRating, artworkMaxRating));
     }
