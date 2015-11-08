@@ -8,7 +8,7 @@ import co.edu.uniandes.csw.artmarketplace.persistence.ExhibitionPersistence;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import javax.inject.Inject;
@@ -124,14 +124,14 @@ public class ExhibitionPersistenceTest {
         this.exhibitions = new ArrayList<ExhibitionEntity>();
         for (int i = 0; i < 5; i++) {
             ExhibitionEntity exhibition = new ExhibitionEntity();
-            exhibition.setStartDate(new Date());
+            exhibition.setStartDate(Calendar.getInstance());
             exhibition.setId(generateRandom(Long.class));
             exhibition.setAwards(generateRandom(String.class));
             exhibition.setDescription(generateRandom(String.class));
             exhibition.setKindOfEvent(generateRandom(String.class));
             exhibition.setName(generateRandom(String.class));
             exhibition.setResume(resume);
-            exhibition.setEndDate(new Date());
+            exhibition.setEndDate(Calendar.getInstance());
             exhibition.setPlace(generateRandom(String.class));
             this.exhibitions.add(exhibition);
         }
@@ -337,8 +337,8 @@ public class ExhibitionPersistenceTest {
         exhibition.setName(generateRandom(String.class));
         exhibition.setDescription(generateRandom(String.class));
         exhibition.setKindOfEvent(generateRandom(String.class));
-        exhibition.setStartDate(new Date());
-        exhibition.setEndDate(new Date());
+        exhibition.setStartDate(Calendar.getInstance());
+        exhibition.setEndDate(Calendar.getInstance());
         exhibition.setPlace(generateRandom(String.class));
         exhibition.setAwards(generateRandom(String.class));
         exhibition.setResume(resume);

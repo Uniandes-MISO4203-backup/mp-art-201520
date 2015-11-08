@@ -26,5 +26,9 @@
             this.rateArtist = function (data) {
                 this.api.one(data['id'] + "/rate/" + data['rate']).customPOST();
             };
+            this.saveExhibition = function (data)
+            {
+                return this.api.one("exhibition/").customPOST(data);
+            };
         }]);
 })(window.angular);

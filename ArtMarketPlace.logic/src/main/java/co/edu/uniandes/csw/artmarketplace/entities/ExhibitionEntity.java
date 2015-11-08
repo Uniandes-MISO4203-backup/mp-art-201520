@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * ExhibitionEntity es una clase disenada para gestionar la informacion
@@ -48,14 +50,14 @@ public class ExhibitionEntity implements Serializable {
      * Fecha de inicio de la exhibicion
      */
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Calendar startDate;
     
     /**
      * Fecha de fin de la exhibicion
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date endDate;
+    @Temporal(TemporalType.DATE)
+    private Calendar endDate;
     
     /**
      * Lugar donde se llevo a cabo el evento
@@ -130,7 +132,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de acceso para la variable startDate.
      * @return 
      */
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
@@ -138,7 +140,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de modificación para la variable startDate.
      * @param startDate 
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
     
@@ -146,7 +148,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de acceso para la variable endDate.
      * @return 
      */
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
@@ -154,7 +156,7 @@ public class ExhibitionEntity implements Serializable {
      * Metodo de modificación para la variable endDate.
      * @param endDate 
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
 

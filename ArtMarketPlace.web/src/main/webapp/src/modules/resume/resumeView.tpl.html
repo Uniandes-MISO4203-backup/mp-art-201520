@@ -23,7 +23,7 @@
     <!--Display Alerts -->
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">Personal Information</div>
         <div class="panel-body">
             <form novalidate name="form" id="Resume-form" role="form">
@@ -81,7 +81,7 @@
             </form>
         </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">Experience & Education</div>
         <div ng-repeat="exp in record.experience">
             <div class="panel-body">
@@ -113,6 +113,34 @@
                         </div>
                     </fieldset>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!-- Inicio del Historial de Exhibiciones del Artista -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Exhibitions</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tr class="info">
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                        <td>Place</td>
+                        <td>Kind of Event</td>
+                        <td>Awards</td>
+                    </tr>
+                    <tr ng-repeat="exhibition in record.exhibitions">
+                        <td>{{exhibition.name}}</td>
+                        <td>{{exhibition.description}}</td>
+                        <td>{{exhibition.startDate| date : format : short}}</td>
+                        <td>{{ exhibition.endDate| date : format : short}}</td>
+                        <td>{{exhibition.place}}</td>
+                        <td>{{exhibition.kindOfEvent}}</td>
+                        <td>{{exhibition.awards}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

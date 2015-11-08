@@ -7,11 +7,13 @@ package co.edu.uniandes.csw.artmarketplace.services;
 
 import co.edu.uniandes.csw.artmarketplace.api.IBlogLogic;
 import co.edu.uniandes.csw.artmarketplace.api.ICommentBlogLogic;
+import co.edu.uniandes.csw.artmarketplace.api.IExhibitionLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IExperienceLogic;
 import co.edu.uniandes.csw.artmarketplace.api.IResumeLogic;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtistDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.BlogDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.CommentBlogDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.ExhibitionDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ExperienceDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ResumeDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
@@ -25,12 +27,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -65,6 +65,12 @@ public class ResumeService {
      */
     @Inject
     private IExperienceLogic experienceLogic;
+    
+    /**
+     * Expone los servicios del backup de experiencia
+     */
+    @Inject
+    private IExhibitionLogic exhibitionLogic;
 
     //Para el servicio de Blog...
     @Inject
@@ -179,6 +185,28 @@ public class ResumeService {
         } else {
             return null;
         }
+    }
+    
+    /**
+     * Este metodo esta encargado de registrar una nueva exhibicion de un artista en la
+     * hoja de vida del artista.
+     * @param dto Es la información de la exhibicion
+     * @return un objeto del tipo ExhibitionDTO con la confirmación de registro.
+     */
+    @POST
+    @Path("/exhibition")
+    public ExhibitionDTO createExhibition(ExhibitionDTO dto) {
+        ExhibitionDTO result = null;
+        if (artist != null && dto!=null) {
+            ResumeDTO resumeDTO = resumeLogic.getResumebyAristId(artist.getId());
+            if (resumeDTO == null) {
+                resumeDTO = new ResumeDTO();
+                resumeDTO.setArtist(artist);
+                resumeLogic.createResume(resumeDTO);
+            }
+            result = exhibitionLogic.createExhibition(dto, artist);
+        }
+        return result;
     }
 
     /**

@@ -73,6 +73,16 @@
                         $scope.listExperience += data.title + " - " + data.place + " - " + format(data.startDate) + " to " + format(data.finishDate) + " \n";
                 });
             };
+            $scope.addExhibition = function () {
+                $('#exhibitionModal').modal('show');
+            };
+            $scope.saveExhibition= function () {
+                console.log($scope.exhibition);
+                svc.saveExhibition($scope.exhibition).then(function (data){
+                    swal("Sucess", "The exhibition was added successfully", "success");
+                    $('#exhibitionModal').modal('hide');
+                });
+            };
             if (idArtist) {
                 svc.getResume(idArtist).then(function (result) {
                     $scope.prueba = result;

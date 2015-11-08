@@ -24,6 +24,7 @@
     <!--Display Alerts -->
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 
+    <!-- Informacion basica del artista -->
     <div class="panel panel-default">
         <div class="panel-heading">Personal Information</div>
         <div class="panel-body">
@@ -69,6 +70,9 @@
             </form>
         </div>
     </div>
+    <!-- Fin de la Inforrmacion basica del artista  -->
+
+    <!--- Inicio Experiencia y Educacion del Artista -->
     <div class="panel panel-default">
         <div class="panel-heading">Experience & Education</div>
         <div class="panel-body">
@@ -94,6 +98,43 @@
 
         </div>
     </div>
+    <!-- Fin de la Experiencia y Educacion del Artista -->
+
+    <!-- Inicio del Historial de Exhibiciones del Artista -->
+    <div class="panel panel-warning">
+        <div class="panel-heading">Exhibitions</div>
+        <div class="panel-body">
+            <nav class="navbar navbar-header">
+                <div class="container-fluid">
+                    <button class="btn btn-default" ng-click="addExhibition()">Add</button>
+                </div>
+            </nav>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                        <td>Place</td>
+                        <td>Kind of Event</td>
+                        <td>Awards</td>
+                    </tr>
+                    <tr ng-repeat="exhibition in record.exhibitions">
+                        <td>{{exhibition.name}}</td>
+                        <td>{{exhibition.description}}</td>
+                        <td>{{exhibition.startDate| date : format : short}}</td>
+                        <td>{{ exhibition.endDate| date : format : short}}</td>
+                        <td>{{exhibition.place}}</td>
+                        <td>{{exhibition.kindOfEvent}}</td>
+                        <td>{{exhibition.awards}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- Inicio del Historial de Exhibiciones del Artista -->
 </div>
 
 <!-- Vista del modal Experiencia-->
@@ -119,11 +160,11 @@
                             <label  class="col-sm-2 control-label">Type of Information: </label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline control-label">
-                                <input type="radio" name="education" value="Education" ng-model="experience.type" checked> Education
-                            </label>
-                            <label class="checkbox-inline control-label">
-                                <input type="radio" name="experience" value="Experience" ng-model="experience.type">Experience
-                            </label>
+                                    <input type="radio" name="education" value="Education" ng-model="experience.type" checked> Education
+                                </label>
+                                <label class="checkbox-inline control-label">
+                                    <input type="radio" name="experience" value="Experience" ng-model="experience.type">Experience
+                                </label>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
@@ -162,5 +203,129 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+<div class="modal fade" id="exhibitionModal" role="dialog">
+    <!-- Definicion del espacio del modal -->
+    <div class="modal-dialog">
+        <!-- Contenido definido para el Modal -->  
+        <div class="modal-content">
+            <form id="exhibitionForm" method="post" class="form-horizontal" ng-submit="saveExhibition()">
+                <!-- Encabezado -->
+                <div class="modal-header">
+                    <!-- Boton de cerrado -->
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!-- Titulo del Modal -->
+                    <h4 class="modal-title" id = "exhibitionModalTitle">Exhibition Form </h4>
+                </div>
+                <!-- Definicion del formulario para la pregunta -->
+
+                <div class="modal-body">
+                    <!-- Forma del Formulario para la pregunta -->
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Name </b>
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="exhName" 
+                                   class="form-control" 
+                                   placeholder="Name of the Exhibition" 
+                                   ng-model="exhibition.name" 
+                                   required="true">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Description</b> 
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea  id="exhDescription" 
+                                       class="form-control" 
+                                       rows="2" 
+                                       placeholder="Write here a short description about the exhibition. e.g. 'This event is created for artist who life in the romance.'"
+                                       ng-model="exhibition.description" 
+                                       required="true"></textarea>
+                        </div>
+                    </div>  
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Start Date </b>
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="exhStartDate" 
+                                   name="exhStartDate" 
+                                   class="form-control" 
+                                   type="date" 
+                                   placeholder="yyyy-MM-dd" 
+                                   ng-model="exhibition.startDate" 
+                                   required="true" />
+                        </div>
+                    </div>  
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>End Date</b> 
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="exhStartDate" 
+                                   name="exhStartDate" 
+                                   class="form-control" 
+                                   type="date" 
+                                   placeholder="yyyy-MM-dd" 
+                                   ng-model="exhibition.endDate" 
+                                   required="true" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Place</b> 
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="exhStartDate" 
+                                   name="exhPlace" 
+                                   class="form-control" 
+                                   placeholder="e.g. National Museum. Bogotá, Colombia." 
+                                   ng-model="exhibition.place" 
+                                   required="true" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Kind of Event</b> 
+                        </label>
+                        <div class="col-sm-9">
+                            <select id="exhKind"
+                                    class="form-control" 
+                                    ng-model="exhibition.kindOfEvent"
+                                    required="true">
+                                <option>Exhibition</option>
+                                <option>Contest</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-sm-3 control-label">
+                            <b>Awards</b> 
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="exhAdwards" 
+                                   name="exhPlace" 
+                                   class="form-control" 
+                                   placeholder="e.g. 1th Place" 
+                                   ng-model="exhibition.awards" 
+                                   required="true" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer del formulario -->
+                <div class="modal-footer">
+                    <!-- Boton de Close para cancelar-->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <!-- Boton de Gusrdar-->
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
