@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  *
@@ -37,6 +38,20 @@ public class BlogPersistence extends CrudPersistence<BlogEntity> {
             params.put("idArtist", idArtist);
             return executeListNamedQuery("Blog.getEntryArtist", params);
         } catch (NoResultException e) {
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        }
+    }
+    //Método para realizar la búsqueda de entradas de un blog de un artista.
+    public List<BlogEntity> searchBlog(String search, Long idArtist) {
+        try{
+            Query q = em.createNamedQuery("Blog.searchBlog");
+            String searchObj = search;
+            Long idArtistObj = idArtist;
+            q.setParameter("search", "%" + searchObj + "%");
+            q.setParameter("idArtist", idArtistObj);
+            return q.getResultList();
+        } catch(NoResultException e){
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
             return null;
         }

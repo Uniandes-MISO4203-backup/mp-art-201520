@@ -23,7 +23,7 @@ public class CommentBlogPersistence extends CrudPersistence<CommentBlogEntity>{
     public CommentBlogPersistence(){
         this.entityClass = CommentBlogEntity.class;
     }
-    
+    //Método que traer los comentarios de un blog dado el id del mismo.
     public List<CommentBlogEntity> getCommentBlog(Long idBlog) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();

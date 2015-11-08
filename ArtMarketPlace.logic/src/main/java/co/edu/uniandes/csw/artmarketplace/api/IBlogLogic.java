@@ -42,4 +42,12 @@ public interface IBlogLogic {
      * @return 
      */
     public List<BlogDTO> getEntryArtist(Long idArtist);
+    
+    /**
+     * Busca las entradas de un Blog de un artisita dado parte del título de la entrada
+     * @param search
+     * @param idArtist
+     * @return
+     */
+    public List<BlogDTO> searchBlog(String search, Long idArtist);
 }

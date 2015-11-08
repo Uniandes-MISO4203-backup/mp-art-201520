@@ -251,13 +251,15 @@ public class ResumeService {
     public List<BlogDTO> getEntrys() {
         return blogLogic.getEntrys(page, maxRecords);
     }
-
+    
+    //Mostrar todas las entrada de un artista.
     @Path("/entryartist/{id: \\d+}")
     @GET
     public List<BlogDTO> getEntryArtist(@PathParam("id") Long idArtist) {
         return blogLogic.getEntryArtist(idArtist);
     }
-
+    
+    //Mostrar la entrada de un blog.
     @Path("/getentry/{id: \\d+}")
     @GET
     public BlogDTO getEntry(@PathParam("id") Long id) {
@@ -280,9 +282,17 @@ public class ResumeService {
         return commentLogic.getComments(page, maxRecords);
     }
     
+    //Para traer los cometarios de un blog.
     @Path("/getcomment/{id: \\d+}")
     @GET
     public List<CommentBlogDTO> getCommentBlog(@PathParam("id") Long idBlog) {
         return commentLogic.getCommentBlog(idBlog);
+    }
+    
+    //Buscar entradas de un blog.
+    @Path("/searchblog/{q}/{id}")
+    @GET
+    public List<BlogDTO> searchBlog(@PathParam("q") String search, @PathParam("id") Long idArtist) {
+        return blogLogic.searchBlog(search, idArtist);
     }
 }

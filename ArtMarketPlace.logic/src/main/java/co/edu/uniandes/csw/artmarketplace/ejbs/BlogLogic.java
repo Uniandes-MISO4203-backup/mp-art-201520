@@ -71,5 +71,16 @@ public class BlogLogic implements IBlogLogic {
     public List<BlogDTO> getEntryArtist(Long idArtist) {
         return BlogConverter.listEntity2DTO(persistence.getEntryArtist(idArtist));
     }
+    
+    /**
+     * Realiza la búsqueda de un entrada.
+     * @param search
+     * @param idArtist
+     * @return
+     */
+    @Override
+    public List<BlogDTO> searchBlog(String search, Long idArtist) {
+        return BlogConverter.listEntity2DTO(persistence.searchBlog(search, idArtist));
+    }
    
 }

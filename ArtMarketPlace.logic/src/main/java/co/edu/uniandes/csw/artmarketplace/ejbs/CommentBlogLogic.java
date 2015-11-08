@@ -24,7 +24,7 @@ public class CommentBlogLogic implements ICommentBlogLogic {
     @Inject private CommentBlogPersistence persistence;
 
     /**
-     * Metodo encargado de obtener las �rdenes de un cliente
+     * Metodo encargado de traer todos los comentarios de un blog.
      * @param page
      * @param maxRecords
      * @return 
@@ -33,18 +33,21 @@ public class CommentBlogLogic implements ICommentBlogLogic {
     public List<CommentBlogDTO> getComments(Integer page, Integer maxRecords) {
         return CommentBlogConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
-
+    
+    //Método que trae un comentario.
     @Override
     public CommentBlogDTO getComment(Long id) {
         return CommentBlogConverter.fullEntity2DTO(persistence.find(id));
     }
 
+    //Método que cuenta el número de comentarios de un blog.
     @Override
     public int countComment() {
         return persistence.count();
     }
 
     /**
+     * Método que crea un comentario de un blog.
      * @param dto
      * @return 
      */
@@ -54,7 +57,7 @@ public class CommentBlogLogic implements ICommentBlogLogic {
         persistence.create(entity);
         return CommentBlogConverter.fullEntity2DTO(entity);
     }
-
+    //Método que traer todos los comentarios de un blog, dado su id.
     public List<CommentBlogDTO> getCommentBlog(Long idBlog) {
         return CommentBlogConverter.listEntity2DTO(persistence.getCommentBlog(idBlog));
     }

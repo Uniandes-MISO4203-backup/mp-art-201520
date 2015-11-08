@@ -19,6 +19,7 @@ public class CommentBlogDTO {
     private Calendar dateComment;
     private Long clientId;
     private Long blogId;
+    private String CommentUser;
 
     public Long getId() {
         return id;
@@ -60,5 +61,11 @@ public class CommentBlogDTO {
         this.blogId = blogId;
     }
 
-      
+    public String getCommentUser() {
+        return CommentUser;
+    }
+
+    public void setCommentUser(String CommentUser) {
+        this.CommentUser = CommentUser;
+    } 
 }
