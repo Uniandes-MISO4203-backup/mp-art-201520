@@ -58,6 +58,7 @@ public class CommentBlogLogic implements ICommentBlogLogic {
         return CommentBlogConverter.fullEntity2DTO(entity);
     }
     //Método que traer todos los comentarios de un blog, dado su id.
+    @Override
     public List<CommentBlogDTO> getCommentBlog(Long idBlog) {
         return CommentBlogConverter.listEntity2DTO(persistence.getCommentBlog(idBlog));
     }

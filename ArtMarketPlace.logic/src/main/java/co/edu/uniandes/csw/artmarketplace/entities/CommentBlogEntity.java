@@ -42,7 +42,7 @@ public class CommentBlogEntity implements Serializable {
     private Long blogId;
     
     //Nombre del usuario que está haciendo el comentario.
-    private String CommentUser;
+    private String commentUser;
 
     public Long getId() {
         return id;
@@ -85,10 +85,10 @@ public class CommentBlogEntity implements Serializable {
     }
 
     public String getCommentUser() {
-        return CommentUser;
+        return commentUser;
     }
 
-    public void setCommentUser(String CommentUser) {
-        this.CommentUser = CommentUser;
+    public void setCommentUser(String commentUser) {
+        this.commentUser = commentUser;
     }
 }

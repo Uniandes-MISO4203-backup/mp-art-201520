@@ -19,7 +19,7 @@ public class CommentBlogDTO {
     private Calendar dateComment;
     private Long clientId;
     private Long blogId;
-    private String CommentUser;
+    private String commentUser;
 
     public Long getId() {
         return id;
@@ -62,10 +62,10 @@ public class CommentBlogDTO {
     }
 
     public String getCommentUser() {
-        return CommentUser;
+        return commentUser;
     }
 
-    public void setCommentUser(String CommentUser) {
-        this.CommentUser = CommentUser;
-    } 
+    public void setCommentUser(String commentUser) {
+        this.commentUser = commentUser;
+    }    
 }
