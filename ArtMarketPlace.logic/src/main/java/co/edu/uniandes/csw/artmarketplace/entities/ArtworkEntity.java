@@ -58,6 +58,11 @@ public class ArtworkEntity implements Serializable {
      * Artwork style
      */
     private String artworkStyle;
+    
+    /**
+     * Artwork type
+     */
+    private String artworkType;
  
     /**
      * Comentarios de la obra de arte.
@@ -188,6 +193,22 @@ public class ArtworkEntity implements Serializable {
 
     public void setArtworkStyle(String artworkStyle) {
         this.artworkStyle = artworkStyle;
+    }
+    
+    /**
+     * Retorna el tipo de obra.
+     * @return artworkType
+     */
+    public String getArtworkType() {
+        return artworkType;
+    }
+
+    /**
+     * Establece el tipo de obra.
+     * @param artworkType 
+     */
+    public void setArtworkType(String artworkType) {
+        this.artworkType = artworkType;
     }
 
     /**

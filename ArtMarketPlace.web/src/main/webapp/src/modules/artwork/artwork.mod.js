@@ -29,8 +29,12 @@
                 displayName: 'Artwork Style',
                 type: 'String',
                 required: true
-            }
-            , {
+            }, {
+                name: 'artworkType',
+                displayName: 'Artwork Type',
+                type: 'String',
+                required: true
+            }, {
                 name: 'ratingSum',
                 displayName: 'ratingSum',
                 type: 'Number',
