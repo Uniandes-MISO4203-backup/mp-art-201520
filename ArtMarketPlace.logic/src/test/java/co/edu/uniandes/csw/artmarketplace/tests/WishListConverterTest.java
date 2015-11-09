@@ -8,17 +8,20 @@ package co.edu.uniandes.csw.artmarketplace.tests;
 import co.edu.uniandes.csw.artmarketplace.converters.WishListConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.WishListDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.WishListEntity;
+import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
- * @author ms.lancheros10
+ * @author a.perez15
  */
+@RunWith(Arquillian.class)
 public class WishListConverterTest {
     
     public WishListConverterTest() {
@@ -47,9 +50,12 @@ public class WishListConverterTest {
     public void testRefEntity2DTO() {
         System.out.println("refEntity2DTO");
         WishListEntity entity = null;
-        WishListDTO expResult = null;
         WishListDTO result = WishListConverter.refEntity2DTO(entity);
-        assertEquals(expResult, result);
+        assertNull(entity);
+        
+        entity = new WishListEntity();
+        result = WishListConverter.refEntity2DTO(entity);
+        assertNotNull(entity);
     }
 
     /**
@@ -59,9 +65,12 @@ public class WishListConverterTest {
     public void testRefDTO2Entity() {
         System.out.println("refDTO2Entity");
         WishListDTO dto = null;
-        WishListEntity expResult = null;
         WishListEntity result = WishListConverter.refDTO2Entity(dto);
-        assertEquals(expResult, result);
+        assertNull(dto);
+        
+        dto = new WishListDTO();
+        result = WishListConverter.refDTO2Entity(dto);
+        assertNotNull(dto);
     }
 
     /**
@@ -71,9 +80,12 @@ public class WishListConverterTest {
     public void testBasicEntity2DTO() {
         System.out.println("basicEntity2DTO");
         WishListEntity entity = null;
-        WishListDTO expResult = null;
         WishListDTO result = WishListConverter.basicEntity2DTO(entity);
-        assertEquals(expResult, result);
+        assertNull(entity);
+        
+        entity = new WishListEntity();
+        result = WishListConverter.basicEntity2DTO(entity);
+        assertNotNull(entity);
     }
 
     /**
@@ -83,9 +95,12 @@ public class WishListConverterTest {
     public void testBasicDTO2Entity() {
         System.out.println("basicDTO2Entity");
         WishListDTO dto = null;
-        WishListEntity expResult = null;
         WishListEntity result = WishListConverter.basicDTO2Entity(dto);
-        assertEquals(expResult, result);
+        assertNull(dto);
+        
+        dto = new WishListDTO();
+        result = WishListConverter.basicDTO2Entity(dto);
+        assertNotNull(dto);
     }
     
 }
