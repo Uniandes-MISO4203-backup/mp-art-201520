@@ -10,9 +10,17 @@ import co.edu.uniandes.csw.artmarketplace.dtos.ClientDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.QuestionDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.RemarkDTO;
 import co.edu.uniandes.csw.artmarketplace.providers.StatusCreated;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.api.ApiKey;
+import com.stormpath.sdk.api.ApiKeys;
+import com.stormpath.sdk.client.Client;
+import com.stormpath.sdk.client.Clients;
+import com.stormpath.sdk.resource.ResourceException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -36,6 +44,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.ini4j.Wini;
 
 /**
  * @generated
@@ -127,12 +136,13 @@ public class ArtworkService {
     public List<ArtworkDTO> searchArtworksBetweenPrices(@PathParam("artworkMinPrice") int artworkMinPrice, @PathParam("artworkMaxPrice") int artworkMaxPrice) {
         return artworkLogic.searchArtworksBetweenPrices(artworkMinPrice, artworkMaxPrice);
     }
-    
+
     /**
      * Search Artworks Between Ratings
+     *
      * @param artworkMinRating
      * @param artworkMaxRating
-     * @return 
+     * @return
      */
     @GET
     @Path("/artworksBetweenRatings/{artworkMinRating}/{artworkMaxRating}")
@@ -217,9 +227,22 @@ public class ArtworkService {
             InputStream data = context.getResourceAsStream(path);
             Properties props = new Properties();
             props.load(data);
-            Subject currentUser = SecurityUtils.getSubject();
-            Map<String, String> userAttributes = (Map<String, String>) currentUser.getPrincipals().oneByType(java.util.Map.class);
-            dto.setEmail(userAttributes.get("email"));
+            ArtworkDTO artwork = artworkLogic.getArtwork(dto.getArtwork().getId());
+            ArtistDTO artistDTO = artistLogic.getArtist(artwork.getArtist().getId());
+            URL url = ArtistService.class.getResource("ArtistService.class");
+            String className = url.getFile();
+            String filePath = className.substring(0, className.indexOf("WEB-INF") + "WEB-INF".length());
+            Wini ini = new Wini(new File(filePath + "/shiro.ini"));
+            String stormPath = ini.get("main", "stormpathClient.apiKeyFileLocation");
+            ApiKey apiKey = ApiKeys.builder().setFileLocation(stormPath).build();
+            Client clientStorm = Clients.builder().setApiKey(apiKey).build();
+            try {
+                Account account = clientStorm.getResource(artistDTO.getUserId(), Account.class);
+                dto.setEmail(account.getEmail());
+            } catch (ResourceException e) {
+                Logger.getLogger(ArtistService.class.getName()).log(Level.SEVERE, null, "No existe el usuario con ese ID");
+                Logger.getLogger(ArtistService.class.getName()).log(Level.SEVERE, null, e);
+            }
             dto.setClient(myClient);
             questionLogic.createQuestion(dto);
             dto.setClient(myClient);
