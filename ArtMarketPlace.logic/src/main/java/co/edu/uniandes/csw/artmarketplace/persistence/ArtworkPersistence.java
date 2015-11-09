@@ -123,6 +123,23 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
     }
     
     /**
+     * Search artwork by type
+     * @param artworkType
+     * @return
+     */
+    public List<ArtworkEntity> searchArtworksByType(String artworkType) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("artworkType", artworkType);
+            result = executeListNamedQuery("ArtworkEntity.searchArtworksByType", params);
+        } catch (Exception e) {
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+    }
+    
+    /**
      * Search artwork between ratings
      * @param artworkMinRating
      * @param artworkMaxRating

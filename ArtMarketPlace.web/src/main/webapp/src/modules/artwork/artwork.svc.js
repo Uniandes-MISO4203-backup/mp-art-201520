@@ -18,6 +18,9 @@
             this.searchArtworksOfAnArtist = function (artistId) {
                 return this.api.one("searchArtworksOfAnArtist/" + artistId).get();
             };
+            this.searchArtworksByType = function (artworkType) {
+                return this.api.one("searchArtworksByType/" + artworkType).get();
+            };
             this.searchArtworksByStyle = function (artworkStyle) {
                 return this.api.one("searchArtworksByStyle/" + artworkStyle).get();
             };

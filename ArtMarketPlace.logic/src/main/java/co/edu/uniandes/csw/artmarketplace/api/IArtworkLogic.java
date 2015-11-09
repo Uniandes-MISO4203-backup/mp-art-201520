@@ -46,6 +46,12 @@ public interface IArtworkLogic {
      */
     public List<ArtworkDTO> searchArtworksByStyle(String artworkStyle);
     /**
+     * Search artworks by type
+     * @param artworkType
+     * @return 
+     */
+    public List<ArtworkDTO> searchArtworksByType(String artworkType);
+    /**
      * Search artworks between ratings
      * @param artworkMinRating
      * @param artworkMaxRating
