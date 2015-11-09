@@ -17,7 +17,8 @@
         'ngRoute',
         'ngCrud',
         'ui.bootstrap',
-        'youtube-embed'
+        'youtube-embed',
+        'wishListModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -45,6 +46,11 @@
                     .when('/shoppingCart', {
                         templateUrl: 'src/modules/cartItem/shoppingCart.tpl.html',
                         controller: 'cartItemCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/wishList', {
+                        templateUrl: 'src/modules/wishList/wishList.tpl.html',
+                        controller: 'wishListCtrl',
                         controllerAs: alias
                     })
                     .when('/pay', {
