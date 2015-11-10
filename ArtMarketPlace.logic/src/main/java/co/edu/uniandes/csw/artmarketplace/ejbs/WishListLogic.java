@@ -31,7 +31,7 @@ public class WishListLogic implements IWishListLogic {
 
     @Override
     public void removeWishListItemDTO(Long id) {
-        persistence.delete(id);
+        persistence.deleteWishListItem(id);
     }
 
     @Override

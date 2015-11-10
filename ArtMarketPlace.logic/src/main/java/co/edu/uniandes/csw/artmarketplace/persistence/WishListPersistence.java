@@ -39,8 +39,8 @@ public class WishListPersistence extends CrudPersistence<WishListEntity> {
     /**
      * @generated
      */
-    public void delete(Long id) {
-        delete(id);
+    public void deleteWishListItem(Long id) {
+        this.delete(id);
     }
     
     /**
