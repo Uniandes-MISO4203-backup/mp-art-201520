@@ -60,13 +60,7 @@ public class BlogConverter {
      */
     private static BlogDTO basicEntity2DTO(BlogEntity entity) {
         if (entity != null) {
-            BlogDTO dto = new BlogDTO();
-            dto.setId(entity.getId());
-            dto.setEntry(entity.getEntry());
-            dto.setTitle(entity.getTitle());
-            dto.setDateEntry(entity.getDateEntry());
-            dto.setClientId(entity.getClientId());
-            return dto;
+            return refEntity2DTO(entity);
         } else {
             return null;
         }

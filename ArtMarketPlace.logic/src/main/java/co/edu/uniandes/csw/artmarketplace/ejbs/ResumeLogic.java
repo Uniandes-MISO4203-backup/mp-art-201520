@@ -111,10 +111,9 @@ public class ResumeLogic implements IResumeLogic {
     public Float getRatingArtist(Long id) {
         ResumeEntity resume = persistence.getResumeByArtistId(id);
         Float rating = 0.0000f;
-        if (resume.getRatingVotes() != null && resume.getRatingSum() != null) {
-            if (resume.getRatingVotes() > 0) {
-                rating = resume.getRatingSum() / resume.getRatingVotes();
-            }
+        if (resume.getRatingVotes() != null && resume.getRatingSum() != null
+                && resume.getRatingVotes() > 0) {
+            rating = resume.getRatingSum() / resume.getRatingVotes();
         }
         return rating;
     }
@@ -124,6 +123,7 @@ public class ResumeLogic implements IResumeLogic {
      * @param artistName
      * @return 
      */
+    @Override
     public List<ResumeDTO> searchArtistByName(String artistName) {
         return ResumeConverter.listEntity2DTO(persistence.searchArtistByName(artistName));
     }
@@ -134,6 +134,7 @@ public class ResumeLogic implements IResumeLogic {
      * @param artistMaxRating
      * @return 
      */
+    @Override
     public List<ResumeDTO> searchArtistsBetweenRatings(float artistMinRating,float artistMaxRating) {
         return ResumeConverter.listEntity2DTO(persistence.searchArtistsBetweenRatings(artistMinRating,artistMaxRating));
     }
