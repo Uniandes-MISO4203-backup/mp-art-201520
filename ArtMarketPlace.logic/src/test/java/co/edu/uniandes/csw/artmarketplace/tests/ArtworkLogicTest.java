@@ -94,6 +94,7 @@ public class ArtworkLogicTest {
      * @generated
      */
     private void clearData() {
+        em.createQuery("delete from ArtworkGaleryItemEntity").executeUpdate();
         em.createQuery("delete from ArtworkEntity").executeUpdate();
     }
 
@@ -117,7 +118,6 @@ public class ArtworkLogicTest {
     }
 
     private void insertArtworksForSearch() {
-
         ArtistEntity artistEntityOne = new ArtistEntity();
         artistEntityOne.setName("Artista1");
         em.persist(artistEntityOne);
@@ -140,11 +140,12 @@ public class ArtworkLogicTest {
         TypeEntity type = new TypeEntity();
         type.setName("photo");
         em.persist(type);
-        
-        ArtworkGaleryItemEntity item = new ArtworkGaleryItemEntity();
-        item.setArtwork(entityOne);
-        item.setLink("prueba");
-        item.setType(type);
+
+        ArtworkGaleryItemEntity artworkGaleryItem = new ArtworkGaleryItemEntity();
+        artworkGaleryItem.setLink(generateRandom(String.class));
+        artworkGaleryItem.setType(type);
+        artworkGaleryItem.setArtwork(entityOne);
+        em.persist(artworkGaleryItem);
 
         ArtworkEntity entityTwo = new ArtworkEntity();
         entityTwo.setName("Pintura2");

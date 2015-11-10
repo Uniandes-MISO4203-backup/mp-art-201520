@@ -97,8 +97,8 @@ public class ArtworkGaleryItemPersistenceTest {
      * @generated
      */
     private void clearData() {
-        em.createQuery("delete from ArtworkEntity").executeUpdate();
         em.createQuery("delete from ArtworkGaleryItemEntity").executeUpdate();
+        em.createQuery("delete from ArtworkEntity").executeUpdate();
     }
 
     /**
