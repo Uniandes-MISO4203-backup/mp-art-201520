@@ -18,31 +18,31 @@ import javax.inject.Inject;
  *
  * @author ms.lancheros10
  */
-public class WishListLogic implements IWishListLogic{
-    
+public class WishListLogic implements IWishListLogic {
+
     @Inject
     private WishListPersistence persistence;
 
+    @Override
     public WishListDTO createWishListItem(WishListDTO dto) {
         persistence.createWishListItem(WishListConverter.basicDTO2Entity(dto));
         return dto;
     }
 
+    @Override
     public void removeWishListItemDTO(Long id) {
         persistence.delete(id);
     }
 
+    @Override
     public List<WishListDTO> getWishListItems(Long id) {
         List<WishListEntity> entities = persistence.getWishListByClient(id);
         List<WishListDTO> dtos = new ArrayList<WishListDTO>();
-        for(WishListEntity entity:entities){
+        for (WishListEntity entity : entities) {
             WishListDTO dto = WishListConverter.basicEntity2DTO(entity);
             dtos.add(dto);
         }
         return dtos;
     }
-    
-    
-    
-    
+
 }

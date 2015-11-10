@@ -174,6 +174,16 @@ public class ArtworkLogic implements IArtworkLogic {
     public List<ArtworkDTO> searchArtworksByType(String artworkType) {
         return ArtworkConverter.listEntity2DTO(persistence.searchArtworksByType(artworkType));
     }
+    
+    /**
+     * Search artworks by format
+     * @param artworkFormat
+     * @return
+     */
+    @Override
+    public List<ArtworkDTO> searchArtworksByFormat(String artworkFormat) {
+        return ArtworkConverter.listEntity2DTO(persistence.searchArtworksByFormat(artworkFormat));
+    }
 
     /**
      * Este metodo esta disennado para recibir la votacion realizar por un

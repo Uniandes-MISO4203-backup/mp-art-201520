@@ -1,82 +1,63 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
 import java.util.Calendar;
-import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * ExhibitionDTO es una clase disenada para gestionar la informacion
- * correspondente a exhibiciones en las que un artista participado y desea reflejar
- * en su resumen.
+ * correspondente a exhibiciones en las que un artista participado y desea
+ * reflejar en su resumen.
+ *
  * @version 1.0.0
  * @author lf.mendivelso10
  */
 @XmlRootElement
-public class ExhibitionDTO {
-    /**
-     * Identificador unico de la exhibicion registrado en el resumen del artista
-     */
-    private Long id;
-    
+public class ExhibitionDTO extends BasicDTO {
+
     /**
      * Nombre de la exhibicion
      */
     private String name;
-    
+
     /**
      * Descripcion de la exhibicion
      */
     private String description;
-    
+
     /**
      * Fecha de inicio de la exhibicion
-     */    
+     */
     private Calendar startDate;
-    
+
     /**
      * Fecha de fin de la exhibicion
      */
     private Calendar endDate;
-    
+
     /**
      * Lugar donde se llevo a cabo el evento
      */
     private String place;
-    
+
     /**
      * Tipo de evento
      */
     private String kindOfEvent;
-    
+
     /**
      * Reconocmiento recibido en el la exhibicion
      */
     private String awards;
-    
+
     /**
      * Resumen al cual pertenece el registro de la exhibicion.
      */
     private ResumeDTO resume;
-    
-    /**
-     * Metodo de acceso para la variable id.
-     * @return 
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Metodo de modificación para la variable id.
-     * @param id 
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * Metodo de acceso para la variable name.
-     * @return 
+     *
+     * @return
      */
     public String getName() {
         return name;
@@ -84,7 +65,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable name.
-     * @param name 
+     *
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -92,7 +74,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable description.
-     * @return 
+     *
+     * @return
      */
     public String getDescription() {
         return description;
@@ -100,7 +83,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable description.
-     * @param description 
+     *
+     * @param description
      */
     public void setDescription(String description) {
         this.description = description;
@@ -108,7 +92,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable startDate.
-     * @return 
+     *
+     * @return
      */
     public Calendar getStartDate() {
         return startDate;
@@ -116,15 +101,17 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable startDate.
-     * @param startDate 
+     *
+     * @param startDate
      */
     public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
-    
+
     /**
      * Metodo de acceso para la variable endDate.
-     * @return 
+     *
+     * @return
      */
     public Calendar getEndDate() {
         return endDate;
@@ -132,7 +119,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable endDate.
-     * @param endDate 
+     *
+     * @param endDate
      */
     public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
@@ -140,7 +128,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable place.
-     * @return 
+     *
+     * @return
      */
     public String getPlace() {
         return place;
@@ -148,7 +137,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable place.
-     * @param place 
+     *
+     * @param place
      */
     public void setPlace(String place) {
         this.place = place;
@@ -156,7 +146,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable kindOfEvent.
-     * @return 
+     *
+     * @return
      */
     public String getKindOfEvent() {
         return kindOfEvent;
@@ -164,7 +155,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable kindOfEvent.
-     * @param kindOfEvent 
+     *
+     * @param kindOfEvent
      */
     public void setKindOfEvent(String kindOfEvent) {
         this.kindOfEvent = kindOfEvent;
@@ -172,7 +164,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable awards.
-     * @return 
+     *
+     * @return
      */
     public String getAwards() {
         return awards;
@@ -180,7 +173,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable awards.
-     * @param awards 
+     *
+     * @param awards
      */
     public void setAwards(String awards) {
         this.awards = awards;
@@ -188,7 +182,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de acceso para la variable resume.
-     * @return 
+     *
+     * @return
      */
     public ResumeDTO getResume() {
         return resume;
@@ -196,7 +191,8 @@ public class ExhibitionDTO {
 
     /**
      * Metodo de modificación para la variable resume.
-     * @param resume 
+     *
+     * @param resume
      */
     public void setResume(ResumeDTO resume) {
         this.resume = resume;

@@ -55,7 +55,7 @@ public abstract class TypeConverter {
      */
     public static TypeDTO basicEntity2DTO(TypeEntity entity) {
         if (entity != null) {
-            return basicEntity2DTO(entity);
+            return refEntity2DTO(entity);
         } else {
             return null;
         }
@@ -68,7 +68,7 @@ public abstract class TypeConverter {
      */
     public static TypeEntity basicDTO2Entity(TypeDTO dto) {
         if (dto != null) {
-            return basicDTO2Entity(dto);
+            return refDTO2Entity(dto);
         } else {
             return null;
         }

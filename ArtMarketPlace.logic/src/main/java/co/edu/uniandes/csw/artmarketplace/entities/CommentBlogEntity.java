@@ -24,23 +24,23 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Blog.getCommentBlog", query = "select u from CommentBlogEntity u WHERE u.blogId = :idBlog")
 })
 public class CommentBlogEntity implements Serializable {
-    
+
     @Id
     @GeneratedValue(generator = "CommentBlog")
     private Long id;
     //Guardará el comentario.
     private String comment;
-    
+
     //Fecha del comentario
     @Temporal(TemporalType.DATE)
     private Calendar dateComment;
-    
+
     //Id del usuario que realiza el comentario.
     private Long clientId;
-    
+
     //Id del blog al cual está realizando el comentario.
     private Long blogId;
-    
+
     //Nombre del usuario que está haciendo el comentario.
     private String commentUser;
 
@@ -50,22 +50,6 @@ public class CommentBlogEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Calendar getDateComment() {
-        return dateComment;
-    }
-
-    public void setDateComment(Calendar dateComment) {
-        this.dateComment = dateComment;
     }
 
     public Long getClientId() {
@@ -84,11 +68,27 @@ public class CommentBlogEntity implements Serializable {
         this.blogId = blogId;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getCommentUser() {
         return commentUser;
     }
 
     public void setCommentUser(String commentUser) {
         this.commentUser = commentUser;
+    }
+
+    public Calendar getDateComment() {
+        return dateComment;
+    }
+
+    public void setDateComment(Calendar dateComment) {
+        this.dateComment = dateComment;
     }
 }

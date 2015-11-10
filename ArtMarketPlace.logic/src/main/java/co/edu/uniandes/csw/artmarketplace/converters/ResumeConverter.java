@@ -70,16 +70,7 @@ public abstract class ResumeConverter {
      */
     public static ResumeDTO basicEntity2DTO(ResumeEntity entity) {
         if (entity != null) {
-            ResumeDTO dto = new ResumeDTO();
-            dto.setId(entity.getId());
-            dto.setCity(entity.getCity());
-            dto.setCountry(entity.getCountry());
-            dto.setWebsite(entity.getWebsite());
-            dto.setLastName(entity.getLastName());
-            dto.setPhoto(entity.getPhoto());
-            dto.setRatingSum(entity.getRatingSum());
-            dto.setRatingVotes(entity.getRatingVotes());
-            return dto;
+            return refEntity2DTO(entity);
         } else {
             return null;
         }

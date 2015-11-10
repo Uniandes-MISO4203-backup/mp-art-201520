@@ -8,6 +8,7 @@
     var tabSearchArtistWithCheapestArtwork = "tabSearchArtistWithCheapestArtwork";
     var tabSearchArtworksByStyle = "tabSearchArtworksByStyle";
     var tabSearchArtworksByType = "tabSearchArtworksByType";
+    var tabSearchArtworksByFormat = "tabSearchArtworksByFormat";
     var tabSearchArtist = "tabSearchArtist";
     var tabSearchArtistsBetweenRatings = "tabSearchArtistsBetweenRatings";
 
@@ -28,6 +29,7 @@
         <li id="tabSearchArtistWithCheapestArtwork" style="border:1px solid black;width: 20%;" onclick="show('tabSearchArtistWithCheapestArtwork', 'searchArtistWithCheapestArtwork')" ><a href="#/search"><strong>Search an Artist with the Cheapest Artwork</strong></a></li>
         <li id="tabSearchArtworksByStyle" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByStyle', 'searchArtworksByStyle')" ><a href="#/search"><strong>Search artworks by style</strong></a></li>
         <li id="tabSearchArtworksByType" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByType', 'searchArtworksByType')" ><a href="#/search"><strong>Search artworks by type</strong></a></li>
+        <li id="tabSearchArtworksByFormat" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtworksByFormat', 'searchArtworksByFormat')" ><a href="#/search"><strong>Search artworks by format</strong></a></li>
         <li id="tabSearchArtist" style="border:1px solid black; width: 10%;" onclick="show('tabSearchArtist', 'searchArtist')" ><a href="#/search"><strong>Search Artist</strong></a></li>
         <li id="tabSearchArtistsBetweenRatings" style="border:1px solid black;width: 15%;" onclick="show('tabSearchArtistsBetweenRatings', 'searchArtistsBetweenRatings')"><a href="#/search"><strong>Search Artists Between Ratings</strong></a></li>
     </ul>
@@ -63,6 +65,10 @@
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Type Here..." ng-model="artworkType" required>
         <button ng-click="searchArtworksByType(artworkType)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
     </div>
+    <div id="searchArtworksByFormat" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;" >
+        <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artwork Format Here..." ng-model="artworkFormat" required>
+        <button ng-click="searchArtworksByFormat(artworkFormat)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
+    </div>
     <div id="searchArtist" class="navbar-form navbar-center" style="padding-top: 10px;padding-bottom: 10px;display: none;">
         <input style="border:1px solid #000000" type="text" class="form-control" placeholder="Artist Name Here..." ng-model="searchName" required>
         <button ng-click="searchArtistByName(searchName)" class="btn btn-default"><span class="glyphicon glyphicon-search"/> <strong>SEARCH</strong></button>
@@ -93,48 +99,37 @@
             </li>
         </ol>
     </div>
-
-
+    
     <div class="col-sm-12">
-        <div ng-repeat="element in artworks">
+        <div ng-repeat="record in artworks">
             <div class="col-sm-4 well text-center">
-                <div class="col-md-12">
-                    <div style="height: 350px">
-                        <uib-carousel no-wrap="false">
-                            <uib-slide ng-repeat="item in element.artworkGaleryItems" active="slide.active">
-                                <img ng-if="item.type === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px; width: 100%"
-                                     alt="{{element.name}}">
-                                <youtube-video ng-if="item.type === 'video'" video-url="item.link" style="height: 350px; width: 100%"></youtube-video>
+                <div class="col-sm-12">
+                    <div style="height: 350px; margin-bottom: 10px">
+                        <uib-carousel interval="5000" no-wrap="false" style="height: 100%">
+                            <uib-slide ng-repeat="item in record.artworkGaleryItems" active="slide.active">
+                                <img ng-if="item.type.name === 'photo'" ng-src="{{item.link}}" style="margin:auto; height: 350px; width: 100%"
+                                     alt="{{record.name}}">
+                                <div class="col-sm-10 col-sm-offset-1" style="padding: 0; margin-top: 0; margin-bottom: 0">
+                                    <youtube-video ng-if="item.type.name === 'youtube'" video-url="item.link" style="height: 350px; width: 100%"></youtube-video>
+                                </div>
                             </uib-slide>
                         </uib-carousel>
                     </div>
-                    <!--
-                    <div id="slider2" style="width: 100%;">
-                        <a href="" class="control_next2">></a>
-                        <a href="" class="control_prev2"><</a>
-                        <ul>
-                            <li ng-repeat="item in element.artworkGaleryItems">
-                                <img ng-if="item.type === 'photo'"ng-src="{{item.link}}" alt="{{item.link}}" width="100%">
-                                <iframe ng-if="item.type === 'video'" width="100%" height="315" ng-src="{{item.link}}" frameborder="0" allowfullscreen></iframe>
-                            </li>
-                        </ul>
+                    <div class="caption">
+                        <p><strong>{{model.fields[0].displayName}}: </strong> {{record.name}}</p>
+                        <p><strong>{{model.fields[1].displayName}}: </strong> {{record.price| currency}}</p>
+                        <p><strong>{{model.fields[2].displayName}}: </strong> <a href="#/resume/{{record.artist.id}}" style="color:blue">{{record.artist.name}}</a></p>
+                        <p><strong>Rating: </strong> {{record.ratingSum / record.ratingVotes| number : 2}}/5</p>
+                        <p ng-if=record.discount ng-style="{
+                                    color:'red'
+                                }"><strong >{{model.fields[3].displayName}}: </strong>{{record.discount}} &#37; </p>
+                        <p ng-if=!record.discount><br/></p>
                     </div>
-                    -->
+                    <p class="text-center">
+                        <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                    </p>
                 </div>
-                <div class="caption" >
-                    <p><strong>Name:</strong> {{element.name}}</p>
-                    <p><strong>Price:</strong> {{element.price}}</p>
-                    <p><strong>Artist:</strong> {{element.artist.name}}</p>
-                    <p><strong>Artwork Style:</strong> {{element.artworkStyle}}</p>
-                    <p><strong>Artwork Type:</strong> {{element.artworkType}}</p>
-                    <p><strong>Rating: </strong> {{element.ratingSum / element.ratingVotes| number : 2}}/5</p>
-                    <p ng-if=element.discount ng-style="{color:'red'}"><strong >{{model.fields[3].displayName}}: </strong>{{element.discount}} &#37; </p>
-                </div>
-                <p class="text-center">
-                    <button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(element)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
-                </p>
             </div>
         </div>
     </div>
-
 </div>

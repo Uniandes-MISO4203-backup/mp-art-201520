@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ExperienceEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 
 /**
  * Clase ExperiencePersistence hace referencia al manejo de un registro de
@@ -41,16 +41,19 @@ public class ExperiencePersistence extends CrudPersistence<ExperienceEntity> {
      * @return List. Lista con las entidades de los registros de experiencia.
      */
     public List<ExperienceEntity> listByResume(Long resume) {
+        List<ExperienceEntity> result = new ArrayList<ExperienceEntity>();
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("resume_id", resume);
-            Query q = em.createNamedQuery("ExperienceEntity.listByResume");
-            q.setParameter("resume_id", resume);
-            return q.getResultList();
+            List<ExperienceEntity> list = new ArrayList<ExperienceEntity>();
+            list = executeListNamedQuery("ExperienceEntity.listByResume");
+            if (list != null && !list.isEmpty()) {
+                result = list.subList(0, 1);
+            }
         } catch (Exception e) {
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return null;
         }
+        return result;
     }
 
     /**
@@ -70,7 +73,8 @@ public class ExperiencePersistence extends CrudPersistence<ExperienceEntity> {
                 return resumes.get(0);
             }
         } catch (NoResultException e) {
-            throw new RuntimeException(e);
+            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return null;
         }
     }
 }

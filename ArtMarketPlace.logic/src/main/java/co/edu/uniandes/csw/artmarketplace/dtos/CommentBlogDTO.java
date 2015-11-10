@@ -13,20 +13,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jh.rubiano10
  */
 @XmlRootElement
-public class CommentBlogDTO {
-    private Long id;
+public class CommentBlogDTO extends BasicDTO {
+
     private String comment;
     private Calendar dateComment;
     private Long clientId;
     private Long blogId;
     private String commentUser;
 
-    public Long getId() {
-        return id;
+    public Calendar getDateComment() {
+        return dateComment;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDateComment(Calendar dateComment) {
+        this.dateComment = dateComment;
     }
 
     public String getComment() {
@@ -37,12 +37,12 @@ public class CommentBlogDTO {
         this.comment = comment;
     }
 
-    public Calendar getDateComment() {
-        return dateComment;
+    public Long getBlogId() {
+        return blogId;
     }
 
-    public void setDateComment(Calendar dateComment) {
-        this.dateComment = dateComment;
+    public void setBlogId(Long blogId) {
+        this.blogId = blogId;
     }
 
     public Long getClientId() {
@@ -53,19 +53,11 @@ public class CommentBlogDTO {
         this.clientId = clientId;
     }
 
-    public Long getBlogId() {
-        return blogId;
-    }
-
-    public void setBlogId(Long blogId) {
-        this.blogId = blogId;
-    }
-
     public String getCommentUser() {
         return commentUser;
     }
 
     public void setCommentUser(String commentUser) {
         this.commentUser = commentUser;
-    }    
+    }
 }
