@@ -117,6 +117,7 @@ public class RemarkConverterTest {
         assertNull(entities);
         
         entities = new ArrayList<RemarkEntity>();
+        entities.add(new RemarkEntity());
         result = RemarkConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -132,6 +133,7 @@ public class RemarkConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<RemarkDTO>();
+        dtos.add(new RemarkDTO());
         result = RemarkConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -160,6 +162,7 @@ public class RemarkConverterTest {
         assertNull(dtos);
         
         dtos = new ArrayList<RemarkDTO>();
+        dtos.add(new RemarkDTO());
         result = RemarkConverter.childListDTO2Entity(dtos, parent);
         assertNotNull(dtos);
     }

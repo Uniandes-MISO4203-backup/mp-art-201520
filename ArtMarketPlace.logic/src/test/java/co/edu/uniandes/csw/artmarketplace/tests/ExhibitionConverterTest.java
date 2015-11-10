@@ -113,6 +113,7 @@ public class ExhibitionConverterTest {
     public void testListEntity2DTO() {
         System.out.println("listEntity2DTO");
         List<ExhibitionEntity> entities = new ArrayList<ExhibitionEntity>();
+        entities.add(new ExhibitionEntity());
         List<ExhibitionDTO> result = ExhibitionConverter.listEntity2DTO(entities);
         assertNotNull(entities);
     }
@@ -124,6 +125,7 @@ public class ExhibitionConverterTest {
     public void testListDTO2Entity() {
         System.out.println("listDTO2Entity");
         List<ExhibitionDTO> dtos = new ArrayList<ExhibitionDTO>();
+        dtos.add(new ExhibitionDTO());
         List<ExhibitionEntity> result = ExhibitionConverter.listDTO2Entity(dtos);
         assertNotNull(dtos);
     }
@@ -147,6 +149,7 @@ public class ExhibitionConverterTest {
     public void testChildListDTO2Entity() {
         System.out.println("childListDTO2Entity");
         List<ExhibitionDTO> dtos = new ArrayList<ExhibitionDTO>();
+        dtos.add(new ExhibitionDTO());
         ResumeEntity parent = new ResumeEntity();
         List<ExhibitionEntity> result = ExhibitionConverter.childListDTO2Entity(dtos, parent);
         assertNotNull(dtos);

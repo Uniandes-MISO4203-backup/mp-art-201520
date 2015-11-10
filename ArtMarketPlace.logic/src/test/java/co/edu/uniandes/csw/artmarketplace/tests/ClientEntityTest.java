@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.artmarketplace.tests;
 
 import co.edu.uniandes.csw.artmarketplace.entities.CartItemEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ClientEntity;
+import co.edu.uniandes.csw.artmarketplace.entities.WishListEntity;
 import java.util.List;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
@@ -133,6 +134,29 @@ public class ClientEntityTest {
         String userId = "";
         ClientEntity instance = new ClientEntity();
         instance.setUserId(userId);
+    }
+
+    /**
+     * Test of getWishList method, of class ClientEntity.
+     */
+    @Test
+    public void testGetWishList() {
+        System.out.println("getWishList");
+        ClientEntity instance = new ClientEntity();
+        List<WishListEntity> expResult = null;
+        List<WishListEntity> result = instance.getWishList();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setWishList method, of class ClientEntity.
+     */
+    @Test
+    public void testSetWishList() {
+        System.out.println("setWishList");
+        List<WishListEntity> wishList = null;
+        ClientEntity instance = new ClientEntity();
+        instance.setWishList(wishList);
     }
     
 }
