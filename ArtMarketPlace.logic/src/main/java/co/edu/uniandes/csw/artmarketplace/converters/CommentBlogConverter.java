@@ -32,6 +32,7 @@ public abstract class CommentBlogConverter {
             dto.setDateComment(entity.getDateComment());
             dto.setBlogId(entity.getBlogId());
             dto.setClientId(entity.getClientId());
+            dto.setCommentUser(entity.getCommentUser());
             return dto;
         } else {
             return null;
@@ -65,6 +66,7 @@ public abstract class CommentBlogConverter {
             dto.setDateComment(entity.getDateComment());
             dto.setClientId(entity.getClientId());
             dto.setBlogId(entity.getBlogId());
+            dto.setCommentUser(entity.getCommentUser());
 
             return dto;
         } else {
@@ -83,6 +85,7 @@ public abstract class CommentBlogConverter {
             entity.setDateComment(dto.getDateComment());
             entity.setClientId(dto.getClientId());
             entity.setBlogId(dto.getBlogId());
+            entity.setCommentUser(dto.getCommentUser());
 
             return entity;
         } else {

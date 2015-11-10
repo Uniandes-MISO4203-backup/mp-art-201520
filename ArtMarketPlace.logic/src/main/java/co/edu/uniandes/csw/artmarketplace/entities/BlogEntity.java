@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.artmarketplace.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,7 +26,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Blog.getEntryArtist", query = "select u from BlogEntity u WHERE u.clientId = :idArtist")
+    @NamedQuery(name = "Blog.getEntryArtist", query = "select u from BlogEntity u WHERE u.clientId = :idArtist"),
+    @NamedQuery(name = "Blog.searchBlog", query = "select u from BlogEntity u WHERE u.clientId = :idArtist AND LOWER(u.title) like :search")  
 })
 public class BlogEntity implements Serializable {
 

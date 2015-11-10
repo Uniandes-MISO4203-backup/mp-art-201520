@@ -17,7 +17,7 @@ import co.edu.uniandes.csw.artmarketplace.persistence.ArtistPersistence;
 import co.edu.uniandes.csw.artmarketplace.persistence.ExhibitionPersistence;
 import co.edu.uniandes.csw.artmarketplace.persistence.ResumePersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -323,13 +323,13 @@ public class ExhibitionLogicTest {
     public void createExhibitionTest() {
         generateTestCase();
         ExhibitionEntity exhibition = new ExhibitionEntity();
-        exhibition.setStartDate(new Date());
+        exhibition.setStartDate(Calendar.getInstance());
         exhibition.setId(generateRandom(Long.class));
         exhibition.setAwards(generateRandom(String.class));
         exhibition.setDescription(generateRandom(String.class));
         exhibition.setKindOfEvent(generateRandom(String.class));
         exhibition.setName(generateRandom(String.class));
-        exhibition.setEndDate(new Date());
+        exhibition.setEndDate(Calendar.getInstance());
         exhibition.setPlace(generateRandom(String.class));
         
         ExhibitionDTO record = exhibitionLogic.createExhibition(ExhibitionConverter.fullEntity2DTO(exhibition), ArtistConverter.refEntity2DTO(artist));

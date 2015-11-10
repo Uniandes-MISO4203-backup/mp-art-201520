@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.artmarketplace.tests;
 
 import co.edu.uniandes.csw.artmarketplace.entities.ExhibitionEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ResumeEntity;
+import java.util.Calendar;
 import java.util.Date;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
@@ -122,8 +123,8 @@ public class ExhibitionEntityTest {
     public void testGetStartDate() {
         System.out.println("getStartDate");
         ExhibitionEntity instance = new ExhibitionEntity();
-        Date expResult = null;
-        Date result = instance.getStartDate();
+        Calendar expResult = null;
+        Calendar result = instance.getStartDate();
         assertEquals(expResult, result);
     }
 
@@ -133,7 +134,7 @@ public class ExhibitionEntityTest {
     @Test
     public void testSetStartDate() {
         System.out.println("setStartDate");
-        Date startDate = null;
+        Calendar startDate = null;
         ExhibitionEntity instance = new ExhibitionEntity();
         instance.setStartDate(startDate);
         assertNull(startDate);
@@ -147,7 +148,7 @@ public class ExhibitionEntityTest {
         System.out.println("getEndDate");
         ExhibitionEntity instance = new ExhibitionEntity();
         Date expResult = null;
-        Date result = instance.getEndDate();
+        Calendar result = instance.getEndDate();
         assertEquals(expResult, result);
     }
 
@@ -157,7 +158,7 @@ public class ExhibitionEntityTest {
     @Test
     public void testSetEndDate() {
         System.out.println("setEndDate");
-        Date endDate = null;
+        Calendar endDate = null;
         ExhibitionEntity instance = new ExhibitionEntity();
         instance.setEndDate(endDate);
         assertNull(endDate);

@@ -46,6 +46,11 @@ public class ArtworkDTO extends BasicDTO {
      * Artwork style
      */
     private String artworkStyle;
+    
+    /**
+     * Artwork type
+     */
+    private String artworkType;
 
     public String getName() {
         return name;
@@ -118,6 +123,22 @@ public class ArtworkDTO extends BasicDTO {
 
     public void setArtworkStyle(String artworkStyle) {
         this.artworkStyle = artworkStyle;
+    }
+    
+    /**
+     * Retorna el tipo de obra.
+     * @return artworkType
+     */
+    public String getArtworkType() {
+        return artworkType;
+    }
+
+    /**
+     * Establece el tipo de obra.
+     * @param artworkType 
+     */
+    public void setArtworkType(String artworkType) {
+        this.artworkType = artworkType;
     }
 
     /**

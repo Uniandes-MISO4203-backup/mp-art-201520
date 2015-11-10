@@ -28,14 +28,21 @@ public class CommentBlogEntity implements Serializable {
     @Id
     @GeneratedValue(generator = "CommentBlog")
     private Long id;
+    //Guardará el comentario.
     private String comment;
     
+    //Fecha del comentario
     @Temporal(TemporalType.DATE)
     private Calendar dateComment;
-
+    
+    //Id del usuario que realiza el comentario.
     private Long clientId;
     
+    //Id del blog al cual está realizando el comentario.
     private Long blogId;
+    
+    //Nombre del usuario que está haciendo el comentario.
+    private String commentUser;
 
     public Long getId() {
         return id;
@@ -75,5 +82,13 @@ public class CommentBlogEntity implements Serializable {
 
     public void setBlogId(Long blogId) {
         this.blogId = blogId;
-    }    
+    }
+
+    public String getCommentUser() {
+        return commentUser;
+    }
+
+    public void setCommentUser(String commentUser) {
+        this.commentUser = commentUser;
+    }
 }

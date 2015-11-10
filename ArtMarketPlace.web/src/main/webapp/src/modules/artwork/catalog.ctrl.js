@@ -3,9 +3,9 @@
 
     mod.controller('catalogCtrl', ['CrudCreator', '$scope', 'artworkService',
         'artworkModel', 'cartItemService', '$location', 'authService',
-        'artworkService', '$http', '$routeParams', 'resumeService',
+        'artworkService', '$http', '$routeParams', 'resumeService', 'wishListService',
         function (CrudCreator, $scope, svc, model, cartItemSvc, $location,
-                  authSvc, artworkSvc, $http, $routeParams, resumeSvc) {
+                  authSvc, artworkSvc, $http, $routeParams, resumeSvc, wishListSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'catalog', 'Catalog');
             this.asGallery = true;
             this.readOnly = true;
@@ -72,6 +72,13 @@
                     $scope.artists = [];
                 });
             };
+            $scope.searchArtworksByType = function (artworkType) {
+                svc.searchArtworksByType(artworkType).then(function (results) {
+                    $scope.artworks = [];
+                    $scope.artworks = results;
+                    $scope.artists = [];
+                });
+            };
             $scope.postRemark = function (id, newRemark) {
                 artworkSvc.postRemark(id, newRemark).then(function (result) {
                     $scope.artworkRecord = [];
@@ -104,6 +111,20 @@
                             artwork: artwork,
                             name: artwork.name,
                             quantity: 1
+                        });
+                    },
+                    show: function () {
+                        return true;
+                    }
+                },
+                addtoWishList: {
+                    name: 'addToWishList',
+                    displayName: 'Add to WishList',
+                    icon: 'list',
+                    class: 'info',
+                    fn: function (artwork) {
+                        return wishListSvc.addItem({
+                            artwork: artwork
                         });
                     },
                     show: function () {
@@ -218,6 +239,8 @@
                 }
                 else if (data.role === "Artist") {
                     elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li class=\"active\"> <a href=\"#/artwork\"><span class=\"glyphicon glyphicon-cog\" ></span>Manage Artoworks</a> </li><li class=\"active\"> <a href=\"#/resume\"><span class=\"glyphicon glyphicon-cog\" ></span>Resume</a> </li><li class=\"active\"> <a href=\"#/blog\"><span class=\"glyphicon glyphicon-edit\" ></span> My Blog</a> </li></ul>";
+                } else if (data.role === "Client"){
+                    elem.innerHTML = "<ul class=\"nav navbar-nav navbar-left\"><li> <a href=\"#/wishList\">Wish List</a></li></ul>";
                 } else {
                     elem.innerHTML = "";
                 }

@@ -1,32 +1,66 @@
 (function (ng) {
     var mod = ng.module('blogModule');
+    var idArtist = 0;
     mod.controller('blogCtrl', ['$scope', '$location', 'blogService',
         'newEntryService', 'viewEntryService', 'authService', '$routeParams',
         function ($scope, $location, svcEntrys, svcNewEntry, svcViewEntry, authSvc, $routeParams){
-            var idArtist = $routeParams.id || authSvc.getCurrentUser().id;
             $("#save-entry").hide();
             if (authSvc.getCurrentUser()){
                 svcEntrys.darRole().then(function(data){
                     if(data.role === "Artist"){
                         $("#save-entry").show();
-                        $("#titleBlog").html(data.name);
                     }
+                    $("#titleBlog").html(data.name);
                 });
             }
-            
-            //var idArtist = $routeParams.id || authSvc.getCurrentUser().id;
-            if($routeParams.idBlog)
-            {
-                //Traer la entrada...
+            //Para mostrar las entradas...
+            var showEntrys = function(data){
+                var txt = "";
+                if(data.length !== 0){
+                    for(var i = 0; i < data.length; i++){
+                        txt += "<a href='#/viewentry/"+(data[i].id)+"' class='list-group-item'><h3 class='list-group-item-heading'>"+(data[i].title)+"</h3><p class='list-group-item-text'>Ingresar al artículo</p></a>";
+                    }
+                    txt = "<div class='list-group'>" + txt + "</div>";
+                }
+                else{
+                    txt = "<div class='alert alert-danger' role='alert'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span><span class='sr-only'>Error:</span> No existe ninguna entrada en el Blog</div>";
+                }
+                $("#entrys").html(txt);
+            };
+            //Llama el servicio que trae las entradas de un artista..
+            var entryArtist = function(){
+                $("#search").val("");
+                svcEntrys.allEntrys(idArtist).then(function (data){
+                    showEntrys(data);
+                });
+            };
+            if($routeParams.idBlog){
                 var idBlog = $routeParams.idBlog;
+                //Para traer los comentarios que pertenecen a la entrada...
+                var commentBlog = function (){
+                    svcViewEntry.showComment(idBlog).then(function (data){
+                        var txt = "";
+                        var fechaComentario = "";
+                        if(data.length !== 0){
+                            for(var i = 0; i < data.length; i++){
+                                fechaComentario = new Date(data[i].dateComment);
+                                txt += "<b>" + data[i].commentUser + " dice: </b>(" + fechaComentario.toDateString() + ")<br>";
+                                txt += data[i].comment + "<hr>";
+                            }
+                        }
+                        else{
+                            txt = "<div class='alert alert-danger' role='alert'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span><span class='sr-only'>Error:</span> No existe ningún comentario relacionado a esta entrada</div>";
+                        }
+                        $("#comments").html(txt);
+                    });
+                };
+                //Traer la entrada...
                 svcViewEntry.showEntry(idBlog).then(function (data){
-                    //console.log("UNO", data);
                     $("#title").html(data.title);
                     $("#entry").html(data.entry);
                     $("#label").html("Comentarios: "+ data.title);
                     commentBlog();
                 });
-                
                 //Para guardar los comentarios de un blog..
                 $("#formComment").submit(function(){
                     if (authSvc.getCurrentUser()){
@@ -34,58 +68,26 @@
                             svcViewEntry.saveComment({
                                 comment: $("#comment").val(),
                                 blogId: idBlog,
-                                clientId: authSvc.getCurrentUser().id
+                                clientId: authSvc.getCurrentUser().id,
+                                commentUser: authSvc.getCurrentUser().name
                             }).then(function () {
-                                //$location.path('/blog');
-                                //console.log(data);
-                                swal({title: "Guardado!", text: "Comentario Guardado",  timer: 2000, type: "success"});
+                                $("#comment").val("");
+                                commentBlog();
                             });
                         }
-                        else
-                        {
+                        else{
                             sweetAlert("Campos Vacíos", "Por favor escribe tu comentario", "error");
                         }
                     }
-                    else
-                    {
+                    else{
                         $location.path('/login');
                     }
                 });
-                
-                //Para traer los comentarios que pertenecen a la entrada...
-                var commentBlog = function ()
-                {
-                    svcViewEntry.showComment(idBlog).then(function (data){
-                        console.log(data);
-                    });
-                };
             }
-            else
-            {
-            svcEntrys.allEntrys(idArtist).then(function (data){
-                 var txt = "";
-                 //var entryBlog = "";
-                 
-                 console.log("DOS", data);
-                 if(data.length !== 0){
-                    for(var i = 0; i < data.length; i++){
-                        //data[i].entry
-                        //jQuery(html).text();
-                        //style = 'white-space: nowrap; width: 20em; overflow: hidden; text-overflow:ellipsis;'
-                       //entryBlog = "<div class='panel-body'>"+(data[i].entry)+"<hr>Ver todo</div>";
-                       //entryBlog = "<div class='panel-body'>Ver entrada de Blog</div>";
-                       //txt += "<div class = 'panel panel-primary'><div class='panel-heading'><h4>"+(data[i].title)+"</h4></div>"+(entryBlog)+"</div>";
-                       txt += "<a href='#/viewentry/"+(data[i].id)+"' class='list-group-item'><h3 class='list-group-item-heading'>"+(data[i].title)+"</h3><p class='list-group-item-text'>Ingresar al artículo</p></a>";
-                    }
-                    txt = "<div class='list-group'>" + txt + "</div>";
-                }
-                else
-                {
-                    txt = "<div class='alert alert-danger' role='alert'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span><span class='sr-only'>Error:</span> No existe ninguna entrada en el Blog</div>";
-                }
-                $("#entrys").html(txt);
-            });
-        }
+            else{
+                idArtist = $routeParams.id || authSvc.getCurrentUser().id;
+                entryArtist();
+            }
             //Guadar la entrada del Blog...
             $("#formEntry").submit(function(){
                if (authSvc.getCurrentUser()){
@@ -100,14 +102,23 @@
                             swal({title: "Guardado!", text: "La entrada de tu blog se ha guardado correctamente",  timer: 2000, type: "success"});
                         });
                     }
-                    else
-                    {
+                    else{
                         sweetAlert("Campos Vacíos", "Por favor escribe tu entrada", "error");
                     }
                 }
-                else
-                {
+                else{
                     $location.path('/login');
+                }
+            });
+            //Para realizar la busqueda de una entrada...
+            $("#formSearch").submit(function(){
+                if ($("#search").val().length !== 0){
+                    svcEntrys.searchEntry($("#search").val().toLowerCase(), idArtist).then(function (data) {
+                        showEntrys(data);
+                    });
+                }
+                else{
+                    sweetAlert("Campos Vacíos", "Por favor escribe el parámetro de búsqueda", "error");
                 }
             });
             $scope.newEntry = function(){
@@ -116,9 +127,11 @@
             $scope.cancel = function(){
                 $location.url('/blog');
             };
-            
             $scope.backBlog = function(){
-                $location.url('/blog');
+                $location.url('/blog/' + idArtist);
+            };
+            $scope.cancelSearch = function(){
+                entryArtist();
             };
         }]);
 })(window.angular);

@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.artmarketplace.tests;
 
-import co.edu.uniandes.csw.artmarketplace.entities.BlogEntity;
-import co.edu.uniandes.csw.artmarketplace.persistence.BlogPersistence;
+import co.edu.uniandes.csw.artmarketplace.entities.CommentBlogEntity;
+import co.edu.uniandes.csw.artmarketplace.persistence.CommentBlogPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,28 +28,27 @@ import org.junit.runner.RunWith;
  * @author jh.rubiano10
  */
 @RunWith(Arquillian.class)
-public class BlogPersistenceTest {
-    
+public class CommentBlogPersistenceTest {
     public static final String DEPLOY = "Prueba";
     
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(BlogEntity.class.getPackage())
-                .addPackage(BlogPersistence.class.getPackage())
+                .addPackage(CommentBlogEntity.class.getPackage())
+                .addPackage(CommentBlogPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
     
     @Inject
-    private BlogPersistence blogPersistence;
+    private CommentBlogPersistence commentBlogPersistence;
 
     /**
      * @generated
      */
     @PersistenceContext
     private EntityManager em;
-
+    
     /**
      * @generated
      */
@@ -72,43 +71,48 @@ public class BlogPersistenceTest {
             }
         }
     }
-
+    
     private void clearData() {
-        em.createQuery("delete from BlogEntity").executeUpdate();
+        em.createQuery("delete from CommentBlogEntity").executeUpdate();
     }
     
-    private List<BlogEntity> data = new ArrayList<BlogEntity>();
+    private List<CommentBlogEntity> data = new ArrayList<CommentBlogEntity>();
     
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            BlogEntity entity = new BlogEntity();
+            CommentBlogEntity entity = new CommentBlogEntity();
             entity.setClientId(Long.MAX_VALUE);
-            entity.setEntry(generateRandom(String.class));
-            entity.setTitle(generateRandom(String.class));
+            entity.setBlogId(Long.MIN_VALUE);
+            entity.setComment(generateRandom(String.class));
+            entity.setCommentUser(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
     }
     
     @Test
-    public void createBlogTest() {
-        BlogEntity newEntity = new BlogEntity();
-        newEntity.setEntry(generateRandom(String.class));
-        newEntity.setTitle(generateRandom(String.class));
-        BlogEntity result = blogPersistence.create(newEntity);     
+    public void createCommentBlogTest() {
+        CommentBlogEntity newEntity = new CommentBlogEntity();
+        newEntity.setClientId(Long.MIN_VALUE);
+        newEntity.setBlogId(Long.MIN_VALUE);
+        newEntity.setComment(generateRandom(String.class));
+        newEntity.setCommentUser(generateRandom(String.class));
+        CommentBlogEntity result = commentBlogPersistence.create(newEntity);
         Assert.assertNotNull(result);
-        BlogEntity entity = em.find(BlogEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getEntry(), entity.getEntry());
-        Assert.assertEquals(newEntity.getTitle(), entity.getTitle());
+        CommentBlogEntity entity = em.find(CommentBlogEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getClientId(), entity.getClientId());
+        Assert.assertEquals(newEntity.getBlogId(), entity.getBlogId());
+        Assert.assertEquals(newEntity.getComment(), entity.getComment());
+        Assert.assertEquals(newEntity.getCommentUser(), entity.getCommentUser());
     }
     
     @Test
-    public void getEntrysTest() {
-        List<BlogEntity> list = blogPersistence.findAll(null, null);
+    public void getAllCommentBlog() {
+        List<CommentBlogEntity> list = commentBlogPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (BlogEntity ent : list) {
+        for (CommentBlogEntity ent : list) {
             boolean found = false;
-            for (BlogEntity entity : data) {
+            for (CommentBlogEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -118,28 +122,19 @@ public class BlogPersistenceTest {
     }
     
     @Test
-    public void getEntryTest() {
-        BlogEntity entity = data.get(0);
-        BlogEntity newEntity = blogPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getEntry(), newEntity.getEntry());
-        Assert.assertEquals(entity.getTitle(), newEntity.getTitle());
-    }
-    
-    @Test
-    public void getEntryArtist() {
-        Long idArtist = data.get(0).getClientId();
-        List<BlogEntity> cache = new ArrayList<BlogEntity>();
-        List<BlogEntity> list = blogPersistence.getEntryArtist(idArtist);
-        for (BlogEntity entity : data) {
-            if (entity.getClientId().equals(idArtist)) {
+    public void getCommentBlog() {
+        Long idBlog = data.get(0).getBlogId();
+        List<CommentBlogEntity> cache = new ArrayList<CommentBlogEntity>();
+        List<CommentBlogEntity> list = commentBlogPersistence.getCommentBlog(idBlog);
+        for (CommentBlogEntity entity : data) {
+            if (entity.getBlogId().equals(idBlog)) {
                 cache.add(entity);
             }
         }
         Assert.assertEquals(list.size(), cache.size());
-        for (BlogEntity ent : list) {
+        for (CommentBlogEntity ent : list) {
             boolean found = false;
-            for (BlogEntity cacheEntity : cache) {
+            for (CommentBlogEntity cacheEntity : cache) {
                 if (cacheEntity.getClientId().equals(ent.getClientId())) {
                     found = true;
                     break;
@@ -148,22 +143,6 @@ public class BlogPersistenceTest {
             if (!found) {
                 Assert.fail();
             }
-        }
-    }
-    
-    @Test
-    public void searchBlog() {
-        String title = data.get(0).getTitle();
-        Long idArtist = data.get(0).getClientId();
-        List<BlogEntity> list = blogPersistence.searchBlog(title, idArtist);
-        for (BlogEntity ent : list) {
-            boolean found = false;
-            for (BlogEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
         }
     }
 }

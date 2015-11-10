@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.QuestionEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,15 +30,16 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
     }
 
     public List<QuestionEntity> listByArtwork(Long artist) {
+        List<QuestionEntity> result = new ArrayList<QuestionEntity>();
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("artwork_id", artist);
             Query q = em.createNamedQuery("QuestionEntity.listByArtwork");
             q.setParameter("artwork_id", artist);
-            return q.getResultList();
+            result= q.getResultList();
         } catch (Exception e) {
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return null;
         }
+        return result;
     }
 }

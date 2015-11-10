@@ -14,9 +14,33 @@ import java.util.List;
  */
 public interface ICommentBlogLogic {
     public int countComment();
+
+    /**
+     * Traer todos los comentarios del BlogDTO
+     * @param page
+     * @param maxRecords
+     * @return
+     */
     public List<CommentBlogDTO> getComments(Integer page, Integer maxRecords);
+
+    /**
+     * Traer un comemtario dado el id del mismo
+     * @param id
+     * @return
+     */
     public CommentBlogDTO getComment(Long id);
+
+    /**
+     * Crear un nuevo comentario.
+     * @param dto
+     * @return
+     */
     public CommentBlogDTO createComment(CommentBlogDTO dto);
-    //Para traer los comentarios relacionados a un Blog...
+
+    /**
+     * Traer los comentarios de un blog específico dado su id
+     * @param idBlog
+     * @return
+     */
     public List<CommentBlogDTO> getCommentBlog(Long idBlog);
 }

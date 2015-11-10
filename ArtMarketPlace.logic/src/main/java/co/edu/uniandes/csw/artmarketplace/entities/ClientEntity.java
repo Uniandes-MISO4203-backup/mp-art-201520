@@ -29,6 +29,9 @@ public class ClientEntity implements Serializable {
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> cartItem;
+    
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WishListEntity> wishList;
 
     /**
      * @generated
@@ -84,5 +87,13 @@ public class ClientEntity implements Serializable {
      */
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+    
+    public List<WishListEntity> getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(List<WishListEntity> wishList) {
+        this.wishList = wishList;
     }
 }

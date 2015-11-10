@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.artmarketplace.dtos;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,12 +31,12 @@ public class ExhibitionDTO {
     /**
      * Fecha de inicio de la exhibicion
      */    
-    private Date startDate;
+    private Calendar startDate;
     
     /**
      * Fecha de fin de la exhibicion
      */
-    private Date endDate;
+    private Calendar endDate;
     
     /**
      * Lugar donde se llevo a cabo el evento
@@ -109,7 +110,7 @@ public class ExhibitionDTO {
      * Metodo de acceso para la variable startDate.
      * @return 
      */
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
@@ -117,7 +118,7 @@ public class ExhibitionDTO {
      * Metodo de modificación para la variable startDate.
      * @param startDate 
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
     
@@ -125,7 +126,7 @@ public class ExhibitionDTO {
      * Metodo de acceso para la variable endDate.
      * @return 
      */
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
@@ -133,7 +134,7 @@ public class ExhibitionDTO {
      * Metodo de modificación para la variable endDate.
      * @param endDate 
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
 

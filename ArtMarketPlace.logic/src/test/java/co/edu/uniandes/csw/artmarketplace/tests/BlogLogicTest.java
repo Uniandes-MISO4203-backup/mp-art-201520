@@ -153,4 +153,20 @@ public class BlogLogicTest {
             }
         }
     }
+    
+    @Test
+    public void searchBlog() {
+        String title = data.get(0).getTitle();
+        Long idArtist = data.get(0).getClientId();
+        List<BlogDTO> list = blogLogic.searchBlog(title, idArtist);
+        for (BlogDTO ent : list) {
+            boolean found = false;
+            for (BlogEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
 }

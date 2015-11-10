@@ -10,6 +10,10 @@
             this.allEntrys = function(idArtist){
                 return this.api.one('../resume/entryartist', idArtist).get();
             };
+            //Buscar entradas de un Blog...
+            this.searchEntry = function(search, idArtist){
+                return this.api.one('../resume/searchblog/' + search + "/" + idArtist).get();
+            };
         }]);
     //Para invocar el servcio de creación de una nueva entrada al Blog.
     mod.service('newEntryService', ['CrudCreator', 'newEntryContext', function (CrudCreator, context) {

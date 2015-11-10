@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.artmarketplace.persistence;
 
 import co.edu.uniandes.csw.artmarketplace.entities.CommentBlogEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +24,16 @@ public class CommentBlogPersistence extends CrudPersistence<CommentBlogEntity>{
     public CommentBlogPersistence(){
         this.entityClass = CommentBlogEntity.class;
     }
-    
+    //Método que traer los comentarios de un blog dado el id del mismo.
     public List<CommentBlogEntity> getCommentBlog(Long idBlog) {
+        List<CommentBlogEntity> result = new ArrayList<CommentBlogEntity>();
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("idBlog", idBlog);
-            return executeListNamedQuery("Blog.getCommentBlog", params);
+            result = executeListNamedQuery("Blog.getCommentBlog", params);
         } catch (NoResultException e) {
             Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return null;
         }
+        return result;
     }
 }
