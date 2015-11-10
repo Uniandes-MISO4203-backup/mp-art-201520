@@ -80,6 +80,7 @@
                 svc.saveExhibition($scope.exhibition).then(function (){
                     swal("Sucess", "The exhibition was added successfully", "success");
                     $('#exhibitionModal').modal('hide');
+                    location.reload();
                 });
             };
             if (idArtist) {
