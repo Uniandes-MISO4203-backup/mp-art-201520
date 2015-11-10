@@ -39,7 +39,7 @@ public class WishListPersistence extends CrudPersistence<WishListEntity> {
     /**
      * @generated
      */
-    public void delete(Long id) {
+    public void deleteWishList(Long id) {
         delete(id);
     }
     
