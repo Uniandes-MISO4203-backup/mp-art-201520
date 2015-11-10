@@ -39,7 +39,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -61,7 +61,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
                 result = list.subList(0, 1);
             }
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -79,7 +79,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("name", name);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksOfAnArtist", params);
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -99,7 +99,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxPrice", artworkMaxPrice);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenPrices", params);
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -117,7 +117,7 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkStyle", artworkStyle);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksByStyle", params);
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
@@ -136,7 +136,25 @@ public class ArtworkPersistence extends CrudPersistence<ArtworkEntity> {
             params.put("artworkMaxRating", artworkMaxRating);
             result = executeListNamedQuery("ArtworkEntity.searchArtworksBetweenRatings", params);
         } catch (Exception e) {
-            Logger.getLogger(AdminPersistence.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return result;
+    }
+    
+    /**
+     * Search artwork by format
+     *
+     * @param artworkFormat
+     * @return
+     */
+    public List<ArtworkEntity> searchArtworksByFormat(String artworkFormat) {
+        List<ArtworkEntity> result = new ArrayList<ArtworkEntity>();
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("type", artworkFormat);
+            result = executeListNamedQuery("ArtworkGaleryItemEntity.searchArtworksByFormat", params);
+        } catch (Exception e) {
+            Logger.getLogger(ArtworkPersistence.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }

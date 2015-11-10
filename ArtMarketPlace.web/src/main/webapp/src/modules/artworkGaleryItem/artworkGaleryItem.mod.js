@@ -7,7 +7,9 @@
         fields: [{
                 name: 'type',
                 displayName: 'Type',
-                type: 'String',
+                type: 'Reference',
+                service: 'typeService',
+                options: [],
                 required: true
             },{
                 name: 'link',

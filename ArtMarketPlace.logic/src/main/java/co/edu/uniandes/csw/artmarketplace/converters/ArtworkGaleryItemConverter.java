@@ -48,13 +48,15 @@ public abstract class ArtworkGaleryItemConverter {
     }
 
     /**
+     * @param entity
+     * @return
      * @generated
      */
     public static ArtworkGaleryItemDTO basicEntity2DTO(ArtworkGaleryItemEntity entity) {
         if (entity != null) {
             ArtworkGaleryItemDTO dto = new ArtworkGaleryItemDTO();
             dto.setId(entity.getId());
-            dto.setType(entity.getType());
+            dto.setType(TypeConverter.refEntity2DTO(entity.getType()));
             dto.setLink(entity.getLink());
             return dto;
         } else {
@@ -63,13 +65,15 @@ public abstract class ArtworkGaleryItemConverter {
     }
 
     /**
+     * @param dto
+     * @return
      * @generated
      */
     public static ArtworkGaleryItemEntity basicDTO2Entity(ArtworkGaleryItemDTO dto) {
         if (dto != null) {
             ArtworkGaleryItemEntity entity = new ArtworkGaleryItemEntity();
             entity.setId(dto.getId());
-            entity.setType(dto.getType());
+            entity.setType(TypeConverter.refDTO2Entity(dto.getType()));
             entity.setLink(dto.getLink());
             return entity;
         } else {
@@ -78,6 +82,8 @@ public abstract class ArtworkGaleryItemConverter {
     }
 
     /**
+     * @param entity
+     * @return
      * @generated
      */
     public static ArtworkGaleryItemDTO fullEntity2DTO(ArtworkGaleryItemEntity entity) {
@@ -89,6 +95,8 @@ public abstract class ArtworkGaleryItemConverter {
     }
 
     /**
+     * @param dto
+     * @return
      * @generated
      */
     public static ArtworkGaleryItemEntity fullDTO2Entity(ArtworkGaleryItemDTO dto) {

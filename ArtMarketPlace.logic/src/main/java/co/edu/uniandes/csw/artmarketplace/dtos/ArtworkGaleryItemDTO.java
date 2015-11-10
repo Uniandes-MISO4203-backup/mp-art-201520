@@ -8,15 +8,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ArtworkGaleryItemDTO extends BasicDTO {
 
-    private String type;
+    private TypeDTO type;
     private String link;
     private ArtworkDTO artwork;
 
-    public String getType() {
+    public TypeDTO getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeDTO type) {
         this.type = type;
     }
 

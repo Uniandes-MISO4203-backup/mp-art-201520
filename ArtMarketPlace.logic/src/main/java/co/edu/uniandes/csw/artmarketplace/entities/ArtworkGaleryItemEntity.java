@@ -6,15 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @generated
  */
 @Entity
 @NamedQueries(
-{
-    
-}        
+        {
+            @NamedQuery(name = "ArtworkGaleryItemEntity.searchArtworksByFormat",
+                    query = "SELECT DISTINCT a.artwork FROM ArtworkGaleryItemEntity a WHERE a.type.name = :type")
+        }
 )
 public class ArtworkGaleryItemEntity implements Serializable {
 
@@ -22,10 +24,11 @@ public class ArtworkGaleryItemEntity implements Serializable {
     @GeneratedValue(generator = "ArtworkGaleryItem")
     private Long id;
 
-    private String type;
+    @ManyToOne
+    private TypeEntity type;
 
     private String link;
-    
+
     @ManyToOne
     private ArtworkEntity artwork;
 
@@ -37,11 +40,11 @@ public class ArtworkGaleryItemEntity implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
+    public TypeEntity getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeEntity type) {
         this.type = type;
     }
 

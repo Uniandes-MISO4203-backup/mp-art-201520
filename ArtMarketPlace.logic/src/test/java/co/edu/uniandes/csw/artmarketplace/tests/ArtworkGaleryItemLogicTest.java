@@ -7,10 +7,13 @@ package co.edu.uniandes.csw.artmarketplace.tests;
 
 import co.edu.uniandes.csw.artmarketplace.converters.ArtworkConverter;
 import co.edu.uniandes.csw.artmarketplace.converters.ArtworkGaleryItemConverter;
+import co.edu.uniandes.csw.artmarketplace.converters.TypeConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkGaleryItemDTO;
+import co.edu.uniandes.csw.artmarketplace.dtos.TypeDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkGaleryItemEntity;
+import co.edu.uniandes.csw.artmarketplace.entities.TypeEntity;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.generateRandom;
 
 import javax.inject.Inject;
@@ -63,6 +66,9 @@ public class ArtworkGaleryItemLogicTest {
                 .addPackage(ArtworkGaleryItemEntity.class.getPackage())
                 .addPackage(ArtworkGaleryItemDTO.class.getPackage())
                 .addPackage(ArtworkGaleryItemConverter.class.getPackage())
+                .addPackage(TypeEntity.class.getPackage())
+                .addPackage(TypeDTO.class.getPackage())
+                .addPackage(TypeConverter.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -104,9 +110,13 @@ public class ArtworkGaleryItemLogicTest {
         entity.setPrice(generateRandom(Integer.class));
         em.persist(entity);
 
+        TypeEntity type = new TypeEntity();
+        type.setName("photo");
+        em.persist(type);
+
         artworkGaleryItem = new ArtworkGaleryItemEntity();
         artworkGaleryItem.setLink(generateRandom(String.class));
-        artworkGaleryItem.setType("photo");
+        artworkGaleryItem.setType(type);
         artworkGaleryItem.setArtwork(entity);
         em.persist(artworkGaleryItem);
     }
@@ -114,16 +124,17 @@ public class ArtworkGaleryItemLogicTest {
     @Test
     public void createArtworkGaleryItemTest() {
         ArtworkDTO artworkDTO = ArtworkConverter.basicEntity2DTO(artworkGaleryItem.getArtwork());
-        
+        TypeDTO typeDTO = TypeConverter.refEntity2DTO(artworkGaleryItem.getType());
+
         ArtworkGaleryItemDTO dto = new ArtworkGaleryItemDTO();
         dto.setId(artworkGaleryItem.getId());
         dto.setLink(artworkGaleryItem.getLink());
-        dto.setType(artworkGaleryItem.getType());
+        dto.setType(typeDTO);
         dto.setArtwork(artworkDTO);
-        
+
         Assert.assertEquals(dto.getId(), artworkGaleryItem.getId());
         Assert.assertEquals(dto.getLink(), artworkGaleryItem.getLink());
-        Assert.assertEquals(dto.getType(), artworkGaleryItem.getType());
+        Assert.assertEquals(dto.getType(), typeDTO);
         Assert.assertEquals(dto.getArtwork(), artworkDTO);
     }
 }

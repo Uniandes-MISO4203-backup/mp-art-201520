@@ -5,6 +5,7 @@
         'xeditable',
         'authModule',
         'artistModule',
+        'typeModule',
         'artworkGaleryItemModule',
         'artworkModule',
         'cartItemModule',
