@@ -6,6 +6,8 @@ import co.edu.uniandes.csw.artmarketplace.converters.ArtworkConverter;
 import co.edu.uniandes.csw.artmarketplace.dtos.ArtworkDTO;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtistEntity;
 import co.edu.uniandes.csw.artmarketplace.entities.ArtworkEntity;
+import co.edu.uniandes.csw.artmarketplace.entities.ArtworkGaleryItemEntity;
+import co.edu.uniandes.csw.artmarketplace.entities.TypeEntity;
 import co.edu.uniandes.csw.artmarketplace.persistence.ArtworkPersistence;
 import static co.edu.uniandes.csw.artmarketplace.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ public class ArtworkLogicTest {
                 .addPackage(ArtworkLogic.class.getPackage())
                 .addPackage(IArtworkLogic.class.getPackage())
                 .addPackage(ArtworkPersistence.class.getPackage())
+                .addPackage(TypeEntity.class.getPackage())
+                .addPackage(ArtworkGaleryItemEntity.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -129,8 +133,18 @@ public class ArtworkLogicTest {
         entityOne.setRatingSum(8F);
         entityOne.setRatingVotes(2F);
         entityOne.setArtist(artistEntityOne);
+        entityOne.setArtworkType("Tipo1");
         em.persist(entityOne);
         data.add(entityOne);
+        
+        TypeEntity type = new TypeEntity();
+        type.setName("photo");
+        em.persist(type);
+        
+        ArtworkGaleryItemEntity item = new ArtworkGaleryItemEntity();
+        item.setArtwork(entityOne);
+        item.setLink("prueba");
+        item.setType(type);
 
         ArtworkEntity entityTwo = new ArtworkEntity();
         entityTwo.setName("Pintura2");
@@ -307,10 +321,10 @@ public class ArtworkLogicTest {
             }
         }
     }
-    
+
     @Test
     public void countArtworks() {
-        Assert.assertEquals(data.size(),artworkLogic.countArtworks());
+        Assert.assertEquals(data.size(), artworkLogic.countArtworks());
     }
 
     /**
@@ -356,6 +370,18 @@ public class ArtworkLogicTest {
         Assert.assertEquals("Artista2", artworkEntitys.get(0).getArtist().getName());
     }
 
+    @Test
+    public void searchArtworksOfAnArtist() {
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksOfAnArtist("");
+        Assert.assertEquals(0, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksOfAnArtist("Artista1");
+        Assert.assertEquals(3, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksOfAnArtist("Artista2");
+        Assert.assertEquals(1, artworkEntitys.size());
+    }
+
     /**
      * Test for search Artworks Between Prices
      */
@@ -397,6 +423,7 @@ public class ArtworkLogicTest {
         artworkEntitys = artworkLogic.searchArtworksBetweenPrices(50000, 90000);
         Assert.assertEquals(0, artworkEntitys.size());
     }
+
     /**
      * Test search Artworks Between Ratings
      */
@@ -413,11 +440,11 @@ public class ArtworkLogicTest {
 
         artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 4.5F);
         Assert.assertEquals(3, artworkEntitys.size());
-        
+
         artworkEntitys = artworkLogic.searchArtworksBetweenRatings(1F, 5F);
         Assert.assertEquals(4, artworkEntitys.size());
     }
-    
+
     /**
      * Test for search Artworks By Style
      */
@@ -442,4 +469,21 @@ public class ArtworkLogicTest {
         }
     }
 
+    @Test
+    public void searchArtworksByType() {
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksByType("");
+        Assert.assertEquals(0, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksByType("Tipo1");
+        Assert.assertEquals(1, artworkEntitys.size());
+    }
+
+    @Test
+    public void searchArtworksByFormat() {
+        List<ArtworkDTO> artworkEntitys = artworkLogic.searchArtworksByFormat("");
+        Assert.assertEquals(0, artworkEntitys.size());
+
+        artworkEntitys = artworkLogic.searchArtworksByFormat("photo");
+        Assert.assertEquals(1, artworkEntitys.size());
+    }
 }
