@@ -21,6 +21,9 @@
             this.searchArtworksByType = function (artworkType) {
                 return this.api.one("searchArtworksByType/" + artworkType).get();
             };
+            this.searchArtworksByFormat = function (artworkFormat) {
+                return this.api.one("searchArtworksByFormat/" + artworkFormat).get();
+            };
             this.searchArtworksByStyle = function (artworkStyle) {
                 return this.api.one("searchArtworksByStyle/" + artworkStyle).get();
             };

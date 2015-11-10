@@ -24,7 +24,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +42,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.ini4j.Wini;
 
 /**
@@ -197,9 +195,10 @@ public class ArtworkService {
     public List<ArtworkDTO> searchArtworksByStyle(@PathParam("artworkStyle") String artworkStyle) {
         return artworkLogic.searchArtworksByStyle(artworkStyle);
     }
-    
+
     /**
      * Search artworks by type
+     *
      * @param artworkType
      * @return
      */
@@ -207,6 +206,18 @@ public class ArtworkService {
     @Path("/searchArtworksByType/{artworkType}")
     public List<ArtworkDTO> searchArtworksByType(@PathParam("artworkType") String artworkType) {
         return artworkLogic.searchArtworksByType(artworkType);
+    }
+
+    /**
+     * Search artworks by format
+     *
+     * @param artworkFormat
+     * @return
+     */
+    @GET
+    @Path("/searchArtworksByFormat/{artworkFormat}")
+    public List<ArtworkDTO> searchArtworksByFormat(@PathParam("artworkFormat") String artworkFormat) {
+        return artworkLogic.searchArtworksByFormat(artworkFormat);
     }
 
     /**

@@ -79,6 +79,13 @@
                     $scope.artists = [];
                 });
             };
+            $scope.searchArtworksByFormat = function (artworkFormat) {
+                svc.searchArtworksByFormat(artworkFormat).then(function (results) {
+                    $scope.artworks = [];
+                    $scope.artworks = results;
+                    $scope.artists = [];
+                });
+            };
             $scope.postRemark = function (id, newRemark) {
                 artworkSvc.postRemark(id, newRemark).then(function (result) {
                     $scope.artworkRecord = [];
